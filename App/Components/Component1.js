@@ -87,7 +87,7 @@ export default class Component1 extends Component {
                     //console.log("Auth_token: "+ value);
                     //console.log("Replaced: " + value.replace(new RegExp('=','g'),"%3D"))
                 }
-
+                
                 const utf8 = require('utf8');
                 //paramList[i] = key + "=" + utf8.encode(value);
                 paramList[i] = key + "=" + value;
