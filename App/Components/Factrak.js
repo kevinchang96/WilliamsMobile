@@ -5,18 +5,24 @@ import {
   StyleSheet,
   Text,
   View,
-  StatusBar,
   PixelRatio,
   Dimensions
 } from 'react-native';
-import SearchBar from './SearchBar';
+import FactrakSearch from './FactrakSearch';
 
 export default class Factrak extends Component{
+    constructor(props){
+        super(props)
+
+    }
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.searchContainer}>
-                    <SearchBar></SearchBar>
+                    <FactrakSearch />
+                </View>
+                <View style={styles.footer}>
+
                 </View>
             </View>
         );
@@ -28,10 +34,14 @@ const weight = Dimensions.get('window').weight * PixelRatio.get();
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        paddingTop: 20,
+        backgroundColor: 'purple',
         height: height,
     },
     searchContainer: {
+
+    },
+    footer :{
 
     }
 });
