@@ -79,6 +79,18 @@ export default class Login extends Component {
                     value = username;
                 else if( key == 'password' )
                     value = password;
+                else if( key == 'utf8' )
+                    value = '%E2%9C%93';
+                else if ( key == 'authenticity_token' ){
+                    value = value.replace(new RegExp('=','g'),"%3D");
+                    value = value.replace('+',"%2B");
+                    value = value.replace(new RegExp('/','g'),"%2F");
+                    //console.log("Auth_token: "+ value);
+                    //console.log("Replaced: " + value.replace(new RegExp('=','g'),"%3D"))
+                }
+                
+                const utf8 = require('utf8');
+                //paramList[i] = key + "=" + utf8.encode(value);
                 paramList[i] = key + "=" + value;
                 paramList[i] = key + "=" + encodeURIComponent(value);
 
