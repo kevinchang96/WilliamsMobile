@@ -5,19 +5,24 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, View } from 'react-native';
-import Component1 from './App/Components/Component1';
+import Login from './App/Components/Login';
+import Logout from './App/Components/Logout'
 import Component2 from './App/Components/Component2';
-import HttpExample from './App/Components/HttpExample'
+import Settings from './App/Components/Settings';
+import HttpExample from './App/Components/HttpExample';
 
-export default class login extends Component{
+export default class main extends Component{
     render(){
         return(
             <View>
-                <Component1 />
+                <Login />
+                <Logout />
                 <Component2 />
+                <Settings />
+                <HttpExample />
             </View>
 
         );
     }
 }
-AppRegistry.registerComponent('login', () => login );
+AppRegistry.registerComponent('main', () => main );
