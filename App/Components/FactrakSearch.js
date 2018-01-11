@@ -27,21 +27,20 @@ export default class FactrackSearch extends Component{
             "Accept": "application/json"
             }
         }).then(function(response) {
+            console.log(response);
             return response.json();
         }).then(function(jsonResponse){
-            this.state.jArr = (jsonResponse) ? jsonResponse : [];
-            console.log(this.state.jArr);
+            console.log(jsonResponse);
+            this.state.jArr = (jsonResponse) ? jsonResponse : "";
         }).catch(function(error) {
              console.log('There has been a problem with your fetch operation: ', error.message);
         });
     }
     createSuggestionBoxes(jsonResponse){
-        {/*Some suggestions are dead links, so might do the check here instead of in
-            SuggestionCard*/}
         this.state.suggestions = this.state.jArr.map(
             function(current){
                 let keys = Object.keys(current);
-                return(<SuggestionCard value={current[0]} id={current['id']}
+                return(<SuggestionCard id={current['id']}
                         title={current['name'] || current['title']}/>);
             }
         );
@@ -54,8 +53,7 @@ export default class FactrackSearch extends Component{
                     placeholder="Search for a professor or course..." />
                 </View>
                 <View style={styles.suggestionsContainer}>
-                    <Text>{this.state.jArr.length+1}</Text>
-                    <Text>{this.state.jArr.length}</Text>
+                    <Text>There are: {this.state.jArr.length} items to be displayed</Text>
                 </View>
             </View>
         );
@@ -63,22 +61,21 @@ export default class FactrackSearch extends Component{
 }
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
-        borderColor: 'black',
-        borderWidth: 2,
-        height: 600
+        //backgroundColor: 'white',
+        //borderColor: 'black',
+        //borderWidth: 2,
     },
     searchBox: {
-        padding: 10,
+        padding: 0,
         flexDirection: "row",
         justifyContent: "space-between",
-        borderColor: 'gold',
-        borderWidth: 4
+        //borderColor: '',
+        //borderWidth: 4
     },
     suggestionsContainer: {
-        backgroundColor: 'white',
-        borderColor: 'black',
-        borderWidth: 2,
+        //backgroundColor: 'white',
+        //borderColor: 'black',
+        //borderWidth: 2,
 
     },
 });
