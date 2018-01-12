@@ -9,6 +9,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 import Cookie from 'react-native-cookie';
+import { FormLabel, FormInput, Button } from 'react-native-elements';
 
 
 export default class Login extends Component {
@@ -28,25 +29,27 @@ export default class Login extends Component {
     render() {
         return (
         <View>
-            <TextInput
-                placeholder="Username"
+            <FormLabel>Username</FormLabel>
+            <FormInput
                 value={this.state.username}
                 onChangeText={username => this.setState({username})}
                 onSubmitEditing={(event) => {this.refs.passwordInput.focus()}}
-            />
+                />
 
-            <TextInput
+            <FormLabel>Password</FormLabel>
+            <FormInput
                 secureTextEntry={true}
                 ref='passwordInput'
-                placeholder="Password"
                 value={this.state.password}
                 onChangeText={password => this.setState({password})}
                 onSubmitEditing={this._submitForm}
-            />
+                />
 
-            <TouchableHighlight onPress={this._submitForm}>
-                <Text>Log In</Text>
-            </TouchableHighlight>
+            <Button
+              title='Log In'
+              onPress={this._submitForm}
+              backgroundColor={'blue'}
+              />
 
          </View>
 

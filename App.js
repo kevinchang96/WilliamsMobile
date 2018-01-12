@@ -14,7 +14,7 @@ import HttpExample from './App/Components/HttpExample';
 export default class main extends Component{
     render(){
         return(
-            <View>
+            <View backgroundColor={"#512698"} >
                 <Login />
                 <Logout />
                 <Component2 />
