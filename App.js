@@ -10,6 +10,7 @@ import Logout from './App/Components/Logout'
 import Component2 from './App/Components/Component2';
 import Settings from './App/Components/Settings';
 import HttpExample from './App/Components/HttpExample';
+import DailyMessages from './App/Components/DailyMessages';
 
 export default class main extends Component{
     render(){
@@ -18,6 +19,7 @@ export default class main extends Component{
                 <Login />
                 <Logout />
                 <Component2 />
+                <DailyMessages />
                 <Settings />
                 <HttpExample />
             </View>
