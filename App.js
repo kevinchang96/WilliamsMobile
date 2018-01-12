@@ -19,7 +19,7 @@ export default class main extends Component{
                 <Logout />
                 <Component2 />
                 <Settings />
-                <HttpExample />
+
             </View>
 
         );
