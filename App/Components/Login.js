@@ -143,8 +143,10 @@ export default class Login extends Component {
                //update = {(setCookies) => this.setState({setCookies})}
                //this.state.cookies = 'Hello';
                this.setState( {cookies: setCookies} );
-                Cookie.get('https://wso.williams.edu/',
-                '_WSOonRails_session').then((cookie) => this.someFn(cookie));
+                this.someFn(setCookies.split(";")[0]);
+
+/*                Cookie.get('https://wso.williams.edu/',
+                '_WSOonRails_session').then((cookie) => this.someFn(cookie));*/
 
                //{cookies => this.setState({cookies})};
                console.log("State information: " + JSON.stringify(this.state));
