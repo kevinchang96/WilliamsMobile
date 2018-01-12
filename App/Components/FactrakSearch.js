@@ -9,39 +9,50 @@ import {
     TouchableOpacity,
     ImageBackground
     } from 'react-native';
-import FactrakSearch from './FactrakSearch';
 import SuggestionCard from './SuggestionCard';
+import Cookie from 'react-native-cookie';
 
-export default class FactrackSearch extends Component{
+export default class FactrakSearch extends Component{
     constructor(props){
         super();
-        this.state = {jArr:[],suggestions:[]}
+        this.state = {jArr:[],suggestions:[]};
     }
+
     getSuggestions(text){
+        /*Cookie.get("https://wso.williams.edu/",
+            '_WSOonRails_session').then((cookie) => console.log(cookie));
+        */
+
+        Cookie.set("https://wso.williams.edu",'_WSOonRails_session',this.state.cookies,{
+            path: "/factrak/autocomplete.json"+text,
+            domain: 'wso.williams.edu'
+        }).then(() => console.log('success'));
+
        fetch("https://wso.williams.edu/factrak/autocomplete.json?q=" + text,
-       {
-        credentials: 'include',
-        mode: "no-cors",
-        method: "GET",
-        headers: {
-            "Accept": "application/json"
-            }
-        }).then(function(response) {
-            console.log(response);
-            return response.json();
-        }).then(function(jsonResponse){
-            console.log(jsonResponse);
-            this.state.jArr = (jsonResponse) ? jsonResponse : "";
-        }).catch(function(error) {
-             console.log('There has been a problem with your fetch operation: ', error.message);
-        });
+           {
+            credentials: 'include',
+            mode: "no-cors",
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+                }
+            }).then(function(response) {
+                console.log(response);
+                return response.json();
+            }).then(function(jsonResponse){
+                console.log(jsonResponse);
+                this.state.jArr = (jsonResponse) ? jsonResponse : "";
+            }).catch(function(error) {
+                console.log('There has been a problem with your fetch operation: ', error.message);
+            });
     }
-    createSuggestionBoxes(jsonResponse){
-        this.state.suggestions = this.state.jArr.map(
+    createSuggestionBoxes(){
+        this.state.suggestions = this.state.jArr.map(   // array of suggestion cards
             function(current){
-                let keys = Object.keys(current);
+                console.log(current);
+                key = Object.keys(current)[0];
                 return(<SuggestionCard id={current['id']}
-                        title={current['name'] || current['title']}/>);
+                        title={current['name'] || current['title']} type={key}/>);
             }
         );
     }
@@ -49,11 +60,12 @@ export default class FactrackSearch extends Component{
         return(
             <View style={styles.container}>
                 <View style={styles.searchBox}>
-                    <TextInput onChangeText={(text) => this.getSuggestions(text)}
+                    <TextInput onChange={console.log(this.createSuggestionBoxes())}
                     placeholder="Search for a professor or course..." />
                 </View>
                 <View style={styles.suggestionsContainer}>
                     <Text>There are: {this.state.jArr.length} items to be displayed</Text>
+                    {/*console.log(this.state.suggestions)*/}
                 </View>
             </View>
         );

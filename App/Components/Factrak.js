@@ -19,6 +19,7 @@ export default class Factrak extends Component{
         return(
             <View style={styles.container}>
                 <View style={styles.searchContainer}>
+
                     <FactrakSearch />
                 </View>
                 <View style={styles.footer}>
@@ -35,7 +36,7 @@ const weight = Dimensions.get('window').weight * PixelRatio.get();
 const styles = StyleSheet.create({
     container: {
         paddingTop: 20,
-        backgroundColor: 'purple',
+        //backgroundColor: 'purple',
         height: height,
     },
     searchContainer: {
