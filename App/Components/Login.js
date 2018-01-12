@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableHighlight
 } from 'react-native';
+import Cookie from 'react-native-cookie';
 
 
 export default class Login extends Component {
@@ -20,7 +21,9 @@ export default class Login extends Component {
                 cookies: '',
             }
     }
-
+    someFn(x){
+            return this.props.callbackFromParent(x);
+        }
 
     render() {
         return (
@@ -44,7 +47,6 @@ export default class Login extends Component {
             <TouchableHighlight onPress={this._submitForm}>
                 <Text>Log In</Text>
             </TouchableHighlight>
-
          </View>
         );
     }
@@ -141,6 +143,8 @@ export default class Login extends Component {
                //update = {(setCookies) => this.setState({setCookies})}
                //this.state.cookies = 'Hello';
                this.setState( {cookies: setCookies} );
+                Cookie.get('https://wso.williams.edu/',
+                '_WSOonRails_session').then((cookie) => this.someFn(cookie));
 
                //{cookies => this.setState({cookies})};
                console.log("State information: " + JSON.stringify(this.state));
