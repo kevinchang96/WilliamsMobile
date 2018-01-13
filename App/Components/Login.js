@@ -9,6 +9,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 import Cookie from 'react-native-cookie';
+import { FormLabel, FormInput, Button } from 'react-native-elements';
 
 
 export default class Login extends Component {
@@ -28,26 +29,32 @@ export default class Login extends Component {
     render() {
         return (
         <View>
-            <TextInput
-                placeholder="Username"
+            <FormLabel>Username</FormLabel>
+            <FormInput
                 value={this.state.username}
                 onChangeText={username => this.setState({username})}
                 onSubmitEditing={(event) => {this.refs.passwordInput.focus()}}
-            />
+                />
 
-            <TextInput
+            <FormLabel>Password</FormLabel>
+            <FormInput
                 secureTextEntry={true}
                 ref='passwordInput'
-                placeholder="Password"
                 value={this.state.password}
                 onChangeText={password => this.setState({password})}
                 onSubmitEditing={this._submitForm}
-            />
+                />
 
-            <TouchableHighlight onPress={this._submitForm}>
-                <Text>Log In</Text>
-            </TouchableHighlight>
+            <Button
+              title='Log In'
+              onPress={this._submitForm}
+              backgroundColor={'blue'}
+              />
+
          </View>
+
+
+
         );
     }
 
@@ -81,22 +88,9 @@ export default class Login extends Component {
                     value = username;
                 else if( key == 'password' )
                     value = password;
-                else if( key == 'utf8' )
-                    value = '%E2%9C%93';
-                else if ( key == 'authenticity_token' ){
-                    value = value.replace(new RegExp('=','g'),"%3D");
-                    value = value.replace('+',"%2B");
-                    value = value.replace(new RegExp('/','g'),"%2F");
-                    //console.log("Auth_token: "+ value);
-                    //console.log("Replaced: " + value.replace(new RegExp('=','g'),"%3D"))
-                }
-                
-                const utf8 = require('utf8');
-                //paramList[i] = key + "=" + utf8.encode(value);
-                paramList[i] = key + "=" + value;
+
                 paramList[i] = key + "=" + encodeURIComponent(value);
 
-                //console.log("UTF8 encoding: "+ utf8.encode(value) );
                 console.log("Attr: " +input[i]);
              }
              var result = '';
@@ -136,19 +130,22 @@ export default class Login extends Component {
            })
            .then(
             function(response) {
-               //console.log(response.headers);
+               console.log(response.headers);
+
                //console.log(response.headers.get("set-cookie"));
                var setCookies = response.headers.get("set-cookie");
                console.log( "Set-Cookies: " + setCookies );
-               //update = {(setCookies) => this.setState({setCookies})}
-               //this.state.cookies = 'Hello';
                this.setState( {cookies: setCookies} );
-                this.someFn(setCookies.split(";")[0]);
+
+               //var updatedCookies = setCookies.split(";",1)[0];
+               //console.log(updatedCookies);
+               //this.setState( {cookies: updatedCookies} );
+
+               //this.someFn(setCookies.split(";")[0]);
 
 /*                Cookie.get('https://wso.williams.edu/',
                 '_WSOonRails_session').then((cookie) => this.someFn(cookie));*/
 
-               //{cookies => this.setState({cookies})};
                console.log("State information: " + JSON.stringify(this.state));
             }.bind(this)
            )
@@ -161,6 +158,7 @@ export default class Login extends Component {
           console.error(error);
        });
     }
+
 
 }
 
