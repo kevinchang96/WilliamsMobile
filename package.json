@@ -9,7 +9,6 @@
   "dependencies": {
     "react": "16.2.0",
     "react-native": "0.51.0",
-    "react-native-cookie": "^0.2.0",
     "react-native-elements": "^0.18.5",
     "react-native-html-parser": "0.0.5"
   },
