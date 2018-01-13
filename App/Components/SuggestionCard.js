@@ -13,7 +13,6 @@ export default class SuggestionCard extends Component{
     selected = () => {
         this.props.selected(this.props.type,this.props.title,this.props.id);
     }
-
     render(){
         return(
             <TouchableOpacity style={styles.container}

@@ -20,6 +20,57 @@ export default class FactrakSearch extends Component{
                         currentJSON:{}  // for use if the selected suggestion is a professor
                     };
     }
+
+    createDoc(){
+        let doc = new DOMParser().parseFromString(this.props.html,'text/html');
+        return doc;
+    }
+
+    getComments(doc){
+        // doc goes as the parameter
+        return doc.querySelectorAll("article .comment div.comment-content");
+    }
+
+    getRatings(ratingsList){
+        const agree = ratingsList[0].trim();
+        const disagree = ratingsList[1].trim();
+        return {"agree":agree, "disagree":disagree};
+    }
+
+    parseOpinions(children){
+        // need to complete
+        let takeAgain = 'I would retake this course';
+        let wouldRecommend = 'I would recommend this course';
+        let arr = [];
+
+        if(!takeAgain) arr.append(takeAgain);
+        if(!wouldRecommend) arr.append(wouldRecommend);
+        return arr;
+    }
+
+    createCommentCard(comment){
+        // done for each comment
+        const id = comment.id.split('comment')[1];
+        const votes = getRatings(comment.querySelectorAll("span[id=agree-count]"));
+        const numAgree = votes.agree;
+        const numDisagree = votes.disagree;
+        const responses = comment.querySelectorAll(".comment-content p:not([class])"); // list of paragraph nodes
+        const responseComponents = Array.from(comment,i).map((response) =>
+            <Text key={i}>{response.innerText.trim()}</Text>);
+        const retakeOrRecommend = parseOpinions(comment.querySelector(".comment-content div").childNodes);
+        const decisionComponents = Array.from(retakeOrRecommend).map((decision) =>
+            <Text>{decision.innerText.trim()}</Text>)
+        const postedWhen = comment.querySelector(".comment-detail").innerText.trim();
+
+        const card = (<FactrakComment numAgree={numAgree} numDisagree={numDisagree}
+                        decisionComponents={decisionComponents} response={responseComponents}
+                        postedWhen={postedWhen}/>);
+        this.state.arr.append(card);
+    }
+
+    //////////////////////// work on above functions
+
+
     selected = (type,title,id) => {
         const dir = (type == "name") ? "professors/" : "courses/";
         const url = "https://wso.williams.edu/factrak/" + dir + id;
