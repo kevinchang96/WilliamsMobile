@@ -19,6 +19,10 @@ export default class FactrakCommentWindow extends Component{
         decisionComponents - recommend course & take again
         postedWhen
     */
+    constructor(props){
+        super(props);
+        this.state.arr = [];
+    }
 
     createDoc(){
         let doc = new DOMParser().parseFromString(this.props.html,'text/html');
@@ -42,7 +46,6 @@ export default class FactrakCommentWindow extends Component{
         let wouldRecommend = 'I would recommend this course';
         let arr = [];
 
-
         if(!takeAgain) arr.append(takeAgain);
         if(!wouldRecommend) arr.append(wouldRecommend);
         return arr;
@@ -55,12 +58,17 @@ export default class FactrakCommentWindow extends Component{
         const numAgree = votes.agree;
         const numDisagree = votes.disagree;
         const responses = comment.querySelectorAll(".comment-content p:not([class])"); // list of paragraph nodes
-        const responseComponents = Array.from(comment).map((response) =>
-            <Text>{response.innerText.trim()}</Text>);
+        const responseComponents = Array.from(comment,i).map((response) =>
+            <Text key={i}>{response.innerText.trim()}</Text>);
         const retakeOrRecommend = parseOpinions(comment.querySelector(".comment-content div").childNodes);
         const decisionComponents = Array.from(retakeOrRecommend).map((decision) =>
             <Text>{decision.innerText.trim()}</Text>)
         const postedWhen = comment.querySelector(".comment-detail").innerText.trim();
+
+        const card = (<FactrakComment numAgree={numAgree} numDisagree={numDisagree}
+                        decisionComponents={decisionComponents} response={responseComponents}
+                        postedWhen={postedWhen}/>);
+        this.state.arr.append(card);
     }
 
     render(){
@@ -71,7 +79,6 @@ export default class FactrakCommentWindow extends Component{
         );
     }
 }
-
 
 export class FactrakComment extends Component{
     // need to use this.props.html and this.props.id to simulate rating/reporting
@@ -90,7 +97,7 @@ export class FactrakComment extends Component{
                 <Text>{this.props.professorName} | {this.props.courseNo}</Text>
                 <Text>{this.props.numAgree} agree, {this.props.numDisagree} disagree</Text>
                 {this.props.decisionComponents}
-                <Text>{this.props.response}</Text>
+                {this.props.responseComponents}
                 <View style={styles.actions}>
                     <TouchableOpacity title="Agree" onPress={this.agree}>
                         <Image style={styles.button} source={require('../img/thumbs-up.png')}/>
