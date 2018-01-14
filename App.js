@@ -10,16 +10,13 @@ import Logout from './App/Components/Logout'
 import Component2 from './App/Components/Component2';
 import Settings from './App/Components/Settings';
 import HttpExample from './App/Components/HttpExample';
+import Facebook from './App/Components/Facebook';
 
 export default class main extends Component{
     render(){
         return(
             <View>
-                <Login />
-                <Logout />
-                <Component2 />
-                <Settings />
-                <HttpExample />
+                <Facebook />
             </View>
 
         );
