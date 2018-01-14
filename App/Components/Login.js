@@ -8,7 +8,6 @@ import {
   TextInput,
   TouchableHighlight
 } from 'react-native';
-import Cookie from 'react-native-cookie';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
 
 
@@ -48,9 +47,8 @@ export default class Login extends Component {
             <Button
               title='Log In'
               onPress={this._submitForm}
-              backgroundColor={'blue'}
+              outline={true}
               />
-
          </View>
 
 
