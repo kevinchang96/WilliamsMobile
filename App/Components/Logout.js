@@ -16,11 +16,12 @@ export default class Logout extends Component {
 
     render() {
         return (
-        <View paddingTop={10}>
+        <View
+        paddingTop={10}>
             <Button
               title='Log Out'
               onPress={this._logout}
-              backgroundColor={'blue'}
+              outline={true}
               />
          </View>
         );
