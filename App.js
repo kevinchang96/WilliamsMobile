@@ -1,6 +1,6 @@
 /**
- * Kevin Chang
- * (c) 2017
+ * Kevin Chang, David Ariyibi, Dysron Marshall
+ * (c) 12/2017, 01/2018
  */
 
 import React, { Component } from 'react';
