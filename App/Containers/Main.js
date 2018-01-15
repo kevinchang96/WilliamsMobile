@@ -1,9 +1,12 @@
+/**
+ * David Ariyibi
+ * (c) 01/2018
+ */
+
 import React, {Component} from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 //import {bind} from 'w../utils/utils';
-
-const mainIcon = '../Assets/williamsldpi-white.png';
 
 class Main extends Component {
 

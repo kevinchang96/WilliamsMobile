@@ -1,3 +1,8 @@
+/**
+ * David Ariyibi
+ * (c) 01/2018
+ */
+
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { Header, Button, ButtonGroup } from 'react-native-elements';
