@@ -19,24 +19,15 @@ export default class FactrakCommentWindow extends Component{
         decisionComponents - recommend course & take again
         postedWhen
     */
+
     constructor(props){
         super(props);
-        this.state.arr = [];
-    }
-
-    createDoc(){
-        let doc = new DOMParser().parseFromString(this.props.html,'text/html');
-        return doc;
-    }
-
-    getComments(doc){
-        // doc goes as the parameter
-        return doc.querySelectorAll("article .comment div.comment-content");
+        this.state = {arr:[]};
     }
 
     getRatings(ratingsList){
-        const agree = ratingsList[0].trim();
-        const disagree = ratingsList[1].trim();
+        const agree = ratingsList[0].innerText.trim();
+        const disagree = ratingsList[1].innerText.trim();
         return {"agree":agree, "disagree":disagree};
     }
 
@@ -50,31 +41,53 @@ export default class FactrakCommentWindow extends Component{
         if(!wouldRecommend) arr.append(wouldRecommend);
         return arr;
     }
+    createCommentWindow(){
+        const DOMParser = require('react-native-html-parser').DOMParser;
+        const doc = new DOMParser().parseFromString(this.props.navigation.state.params.html,'text/html');
+        const comments = doc.querySelect(".comment.comment-content");
+
+        const id = comments[0].getElementsBySelector("[id^=flag]")
+        console.log(id);
+        const comment = doc.getElementsByClassName('comment-text');
+        console.log(comment);
+
+        return;
+        let cards = [];
+        comments.forEach((comment) => cards.push(createCommentCard));
+        this.setState(arr:comment);
+        console.log(this.state);
+    }
 
     createCommentCard(comment){
         // done for each comment
-        const id = comment.id.split('comment')[1];
-        const votes = getRatings(comment.querySelectorAll("span[id=agree-count]"));
+
+
+
+
+        const id = comment.querySelector("[id^=flag]").id.split("flag")[1]
+        const votes = getRatings(comment.querySelectorAll("span[id$=agree-count]"));
         const numAgree = votes.agree;
         const numDisagree = votes.disagree;
         const responses = comment.querySelectorAll(".comment-content p:not([class])"); // list of paragraph nodes
-        const responseComponents = Array.from(comment,i).map((response) =>
-            <Text key={i}>{response.innerText.trim()}</Text>);
+        const responseComponents = Array.from(comment).map((paragraph,i) =>
+            <Text key={i}>{paragraph.innerText.trim()}</Text>);
         const retakeOrRecommend = parseOpinions(comment.querySelector(".comment-content div").childNodes);
-        const decisionComponents = Array.from(retakeOrRecommend).map((decision) =>
-            <Text>{decision.innerText.trim()}</Text>)
+        const decisionComponents = Array.from(retakeOrRecommend).map((decision,i) =>
+            <Text key={i}>{decision.innerText.trim()}</Text>);
         const postedWhen = comment.querySelector(".comment-detail").innerText.trim();
 
         const card = (<FactrakComment numAgree={numAgree} numDisagree={numDisagree}
                         decisionComponents={decisionComponents} response={responseComponents}
                         postedWhen={postedWhen}/>);
-        this.state.arr.append(card);
+        return card;
     }
 
     render(){
+        console.log(this);
+        {this.createCommentWindow()}
         return(
             <View>
-
+                {this.state.arr}
             </View>
         );
     }
@@ -129,4 +142,3 @@ const styles = StyleSheet.create({
     }
 });
 
-AppRegistry.registerComponent('FactrakCommentWindow', () => Factrak);
