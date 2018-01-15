@@ -50,9 +50,6 @@ export default class Login extends Component {
               outline={true}
               />
          </View>
-
-
-
         );
     }
 
@@ -100,9 +97,7 @@ export default class Login extends Component {
                     result = result + '&' + paramList[i];
                 }
              }
-
              console.log( "Result: " + result + "\nContent length: " + result.length );
-
              this._loginPost(result);
           })
           .catch((error) => {
@@ -129,19 +124,12 @@ export default class Login extends Component {
            .then(
             function(response) {
                console.log(response.headers);
-
                //console.log(response.headers.get("set-cookie"));
                var setCookies = response.headers.get("set-cookie");
                console.log( "Set-Cookies: " + setCookies );
                this.setState( {cookies: setCookies} );
 
-               //var updatedCookies = setCookies.split(";",1)[0];
-               //console.log(updatedCookies);
-               //this.setState( {cookies: updatedCookies} );
-
-               //this.someFn(setCookies.split(";")[0]);
-
-/*                Cookie.get('https://wso.williams.edu/',
+                /*Cookie.get('https://wso.williams.edu/',
                 '_WSOonRails_session').then((cookie) => this.someFn(cookie));*/
 
                console.log("State information: " + JSON.stringify(this.state));
@@ -151,13 +139,10 @@ export default class Login extends Component {
            .then( responseText => {
                 console.log(responseText);
            })*/
-
        .catch((error) => {
           console.error(error);
        });
     }
-
-
 }
 
 

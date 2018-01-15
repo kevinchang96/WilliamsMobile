@@ -22,6 +22,7 @@ import {FactrakComment} from './App/Components/FactrakCommentWindow';
 import FactrakSearch from './App/Components/FactrakSearch';
 import SuggestionCard from './App/Components/SuggestionCard';
 import DiningMenus from './App/Components/DiningMenus';
+import Home from './App/Containers/Home';
 
 export default class main extends Component{
 
@@ -32,9 +33,10 @@ export default class main extends Component{
     render(){
         return(
             <View style={styles.container}>
-                <Login />
-                <Logout />
-                <FactrakSearch />
+                {/*<Login />
+                <Logout />*/
+                /*<FactrakSearch />*/}
+                <DiningMenus />
                 {/*<FactrakComment professorName="Stewart Johnson" courseNo="MATH 150" numAgree="10"
                                      numDisagree="5" responseComponents={[<Text key={1}>Good professor.</Text>,
                                                                             <Text key={2}>Would take again.</Text>]}
