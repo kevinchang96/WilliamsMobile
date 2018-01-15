@@ -31,7 +31,7 @@ export default class FactrakSearch extends Component{
     componentDidUpdate(){
         if(this.state.renderComments){
             this.setState({renderComments:false});
-            this.passHTML(this.state.html);
+            this.passHTML(this.state.html,);
         }
     }
 
