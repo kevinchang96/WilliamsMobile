@@ -6,3 +6,8 @@ Useful commands to know.
 Start the React Packager: react-native start
 Running the application:  react-native run-android
                           react-native run-ios
+
+Installations:
+react-native-vector-icons --save
+react-native-elements --save
+react-native-html-parser

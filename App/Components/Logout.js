@@ -9,14 +9,20 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import { Button } from 'react-native-elements';
+
+
 export default class Logout extends Component {
 
     render() {
         return (
-        <View>
-            <TouchableHighlight onPress={this._logout}>
-                <Text>Log Out</Text>
-            </TouchableHighlight>
+        <View
+        paddingTop={10}>
+            <Button
+              title='Log Out'
+              onPress={this._logout}
+              outline={true}
+              />
          </View>
         );
     }
