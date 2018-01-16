@@ -8,7 +8,7 @@ import {
   Button,
   TouchableOpacity,
   Image,
-  ScrollView
+  FlatList
 } from 'react-native';
 
 export default class FactrakCommentWindow extends Component{
@@ -125,9 +125,10 @@ export default class FactrakCommentWindow extends Component{
 
     render(){
         return(
-            <ScrollView>
-                {this.state.arr}
-            </ScrollView>
+            <FlatList
+                data={this.state.arr}
+                renderItem={({item}) => <View>{item}</View>}
+            />
         );
     }
 }
