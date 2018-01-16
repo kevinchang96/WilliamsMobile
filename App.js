@@ -14,8 +14,7 @@ import { StackNavigator } from 'react-navigation';
 import Login from './App/Components/Login';
 import Logout from './App/Components/Logout';
 import Settings from './App/Components/Settings';
-import FactrakSearch from './App/Components/FactrakSearch';
-import SuggestionCard from './App/Components/SuggestionCard';
+import Factrak from './App/Components/Factrak';
 import FactrakCommentWindow from './App/Components/FactrakCommentWindow';
 //import DiningMenus from './App/Components/DiningMenus';
 
@@ -148,7 +147,7 @@ const logout = () => (
 );
 
 const factrak = ({navigation}) => (
-    <FactrakSearch comments={(html) => navigation.navigate('FactrakCommentWindow',{html:html})}/>
+    <Factrak comments={(html) => navigation.navigate('FactrakCommentWindow',{html:html})}/>
 );
 
 const factrakCommentWindow = ({navigation}) => (

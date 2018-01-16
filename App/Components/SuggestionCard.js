@@ -17,8 +17,8 @@ export default class SuggestionCard extends Component{
         return(
             <TouchableOpacity style={styles.container}
                 onPress={this.selected}>
+                {/* onPress will trigger navigation pass props to comment window */}
                 <Text>{this.props.title}</Text>
-                {/* onPress will remove suggestions and pass props to comment window */}
             </TouchableOpacity>
         );
     }
