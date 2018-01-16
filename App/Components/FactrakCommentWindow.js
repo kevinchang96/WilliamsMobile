@@ -21,12 +21,6 @@ export default class FactrakCommentWindow extends Component{
         this.createCommentWindow();
     }
 
-    getRatings(ratingsList){
-        const agree = ratingsList[0].innerText.trim();
-        const disagree = ratingsList[1].innerText.trim();
-        return {"agree":agree, "disagree":disagree};
-    }
-
     parseRetakeOrRecommend(retakeOrRecommend){
         const length = retakeOrRecommend.length;
         if(!length) return [];
@@ -66,7 +60,7 @@ export default class FactrakCommentWindow extends Component{
     createCommentWindow(){
         const DOMParser = require('react-native-html-parser').DOMParser;
         const doc = new DOMParser().parseFromString(this.props.navigation.state.params.html,'text/html');
-        const comments = doc.querySelect(".comment.comment-content");
+        const comments = doc.querySelect(".comment.comment-content")
 
         // contains review, retake/recommend, agree/disagree POST,
         const commentTexts = doc.getElementsByClassName('comment-text');
@@ -76,23 +70,25 @@ export default class FactrakCommentWindow extends Component{
 
         const commentContents = doc.getElementsByClassName('comment-content');
 
-        let cards = [];
 
+        let cards = [];
+        
         for(let i = 0; i < length; i++){
+            const comment = comments[i]
             const commentText = commentTexts[i];
             const commentDetail = commentDetails[i];
             const commentContent = commentContents[i];
-            cards.push(this.createCommentCard(commentText,commentDetail, commentContent, i));
+            cards.push(this.createCommentCard(comment, commentText,commentDetail, commentContent));
         }
         this.setState({arr:cards});
     }
 
-    createCommentCard(commentText, commentDetail, commentContent, key){
+    createCommentCard(comment, commentText, commentDetail, commentContent){
         // done for each comment
-        const title = commentContent.childNodes[1].textContent.trim().split(/\s\s+/g).join(" ");
-
+        const title = commentContent.childNodes[1].textContent.trim().split(/\s\s+/g).join(' ');
+        const id = comment.attributes[0].nodeValue.split('comment')[1];
         const uneditedAndDisagree = commentContent.childNodes[3].textContent.trim();
-        const editedAgreeDisagree = uneditedAndDisagree.split(/\s\s+/g).join(" ");
+        const editedAgreeDisagree = uneditedAndDisagree.split(/\s\s+/g).join(' ');
 
         // create Text component for paragraphs and pushes retake/recommend for further parsing
         const childNodes = commentText.childNodes;
@@ -103,7 +99,7 @@ export default class FactrakCommentWindow extends Component{
             const child = childNodes[i];
             if(child.previousSibling && child.nextSibling){
                 if(child.tagName == 'p'){
-                    review.push(<Text>{child.textContent.trim()}</Text>);
+                    review.push(<Text key={i}>{child.textContent.trim()}</Text>);
                 }
                 else if((child.previousSibling.tagName == 'br' &&
                         (child.nextSibling.tagName == 'br' || child.nextSibling.tagName == 'b')) ||
@@ -123,7 +119,7 @@ export default class FactrakCommentWindow extends Component{
 
         const card = (<FactrakComment title={title} agreement={editedAgreeDisagree} review={review}
                         responseComponents={responseComponents}
-                        postedWhen={postedWhen} key={key}/>);
+                        postedWhen={postedWhen} key={id}/>);
         return card;
     }
 
