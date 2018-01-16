@@ -1,11 +1,14 @@
 /**
- * Kevin Chang, David Ariyibi, Dysron Marshall
- * (c) 12/2017, 01/2018
+ * Kevin Chang
+ * (c) 12/2017
+ *
+ * David Ariyibi, Dysron Marshall
+ * (c) 01/2018
  */
 
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Button, ButtonGroup, Card, Header } from 'react-native-elements';
+import { Button, ButtonGroup, Card, Header, Icon } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 
 import Login from './App/Components/Login';
@@ -37,24 +40,28 @@ class HomeScreen extends Component {
             <View style={styles.container}>
                 <Header
                     leftComponent={
-                        <Button
-                            icon={{name: 'menu'}}
-                            backgroundColor='#512698'
+                        <Icon
+                            name='menu'
+                            color='white'
                             onPress={() => navigate('Settings')} />
                     }
-                    centerComponent={{text: 'WILLIAMS MOBILE', style: {color: '#ffffff', fontSize: 22}}}
+                    centerComponent={
+                        <Image source={require('./App/Assets/williams2.png')}
+                            style={{width: 173, height: 30}} />
+                    }
                     rightComponent={
-                        <Button
-                            icon={{name: 'settings'}}
-                            backgroundColor='#512698'
+                        <Icon
+                            name='settings'
+                            color='white'
                             onPress={() => navigate('Settings')} />
                     }
-                    outerContainerStyles={{backgroundColor: '#512698'}} />
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
+
                 <ScrollView style={styles.scrollContainer}>
                     <Card
                         title='WEATHER'
                         image={require('./App/Assets/weather-week-report.png')}>
-                        <Text style={{borderRadius: 5, marginBottom: 10}}>
+                        <Text style={{borderRadius: 5, marginBottom: 5}}>
                             This and above is where you implement all the current weather stuff.
                         </Text>
                         <Button
@@ -65,10 +72,11 @@ class HomeScreen extends Component {
                             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='FORECAST' />
                     </Card>
+
                     <Card
                         title="TODAY'S MENU"
                         image={require('./App/Assets/cutlery.png')}>
-                        <Text style={{borderRadius: 5, marginBottom: 10}}>
+                        <Text style={{borderRadius: 5, marginBottom: 5}}>
                             This and above is where you implement all the current weather stuff.
                         </Text>
                         <Button
@@ -78,26 +86,30 @@ class HomeScreen extends Component {
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='MENUS' />
                     </Card>
+
                     <Button
                         raised
                         title={`Login`}
                         rounded
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('Login')} />
+
                     <Button
                         raised
                         title={`Logout`}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('Logout')} />
+
                     <Button
                         raised
                         title={`Factrak`}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('Factrak')} />
+
                     <Card
                         title='HELLO WORLD'
                         image={require('./App/Assets/williamsldpi.png')}>
-                        <Text style={{borderRadius: 5, marginBottom: 10}}>
+                        <Text style={{borderRadius: 5, marginBottom: 5}}>
                             The idea with React Native Elements is more about component structure than actual design.
                         </Text>
                         <Button
@@ -107,14 +119,17 @@ class HomeScreen extends Component {
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='VIEW NOW' />
                     </Card>
-
                 </ScrollView>
+
                 <ButtonGroup
                     selectedBackgroundColor="orange"
                     onPress={this.updateIndex}
                     selectedIndex={this.state.index}
                     buttons={footerButtons}
-                    containerStyle={{height: 30}} />
+                    innerBorderStyle={{width: 0}}
+
+
+                    containerStyle={{borderRadius: 0, padding: 5, height: 30}} />
             </View>
         );
     }
