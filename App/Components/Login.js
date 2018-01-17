@@ -1,14 +1,19 @@
+/**
+ * Kevin Chang, David Ariyibi
+ * (c) 01/2018
+ */
+
 import React, { Component } from 'react';
 import {
   AppRegistry,
   Platform,
   StyleSheet,
   Text,
-  View,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
+  View
 } from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { Button, FormInput, FormLabel } from 'react-native-elements';
 
 
 export default class Login extends Component {
@@ -27,28 +32,31 @@ export default class Login extends Component {
 
     render() {
         return (
-        <View>
-            <FormLabel>Username</FormLabel>
-            <FormInput
-                value={this.state.username}
-                onChangeText={username => this.setState({username})}
-                onSubmitEditing={(event) => {this.refs.passwordInput.focus()}}
-                />
+        <View style={styles.container}>
+            <View style={styles.title}>
+                <FormLabel>Log In</FormLabel>
+            </View>
 
-            <FormLabel>Password</FormLabel>
-            <FormInput
-                secureTextEntry={true}
-                ref='passwordInput'
-                value={this.state.password}
-                onChangeText={password => this.setState({password})}
-                onSubmitEditing={this._submitForm}
-                />
+            <View style={styles.container}>
+                <FormInput
+                    value={this.state.username}
+                    placeholder='Username'
+                    onChangeText={username => this.setState({username})}
+                    onSubmitEditing={(event) => {this.refs.passwordInput.focus()}} />
 
-            <Button
-              title='Log In'
-              onPress={this._submitForm}
-              outline={true}
-              />
+                <FormInput
+                    secureTextEntry={true}
+                    ref='passwordInput'
+                    placeholder='Password'
+                    value={this.state.password}
+                    onChangeText={password => this.setState({password})}
+                    onSubmitEditing={this._submitForm} />
+
+                <Button
+                  title='Submit'
+                  onPress={this._submitForm}
+                  outline={true} />
+            </View>
          </View>
         );
     }
@@ -144,6 +152,21 @@ export default class Login extends Component {
        });
     }
 }
+
+const styles = StyleSheet.create({
+    title: {
+        backgroundColor: '#512698',
+        alignItems: 'center',
+    },
+    container: {
+        flex: 1,
+        backgroundColor: '#512698',
+    },
+    icon: {
+        width: 100,
+        height: 100,
+    },
+});
 
 
 AppRegistry.registerComponent('Login', () => Login );
