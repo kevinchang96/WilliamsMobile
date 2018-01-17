@@ -10,4 +10,6 @@ Running the application:  react-native run-android
 Installations:
 react-native-vector-icons --save
 react-native-elements --save
+react-native-animatable --save
+react-navigation
 react-native-html-parser
