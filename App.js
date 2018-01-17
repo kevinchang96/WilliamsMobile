@@ -9,7 +9,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Button, ButtonGroup, Card, Header, Icon } from 'react-native-elements';
-import { StackNavigator } from 'react-navigation';
+import { DrawerNavigator, StackNavigator } from 'react-navigation';
 
 import Login from './App/Components/Login';
 import Logout from './App/Components/Logout';
@@ -19,9 +19,9 @@ import FactrakCommentWindow from './App/Components/FactrakCommentWindow';
 //import DiningMenus from './App/Components/DiningMenus';
 
 class HomeScreen extends Component {
-    static navigationOptions = ({navigation}) => ({
-        title: 'Welcome',
-    });
+//    static navigationOptions = ({navigation}) => ({
+//        title: 'Welcome',
+//    });
 
     state = {
         index: 0
@@ -76,7 +76,7 @@ class HomeScreen extends Component {
                         title="TODAY'S MENU"
                         image={require('./App/Assets/cutlery.png')}>
                         <Text style={{borderRadius: 5, marginBottom: 5}}>
-                            This and above is where you implement all the current weather stuff.
+                            This and above is where you implement all the current dining stuff.
                         </Text>
                         <Button
                             icon={{name: 'local-dining'}}
@@ -84,6 +84,20 @@ class HomeScreen extends Component {
                             fontFamily='Lato'
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='MENUS' />
+                    </Card>
+
+                    <Card
+                        title='DAILY MESSAGES'
+                        image={require('./App/Assets/text.png')}>
+                        <Text style={{borderRadius: 5, marginBottom: 5}}>
+                            This and above is where you implement all the current daily messages stuff.
+                        </Text>
+                        <Button
+                            icon={{name: 'line-weight'}}
+                            backgroundColor='#512698'
+                            fontFamily='Lato'
+                            buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                            title='MORE' />
                     </Card>
 
                     <Button
@@ -155,24 +169,15 @@ const factrakCommentWindow = ({navigation}) => (
 );
 
 const RootNavigator = StackNavigator({
-  Home: {
-    screen: HomeScreen,
-  },
-  Settings: {
-    screen: settings,
-  },
-  Login: {
-    screen: login,
-  },
-  Logout: {
-    screen: logout,
-  },
-  Factrak: {
-    screen: factrak,
-  },
-  FactrakCommentWindow: {
-    screen: factrakCommentWindow,
-  }
+    Home: { screen: HomeScreen },
+    Settings: { screen: settings },
+    Login: { screen: login },
+    Logout: { screen: logout },
+    Factrak: { screen: factrak },
+    FactrakCommentWindow: { screen: factrakCommentWindow }
+},{
+    headerMode: 'none',
+//    initialRouteName: 'homeScreen'
 });
 
 const styles = StyleSheet.create({
