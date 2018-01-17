@@ -34,6 +34,10 @@ class HomeScreen extends Component {
             onPress={() => navigate('Logout')}
         />
         <Button
+            title="Go to Dining Menus"
+            onPress={() => navigate('DiningMenus')}
+        />
+        <Button
             title="Go to Factrak"
             onPress={() => navigate('Factrak')}
         />
@@ -48,6 +52,10 @@ const login = () => (
 
 const logout = () => (
     <Logout />
+);
+
+const diningMenus = () => (
+    <DiningMenus />
 );
 
 const factrak = ({navigation}) => (
@@ -67,6 +75,9 @@ const RootNavigator = StackNavigator({
   },
   Logout: {
     screen: logout,
+  },
+  DiningMenus: {
+    screen: diningMenus,
   },
   Factrak: {
     screen: factrak

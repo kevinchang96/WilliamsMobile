@@ -11,3 +11,4 @@ Installations:
 react-native-vector-icons --save
 react-native-elements --save
 react-native-html-parser
+react-navigation --save

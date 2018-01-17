@@ -70,30 +70,68 @@ export default class DiningMenus extends Component {
         fetch('http://nutrition.williams.edu/NetNutrition/1',
         {
             method: 'GET',
+            redirect: "manual",
             headers: {
-                'Host': 'nutrition.williams.edu',
-                'Connection': 'keep-alive',
-                'Upgrade-Insecure-Requests': 1,
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-                'DNT': 1,
-                'Referer': 'http://nutrition.williams.edu/',
-                'Accept-Encoding': 'gzip, deflate',
-                'Accept-Language': 'en-US,en;q=0.9'
-            },
-
+            'Host': 'nutrition.williams.edu',
+            'Connection': 'keep-alive',
+            'Upgrade-Insecure-Requests': 1,
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+            'DNT': 1,
+            'Referer': 'http://nutrition.williams.edu/NetNutrition/1',
+            'Accept-Encoding': 'gzip, deflate',
+            'Accept-Language': 'en-US,en;q=0.9',
+            }
         })
-        .then(
-            function(response) {
-               console.log(response.headers);
-               //console.log(response.headers.get("set-cookie"));
-               var setCookies = response.headers.get("set-cookie");
-               console.log( "Set-Cookie: " + setCookies );
-               this.setState( {cookies: setCookies} );
-            }.bind(this)
-        )
-
+        .then(response => {
+                // HTTP 301 response
+                console.log(response);
+                console.log("Set-cookies: " + response.headers.get('set-cookie'));
+            })
+            .catch(function(err) {
+                console.info(err + " url: " + url);
+            });
     }
+
+        _getMeal = () => {
+            var data = 'menuOid=325649';
+            var result = encodeURIComponent(data);
+            var size = data.length;
+            console.log("Data size: " + size);
+
+            fetch('http://nutrition.williams.edu/NetNutrition/1/Menu/SelectMenu',
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                Host: 'wso.williams.edu',
+                Connection: 'keep-alive',
+                'Content-Length': size,
+                Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
+                //'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Content-Type': 'application/json',
+                Referer: 'http://nutrition.williams.edu/NetNutrition/1',
+                'Accept-Language': 'en-US,en;q=0.8',
+                'Cookie': 'ASP.NET_SessionId=nbecy3umbn5xlheikcpnitjg; CBORD.netnutrition2=NNexternalID=1'
+                },
+                body: JSON.stringify({menuOid: 327265})
+            })
+            .then(
+                function( response ){
+                    console.log(response);
+                }
+            )
+            /*.then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+            })*/
+            .catch(function(err) {
+                console.info(err + " url: " + url);
+            });
+        }
+
+
 
     render() {
         let newArray = this.state.valueArray.map(( item, key ) =>
@@ -117,7 +155,7 @@ export default class DiningMenus extends Component {
             />
 
             <Button
-                onPress={ this._getCookies }
+                onPress={ this._getMeal }
                 raised
                 buttonStyle={{backgroundColor: 'blue'}}
                 textStyle={{textAlign: 'center'}}
@@ -125,7 +163,7 @@ export default class DiningMenus extends Component {
             />
 
             <Button
-                onPress={ this.renderAll }
+                onPress={ this._getCookies }
                 raised
                 buttonStyle={{backgroundColor: 'blue'}}
                 textStyle={{textAlign: 'center'}}
