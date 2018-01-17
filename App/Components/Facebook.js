@@ -9,8 +9,10 @@ import {
   View,
   ScrollView
 } from 'react-native';
+
 import { SearchBar } from 'react-native-elements'
 import StudentSuggestionCard from './StudentSuggestionCard';
+import StudentCard from './StudentCard';
 
 export default class Facebook extends Component{
 
@@ -24,9 +26,9 @@ export default class Facebook extends Component{
 
     render(){
         return(
-            <View>
+            <View style= {{flex: 1, backgroundColor: "#512698"}}>
                 <TextInput
-                    style=  {{color : "white", fontSize: 20}}
+                    style=  {{color: "white", fontSize: 20}}
                     placeholder = {this.state.searchFor}
                     placeholderTextColor = "white"
                     onChangeText = {searchFor => this.setState({searchFor})}
@@ -42,8 +44,6 @@ export default class Facebook extends Component{
             </View>
         );
     }
-
-    /*utf8=%E2%9C%93&authenticity_token=vCWKS%2BPUDQSTYHJiKGizW72El3tY5UpFm3m0amsJxVkk5YJoJIVS8AlTVkCjfbvep3xcxM0DDc8xyMDFmxxkyg%3D%3D&search=balls&commit=Search*/
 
     submitForm = () => {
         fetch('https://wso.williams.edu/facebook', {
@@ -94,7 +94,7 @@ export default class Facebook extends Component{
               });
     };
 
-    selected = (url) => {
+    /*selected = (url) => {
         fetch(url, {
             method: 'GET'
         })
@@ -111,7 +111,7 @@ export default class Facebook extends Component{
 
           })
 
-    }
+    }*/
     getPeople(result){
         fetch('https://wso.williams.edu/facebook', {
                 method: 'POST',
@@ -130,48 +130,62 @@ export default class Facebook extends Component{
         })
         .then((response) => response.text() ) // Transform the data into text
             .then((responseText) => {
-                //console.log("Response 2 = " + responseText);
                 var DOMParser = require('react-native-html-parser').DOMParser;
 
                 let doc = new DOMParser().parseFromString(responseText,'text/html');
                 var input = doc.getElementsByTagName("a");
-                //console.log("Tags: " + input);
 
                 var students = [input.length - 12];
 
                 if(input.length > 14){
                     for( i = 0; i < input.length - 1; i += 2 ){
-                        // Iterate through parameters
                         if(i < 12)
                             continue;
 
                         let student = {
                                 name: input[i].textContent,
                                 unix: input[i + 1].textContent,
+                                img: "https://wso.williams.edu/pic/" + input[i + 1].textContent,
                                 info: input[i].getAttribute("href")
                             };
 
-                        card = <StudentSuggestionCard
+                        card = <StudentCard
                                     name = {student.name}
-                                    info = {student.info}
+                                    unix = {student.unix}
+                                    img = {student.img}
                                     key = {student.unix}
-                                    selected={(url) => selected}
                                />
                         students[i-12] = card;
 
                         console.log("Student: " + student.name);
                         console.log("Unix: " + student.unix);
                         console.log("Input length: " + input.length)
-
-                        //console.log("Attr: " + input[i]);
                      }
                      this.setState({studentCards: students})
                  }
                  else{
 
+                    var nameInput = doc.getElementsByTagName("h3");
+                    var unixInput = doc.getElementsByTagName("h4");
+                    let student = {
+                        name: nameInput[0].textContent,
+                        unix: unixInput[0].textContent,
+                        img: "https://wso.williams.edu/pic/" + unixInput[0].textContent
+                    }
+                    card = <StudentCard
+                                name = {student.name}
+                                unix = {student.unix}
+                                img = {student.img}
+                                key = {student.unix}
+                           />
+                    students[0] = card;
+
+                    console.log("Student: " + student.name);
+                    console.log("Unix: " + student.unix);
+
+                    this.setState({studentCards: students})
                  }
         })
-
     }
 }
 AppRegistry.registerComponent('Facebook', () => Facebook );

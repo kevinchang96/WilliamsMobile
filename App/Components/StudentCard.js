@@ -1,37 +1,30 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  Button,
   Platform,
   StyleSheet,
-  Text,
   Image,
   View
 } from 'react-native';
+import { Container, Header, Content, Card, CardItem, Button, Text, Thumbnail, Icon, Left, Body } from 'native-base';
 
 export default class StudentCard extends Component{
 
     render(){
         return(
-            <View>
-                <Image>
-                    source={{uri: this.props.photo}}
-                    style={{width: 50, height: 50}}
-                />
-            </View>
+            <Card style={{flex: 0}}>
+            <CardItem>
+              <Left>
+                <Thumbnail source={{uri: this.props.img}} />
+                <Body>
+                  <Text>{this.props.name}</Text>
+                  <Text note>Unix: {this.props.unix}</Text>
+                </Body>
+              </Left>
+            </CardItem>
+            </Card>
         );
     }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    borderWidth: 1,
-    borderRadius: 0,
-    borderColor: 'white',
-  },
-  text: {
-    fontSize: 30
-  }
-});
 
 AppRegistry.registerComponent('StudentCard', () => StudentCard );

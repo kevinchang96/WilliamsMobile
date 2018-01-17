@@ -19,7 +19,6 @@ export default class StudentSuggestionCard extends Component{
     render(){
         return(
             <TouchableOpacity style = {styles.container}>
-                onPress = {this.selected}
                 <Text style = {styles.text}> {this.props.name} </Text>
             </TouchableOpacity>
         );

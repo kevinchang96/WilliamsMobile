@@ -16,6 +16,7 @@ import Logout from './App/Components/Logout';
 import Settings from './App/Components/Settings';
 import Factrak from './App/Components/Factrak';
 import FactrakCommentWindow from './App/Components/FactrakCommentWindow';
+import Facebook from './App/Components/Facebook';
 //import DiningMenus from './App/Components/DiningMenus';
 import WeatherReader from './App/Components/WeatherReader';
 
@@ -119,7 +120,11 @@ class HomeScreen extends Component {
                         title={`Factrak`}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('Factrak')} />
-
+                    <Button
+                        raised
+                        title={`Facebook`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('Facebook')} />
                     <Card
                         title='HELLO WORLD'
                         image={require('./App/Assets/williamsldpi.png')}>
@@ -161,6 +166,10 @@ const logout = () => (
     <Logout />
 );
 
+const facebook = () => (
+    <Facebook />
+);
+
 const factrak = ({navigation}) => (
     <Factrak comments={(html) => navigation.navigate('FactrakCommentWindow',{html:html})}/>
 );
@@ -175,6 +184,7 @@ const RootNavigator = StackNavigator({
     Login: { screen: login },
     Logout: { screen: logout },
     Factrak: { screen: factrak },
+    Facebook: { screen: facebook },
     FactrakCommentWindow: { screen: factrakCommentWindow }
 },{
     headerMode: 'none',
