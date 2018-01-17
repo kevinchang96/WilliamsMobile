@@ -18,6 +18,9 @@ import Factrak from './App/Components/Factrak';
 import FactrakCommentWindow from './App/Components/FactrakCommentWindow';
 import DiningMenus from './App/Components/DiningMenus';
 import WebViewComponent from './App/Components/WebViewComponent';
+import DiningList from './App/Components/DiningList';
+import LinkList from './App/Components/LinkList';
+import WeatherReader from './App/Components/WeatherReader';
 
 class HomeScreen extends Component {
 //    static navigationOptions = ({navigation}) => ({
@@ -43,7 +46,7 @@ class HomeScreen extends Component {
                         <Icon
                             name='menu'
                             color='white'
-                            onPress={() => navigate('Settings')} />
+                            onPress={() => navigate('LinkList')} />
                     }
                     centerComponent={
                         <Image source={require('./App/Assets/williams2.png')}
@@ -83,10 +86,9 @@ class HomeScreen extends Component {
                             icon={{name: 'local-dining'}}
                             backgroundColor='#512698'
                             fontFamily='Lato'
+                            onPress={() => navigate('DiningList')}
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                            title='MENUS'
-                            onPress={() => navigate('DiningMenus')}
-                             />
+                            title='MENUS' />
                     </Card>
 
                     <Card
@@ -121,6 +123,12 @@ class HomeScreen extends Component {
                         title={`Factrak`}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('Factrak')} />
+
+                    <Button
+                        raised
+                        title={`Links`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('LinkList')} />
 
                     <Button
                         raised
@@ -187,6 +195,14 @@ const laundryview = ({navigation}) => (
     <WebViewComponent navigation={navigation}/>
 );
 
+const diningList = () => (
+    <DiningList />
+);
+
+const linkList = () => (
+    <LinkList />
+);
+
 const factrak = ({navigation}) => (
     <Factrak comments={(html) => navigation.navigate('FactrakCommentWindow',{html:html})}/>
 );
@@ -204,7 +220,9 @@ const RootNavigator = StackNavigator({
     Map: { screen: map },
     LaundryView: { screen: laundryview },
     Factrak: { screen: factrak },
-    FactrakCommentWindow: { screen: factrakCommentWindow }
+    FactrakCommentWindow: { screen: factrakCommentWindow },
+    DiningList: { screen: diningList },
+    LinkList: { screen: linkList }
 },{
     headerMode: 'none',
 //    initialRouteName: 'homeScreen'
