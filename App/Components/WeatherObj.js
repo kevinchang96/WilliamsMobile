@@ -5,8 +5,9 @@
 
 import React, { Component } from 'react';
 import {View, Text} from 'react-native';
+//import WeatherReader from './WeatherReader';
 
-class WeatherObj extends Component {
+export default class WeatherObj extends Component {
     state = {
         main: '',           // main, eg. cloudy, sunny, etc.
         description: '',    // a somewhat accurate blurb about the weather
@@ -18,8 +19,8 @@ class WeatherObj extends Component {
         mph: '',            // speed in mi/hr (imperial units)
     }
 
-    storeData = (json) => {
-        var raw = JSON.parse(json); // all the data
+    storeData = () => {
+        var raw = JSON.parse('{"coord":{"lon":-73.2,"lat":42.71},"weather":[{"id":600,"main":"Snow","description":"light snow","icon":"13d"},{"id":701,"main":"Mist","description":"mist","icon":"50d"}],"base":"stations","main":{"temp":270.92,"pressure":1024,"humidity":86,"temp_min":270.15,"temp_max":272.15},"visibility":4828,"wind":{"speed":1.06,"deg":355.005},"clouds":{"all":90},"dt":1516204440,"sys":{"type":1,"id":2898,"message":0.0191,"country":"US","sunrise":1516191537,"sunset":1516225663},"id":4955786,"name":"Williamstown","cod":200}'); // all the data
         var temp = raw.main.temp;   // temperature in Kelvins
 
         // temperature conversions
@@ -30,12 +31,18 @@ class WeatherObj extends Component {
             main: raw.weather[0].main,
             description: raw.weather[0].description,
             icon: raw.weather[0].icon,
+        });
+
+        this.setState({
             fahrenheit: tempF,
             celsius: tempC,
             humidity: raw.main.humidity,
+        });
+
+        this.setState({
             ms: raw.wind.speed,
             mph: raw.wind.speed*2.2369,
-        });
+        })
     }
 
     // get functions for each piece of information stored
@@ -73,13 +80,14 @@ class WeatherObj extends Component {
     }
 
     // a render function for testing
-//    render() {
-//        return (
-//            <View>
-//                <Text>{this.state}</Text>
-//            </View>
-//        )
-//    }
-}
 
-export default WeatherObj
+    render() {
+        //let w = '{"coord":{"lon":-73.2,"lat":42.71},"weather":[{"id":600,"main":"Snow","description":"light snow","icon":"13d"},{"id":701,"main":"Mist","description":"mist","icon":"50d"}],"base":"stations","main":{"temp":270.92,"pressure":1024,"humidity":86,"temp_min":270.15,"temp_max":272.15},"visibility":4828,"wind":{"speed":1.06,"deg":355.005},"clouds":{"all":90},"dt":1516204440,"sys":{"type":1,"id":2898,"message":0.0191,"country":"US","sunrise":1516191537,"sunset":1516225663},"id":4955786,"name":"Williamstown","cod":200}';
+        this.storeData();
+        return (
+            <View>
+                <Text>{this.getMain()}</Text>
+            </View>
+        )
+    }
+}

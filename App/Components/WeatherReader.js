@@ -5,10 +5,10 @@
 // (c) 2018 Grace Mazzarella
 
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { AppRegistry, View, Text } from 'react-native';
 import { WeatherObj } from './WeatherObj'
 
-class WeatherReader extends Component {
+export default class WeatherReader extends Component {
    state = {
     data: '',
     currWeather: '',
@@ -45,4 +45,5 @@ class WeatherReader extends Component {
       )
    }
 }
-export default WeatherReader
+
+AppRegistry.registerComponent('Weather', () => WeatherReader );

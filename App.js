@@ -17,6 +17,7 @@ import Settings from './App/Components/Settings';
 import Factrak from './App/Components/Factrak';
 import FactrakCommentWindow from './App/Components/FactrakCommentWindow';
 //import DiningMenus from './App/Components/DiningMenus';
+import WeatherReader from './App/Components/WeatherReader';
 
 class HomeScreen extends Component {
 //    static navigationOptions = ({navigation}) => ({
@@ -215,3 +216,31 @@ const styles = StyleSheet.create({
 });
 
 export default RootNavigator;
+
+/**
+ * Kevin Chang
+ * (c) 2017
+ */
+
+//import React, { Component } from 'react';
+//import { AppRegistry, Platform, StyleSheet, Text, View } from 'react-native';
+//import Login from './App/Components/Login';
+//import Logout from './App/Components/Logout';
+//import Component2 from './App/Components/Component2';
+//import Settings from './App/Components/Settings';
+//import HttpExample from './App/Components/HttpExample';
+//import WeatherReader from './App/Components/WeatherReader';
+//import WeatherObj from './App/Components/WeatherObj';
+//
+//export default class main extends Component{
+//    render(){
+//        return(
+//            <View>
+//                <Text>Below should be some weather:</Text>
+//                <WeatherObj/>
+//            </View>
+//
+//        );
+//    }
+//}
+//AppRegistry.registerComponent('main', () => main );
