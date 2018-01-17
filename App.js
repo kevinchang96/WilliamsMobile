@@ -16,7 +16,8 @@ import Logout from './App/Components/Logout';
 import Settings from './App/Components/Settings';
 import Factrak from './App/Components/Factrak';
 import FactrakCommentWindow from './App/Components/FactrakCommentWindow';
-//import DiningMenus from './App/Components/DiningMenus';
+import DiningMenus from './App/Components/DiningMenus';
+import WebViewComponent from './App/Components/WebViewComponent';
 
 class HomeScreen extends Component {
 //    static navigationOptions = ({navigation}) => ({
@@ -83,7 +84,9 @@ class HomeScreen extends Component {
                             backgroundColor='#512698'
                             fontFamily='Lato'
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                            title='MENUS' />
+                            title='MENUS'
+                            onPress={() => navigate('DiningMenus')}
+                             />
                     </Card>
 
                     <Card
@@ -118,6 +121,18 @@ class HomeScreen extends Component {
                         title={`Factrak`}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('Factrak')} />
+
+                    <Button
+                        raised
+                        title={`Campus Map`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('Map',{ url: 'http://map.williams.edu/map/?id=640'})} />
+
+                    <Button
+                        raised
+                        title={`LaundryView`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('LaundryView',{ url: 'http://m.laundryview.com/lvs.php'})} />
 
                     <Card
                         title='HELLO WORLD'
@@ -160,6 +175,18 @@ const logout = () => (
     <Logout />
 );
 
+const diningMenus = () => (
+    <DiningMenus />
+);
+
+const map = ({navigation}) => (
+    <WebViewComponent navigation={navigation}/>
+);
+
+const laundryview = ({navigation}) => (
+    <WebViewComponent navigation={navigation}/>
+);
+
 const factrak = ({navigation}) => (
     <Factrak comments={(html) => navigation.navigate('FactrakCommentWindow',{html:html})}/>
 );
@@ -173,6 +200,9 @@ const RootNavigator = StackNavigator({
     Settings: { screen: settings },
     Login: { screen: login },
     Logout: { screen: logout },
+    DiningMenus: { screen: diningMenus },
+    Map: { screen: map },
+    LaundryView: { screen: laundryview },
     Factrak: { screen: factrak },
     FactrakCommentWindow: { screen: factrakCommentWindow }
 },{

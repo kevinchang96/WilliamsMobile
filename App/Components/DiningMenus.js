@@ -99,7 +99,7 @@ export default class DiningMenus extends Component {
     }
 
         _getMeal = () => {
-            var data = 'menuOid=325649';
+            var data = 'menuOid=332831';
             var result = encodeURIComponent(data);
             var size = data.length;
             console.log("Data size: " + size);
@@ -107,30 +107,31 @@ export default class DiningMenus extends Component {
             fetch('http://nutrition.williams.edu/NetNutrition/1/Menu/SelectMenu',
             {
                 method: 'POST',
-                credentials: 'include',
+                //credentials: 'include',
                 headers: {
-                Host: 'wso.williams.edu',
-                Connection: 'keep-alive',
+                'Host': 'wso.williams.edu',
+                'Connection': 'keep-alive',
                 'Content-Length': size,
-                Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
-                //'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                'Content-Type': 'application/json',
-                Referer: 'http://nutrition.williams.edu/NetNutrition/1',
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                //'Content-Type': 'application/json',
+                'Referer': 'http://nutrition.williams.edu/NetNutrition/1',
                 'Accept-Language': 'en-US,en;q=0.8',
                 'Cookie': 'ASP.NET_SessionId=nbecy3umbn5xlheikcpnitjg; CBORD.netnutrition2=NNexternalID=1'
                 },
-                body: JSON.stringify({menuOid: 327265})
+                body: 'menuOid=332831'
+                //body: JSON.stringify({menuOid: 327265})
             })
-            .then(
+            /*.then(
                 function( response ){
                     console.log(response);
                 }
-            )
-            /*.then((response) => response.json())
+            )*/
+            .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson);
-            })*/
+            })
             .catch(function(err) {
                 console.info(err + " url: " + url);
             });
