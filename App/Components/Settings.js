@@ -22,9 +22,13 @@ export default class Settings extends Component{
                 <Header
                     centerComponent={
                         <Image source={require('../Assets/williams2.png')}
-                            style={{width: 173, height: 30}} />
+                        style={{width: 173, height: 30}} />
                     }
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
+
+                <Header
+                    centerComponent={{ text: 'Settings', style: { fontSize: 22, color: '#ffffff' } }}
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
 
                 <List containerStyle={{marginBottom: 20}}>
                   {
