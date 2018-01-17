@@ -31,7 +31,7 @@ class WeatherObj extends Component {
             description: raw.weather[0].description,
             icon: raw.weather[0].icon,
             fahrenheit: tempF,
-            celsius: temperature,
+            celsius: tempC,
             humidity: raw.main.humidity,
             ms: raw.wind.speed,
             mph: raw.wind.speed*2.2369,
