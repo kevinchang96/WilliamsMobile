@@ -11,8 +11,6 @@ import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TextInput, 
 import { Button, ButtonGroup, Card, Header, Icon } from 'react-native-elements';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 
-import Login from './App/Components/Login';
-import Logout from './App/Components/Logout';
 import Settings from './App/Components/Settings';
 import Factrak from './App/Components/Factrak';
 import FactrakCommentWindow from './App/Components/FactrakCommentWindow';
@@ -117,19 +115,6 @@ class HomeScreen extends Component {
 
                     <Button
                         raised
-                        title={`Login`}
-                        rounded
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('Login')} />
-
-                    <Button
-                        raised
-                        title={`Logout`}
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('Logout')} />
-
-                    <Button
-                        raised
                         title={`Factrak`}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('Factrak')} />
@@ -175,10 +160,6 @@ class HomeScreen extends Component {
 
 const settings = () => ( <Settings/> );
 
-const login = () => ( <Login /> );
-
-const logout = () => ( <Logout /> );
-
 const diningMenus = () => ( <DiningMenus /> );
 
 const diningList = () => ( <DiningList /> );
@@ -198,8 +179,6 @@ const factrakCommentWindow = ({navigation}) => (
 const RootNavigator = StackNavigator({
     Home: { screen: HomeScreen },
     Settings: { screen: settings },
-    Login: { screen: login },
-    Logout: { screen: logout },
     DiningMenus: { screen: diningMenus },
     Factrak: { screen: factrak },
     FactrakCommentWindow: { screen: factrakCommentWindow },
