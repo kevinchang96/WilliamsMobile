@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { WebView } from 'react-native';
+import { WebView, Platform} from 'react-native';
 
 export default class WebViewComponent extends Component {
   render() {
@@ -7,7 +7,7 @@ export default class WebViewComponent extends Component {
     return (
       <WebView
         source={{uri: this.props.navigation.state.params.url}}
-        style={{marginTop: 20}}
+        style={{paddingTop: Platform.OS === 'ios' ? 20 : 0}}
         javaScriptEnabled={true}
       />
     );
