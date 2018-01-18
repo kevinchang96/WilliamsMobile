@@ -1,21 +1,27 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Header, Icon, List, ListItem } from 'react-native-elements';
+import { StackNavigator } from 'react-navigation';
+import WebViewComponent from './WebViewComponent';
 
-export default class NewsList extends Component{
+class NewsList extends Component{
     render() {
+        const { navigate } = this.props.navigation;
         const newsList = [
           {
             url: 'http://williamsrecord.com/',
             name: "Williams Record",
+            screen: 'Record',
             icon: require('../Assets/record_logo.png')
           },{
             url: 'http://williamsalternative.com/',
             name: "Williams Alternative",
+            screen: 'Alternative',
             icon: require('../Assets/wa_logo2.png')
           },{
             url: 'http://ephblog.com/',
             name: "EphBlog",
+            screen: 'EphBlog',
             icon: require('../Assets/ephblog.jpg')
           }
         ]
@@ -41,6 +47,7 @@ export default class NewsList extends Component{
                             avatar={l.icon}
                             key={i}
                             title={l.name}
+                            onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }
                           />
                         ))
                       }
@@ -86,4 +93,19 @@ const styles = StyleSheet.create({
 
 });
 
-AppRegistry.registerComponent('NewsList', () => NewsList );
+const record = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
+const alternative = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
+const ephBlog = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
+const NewsNavigator = StackNavigator({
+    Home: { screen: NewsList },
+    Record: { screen: record },
+    Alternative: { screen: alternative },
+    EphBlog: { screen: ephBlog }
+    },
+    { headerMode: 'none' }
+);
+
+export default NewsNavigator;
