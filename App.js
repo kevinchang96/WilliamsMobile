@@ -20,12 +20,22 @@ import DiningMenus from './App/Components/DiningMenus';
 import WebViewComponent from './App/Components/WebViewComponent';
 import DiningList from './App/Components/DiningList';
 import LinkList from './App/Components/LinkList';
+import NewsList from './App/Components/NewsList';
 import WeatherReader from './App/Components/WeatherReader';
 
 class HomeScreen extends Component {
 //    static navigationOptions = ({navigation}) => ({
 //        title: 'Welcome',
 //    });
+
+    static navigationOptions = {
+        drawerLabel: 'Home',
+        drawerIcon: () => (
+          <Image
+            source={require('./App/Assets/star.png')}
+          />
+        ),
+      };
 
     state = {
         index: 0
@@ -46,7 +56,7 @@ class HomeScreen extends Component {
                         <Icon
                             name='menu'
                             color='white'
-                            onPress={() => navigate('LinkList')} />
+                            onPress={() => navigate('DrawerOpen')} />
                     }
                     centerComponent={
                         <Image source={require('./App/Assets/williams2.png')}
@@ -130,6 +140,12 @@ class HomeScreen extends Component {
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('LinkList')} />
 
+                    <Button
+                        raised
+                        title={`News`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('NewsList')} />
+
                     <Card
                         title='HELLO WORLD'
                         image={require('./App/Assets/williamsldpi.png')}>
@@ -169,6 +185,8 @@ const diningList = () => ( <DiningList /> );
 
 const linkList = () => ( <LinkList /> );
 
+const newsList = () => ( <NewsList /> );
+
 const factrak = ({navigation}) => (
     <Factrak comments={(html) => navigation.navigate('FactrakCommentWindow',{html:html})}/>
 );
@@ -186,8 +204,9 @@ const RootNavigator = StackNavigator({
     Factrak: { screen: factrak },
     FactrakCommentWindow: { screen: factrakCommentWindow },
     DiningList: { screen: diningList },
-    LinkList: { screen: linkList }
-    },{
+    LinkList: { screen: linkList },
+    NewsList: { screen: newsList }
+},{
     headerMode: 'none',
 //    initialRouteName: 'homeScreen'
 });
@@ -217,13 +236,43 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.7)',
 //        padding: 15
     },
-    btnImage:
-    {
+    btnImage: {
         resizeMode: 'contain',
         width: '100%',
         tintColor: 'white'
+    },
+    icon: {
+        width: 24,
+        height: 24,
     }
-
 });
 
 export default RootNavigator;
+
+/**
+ * Kevin Chang
+ * (c) 2017
+ */
+
+//import React, { Component } from 'react';
+//import { AppRegistry, Platform, StyleSheet, Text, View } from 'react-native';
+//import Login from './App/Components/Login';
+//import Logout from './App/Components/Logout';
+//import Component2 from './App/Components/Component2';
+//import Settings from './App/Components/Settings';
+//import HttpExample from './App/Components/HttpExample';
+//import WeatherReader from './App/Components/WeatherReader';
+//import WeatherObj from './App/Components/WeatherObj';
+//
+//export default class main extends Component{
+//    render(){
+//        return(
+//            <View>
+//                <Text>Below should be some weather:</Text>
+//                <WeatherObj/>
+//            </View>
+//
+//        );
+//    }
+//}
+//AppRegistry.registerComponent('main', () => main );
