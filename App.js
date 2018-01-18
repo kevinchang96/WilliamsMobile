@@ -130,18 +130,6 @@ class HomeScreen extends Component {
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('LinkList')} />
 
-                    <Button
-                        raised
-                        title={`Campus Map`}
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('Map',{ url: 'http://map.williams.edu/map/?id=640'})} />
-
-                    <Button
-                        raised
-                        title={`LaundryView`}
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('LaundryView',{ url: 'http://m.laundryview.com/lvs.php'})} />
-
                     <Card
                         title='HELLO WORLD'
                         image={require('./App/Assets/williamsldpi.png')}>
@@ -163,45 +151,23 @@ class HomeScreen extends Component {
                     selectedIndex={this.state.index}
                     buttons={footerButtons}
                     innerBorderStyle={{width: 0}}
-
-
                     containerStyle={{borderRadius: 0, padding: 5, height: 30}} />
             </View>
         );
     }
 }
 
-const settings = () => (
-    <Settings/>
-);
+const settings = () => ( <Settings/> );
 
-const login = () => (
-    <Login />
-);
+const login = () => ( <Login /> );
 
-const logout = () => (
-    <Logout />
-);
+const logout = () => ( <Logout /> );
 
-const diningMenus = () => (
-    <DiningMenus />
-);
+const diningMenus = () => ( <DiningMenus /> );
 
-const map = ({navigation}) => (
-    <WebViewComponent navigation={navigation}/>
-);
+const diningList = () => ( <DiningList /> );
 
-const laundryview = ({navigation}) => (
-    <WebViewComponent navigation={navigation}/>
-);
-
-const diningList = () => (
-    <DiningList />
-);
-
-const linkList = () => (
-    <LinkList />
-);
+const linkList = () => ( <LinkList /> );
 
 const factrak = ({navigation}) => (
     <Factrak comments={(html) => navigation.navigate('FactrakCommentWindow',{html:html})}/>
@@ -217,13 +183,11 @@ const RootNavigator = StackNavigator({
     Login: { screen: login },
     Logout: { screen: logout },
     DiningMenus: { screen: diningMenus },
-    Map: { screen: map },
-    LaundryView: { screen: laundryview },
     Factrak: { screen: factrak },
     FactrakCommentWindow: { screen: factrakCommentWindow },
     DiningList: { screen: diningList },
     LinkList: { screen: linkList }
-},{
+    },{
     headerMode: 'none',
 //    initialRouteName: 'homeScreen'
 });
