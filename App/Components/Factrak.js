@@ -21,22 +21,22 @@ export default class Factrak extends Component{
     constructor(props){
         super();
         this.state = {
-                        jArr: [],
-                        suggestions: [],
-                        html: "",
-                        renderComments: false,
+                        jArr: [],               // JSON objects: {name/title: , id:#}
+                        suggestions: [],        // array of suggestion cards
+                        html: "",               // html text to be converted into document object
+                        renderComments: false,  // indicates whether to render comments or not
         };
     }
 
     componentDidUpdate(){
-        if(this.state.renderComments){
+        if(this.state.renderComments){              // a check for dead links/unsuccessful requests
             this.setState({renderComments:false});
-            this.props.comments(this.state.html);
+            this.props.comments(this.state.html);   // callback func - send html to comment window
         }
     }
 
     fetchHTML(url){
-        fetch(url,         // NodeList after assignment
+        fetch(url,
             {
             credentials: 'include',
             mode: "no-cors",
@@ -46,6 +46,7 @@ export default class Factrak extends Component{
             }
             }).then(response => {
                 if(response.status == 200) response.text().then((text) => {
+                    // if successful fetch, continue
                     this.setState({html : text});
                     this.setState({renderComments:true});
                 });
@@ -77,10 +78,10 @@ export default class Factrak extends Component{
     }
 
     createSuggestionBoxes(selected){
-        this.state.suggestions = this.state.jArr.map(   // array of suggestion cards
+        this.state.suggestions = this.state.jArr.map(
             function(current,i){
                 //console.log(current);
-                let type = Object.keys(current)[0];
+                let type = Object.keys(current)[0];     // either name (professor) or title (course)
                 return(<SuggestionCard id={current['id']}
                         title={current['name'] || current['title']} type={type} key={i}
                         selected={selected}/>);
@@ -115,8 +116,6 @@ const styles = StyleSheet.create({
     },
     searchBox: {
         padding: 0,
-        flexDirection: "row",
-        justifyContent: "space-between",
         //borderColor: '',
         //borderWidth: 4
     },

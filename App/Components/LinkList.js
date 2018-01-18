@@ -11,32 +11,32 @@ class LinkList extends Component{
             {
               id: '55',
               name: "Campus Map",
-              screen: 'campusMap',
+              screen: 'CampusMap',
               url: 'http://map.williams.edu/map/?id=640'
             },{
               id: '56',
-              name: "LaundryView",
-              screen: 'laundryView',
+              name: "Laundry View",
+              screen: 'LaundryView',
               url: 'http://m.laundryview.com/lvs.php'
             },{
               id: '57',
-              name: "RouteShout",
-              screen: 'routeShout',
+              name: "Route Shout",
+              screen: 'RouteShout',
               url: 'http://m.routeshout.com/'
             },{
               id: '58',
               name: "BRTA Routes",
-              screen: 'brta',
+              screen: 'BRTA',
               url: 'http://brta.routematch.com:52079/portal/fr2/index.jsf'
             },{
               id: '59',
               name: "A-Z Directories",
-              screen: 'az',
+              screen: 'AZ',
               url: 'https://www.williams.edu/a-z/'
             },{
               id: '60',
               name: "Course Catalog",
-              screen: 'courseCatalog',
+              screen: 'CourseCatalog',
               url: 'https://catalog.williams.edu/'
             }
         ]
@@ -61,7 +61,7 @@ class LinkList extends Component{
                           <ListItem
                             key={i}
                             title={l.name}
-                            onPress={() => {navigate(l.screen,{url: l.url})} }
+                            onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }
                           />
                         ))
                       }
