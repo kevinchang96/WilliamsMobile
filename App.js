@@ -111,6 +111,7 @@ class HomeScreen extends Component {
                             icon={{name: 'line-weight'}}
                             backgroundColor='#512698'
                             fontFamily='Lato'
+                            onPress={() => navigate('DailyMessages')}
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='MORE' />
                     </Card>
