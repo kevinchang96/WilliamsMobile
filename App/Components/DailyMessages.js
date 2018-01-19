@@ -11,7 +11,6 @@ import {
   Dimensions
 } from 'react-native';
 
-import HTML from 'react-native-render-html';
 
 export default class DailyMessages extends Component {
 
@@ -73,7 +72,7 @@ export default class DailyMessages extends Component {
         console.log(this.state.titlesArray.length);
         return (
             <View>
-                 <Text>{for each in this.state.titlesArray}</Text>
+                 <Text>{this.state.titlesArray}</Text>
             </View>
         );
     }

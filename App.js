@@ -21,6 +21,7 @@ import DiningList from './App/Components/DiningList';
 import LinkList from './App/Components/LinkList';
 import NewsList from './App/Components/NewsList';
 import WeatherReader from './App/Components/WeatherReader';
+import DailyMessages from './App/Components/DailyMessages';
 
 class HomeScreen extends Component {
 //    static navigationOptions = ({navigation}) => ({
@@ -177,6 +178,8 @@ const newsList = () => ( <NewsList /> );
 
 const facebook = () => ( <Facebook /> );
 
+const dailyMess = () => ( <DailyMessages /> );
+
 const factrak = ({navigation}) => (
     <Factrak comments={(html) => navigation.navigate('FactrakCommentWindow',{html:html})}/>
 );
@@ -194,7 +197,8 @@ const RootNavigator = StackNavigator({
     DiningList: { screen: diningList },
     Facebook: { screen: facebook },
     LinkList: { screen: linkList },
-    NewsList: { screen: newsList }
+    NewsList: { screen: newsList },
+    DailyMessages: {screen: dailyMess }
 },{
     headerMode: 'none',
 //    initialRouteName: 'homeScreen'
