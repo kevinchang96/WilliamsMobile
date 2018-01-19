@@ -13,3 +13,4 @@ react-native-elements --save
 react-native-animatable --save
 react-navigation
 react-native-html-parser
+npm install native-base --save
