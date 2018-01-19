@@ -1,7 +1,7 @@
 // A WIP
 // Need to test that this actually works, possibly without hooking it up to WeatherReader.js
 // A class to keep track useful information about Williamstown's current weather conditions
-// (c) 2018 Grace Mazzarella
+// (c) 2018 Grace Mazzarella, William Fung
 
 import React, { Component } from 'react';
 import {View, Text} from 'react-native';
@@ -10,7 +10,6 @@ import {View, Text} from 'react-native';
 export default class WeatherObj extends Component {
     constructor(props) {
       super(props);
-
 
       let raw = JSON.parse('{"coord":{"lon":-73.2,"lat":42.71},"weather":[{"id":600,"main":"Snow","description":"light snow","icon":"13d"},{"id":701,"main":"Mist","description":"mist","icon":"50d"}],"base":"stations","main":{"temp":270.92,"pressure":1024,"humidity":86,"temp_min":270.15,"temp_max":272.15},"visibility":4828,"wind":{"speed":1.06,"deg":355.005},"clouds":{"all":90},"dt":1516204440,"sys":{"type":1,"id":2898,"message":0.0191,"country":"US","sunrise":1516191537,"sunset":1516225663},"id":4955786,"name":"Williamstown","cod":200}'); // all the data
       let temp = raw.main.temp;   // temperature in Kelvins
