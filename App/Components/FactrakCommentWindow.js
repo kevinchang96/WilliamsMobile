@@ -7,94 +7,133 @@ import {
   View,
   Button,
   TouchableOpacity,
-  Image
+  Image,
+  FlatList
 } from 'react-native';
 
 export default class FactrakCommentWindow extends Component{
-    /* props needed for each comment card:
-        html - the NodeList
-        professorName, courseNo
-        numAgree, numDisagree
-        responseComponents
-        decisionComponents - recommend course & take again
-        postedWhen
-    */
-
     constructor(props){
         super(props);
         this.state = {arr:[]};
     }
 
-    getRatings(ratingsList){
-        const agree = ratingsList[0].innerText.trim();
-        const disagree = ratingsList[1].innerText.trim();
-        return {"agree":agree, "disagree":disagree};
+    componentDidMount(){
+        this.createCommentWindow();
     }
 
-    parseOpinions(children){
-        // need to complete
-        let takeAgain = 'I would retake this course';
-        let wouldRecommend = 'I would recommend this course';
-        let arr = [];
-
-        if(!takeAgain) arr.append(takeAgain);
-        if(!wouldRecommend) arr.append(wouldRecommend);
-        return arr;
+    parseRetakeOrRecommend(retakeOrRecommend){
+        const length = retakeOrRecommend.length;
+        if(!length) return [];
+        if(length == 1) return (<Text key={1}>{retakeOrRecommend[0]}</Text>);
+        else if(length == 2) return([<Text key={1}>{retakeOrRecommend[0]}</Text>,
+                                     <Text key={2}>{retakeOrRecommend[1]}</Text>]);
+        else if(length == 3) return ([<Text key={1}>{retakeOrRecommend[0] + " " +
+                                                     retakeOrRecommend[1] + " " +
+                                                     retakeOrRecommend[2]}
+                                      </Text>]);
+        else if(length == 4){
+            if(retakeOrRecommend[1] == 'not'){
+                return ([<Text key={1}>{retakeOrRecommend[0] + " " +
+                                retakeOrRecommend[1] + " " +
+                                retakeOrRecommend[2]}
+                         </Text>,
+                         <Text key={2}>{retakeOrRecommend[3]}</Text>]);
+            }
+            else return ([<Text key={1}>{retakeOrRecommend[0]}</Text>,
+                          <Text key={2}>{retakeOrRecommend[1] + " " +
+                                 retakeOrRecommend[2] + " " +
+                                 retakeOrRecommend[3]}
+                          </Text>]);
+        }
+        else{
+            return ([<Text key={1}>{retakeOrRecommend[0] + " " +
+                            retakeOrRecommend[1] + " " +
+                            retakeOrRecommend[2]}
+                     </Text>,
+                     <Text key={2}>{retakeOrRecommend[3] + " " +
+                            retakeOrRecommend[4] + " " +
+                            retakeOrRecommend[5]}
+                     </Text>]);
+        }
     }
+
     createCommentWindow(){
         const DOMParser = require('react-native-html-parser').DOMParser;
         const doc = new DOMParser().parseFromString(this.props.navigation.state.params.html,'text/html');
-        const comments = doc.querySelect(".comment.comment-content");
+        const comments = doc.querySelect(".comment.comment-content")
 
-        const id = comments[0].getElementsBySelector("[id^=flag]")
-        console.log(id);
-        const comment = doc.getElementsByClassName('comment-text');
-        console.log(comment);
+        // contains review, retake/recommend, agree/disagree POST,
+        const commentTexts = doc.getElementsByClassName('comment-text');
+        const length = commentTexts.length;
 
-        return;
-        let cards = [];
-        comments.forEach((comment) => cards.push(createCommentCard));
-        this.setState(arr:comment);
-        console.log(this.state);
+        const commentDetails = doc.getElementsByClassName('comment-detail');    // postedWhen
+
+        const commentContents = doc.getElementsByClassName('comment-content');
+
+        let cards = [];     // contain comment cards
+        
+        for(let i = 0; i < length; i++){
+            const comment = comments[i]
+            const commentText = commentTexts[i];
+            const commentDetail = commentDetails[i];
+            const commentContent = commentContents[i];
+            cards.push(this.createCommentCard(comment, commentText,commentDetail, commentContent));
+        }
+        this.setState({arr:cards});
     }
 
-    createCommentCard(comment){
+    createCommentCard(comment, commentText, commentDetail, commentContent){
         // done for each comment
+        const title = commentContent.childNodes[1].textContent.trim().split(/\s\s+/g).join(' ');
+        const id = comment.attributes[0].nodeValue.split('comment')[1];
+        const uneditedAndDisagree = commentContent.childNodes[3].textContent.trim();
+        const editedAgreeDisagree = uneditedAndDisagree.split(/\s\s+/g).join(' ');
 
+        // create Text component for paragraphs and pushes retake/recommend for further parsing
+        const childNodes = commentText.childNodes;
+        const length = childNodes.length;
+        let review = [];
+        let retakeOrRecommend = []
+        for(let i = 0; i < length; i++){
+            const child = childNodes[i];
+            if(child.previousSibling && child.nextSibling){
+                if(child.tagName == 'p'){
+                    review.push(<Text key={i}>{child.textContent.trim()}</Text>);
+                }
+                else if((child.previousSibling.tagName == 'br' &&
+                        (child.nextSibling.tagName == 'br' || child.nextSibling.tagName == 'b')) ||
+                        (child.previousSibling.tagName == 'b' && child.nextSibling.tagName == 'br')){
+                    retakeOrRecommend.push(child.textContent.trim());
+                }
+                if(child.tagName == 'b'){
+                    retakeOrRecommend.push(child.textContent);
+                }
+            }
+        }
 
+        const responseComponents = this.parseRetakeOrRecommend(retakeOrRecommend);
+        //console.log(responseComponents);
+        //console.log(review);
+        const postedWhen = commentDetail.childNodes[0].data.trim();
 
-
-        const id = comment.querySelector("[id^=flag]").id.split("flag")[1]
-        const votes = getRatings(comment.querySelectorAll("span[id$=agree-count]"));
-        const numAgree = votes.agree;
-        const numDisagree = votes.disagree;
-        const responses = comment.querySelectorAll(".comment-content p:not([class])"); // list of paragraph nodes
-        const responseComponents = Array.from(comment).map((paragraph,i) =>
-            <Text key={i}>{paragraph.innerText.trim()}</Text>);
-        const retakeOrRecommend = parseOpinions(comment.querySelector(".comment-content div").childNodes);
-        const decisionComponents = Array.from(retakeOrRecommend).map((decision,i) =>
-            <Text key={i}>{decision.innerText.trim()}</Text>);
-        const postedWhen = comment.querySelector(".comment-detail").innerText.trim();
-
-        const card = (<FactrakComment numAgree={numAgree} numDisagree={numDisagree}
-                        decisionComponents={decisionComponents} response={responseComponents}
-                        postedWhen={postedWhen}/>);
+        const card = (<FactrakComment title={title} agreement={editedAgreeDisagree} review={review}
+                        responseComponents={responseComponents}
+                        postedWhen={postedWhen} key={id}/>);
         return card;
     }
 
     render(){
-        console.log(this);
-        {this.createCommentWindow()}
         return(
-            <View>
-                {this.state.arr}
-            </View>
+            <FlatList
+                data={this.state.arr}
+                renderItem={({item}) => <View>{item}</View>}
+            />
         );
     }
 }
 
 export class FactrakComment extends Component{
-    // need to use this.props.html and this.props.id to simulate rating/reporting
+    // need to use the href value for the component to simulate actions
     agree(){
         console.log('agree');
     }
@@ -107,9 +146,9 @@ export class FactrakComment extends Component{
     render(){
         return(
             <View style={styles.comment}>
-                <Text>{this.props.professorName} | {this.props.courseNo}</Text>
-                <Text>{this.props.numAgree} agree, {this.props.numDisagree} disagree</Text>
-                {this.props.decisionComponents}
+                <Text style={styles.title}>{this.props.title}</Text>
+                <Text style={styles.agreement}>{this.props.agreement}</Text>
+                {this.props.review}
                 {this.props.responseComponents}
                 <View style={styles.actions}>
                     <TouchableOpacity title="Agree" onPress={this.agree}>
@@ -127,6 +166,18 @@ export class FactrakComment extends Component{
 }
 
 const styles = StyleSheet.create({
+    title:{
+        fontSize: 20
+    },
+    agreement:{
+
+    },
+    review:{
+
+    },
+    responses:{
+
+    },
     container: {
 
     },
@@ -139,6 +190,7 @@ const styles = StyleSheet.create({
     },
     actions: {
         flexDirection: 'row',
+        justifyContent: 'space-around'
     }
 });
 
