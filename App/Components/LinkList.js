@@ -1,36 +1,47 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Header, Icon, List, ListItem } from 'react-native-elements';
+import { StackNavigator } from 'react-navigation';
+import WebViewComponent from './WebViewComponent';
 
-export default class LinkList extends Component{
-    render(){
-        const list = [
-          {
-            name: 'Amy Farha',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-            subtitle: 'Vice President'
-          },
-          {
-            name: 'Chris Jackson',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            subtitle: 'Vice Chairman'
-          },
+class LinkList extends Component{
+    render() {
+        const { navigate } = this.props.navigation;
+        const resourceList = [
+            {
+              id: '55',
+              name: "Campus Map",
+              screen: 'CampusMap',
+              url: 'http://map.williams.edu/map/?id=640'
+            },{
+              id: '56',
+              name: "Laundry View",
+              screen: 'LaundryView',
+              url: 'http://m.laundryview.com/lvs.php'
+            },{
+              id: '57',
+              name: "Route Shout",
+              screen: 'RouteShout',
+              url: 'http://m.routeshout.com/'
+            },{
+              id: '58',
+              name: "BRTA Routes",
+              screen: 'BRTA',
+              url: 'http://brta.routematch.com:52079/portal/fr2/index.jsf'
+            },{
+              id: '59',
+              name: "A-Z Directories",
+              screen: 'AZ',
+              url: 'https://www.williams.edu/a-z/'
+            },{
+              id: '60',
+              name: "Course Catalog",
+              screen: 'CourseCatalog',
+              url: 'https://catalog.williams.edu/'
+            }
         ]
 
-        const diningHallList = [
-          {
-            id: '211',
-            name: "Whitmans' Marketplace"
-          },{
-            id: '3',
-            name: "Driscoll"
-          },{
-            id: '5',
-            name: "Mission"
-          }
-        ]
-
-        return(
+        return (
             <View style={styles.container}>
                 <ScrollView style={styles.scrollContainer}>
                     <Header
@@ -46,26 +57,49 @@ export default class LinkList extends Component{
 
                     <List containerStyle={{marginBottom: 10}}>
                       {
-                        diningHallList.map((l, i) => (
+                        resourceList.map((l, i) => (
                           <ListItem
                             key={i}
                             title={l.name}
+                            onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }
                           />
                         ))
                       }
                     </List>
-
                 </ScrollView>
             </View>
         );
     }
 }
 
+const campusMap = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
+const laundryView = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
+const routeShout = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
+const brta = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
+const az = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
+const courseCatalog = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
+const LinkNavigator = StackNavigator({
+    Home: { screen: LinkList },
+    CampusMap: { screen: campusMap },
+    LaundryView: { screen: laundryView },
+    RouteShout: { screen: routeShout },
+    BRTA: { screen: brta },
+    AZ: { screen: az },
+    CourseCatalog: { screen: courseCatalog }
+    },
+    { headerMode: 'none' }
+);
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-//        justifyContent: 'center',
-        backgroundColor: '#DDDDDD', //'#DCD0FE',
+        backgroundColor: '#DDDDDD',
     },
     scrollContainer: {
         flex: 1,
@@ -75,16 +109,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     btn: {
-//        position: 'absolute',
-//        right: 25,
-//        bottom: 25,
         borderRadius: 30,
         width: 60,
         height: 60,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.7)',
-//        padding: 15
+        backgroundColor: 'rgba(0,0,0,0.7)'
     },
     btnImage:
     {
@@ -92,7 +122,6 @@ const styles = StyleSheet.create({
         width: '100%',
         tintColor: 'white'
     }
-
 });
 
-AppRegistry.registerComponent('LinkList', () => LinkList );
+export default LinkNavigator;
