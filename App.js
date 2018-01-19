@@ -20,6 +20,7 @@ import DiningList from './App/Components/DiningList';
 import LinkList from './App/Components/LinkList';
 import NewsList from './App/Components/NewsList';
 import WeatherReader from './App/Components/WeatherReader';
+import WSO from './App/Components/WSO';
 
 class HomeScreen extends Component {
 //    static navigationOptions = ({navigation}) => ({
@@ -115,6 +116,12 @@ class HomeScreen extends Component {
 
                     <Button
                         raised
+                        title={`WSO`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('WSO')} />
+
+                    <Button
+                        raised
                         title={`Factrak`}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('Factrak')} />
@@ -168,6 +175,8 @@ const linkList = () => ( <LinkList /> );
 
 const newsList = () => ( <NewsList /> );
 
+const wso = () => ( <WSO /> );
+
 const factrak = ({navigation}) => (
     <Factrak comments={(html) => navigation.navigate('FactrakCommentWindow',{html:html})}/>
 );
@@ -180,6 +189,7 @@ const RootNavigator = StackNavigator({
     Home: { screen: HomeScreen },
     Settings: { screen: settings },
     DiningMenus: { screen: diningMenus },
+    WSO: { screen: wso },
     Factrak: { screen: factrak },
     FactrakCommentWindow: { screen: factrakCommentWindow },
     DiningList: { screen: diningList },
