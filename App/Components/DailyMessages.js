@@ -6,37 +6,61 @@ import {
   Text,
   View,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
+  ScrollView,
+  Dimensions
 } from 'react-native';
+
+import HTML from 'react-native-render-html';
 
 export default class DailyMessages extends Component {
 
-    state = {
-       data: ''
+
+    constructor(props){
+        super(props);
+        this.state = {
+            messages: [],
+            renderMessages: false,
+            titlesArray: [],
+        };
+        this.getMessages();
     }
+
+
 
     getMessages = () => {
 
         const request = new Request('https://web.williams.edu/messages/');
         const test = request.credentials;
         console.log("Creds: "+ test.toString() );
-        fetch('https://web.williams.edu/messages/', {
-            method: 'GET',
-        })
+        fetch('https://web.williams.edu/messages/', {mode: 'no-cors'}, {method: 'GET'})
         .then((response) => response.text() ) // Transform the data into text
         .then((responseText) => {
+
             console.log(responseText);
+            //console.log(responseText);
             var DOMParser = require('react-native-html-parser').DOMParser;
 
             let doc = new DOMParser().parseFromString(responseText,'text/html');
-            //var title = doc.getElementsByTagName("b");
-            var test = 'test'
-            var source = doc.getElementsByTagName("EM");
-            console.log("Title: " + test);
+
+            const titles = doc.getElementsByTagName("b");
+
+            const sources = doc.getElementsByTagName("em");
+
+            const test = doc.getElementsByClassName("printOnly");
+
+            var titlesarray = [];
+
+            for (var i=1; i < titles.length; i = i+2){
+                titlesarray[i] = titles[i].textContent;
+                console.log(titlesarray[i]);
+                console.log("LENGTH " + titlesarray.length);
+            }
 
             this.setState({
-                data: test
-            })
+                titlesArray: titlesarray
+            });
+            console.log(this.state);
         })
         .catch((error) => {
            console.error(error);
@@ -45,13 +69,12 @@ export default class DailyMessages extends Component {
     };
 
     render() {
+        //this.getMessages();
+        console.log(this.state.titlesArray.length);
         return (
-          <View>
-             <Text>
-                Daily Messages
-                {this.state.data}
-             </Text>
-          </View>
+            <View>
+                 <Text>{for each in this.state.titlesArray}</Text>
+            </View>
         );
     }
 }

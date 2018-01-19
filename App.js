@@ -14,6 +14,7 @@ import FactrakCommentWindow from './App/Components/FactrakCommentWindow';
 import {StackNavigator} from 'react-navigation';
 import DiningMenus from './App/Components/DiningMenus';
 import Home from './App/Containers/Home';
+import DailyMessages from './App/Components/DailyMessages'
 
 
 class HomeScreen extends Component {
@@ -37,6 +38,10 @@ class HomeScreen extends Component {
             title="Go to Factrak"
             onPress={() => navigate('Factrak')}
         />
+        <Button
+            title="Go to Daily Messages"
+            onPress={() => navigate('DailyMessages')}
+        />
         </View>
     );
   }
@@ -58,6 +63,10 @@ const factrakCommentWindow = ({navigation}) => (
     <FactrakCommentWindow navigation={navigation}/>
 );
 
+const dailyMess = () => (
+    <DailyMessages />
+);
+
 const RootNavigator = StackNavigator({
   Home: {
     screen: HomeScreen,
@@ -73,8 +82,12 @@ const RootNavigator = StackNavigator({
   },
   FactrakCommentWindow: {
     screen: factrakCommentWindow,
-  }
+  },
 
+  DailyMessages: {
+
+    screen: dailyMess
+  }
 });
 
 export default RootNavigator;
