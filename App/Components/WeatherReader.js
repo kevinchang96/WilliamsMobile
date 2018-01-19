@@ -16,7 +16,7 @@ export default class WeatherReader extends Component {
 
    getWeather = () => {
 
-      fetch('http://api.openweathermap.org/data/2.5/weather?q=01267&APPID=5001beb19a0b0fa04fb3aa969e984f68', {
+      fetch('http://api.openweathermap.org/data/2.5/weather?q=01267&APPID=5001beb19a0b0fa04fb3aa969e984f68&lat=42.712021&lon=-73.20372', { // "lon": -73.20372,  "lat": 42.712021
          method: 'GET',
       })
       .then((response) => response.text() ) // Transform the data into json
