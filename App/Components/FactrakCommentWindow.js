@@ -65,13 +65,12 @@ export default class FactrakCommentWindow extends Component{
         // contains review, retake/recommend, agree/disagree POST,
         const commentTexts = doc.getElementsByClassName('comment-text');
         const length = commentTexts.length;
-        // postedWhen
-        const commentDetails = doc.getElementsByClassName('comment-detail');
+
+        const commentDetails = doc.getElementsByClassName('comment-detail');    // postedWhen
 
         const commentContents = doc.getElementsByClassName('comment-content');
 
-
-        let cards = [];
+        let cards = [];     // contain comment cards
         
         for(let i = 0; i < length; i++){
             const comment = comments[i]
@@ -134,7 +133,7 @@ export default class FactrakCommentWindow extends Component{
 }
 
 export class FactrakComment extends Component{
-    // need to use this.props.html and this.props.id to simulate rating/reporting
+    // need to use the href value for the component to simulate actions
     agree(){
         console.log('agree');
     }
@@ -145,11 +144,10 @@ export class FactrakComment extends Component{
         console.log('report');
     }
     render(){
-
         return(
             <View style={styles.comment}>
-                <Text>{this.props.title}</Text>
-                <Text>{this.props.agreement}</Text>
+                <Text style={styles.title}>{this.props.title}</Text>
+                <Text style={styles.agreement}>{this.props.agreement}</Text>
                 {this.props.review}
                 {this.props.responseComponents}
                 <View style={styles.actions}>
@@ -168,6 +166,18 @@ export class FactrakComment extends Component{
 }
 
 const styles = StyleSheet.create({
+    title:{
+        fontSize: 20
+    },
+    agreement:{
+
+    },
+    review:{
+
+    },
+    responses:{
+
+    },
     container: {
 
     },
@@ -180,8 +190,7 @@ const styles = StyleSheet.create({
     },
     actions: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-around'
     }
-
 });
 

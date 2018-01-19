@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Header, Icon, List, ListItem } from 'react-native-elements';
+import { StackNavigator } from 'react-navigation';
+import Login from './Login';
+import Logout from './Logout';
 
-export default class Settings extends Component{
+class Settings extends Component{
     render(){
-        const list = [
-          {
-            name: 'Amy Farha',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-            subtitle: 'Vice President'
-          },
-          {
-            name: 'Chris Jackson',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            subtitle: 'Vice Chairman'
-          },
+
+    const { navigate } = this.props.navigation;
+
+        const settingsList = [
+        {
+          name: 'Log In',
+          screen: 'Login',
+        },{
+          name: 'Log Out',
+          screen: 'Logout',
+        }
         ]
 
         return(
@@ -22,18 +25,21 @@ export default class Settings extends Component{
                 <Header
                     centerComponent={
                         <Image source={require('../Assets/williams2.png')}
-                            style={{width: 173, height: 30}} />
+                        style={{width: 173, height: 30}} />
                     }
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
 
+                <Header
+                    centerComponent={{ text: 'Settings', style: { fontSize: 22, color: '#ffffff' } }}
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
+
                 <List containerStyle={{marginBottom: 20}}>
                   {
-                    list.map((l, i) => (
+                    settingsList.map((l, i) => (
                       <ListItem
-                        roundAvatar
-                        avatar={{uri:l.avatar_url}}
                         key={i}
                         title={l.name}
+                        onPress={() => navigate(l.screen)}
                       />
                     ))
                   }
@@ -79,4 +85,16 @@ const styles = StyleSheet.create({
 
 });
 
-AppRegistry.registerComponent('Settings', () => Settings );
+const login = () => ( <Login /> );
+
+const logout = () => ( <Logout /> );
+
+const SettingsNavigator = StackNavigator({
+    Home: { screen: Settings },
+    Login: { screen: login },
+    Logout: { screen: logout }
+},{
+    headerMode: 'none',
+});
+
+export default SettingsNavigator;

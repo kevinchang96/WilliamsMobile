@@ -11,18 +11,30 @@ import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TextInput, 
 import { Button, ButtonGroup, Card, Header, Icon } from 'react-native-elements';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 
-import Login from './App/Components/Login';
-import Logout from './App/Components/Logout';
 import Settings from './App/Components/Settings';
 import Factrak from './App/Components/Factrak';
 import FactrakCommentWindow from './App/Components/FactrakCommentWindow';
-//import DiningMenus from './App/Components/DiningMenus';
+import Facebook from './App/Components/Facebook';
+import DiningMenus from './App/Components/DiningMenus';
+import WebViewComponent from './App/Components/WebViewComponent';
+import DiningList from './App/Components/DiningList';
+import LinkList from './App/Components/LinkList';
+import NewsList from './App/Components/NewsList';
 import WeatherReader from './App/Components/WeatherReader';
 
 class HomeScreen extends Component {
 //    static navigationOptions = ({navigation}) => ({
 //        title: 'Welcome',
 //    });
+
+    static navigationOptions = {
+        drawerLabel: 'Home',
+        drawerIcon: () => (
+          <Image
+            source={require('./App/Assets/star.png')}
+          />
+        ),
+      };
 
     state = {
         index: 0
@@ -43,7 +55,7 @@ class HomeScreen extends Component {
                         <Icon
                             name='menu'
                             color='white'
-                            onPress={() => navigate('Settings')} />
+                            onPress={() => navigate('DrawerOpen')} />
                     }
                     centerComponent={
                         <Image source={require('./App/Assets/williams2.png')}
@@ -83,6 +95,7 @@ class HomeScreen extends Component {
                             icon={{name: 'local-dining'}}
                             backgroundColor='#512698'
                             fontFamily='Lato'
+                            onPress={() => navigate('DiningList')}
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='MENUS' />
                     </Card>
@@ -103,22 +116,27 @@ class HomeScreen extends Component {
 
                     <Button
                         raised
-                        title={`Login`}
-                        rounded
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('Login')} />
-
-                    <Button
-                        raised
-                        title={`Logout`}
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('Logout')} />
-
-                    <Button
-                        raised
                         title={`Factrak`}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('Factrak')} />
+
+                    <Button
+                        raised
+                        title={`Facebook`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('Facebook')} />
+
+                    <Button
+                        raised
+                        title={`Links`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('LinkList')} />
+
+                    <Button
+                        raised
+                        title={`News`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('NewsList')} />
 
                     <Card
                         title='HELLO WORLD'
@@ -141,25 +159,23 @@ class HomeScreen extends Component {
                     selectedIndex={this.state.index}
                     buttons={footerButtons}
                     innerBorderStyle={{width: 0}}
-
-
                     containerStyle={{borderRadius: 0, padding: 5, height: 30}} />
             </View>
         );
     }
 }
 
-const settings = () => (
-    <Settings/>
-);
+const settings = () => ( <Settings/> );
 
-const login = () => (
-    <Login />
-);
+const diningMenus = () => ( <DiningMenus /> );
 
-const logout = () => (
-    <Logout />
-);
+const diningList = () => ( <DiningList /> );
+
+const linkList = () => ( <LinkList /> );
+
+const newsList = () => ( <NewsList /> );
+
+const facebook = () => ( <Facebook /> );
 
 const factrak = ({navigation}) => (
     <Factrak comments={(html) => navigation.navigate('FactrakCommentWindow',{html:html})}/>
@@ -172,10 +188,13 @@ const factrakCommentWindow = ({navigation}) => (
 const RootNavigator = StackNavigator({
     Home: { screen: HomeScreen },
     Settings: { screen: settings },
-    Login: { screen: login },
-    Logout: { screen: logout },
+    DiningMenus: { screen: diningMenus },
     Factrak: { screen: factrak },
-    FactrakCommentWindow: { screen: factrakCommentWindow }
+    FactrakCommentWindow: { screen: factrakCommentWindow },
+    DiningList: { screen: diningList },
+    Facebook: { screen: facebook },
+    LinkList: { screen: linkList },
+    NewsList: { screen: newsList }
 },{
     headerMode: 'none',
 //    initialRouteName: 'homeScreen'
@@ -206,13 +225,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.7)',
 //        padding: 15
     },
-    btnImage:
-    {
+    btnImage: {
         resizeMode: 'contain',
         width: '100%',
         tintColor: 'white'
+    },
+    icon: {
+        width: 24,
+        height: 24,
     }
-
 });
 
 export default RootNavigator;

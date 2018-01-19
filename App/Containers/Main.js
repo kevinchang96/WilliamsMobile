@@ -6,15 +6,13 @@
 import React, {Component} from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import { StackNavigator } from 'react-navigation';
-//import {bind} from 'w../utils/utils';
+import { DrawerNavigator } from 'react-navigation';
 
 import HomeScreen from '.../App';
+import SideMenu from '../Components/SideMenu';
+
 
 class Main extends Component {
-    static navigationOptions = ({navigation}) => ({
-        title: 'Welcome',
-    });
 
     render() {
         const { navigate } = this.props.navigation;
@@ -36,15 +34,14 @@ class Main extends Component {
     }
 }
 
-const homeScreen = () => (
-    <HomeScreen/>
+const SideMenuNavigator = DrawerNavigator({
+    Home: { screen: HomeScreen },
+    SideMenu: { screen: SideMenu }
+},{
+    initialRoute: 'Home',
+    drawerPosition: 'left'
+}
 );
-
-const RootNavigator = StackNavigator({
-  Home: {
-    screen: HomeScreen,
-  }
-});
 
 const styles = StyleSheet.create({
     container: {
