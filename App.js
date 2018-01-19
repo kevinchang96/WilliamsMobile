@@ -14,6 +14,7 @@ import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import Settings from './App/Components/Settings';
 import Factrak from './App/Components/Factrak';
 import FactrakCommentWindow from './App/Components/FactrakCommentWindow';
+import Facebook from './App/Components/Facebook';
 import DiningMenus from './App/Components/DiningMenus';
 import WebViewComponent from './App/Components/WebViewComponent';
 import DiningList from './App/Components/DiningList';
@@ -121,6 +122,12 @@ class HomeScreen extends Component {
 
                     <Button
                         raised
+                        title={`Facebook`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('Facebook')} />
+
+                    <Button
+                        raised
                         title={`Links`}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('LinkList')} />
@@ -168,6 +175,8 @@ const linkList = () => ( <LinkList /> );
 
 const newsList = () => ( <NewsList /> );
 
+const facebook = () => ( <Facebook /> );
+
 const factrak = ({navigation}) => (
     <Factrak comments={(html) => navigation.navigate('FactrakCommentWindow',{html:html})}/>
 );
@@ -183,6 +192,7 @@ const RootNavigator = StackNavigator({
     Factrak: { screen: factrak },
     FactrakCommentWindow: { screen: factrakCommentWindow },
     DiningList: { screen: diningList },
+    Facebook: { screen: facebook },
     LinkList: { screen: linkList },
     NewsList: { screen: newsList }
 },{

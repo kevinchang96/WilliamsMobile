@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 
 import { SearchBar } from 'react-native-elements'
-import StudentSuggestionCard from './StudentSuggestionCard';
 import StudentCard from './StudentCard';
 
 export default class Facebook extends Component{
