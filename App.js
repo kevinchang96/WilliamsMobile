@@ -13,8 +13,6 @@ import { DrawerNavigator, StackNavigator } from 'react-navigation';
 
 import Settings from './App/Components/Settings';
 import Factrak from './App/Components/Factrak';
-import FactrakCommentWindow from './App/Components/FactrakCommentWindow';
-import Facebook from './App/Components/Facebook';
 import DiningMenus from './App/Components/DiningMenus';
 import WebViewComponent from './App/Components/WebViewComponent';
 import DiningList from './App/Components/DiningList';
@@ -80,7 +78,6 @@ class HomeScreen extends Component {
                             rounded
                             icon={{name: 'wb-cloudy'}}
                             backgroundColor='#512698'
-                            fontFamily='Lato'
                             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='FORECAST' />
                     </Card>
@@ -94,7 +91,6 @@ class HomeScreen extends Component {
                         <Button
                             icon={{name: 'local-dining'}}
                             backgroundColor='#512698'
-                            fontFamily='Lato'
                             onPress={() => navigate('DiningList')}
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='MENUS' />
@@ -109,7 +105,6 @@ class HomeScreen extends Component {
                         <Button
                             icon={{name: 'line-weight'}}
                             backgroundColor='#512698'
-                            fontFamily='Lato'
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='MORE' />
                     </Card>
@@ -119,12 +114,6 @@ class HomeScreen extends Component {
                         title={`Factrak`}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('Factrak')} />
-
-                    <Button
-                        raised
-                        title={`Facebook`}
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('Facebook')} />
 
                     <Button
                         raised
@@ -147,7 +136,6 @@ class HomeScreen extends Component {
                         <Button
                             icon={{name: 'code'}}
                             backgroundColor='#512698'
-                            fontFamily='Lato'
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='VIEW NOW' />
                     </Card>
@@ -175,24 +163,14 @@ const linkList = () => ( <LinkList /> );
 
 const newsList = () => ( <NewsList /> );
 
-const facebook = () => ( <Facebook /> );
-
-const factrak = ({navigation}) => (
-    <Factrak comments={(html) => navigation.navigate('FactrakCommentWindow',{html:html})}/>
-);
-
-const factrakCommentWindow = ({navigation}) => (
-    <FactrakCommentWindow navigation={navigation}/>
-);
+const factrak = ({navigation}) => (<Factrak />);
 
 const RootNavigator = StackNavigator({
     Home: { screen: HomeScreen },
     Settings: { screen: settings },
     DiningMenus: { screen: diningMenus },
     Factrak: { screen: factrak },
-    FactrakCommentWindow: { screen: factrakCommentWindow },
     DiningList: { screen: diningList },
-    Facebook: { screen: facebook },
     LinkList: { screen: linkList },
     NewsList: { screen: newsList }
 },{
@@ -243,17 +221,17 @@ export default RootNavigator;
  * (c) 2017
  */
 
-// import React, { Component } from 'react';
-// import { AppRegistry, Platform, StyleSheet, Text, View } from 'react-native';
-// import Login from './App/Components/Login';
-// import Logout from './App/Components/Logout';
-// import Component2 from './App/Components/Component2';
-// import Settings from './App/Components/Settings';
-// import HttpExample from './App/Components/HttpExample';
-// import WeatherReader from './App/Components/WeatherReader';
-// import WeatherObj from './App/Components/WeatherObj';
+//import React, { Component } from 'react';
+//import { AppRegistry, Platform, StyleSheet, Text, View } from 'react-native';
+//import Login from './App/Components/Login';
+//import Logout from './App/Components/Logout';
+//import Component2 from './App/Components/Component2';
+//import Settings from './App/Components/Settings';
+//import HttpExample from './App/Components/HttpExample';
+//import WeatherReader from './App/Components/WeatherReader';
+//import WeatherObj from './App/Components/WeatherObj';
 //
-// export default class main extends Component{
+//export default class main extends Component{
 //    render(){
 //        return(
 //            <View>
@@ -263,5 +241,5 @@ export default RootNavigator;
 //
 //        );
 //    }
-// }
-// AppRegistry.registerComponent('main', () => main );
+//}
+//AppRegistry.registerComponent('main', () => main );

@@ -1,3 +1,7 @@
+/*
+ * Dysron Marshall
+ * (c) 01/2018
+ */
 import React, { Component } from 'react';
 import {
     AppRegistry,
@@ -10,13 +14,13 @@ import {
 
 export default class SuggestionCard extends Component{
 
-    selected = () => {
+    sendData = () => {
         this.props.selected(this.props.type,this.props.title,this.props.id);
     }
     render(){
         return(
             <TouchableOpacity style={styles.container}
-                onPress={this.selected}>
+                onPress={this.sendData}>
                 {/* onPress will trigger navigation pass props to comment window */}
                 <Text>{this.props.title}</Text>
             </TouchableOpacity>
@@ -25,7 +29,6 @@ export default class SuggestionCard extends Component{
 }
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
         // borderColor: 'black',
     }
 });
