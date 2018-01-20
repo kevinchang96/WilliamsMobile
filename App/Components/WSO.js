@@ -7,7 +7,6 @@ import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { Card, Button, Header, Icon, List, ListItem } from 'react-native-elements';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
-import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import WebViewComponent from './WebViewComponent';
 import WSOPost from '../Components/WSOPost';
 
@@ -24,21 +23,8 @@ class WSO extends Component{
 
     constructor(props){
         super(props);
-
         this.state=
         {
-           users:[
-                    {
-                       name: 'brynn',
-                       avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
-                    },{
-                       name: 'Kevin',
-                       id: '67'
-                    },{
-                       name: 'David',
-                       id: '68'
-                    }
-                 ],
            discussions:[],
            announcements:[],
            exchanges:[],
@@ -167,27 +153,6 @@ class WSO extends Component{
                     rightTitle='More'
                   />
                 </Card>
-         <View >
-         <ScrollView>
-            <Card title='Discussions'
-                containerStyle={{padding: 10}}>
-              {
-                this.state.discussions.map((u, i) => {
-                    return(
-                    <ListItem
-                        key={i}
-                        title={u.text}
-                        hideChevron={true}
-                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link})} }
-                     />
-                    );
-                })
-              }
-              <ListItem
-                rightTitle='More'
-                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/discussions"})} }
-              />
-            </Card>
 
             <Card title='Announcements'
                 containerStyle={{padding: 10}}>
