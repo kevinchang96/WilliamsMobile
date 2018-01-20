@@ -1,3 +1,8 @@
+/**
+ * Kevin Chang, David Ariyibi
+ * (c) 01/2018
+ */
+
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { Card, Button, Header, Icon, List, ListItem } from 'react-native-elements';

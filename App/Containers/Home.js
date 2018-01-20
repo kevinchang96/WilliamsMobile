@@ -56,7 +56,7 @@ class HomeScreen extends Component {
                         <Icon
                             name='menu'
                             color='white'
-                            onPress={() => this.props.navigation.navigate('DrawerToggle')} />
+                            onPress={() => this.props.navigation.navigate('DrawerOpen')} />
                     }
                     centerComponent={
                         <Image source={require('../Assets/williams2.png')}
@@ -97,7 +97,7 @@ class HomeScreen extends Component {
                             backgroundColor='#512698'
                             onPress={() => navigate('DiningList')}
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                            title='MENUS' />
+                            title='DINING' />
                     </Card>
 
                     <Card

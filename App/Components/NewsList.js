@@ -1,3 +1,8 @@
+/**
+ * David Ariyibi, Kevin Chang
+ * (c) 01/2018
+ */
+
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Header, Icon, List, ListItem } from 'react-native-elements';
@@ -55,26 +60,26 @@ class NewsList extends Component{
 
         return(
             <View style={styles.container}>
+                <Header
+                    leftComponent={
+                        <Icon
+                            name='menu'
+                            color='white'
+                            onPress={() => this.props.navigation.navigate('DrawerToggle')} />
+                    }
+                    centerComponent={
+                        <Image
+                            source={require('../Assets/williams2.png')}
+                            style={{width: 173, height: 30}}
+                        />
+                    }
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
+
+                <Header
+                    centerComponent={{ text: 'Events & News', style: { fontSize: 22, color: '#ffffff' } }}
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
+
                 <ScrollView style={styles.scrollContainer}>
-                    <Header
-                        leftComponent={
-                            <Icon
-                                name='menu'
-                                color='white'
-                                onPress={() => this.props.navigation.navigate('DrawerToggle')} />
-                        }
-                        centerComponent={
-                            <Image
-                                source={require('../Assets/williams2.png')}
-                                style={{width: 173, height: 30}}
-                            />
-                        }
-                        outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
-
-                    <Header
-                        centerComponent={{ text: 'Events & News', style: { fontSize: 22, color: '#ffffff' } }}
-                        outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
-
                     <List containerStyle={{marginBottom: 10}}>
                       {
                         dmList.map((l, i) => (
@@ -175,5 +180,7 @@ const NewsNavigator = StackNavigator({
     },
     { headerMode: 'none' }
 );
+
+AppRegistry.registerComponent('NewsList', () => NewsList );
 
 export default NewsNavigator;

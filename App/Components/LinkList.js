@@ -1,5 +1,5 @@
 /**
- * Kevin Chang
+ * David Ariyibi, Kevin Chang
  * (c) 01/2018
  */
 
@@ -69,27 +69,27 @@ class LinkList extends Component{
 
         return (
             <View style={styles.container}>
+                <Header
+                    leftComponent={
+                        <Icon
+                            name='menu'
+                            color='white'
+                            onPress={() => this.props.navigation.navigate('DrawerToggle')}
+                        />
+                    }
+                    centerComponent={
+                        <Image
+                            source={require('../Assets/williams2.png')}
+                            style={{width: 173, height: 30}}
+                        />
+                    }
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
+
+                <Header
+                    centerComponent={{ text: 'Links', style: { fontSize: 22, color: '#ffffff' } }}
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
+
                 <ScrollView style={styles.scrollContainer}>
-                    <Header
-                        leftComponent={
-                            <Icon
-                                name='menu'
-                                color='white'
-                                onPress={() => this.props.navigation.navigate('DrawerToggle')}
-                            />
-                        }
-                        centerComponent={
-                            <Image
-                                source={require('../Assets/williams2.png')}
-                                style={{width: 173, height: 30}}
-                            />
-                        }
-                        outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
-
-                    <Header
-                        centerComponent={{ text: 'Links', style: { fontSize: 22, color: '#ffffff' } }}
-                        outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
-
                     <List containerStyle={{marginBottom: 10}}>
                       {
                         resourceList.map((l, i) => (
@@ -162,5 +162,7 @@ const styles = StyleSheet.create({
         tintColor: 'white'
     }
 });
+
+AppRegistry.registerComponent( 'LinkList', () => LinkList );
 
 export default LinkNavigator;

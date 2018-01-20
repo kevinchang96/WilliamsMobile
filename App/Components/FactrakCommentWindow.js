@@ -2,6 +2,7 @@
  * Dysron Marshall
  * (c) 01/2018
  */
+
 import React, { Component } from 'react';
 import {
   AppRegistry,

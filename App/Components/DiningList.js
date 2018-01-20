@@ -1,6 +1,11 @@
+/**
+ * David Ariyibi
+ * (c) 01/2018
+ */
+
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Avatar, Button, FormLabel, Header, Icon, List, ListItem } from 'react-native-elements';
+import { Avatar, Button, Header, Icon, List, ListItem } from 'react-native-elements';
 
 export default class DiningList extends Component{
     render() {
@@ -36,24 +41,27 @@ export default class DiningList extends Component{
            }
          ]
 
+         const getAppList = [
+           {
+             name: "GET Website",
+             url: 'https://get.cbord.com/williamscollege/full/prelogin.php'
+           }
+         ]
+
          return(
              <View style={styles.container}>
+                 <Header
+                     centerComponent={
+                         <Image source={require('../Assets/williams2.png')}
+                         style={{width: 173, height: 30}} />
+                     }
+                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
+
+                 <Header
+                     centerComponent={{ text: 'Dining', style: { fontSize: 22, color: '#ffffff' } }}
+                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
+
                  <ScrollView style={styles.scrollContainer}>
-                     <Header
-                         centerComponent={
-                             <Image source={require('../Assets/williams2.png')}
-                             style={{width: 173, height: 30}} />
-                         }
-                         outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
-
-                     <Header
-                         centerComponent={{ text: 'Dining', style: { fontSize: 22, color: '#ffffff' } }}
-                         outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
-
-                     <View>
-                        <FormLabel>Halls</FormLabel>
-                     </View>
-
                      <List containerStyle={{ marginTop: 0, marginBottom: 20 }}>
                        {
                          diningHallList.map((l, i) => (
@@ -66,10 +74,6 @@ export default class DiningList extends Component{
                        }
                      </List>
 
-                     <View>
-                        <FormLabel>Calculators</FormLabel>
-                     </View>
-
                      <List containerStyle={{ marginTop: 0, marginBottom: 10 }}>
                        {
                          snackBarList.map((l, i) => (
@@ -81,6 +85,21 @@ export default class DiningList extends Component{
                          ))
                        }
                      </List>
+
+                     <List containerStyle={{ marginTop: 0, marginBottom: 10 }}>
+                        {
+                          getAppList.map((l, i) => (
+                            <ListItem
+                              avatar={<Image
+                                          source={require('../Assets/getlogo-150x150.png')}
+                                          style={{width: 24, height: 24}} />
+                                     }
+                              key={i}
+                              title={l.name}
+                            />
+                          ))
+                        }
+                      </List>
 
                  </ScrollView>
              </View>

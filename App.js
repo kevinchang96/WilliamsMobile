@@ -11,36 +11,14 @@ import LinkList from './App/Components/LinkList';
 import NewsList from './App/Components/NewsList';
 import HomeScreen from './App/Containers/Home';
 import WSO from './App/Components/WSO';
-
-//const home = () => ( <HomeScreen/> );
-//
-//const linkList = () => ( <LinkList /> );
-//
-//const newsList = () => ( <NewsList /> );
-//
-//const drawerList = () => ( <DrawerList /> );
-
-//const TabsNavigator = TabNavigator({
-//    Home: { screen: HomeScreen },
-//    News: { screen: newsList },
-//    Link: { screen: linkList },
-//},{
-//   tabBarPosition: 'bottom',
-//   animationEnabled: true,
-//   tabBarOptions: {
-//       activeTintColor: '#ffcc33',
-//       activeBackgroundColor: '#512698',
-//       inactiveBackgroundColor: '#512698',
-//   },
-//   labelStyle: { fontSize: 12 },
-//   style: { backgroundColor: '#512698' },
-//});
+import Emergency from './App/Components/Emergency';
 
 const drawers = DrawerNavigator({
     HomeScreen: { screen: HomeScreen },
     NewsList: { screen: NewsList },
-    LinkList: { screen: LinkList },
     WSO: { screen: WSO },
+    LinkList: { screen: LinkList },
+    Emergency: { screen: Emergency },
 },{
     initialRouteName: 'HomeScreen',
     drawerPosition: 'left',
@@ -64,8 +42,6 @@ const styles = StyleSheet.create({
         height: 24,
     }
 });
-
-//export default TabsNavigator;
 
 export default drawers;
 

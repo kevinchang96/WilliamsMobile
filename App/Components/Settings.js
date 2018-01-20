@@ -1,5 +1,5 @@
 /**
- * Kevin Chang, David Ariyibi
+ * David Ariyibi, Kevin Chang
  * (c) 01/2018
  */
 
@@ -17,7 +17,7 @@ class Settings extends Component{
 
         const settingsList = [
             {
-                name: 'About'
+                name: 'About',
                 screen: 'Login'
             },{
                 name: 'Log In',
