@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
-import { AppRegistry, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
+import { AppRegistry, Image, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { Card, Button, Header, Icon, List, ListItem } from 'react-native-elements';
+import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import WebViewComponent from './WebViewComponent';
 import WSOPost from '../Components/WSOPost';
 
 class WSO extends Component{
+    static navigationOptions = {
+        drawerLabel: 'WSO',
+        drawerIcon: ({ tintColor }) => (
+            <Icon
+                name='language'
+                color='white' />
+        ),
+    };
+
 
     constructor(props){
         super(props);
+
         this.state=
         {
            users:[
@@ -118,6 +129,39 @@ class WSO extends Component{
     render(){
         const { navigate } = this.props.navigation;
         return(
+         <View style={styles.container}>
+             <Header
+                 leftComponent={
+                     <Icon
+                         name='menu'
+                         color='white'
+                         onPress={() => this.props.navigation.navigate('DrawerToggle')} />
+                 }
+                 centerComponent={
+                     <Image source={require('../Assets/williams2.png')}
+                         style={{width: 173, height: 30}} />
+                 }
+                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+             />
+
+             <ScrollView>
+                <Card title='Discussions'
+                    containerStyle={{padding: 10}}>
+                  {
+                    this.state.discussions.map((u, i) => {
+                        return(
+                        <ListItem
+                            key={i}
+                            title={u.text}
+                            hideChevron={true}
+                         />
+                        );
+                    })
+                  }
+                  <ListItem
+                    rightTitle='More'
+                  />
+                </Card>
          <View >
          <ScrollView>
             <Card title='Discussions'
@@ -240,11 +284,47 @@ class WSO extends Component{
               />
             </Card>
 
-          </ScrollView>
+              </ScrollView>
          </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: '#DDDDDD', //'#DCD0FE',
+    },
+    scrollContainer: {
+        flex: 1,
+    },
+    scrollText: {
+        color: 'black',
+        fontSize: 18,
+    },
+    btn: {
+//        position: 'absolute',
+//        right: 25,
+//        bottom: 25,
+        borderRadius: 30,
+        width: 60,
+        height: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.7)',
+//        padding: 15
+    },
+    btnImage: {
+        resizeMode: 'contain',
+        width: '100%',
+        tintColor: 'white'
+    },
+    icon: {
+        width: 24,
+        height: 24,
+    }
+});
 
 const webViewPost = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 

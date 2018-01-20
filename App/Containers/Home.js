@@ -30,7 +30,12 @@ class HomeScreen extends Component {
 
     static navigationOptions = {
         drawerLabel: 'Home',
-      };
+        drawerIcon: ({ tintColor }) => (
+            <Icon
+                name='home'
+                color='white' />
+        ),
+    };
 
     state = {
         index: 0
@@ -63,7 +68,8 @@ class HomeScreen extends Component {
                             color='white'
                             onPress={() => navigate('Settings')} />
                     }
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+                />
 
                 <ScrollView style={styles.scrollContainer}>
                     <Card

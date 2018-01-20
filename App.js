@@ -10,6 +10,7 @@ import { DrawerNavigator, TabNavigator, } from 'react-navigation';
 import LinkList from './App/Components/LinkList';
 import NewsList from './App/Components/NewsList';
 import HomeScreen from './App/Containers/Home';
+import WSO from './App/Components/WSO';
 
 //const home = () => ( <HomeScreen/> );
 //
@@ -39,11 +40,14 @@ const drawers = DrawerNavigator({
     HomeScreen: { screen: HomeScreen },
     NewsList: { screen: NewsList },
     LinkList: { screen: LinkList },
+    WSO: { screen: WSO },
 },{
     initialRouteName: 'HomeScreen',
     drawerPosition: 'left',
+    drawerBackgroundColor: '#512698',
     contentOptions: {
-        activeTintColor: '#e91e63',
+        activeTintColor: '#ffcc33',
+        inactiveTintColor: 'white',
         itemsContainerStyle: {
             marginVertical: 0,
         },

@@ -58,7 +58,7 @@ export default class DiningList extends Component{
                        {
                          diningHallList.map((l, i) => (
                            <ListItem
-                             avatar={<Avatar icon={{name: 'local-dining'}} />}
+                             avatar={<Icon name='local-dining' />}
                              key={i}
                              title={l.name}
                            />
@@ -74,6 +74,7 @@ export default class DiningList extends Component{
                        {
                          snackBarList.map((l, i) => (
                            <ListItem
+                             avatar={<Icon name='exposure' />}
                              key={i}
                              title={l.name}
                            />
