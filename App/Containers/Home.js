@@ -16,12 +16,8 @@ import Factrak from '../Components/Factrak';
 import DiningMenus from '../Components/DiningMenus';
 import WebViewComponent from '../Components/WebViewComponent';
 import DiningList from '../Components/DiningList';
-import LinkList from '../Components/LinkList';
-import NewsList from '../Components/NewsList';
 import WeatherReader from '../Components/WeatherReader';
 import DailyMessages from '../Components/DailyMessages';
-import WSOPost from '../Components/WSOPost';
-import WSO from '../Components/WSO';
 
 class HomeScreen extends Component {
 //    static navigationOptions = ({navigation}) => ({
@@ -119,30 +115,6 @@ class HomeScreen extends Component {
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('Factrak')} />
 
-                    <Button
-                        raised
-                        title={`Links`}
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('LinkList')} />
-
-                    <Button
-                        raised
-                        title={`WSO`}
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('WSO')} />
-
-                    <Button
-                        raised
-                        title={`WSOPost`}
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('WSOPost')} />
-
-                    <Button
-                        raised
-                        title={`News`}
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('NewsList')} />
-
                     <Card
                         title='HELLO WORLD'
                         image={require('../Assets/williamsldpi.png')}>
@@ -167,14 +139,6 @@ const diningMenus = () => ( <DiningMenus /> );
 
 const diningList = () => ( <DiningList /> );
 
-const linkList = () => ( <LinkList /> );
-
-const newsList = () => ( <NewsList /> );
-
-const wso = () => ( <WSO /> );
-
-const wsoPost = () => ( <WSOPost /> );
-
 const factrak = ({navigation}) => (<Factrak />);
 
 const dailyMessages = () => ( <DailyMessages /> );
@@ -185,10 +149,6 @@ const RootNavigator = StackNavigator({
     DiningMenus: { screen: diningMenus },
     Factrak: { screen: factrak },
     DiningList: { screen: diningList },
-    LinkList: { screen: linkList },
-    NewsList: { screen: newsList },
-    WSO: { screen: wso },
-    WSOPost: { screen: wsoPost },
     DailyMessages: {screen: dailyMessages }
 },{
     headerMode: 'none',
