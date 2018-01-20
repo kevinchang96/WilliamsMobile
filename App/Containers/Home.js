@@ -20,6 +20,8 @@ import LinkList from '../Components/LinkList';
 import NewsList from '../Components/NewsList';
 import WeatherReader from '../Components/WeatherReader';
 import DailyMessages from '../Components/DailyMessages';
+import WSOPost from '../Components/WSOPost';
+import WSO from '../Components/WSO';
 
 class HomeScreen extends Component {
 //    static navigationOptions = ({navigation}) => ({
@@ -119,6 +121,18 @@ class HomeScreen extends Component {
 
                     <Button
                         raised
+                        title={`WSO`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('WSO')} />
+
+                    <Button
+                        raised
+                        title={`WSOPost`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('WSOPost')} />
+
+                    <Button
+                        raised
                         title={`News`}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('NewsList')} />
@@ -151,6 +165,10 @@ const linkList = () => ( <LinkList /> );
 
 const newsList = () => ( <NewsList /> );
 
+const wso = () => ( <WSO /> );
+
+const wsoPost = () => ( <WSOPost /> );
+
 const factrak = ({navigation}) => (<Factrak />);
 
 const dailyMessages = () => ( <DailyMessages /> );
@@ -163,6 +181,8 @@ const RootNavigator = StackNavigator({
     DiningList: { screen: diningList },
     LinkList: { screen: linkList },
     NewsList: { screen: newsList },
+    WSO: { screen: wso },
+    WSOPost: { screen: wsoPost },
     DailyMessages: {screen: dailyMessages }
 },{
     headerMode: 'none',

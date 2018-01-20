@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { Card, Button, Header, Icon, List, ListItem } from 'react-native-elements';
+import { DrawerNavigator, StackNavigator } from 'react-navigation';
+import WebViewComponent from './WebViewComponent';
+import WSOPost from '../Components/WSOPost';
 
-export default class WSO extends Component{
+class WSO extends Component{
 
     constructor(props){
         super(props);
@@ -30,110 +33,81 @@ export default class WSO extends Component{
     }
 
     componentDidMount(){
-        this.parseWSO();
-    }
-
-    parseWSO(){
         var html = '';
         fetch('https://wso.williams.edu/', {method: 'GET'})
         .then( (response) => response.text() )
         .then( (responseText) => {
             const parts = responseText.split('center');
-            //const html = responseText;
             const html = parts[0] + "\'center\'" + parts[1];
 
             var DOMParser = require('react-native-html-parser').DOMParser;
             let doc = new DOMParser({errorHandler:{warning:function(w){console.warn(w)},error:function(w){console.log(w)},fatalError:function(w){console.log(w)}}}).parseFromString(html,'text/html');
-            //console.log(doc);
             var input = doc.getElementsByTagName("section");
-            //console.log( "Size: " + input.length );
             const links = input.item(0).getElementsByTagName("a");
             var size = links.length;
-            //console.log(links.item(0));
-            console.log( "Child: " + links );
-            console.log( "First child: " + links.item(0) );
             var temp = [5];
             for( var i = 1; i < 6; i++ ){
                 var discussions = {
                     link: links.item(i).attributes.item(0).value,
-                    text: links.item(i).textContent
+                    text: links.item(i).textContent,
+                    screen: 'WebViewPost'
                 };
                 temp[i-1] = discussions;
-                //temp.push(discussions);
             };
-            //this.setState( {discussions: temp} );
             var temp1 = [5];
-            for( var j = 7; j < 12; j++ ){
+            for( var i = 7; i < 12; i++ ){
                 var announcements = {
-                    link: links.item(j).attributes.item(0).value,
-                    text: links.item(j).textContent
+                    link: links.item(i).attributes.item(0).value,
+                    text: links.item(i).textContent,
+                    screen: 'WSOPost'
                 };
-                temp1[j-7] = announcements;
-                //temp1.push(announcements);
+                temp1[i-7] = announcements;
             };
-            //this.setState( {announcements: temp} );
             var temp2 = [5];
-            for( var k = 13; k < 18; k++ ){
+            for( var i = 13; i < 18; i++ ){
                 var exchanges = {
-                    link: links.item(k).attributes.item(0).value,
-                    text: links.item(k).textContent
+                    link: links.item(i).attributes.item(0).value,
+                    text: links.item(i).textContent,
+                    screen: 'WSOPost'
                 };
-                temp2[k-13] = exchanges;
-                //temp2.push(exchanges);
+                temp2[i-13] = exchanges;
             };
-            //this.setState( {exchanges: temp} );
             var temp3 = [5];
-            for( var l = 19; l < 24; l++ ){
+            for( var i = 19; i < 24; i++ ){
                 var lostNfound = {
-                    link: links.item(l).attributes.item(0).value,
-                    text: links.item(l).textContent
+                    link: links.item(i).attributes.item(0).value,
+                    text: links.item(i).textContent,
+                    screen: 'WSOPost'
                 };
-                temp3[l-19] = lostNfound;
-                //temp3.push(lostNfound);
+                temp3[i-19] = lostNfound;
             };
-            //this.setState( {lostNfound: temp} );
             var temp4 = [5];
-            for( var m = 25; m < 30; m++ ){
+            for( var i = 25; i < 30; i++ ){
                 var jobs = {
-                    link: links.item(m).attributes.item(0).value,
-                    text: links.item(m).textContent
+                    link: links.item(i).attributes.item(0).value,
+                    text: links.item(i).textContent,
+                    screen: 'WSOPost'
                 };
-                temp4[m-25] = jobs;
-                //temp4.push(jobs);
+                temp4[i-25] = jobs;
             };
-            //this.setState( {jobs: temp} );
             let temp5 = [5];
-            for( var n = 31; n < 36; n++ ){
+            for( var i = 31; i < 36; i++ ){
                 var rides = {
-                    link: links.item(n).attributes.item(0).value,
-                    text: links.item(n).textContent
+                    link: links.item(i).attributes.item(0).value,
+                    text: links.item(i).textContent
                 };
-                temp5[n-31] = rides;
-                //temp5.push(rides);
+                temp5[i-31] = rides;
             };
-            //this.setState( {rides: temp} );
-
-            //console.log("More children: " + links.item(i));
-            //href=""
-            //console.log(""+links.item(i).attributes.item(0) );
-            //link
-            //console.log(""+links.item(i).attributes.item(0).value );
-
-            //textContent
-            //console.log(""+links.item(i).textContent );
-
-            //this.setState({discussions:input.item(0).getElementsByTagName("a").childNodes});
-            //console.log( this.state );
             this.setState(
-                        {
-                            discussions: temp,
-                            announcements: temp1,
-                            exchanges: temp2,
-                            lostNfound: temp3,
-                            jobs: temp4,
-                            rides: temp5
-                        }
-                        );
+                {
+                    discussions: temp,
+                    announcements: temp1,
+                    exchanges: temp2,
+                    lostNfound: temp3,
+                    jobs: temp4,
+                    rides: temp5
+                }
+            );
         }
         )
         .catch((error) => {
@@ -142,9 +116,7 @@ export default class WSO extends Component{
     }
 
     render(){
-        //this.parseWSO();
-        //console.log("hello");
-        console.log(this.state);
+        const { navigate } = this.props.navigation;
         return(
          <View >
          <ScrollView>
@@ -157,12 +129,14 @@ export default class WSO extends Component{
                         key={i}
                         title={u.text}
                         hideChevron={true}
+                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link})} }
                      />
                     );
                 })
               }
               <ListItem
                 rightTitle='More'
+                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/discussions"})} }
               />
             </Card>
 
@@ -175,12 +149,14 @@ export default class WSO extends Component{
                         key={i}
                         title={u.text}
                         hideChevron={true}
+                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, name: 'Announcements'})} }
                      />
                     );
                 })
               }
               <ListItem
                 rightTitle='More'
+                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/announcements"})} }
               />
             </Card>
 
@@ -193,12 +169,14 @@ export default class WSO extends Component{
                         key={i}
                         title={u.text}
                         hideChevron={true}
+                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, name: 'Exchanges'})} }
                      />
                     );
                 })
               }
               <ListItem
                 rightTitle='More'
+                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/exchanges"})} }
               />
             </Card>
 
@@ -211,12 +189,14 @@ export default class WSO extends Component{
                         key={i}
                         title={u.text}
                         hideChevron={true}
+                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, name: 'Lost + Found'})} }
                      />
                     );
                 })
               }
               <ListItem
                 rightTitle='More'
+                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/lost_and_found"})} }
               />
             </Card>
 
@@ -229,12 +209,14 @@ export default class WSO extends Component{
                         key={i}
                         title={u.text}
                         hideChevron={true}
+                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, name: 'Jobs'})} }
                      />
                     );
                 })
               }
               <ListItem
                 rightTitle='More'
+                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/jobs"})} }
               />
             </Card>
 
@@ -247,12 +229,14 @@ export default class WSO extends Component{
                         key={i}
                         title={u.text}
                         hideChevron={true}
+                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link})} }
                      />
                     );
                 })
               }
               <ListItem
                 rightTitle='More'
+                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/rides"})} }
               />
             </Card>
 
@@ -262,4 +246,16 @@ export default class WSO extends Component{
     }
 }
 
-AppRegistry.registerComponent('WSO', () => WSO );
+const webViewPost = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
+const wsoPost = ({navigation}) => ( <WSOPost navigation={navigation}/> );
+
+const PostNavigator = StackNavigator({
+    Home: { screen: WSO },
+    WebViewPost: { screen: webViewPost },
+    WSOPost: { screen: wsoPost }
+    },
+    { headerMode: 'none' }
+);
+
+export default PostNavigator;

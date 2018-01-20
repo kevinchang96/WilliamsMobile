@@ -1,3 +1,8 @@
+/**
+ * Kevin Chang
+ * (c) 01/2018
+ */
+
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar, Button, Header, Icon, List, ListItem } from 'react-native-elements';
