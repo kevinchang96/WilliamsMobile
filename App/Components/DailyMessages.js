@@ -10,7 +10,7 @@ import {
   ScrollView,
   Dimensions
 } from 'react-native';
-
+import MessageCard from './MessageCard';
 
 export default class DailyMessages extends Component {
 
@@ -21,6 +21,7 @@ export default class DailyMessages extends Component {
             messages: [],
             renderMessages: false,
             titlesArray: [],
+            messageCards: []
         };
         this.getMessages();
     }
@@ -31,35 +32,50 @@ export default class DailyMessages extends Component {
 
         const request = new Request('https://web.williams.edu/messages/');
         const test = request.credentials;
-        console.log("Creds: "+ test.toString() );
+        //console.log("Creds: "+ test.toString() );
         fetch('https://web.williams.edu/messages/', {mode: 'no-cors'}, {method: 'GET'})
         .then((response) => response.text() ) // Transform the data into text
         .then((responseText) => {
 
-            console.log(responseText);
             //console.log(responseText);
+            //console.log(responseText);
+
+            let messagecards = [];
+
             var DOMParser = require('react-native-html-parser').DOMParser;
 
             let doc = new DOMParser().parseFromString(responseText,'text/html');
 
-            const titles = doc.getElementsByTagName("b");
+            const root = doc.getElementsByClassName("printOnly");
 
-            const sources = doc.getElementsByTagName("em");
+            //console.log("Root size " + root.length);
 
-            const test = doc.getElementsByClassName("printOnly");
+            /*let title = root[0].firstChild.textContent;
+            let text = root[0].lastChild.textContent;
 
-            var titlesarray = [];
+            console.log(text.substring(0, text.lastIndexOf("from")));
+            console.log(text.slice(text.lastIndexOf("from")+5));
+            console.log(root[0]);*/
 
-            for (var i=1; i < titles.length; i = i+2){
-                titlesarray[i] = titles[i].textContent;
-                console.log(titlesarray[i]);
-                console.log("LENGTH " + titlesarray.length);
+            for (let i = 0; i < root.length; i++){
+                let card = this.createCard(root[i].firstChild.textContent, root[i].lastChild.textContent);
+                console.log(card);
+                messagecards.push(card);
             }
+            console.log(messagecards);
+
+            /*for (let i=0; i < root.length; i = i+2){
+                console.log(root[0].textContent);
+                console.log(root[0]);
+            }*/
+
+
 
             this.setState({
-                titlesArray: titlesarray
+                messageCards: messagecards
             });
-            console.log(this.state);
+            //console.log(this.state);
+
         })
         .catch((error) => {
            console.error(error);
@@ -67,13 +83,33 @@ export default class DailyMessages extends Component {
 
     };
 
+    createCard(firstChild, lastChild){
+        let message = {
+            title: firstChild,
+            text: lastChild.substring(0, lastChild.lastIndexOf("from")),
+            src: lastChild.slice(lastChild.lastIndexOf("from")+5)
+        }
+
+        card = <MessageCard
+                    title = {message.title}
+                    text = {message.text}
+                    src = {message.src}
+               />
+
+        console.log(card);
+        return card;
+    }
+
     render() {
         //this.getMessages();
         console.log(this.state.titlesArray.length);
         return (
             <View>
-                 <Text>{this.state.titlesArray}</Text>
+                 <ScrollView>
+                     {this.state.messageCards}
+                 </ScrollView>
             </View>
+
         );
     }
 }
