@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Header, Icon, List, ListItem } from 'react-native-elements';
-import { StackNavigator } from 'react-navigation';
+import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import WebViewComponent from './WebViewComponent';
 
 class NewsList extends Component{
     static navigationOptions = {
         drawerLabel: 'Events & News',
+        drawerIcon: ({ tintColor }) => (
+            <Icon
+                name='today'
+                color='white' />
+        ),
     };
 
     render() {
@@ -23,6 +28,7 @@ class NewsList extends Component{
         const eventsList = [
           {
             url: 'https://events.williams.edu/',
+            name: "Williams Events Page",
             screen: 'Events',
             icon: require('../Assets/0f7109a.png')
           }
@@ -39,6 +45,11 @@ class NewsList extends Component{
             name: "Williams Alternative",
             screen: 'Alternative',
             icon: require('../Assets/wa_logo2.png')
+          },{
+            url: 'http://www.berkshireeagle.com/',
+            name: "Berkshire Eagle",
+            screen: 'Eagle',
+            icon: require('../Assets/berkshireeagle.jpg')
           }
         ]
 
@@ -46,9 +57,17 @@ class NewsList extends Component{
             <View style={styles.container}>
                 <ScrollView style={styles.scrollContainer}>
                     <Header
+                        leftComponent={
+                            <Icon
+                                name='menu'
+                                color='white'
+                                onPress={() => this.props.navigation.navigate('DrawerToggle')} />
+                        }
                         centerComponent={
-                            <Image source={require('../Assets/williams2.png')}
-                            style={{width: 173, height: 30}} />
+                            <Image
+                                source={require('../Assets/williams2.png')}
+                                style={{width: 173, height: 30}}
+                            />
                         }
                         outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
 
@@ -73,7 +92,7 @@ class NewsList extends Component{
                           <ListItem
                             avatar={l.icon}
                             key={i}
-                            title={l.screen}
+                            title={l.name}
                             onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }
                           />
                         ))
@@ -143,12 +162,15 @@ const record = ({navigation}) => ( <WebViewComponent navigation={navigation}/> )
 
 const alternative = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
+const eagle = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
 
 const NewsNavigator = StackNavigator({
     Home: { screen: NewsList },
     Record: { screen: record },
     Alternative: { screen: alternative },
-    Events: { screen: events }
+    Events: { screen: events },
+    Eagle: { screen: eagle },
 //    DM: { screen: dm }
     },
     { headerMode: 'none' }

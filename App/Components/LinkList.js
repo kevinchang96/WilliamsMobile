@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar, Button, Header, Icon, List, ListItem } from 'react-native-elements';
-import { StackNavigator } from 'react-navigation';
+import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import WebViewComponent from './WebViewComponent';
 
 class LinkList extends Component{
     static navigationOptions = {
         drawerLabel: 'Links',
+        drawerIcon: ({ tintColor }) => (
+            <Icon
+                name='link'
+                color='white' />
+        ),
     };
 
     render() {
@@ -17,43 +22,43 @@ class LinkList extends Component{
                 name: "Campus Map",
                 screen: 'CampusMap',
                 url: 'http://map.williams.edu/map/?id=640',
-                icon: 'map'
+                icon: <Icon name='map' />
             },{
                 id: '56',
                 name: "Laundry View",
                 screen: 'LaundryView',
                 url: 'http://m.laundryview.com/lvs.php',
-                icon: 'local-laundry-service'
+                icon: <Icon name='local-laundry-service' />
             },{
                 id: '57',
                 name: "Route Shout",
                 screen: 'RouteShout',
                 url: 'http://m.routeshout.com/',
-                icon: 'directions-bus'
+                icon: <Icon name='directions-bus' />
             },{
                 id: '58',
                 name: "BRTA Routes",
                 screen: 'BRTA',
                 url: 'http://brta.routematch.com:52079/portal/fr2/index.jsf',
-                icon: 'directions'
+                icon: <Icon name='directions' />
             },{
                 id: '59',
                 name: "A-Z Directories",
                 screen: 'AZ',
                 url: 'https://www.williams.edu/a-z/',
-                icon: 'apps'
+                icon: <Icon name='apps' />
             },{
                 id: '60',
                 name: "Course Catalog",
                 screen: 'CourseCatalog',
                 url: 'https://catalog.williams.edu/',
-                icon: 'import-contacts'
+                icon: <Icon name='import-contacts' />
             },{
                 id: '61',
                 name: "Eph Sports",
                 screen: 'EphSports',
                 url: 'https://ephsports.williams.edu/',
-                icon: 'fitness-center'
+                icon: <Icon name='fitness-center' />
             }
         ]
 
@@ -61,9 +66,18 @@ class LinkList extends Component{
             <View style={styles.container}>
                 <ScrollView style={styles.scrollContainer}>
                     <Header
+                        leftComponent={
+                            <Icon
+                                name='menu'
+                                color='white'
+                                onPress={() => this.props.navigation.navigate('DrawerToggle')}
+                            />
+                        }
                         centerComponent={
-                            <Image source={require('../Assets/williams2.png')}
-                            style={{width: 173, height: 30}} />
+                            <Image
+                                source={require('../Assets/williams2.png')}
+                                style={{width: 173, height: 30}}
+                            />
                         }
                         outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
 
@@ -75,7 +89,7 @@ class LinkList extends Component{
                       {
                         resourceList.map((l, i) => (
                           <ListItem
-                            avatar={<Avatar icon={{name: l.icon}}/>}
+                            avatar={l.icon}
                             key={i}
                             title={l.name}
                             onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }

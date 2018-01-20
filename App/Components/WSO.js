@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import { AppRegistry, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
+import { AppRegistry, Image, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { Card, Button, Header, Icon, List, ListItem } from 'react-native-elements';
+import { DrawerNavigator, StackNavigator } from 'react-navigation';
 
 export default class WSO extends Component{
+    static navigationOptions = {
+        drawerLabel: 'WSO',
+        drawerIcon: ({ tintColor }) => (
+            <Icon
+                name='language'
+                color='white' />
+        ),
+    };
 
     constructor(props){
         super(props);
+
         this.state=
         {
            users:[
@@ -144,122 +154,173 @@ export default class WSO extends Component{
     render(){
         //this.parseWSO();
         //console.log("hello");
+        const { navigate } = this.props.navigation;
         console.log(this.state);
         return(
-         <View >
-         <ScrollView>
-            <Card title='Discussions'
-                containerStyle={{padding: 10}}>
-              {
-                this.state.discussions.map((u, i) => {
-                    return(
-                    <ListItem
-                        key={i}
-                        title={u.text}
-                        hideChevron={true}
-                     />
-                    );
-                })
-              }
-              <ListItem
-                rightTitle='More'
-              />
-            </Card>
+         <View style={styles.container}>
+             <Header
+                 leftComponent={
+                     <Icon
+                         name='menu'
+                         color='white'
+                         onPress={() => this.props.navigation.navigate('DrawerToggle')} />
+                 }
+                 centerComponent={
+                     <Image source={require('../Assets/williams2.png')}
+                         style={{width: 173, height: 30}} />
+                 }
+                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+             />
 
-            <Card title='Announcements'
-                containerStyle={{padding: 10}}>
-              {
-                this.state.announcements.map((u, i) => {
-                    return(
-                    <ListItem
-                        key={i}
-                        title={u.text}
-                        hideChevron={true}
-                     />
-                    );
-                })
-              }
-              <ListItem
-                rightTitle='More'
-              />
-            </Card>
+             <ScrollView>
+                <Card title='Discussions'
+                    containerStyle={{padding: 10}}>
+                  {
+                    this.state.discussions.map((u, i) => {
+                        return(
+                        <ListItem
+                            key={i}
+                            title={u.text}
+                            hideChevron={true}
+                         />
+                        );
+                    })
+                  }
+                  <ListItem
+                    rightTitle='More'
+                  />
+                </Card>
 
-            <Card title='Exchanges'
-                containerStyle={{padding: 10}}>
-              {
-                this.state.exchanges.map((u, i) => {
-                    return(
-                    <ListItem
-                        key={i}
-                        title={u.text}
-                        hideChevron={true}
-                     />
-                    );
-                })
-              }
-              <ListItem
-                rightTitle='More'
-              />
-            </Card>
+                <Card title='Announcements'
+                    containerStyle={{padding: 10}}>
+                  {
+                    this.state.announcements.map((u, i) => {
+                        return(
+                        <ListItem
+                            key={i}
+                            title={u.text}
+                            hideChevron={true}
+                         />
+                        );
+                    })
+                  }
+                  <ListItem
+                    rightTitle='More'
+                  />
+                </Card>
 
-            <Card title='Lost & Found'
-                containerStyle={{padding: 10}}>
-              {
-                this.state.lostNfound.map((u, i) => {
-                    return(
-                    <ListItem
-                        key={i}
-                        title={u.text}
-                        hideChevron={true}
-                     />
-                    );
-                })
-              }
-              <ListItem
-                rightTitle='More'
-              />
-            </Card>
+                <Card title='Exchanges'
+                    containerStyle={{padding: 10}}>
+                  {
+                    this.state.exchanges.map((u, i) => {
+                        return(
+                        <ListItem
+                            key={i}
+                            title={u.text}
+                            hideChevron={true}
+                         />
+                        );
+                    })
+                  }
+                  <ListItem
+                    rightTitle='More'
+                  />
+                </Card>
 
-            <Card title='Jobs'
-                containerStyle={{padding: 10}}>
-              {
-                this.state.jobs.map((u, i) => {
-                    return(
-                    <ListItem
-                        key={i}
-                        title={u.text}
-                        hideChevron={true}
-                     />
-                    );
-                })
-              }
-              <ListItem
-                rightTitle='More'
-              />
-            </Card>
+                <Card title='Lost & Found'
+                    containerStyle={{padding: 10}}>
+                  {
+                    this.state.lostNfound.map((u, i) => {
+                        return(
+                        <ListItem
+                            key={i}
+                            title={u.text}
+                            hideChevron={true}
+                         />
+                        );
+                    })
+                  }
+                  <ListItem
+                    rightTitle='More'
+                  />
+                </Card>
 
-            <Card title='Rides'
-                containerStyle={{padding: 10}}>
-              {
-                this.state.rides.map((u, i) => {
-                    return(
-                    <ListItem
-                        key={i}
-                        title={u.text}
-                        hideChevron={true}
-                     />
-                    );
-                })
-              }
-              <ListItem
-                rightTitle='More'
-              />
-            </Card>
+                <Card title='Jobs'
+                    containerStyle={{padding: 10}}>
+                  {
+                    this.state.jobs.map((u, i) => {
+                        return(
+                        <ListItem
+                            key={i}
+                            title={u.text}
+                            hideChevron={true}
+                         />
+                        );
+                    })
+                  }
+                  <ListItem
+                    rightTitle='More'
+                  />
+                </Card>
 
-          </ScrollView>
+                <Card title='Rides'
+                    containerStyle={{padding: 10}}>
+                  {
+                    this.state.rides.map((u, i) => {
+                        return(
+                        <ListItem
+                            key={i}
+                            title={u.text}
+                            hideChevron={true}
+                         />
+                        );
+                    })
+                  }
+                  <ListItem
+                    rightTitle='More'
+                  />
+                </Card>
+
+              </ScrollView>
          </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: '#DDDDDD', //'#DCD0FE',
+    },
+    scrollContainer: {
+        flex: 1,
+    },
+    scrollText: {
+        color: 'black',
+        fontSize: 18,
+    },
+    btn: {
+//        position: 'absolute',
+//        right: 25,
+//        bottom: 25,
+        borderRadius: 30,
+        width: 60,
+        height: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.7)',
+//        padding: 15
+    },
+    btnImage: {
+        resizeMode: 'contain',
+        width: '100%',
+        tintColor: 'white'
+    },
+    icon: {
+        width: 24,
+        height: 24,
+    }
+});
 
 AppRegistry.registerComponent('WSO', () => WSO );

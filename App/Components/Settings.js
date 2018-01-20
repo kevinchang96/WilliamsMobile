@@ -11,13 +11,16 @@ class Settings extends Component{
     const { navigate } = this.props.navigation;
 
         const settingsList = [
-        {
-          name: 'Log In',
-          screen: 'Login',
-        },{
-          name: 'Log Out',
-          screen: 'Logout',
-        }
+            {
+                name: 'About'
+                screen: 'Login'
+            },{
+                name: 'Log In',
+                screen: 'Login',
+            },{
+                name: 'Log Out',
+                screen: 'Logout',
+            }
         ]
 
         return(
