@@ -116,9 +116,9 @@ class HomeScreen extends Component {
 
                     <Button
                         raised
-                        title={`WSO`}
+                        title={`Dining`}
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('WSO')} />
+                        onPress={() => navigate('DiningMenus')} />
 
                     <Button
                         raised
