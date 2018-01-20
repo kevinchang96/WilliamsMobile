@@ -5,8 +5,29 @@ import { StackNavigator } from 'react-navigation';
 import WebViewComponent from './WebViewComponent';
 
 class NewsList extends Component{
+    static navigationOptions = {
+        drawerLabel: 'Events & News',
+    };
+
     render() {
         const { navigate } = this.props.navigation;
+
+        const dmList = [
+          {
+            name: "Daily Messages",
+            screen: 'DM',
+            icon: require('../Assets/paper_plane.png')
+          }
+        ]
+
+        const eventsList = [
+          {
+            url: 'https://events.williams.edu/',
+            screen: 'Events',
+            icon: require('../Assets/0f7109a.png')
+          }
+        ]
+
         const newsList = [
           {
             url: 'http://williamsrecord.com/',
@@ -18,11 +39,6 @@ class NewsList extends Component{
             name: "Williams Alternative",
             screen: 'Alternative',
             icon: require('../Assets/wa_logo2.png')
-          },{
-            url: 'http://ephblog.com/',
-            name: "EphBlog",
-            screen: 'EphBlog',
-            icon: require('../Assets/ephblog.jpg')
           }
         ]
 
@@ -37,8 +53,32 @@ class NewsList extends Component{
                         outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
 
                     <Header
-                        centerComponent={{ text: 'News', style: { fontSize: 22, color: '#ffffff' } }}
+                        centerComponent={{ text: 'Events & News', style: { fontSize: 22, color: '#ffffff' } }}
                         outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
+
+                    <List containerStyle={{marginBottom: 10}}>
+                      {
+                        dmList.map((l, i) => (
+                          <ListItem
+                            avatar={l.icon}
+                            key={i}
+                            title={l.name} />
+                        ))
+                      }
+                    </List>
+
+                    <List containerStyle={{marginBottom: 10}}>
+                      {
+                        eventsList.map((l, i) => (
+                          <ListItem
+                            avatar={l.icon}
+                            key={i}
+                            title={l.screen}
+                            onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }
+                          />
+                        ))
+                      }
+                    </List>
 
                     <List containerStyle={{marginBottom: 10}}>
                       {
@@ -63,10 +103,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
 //        justifyContent: 'center',
-        backgroundColor: '#DDDDDD', //'#DCD0FE',
+        backgroundColor: '#512698', //'#DCD0FE',
     },
     scrollContainer: {
         flex: 1,
+        backgroundColor: '#DDDDDD',
     },
     scrollText: {
         color: 'black',
@@ -93,17 +134,22 @@ const styles = StyleSheet.create({
 
 });
 
+
+//const dm = () => ( <DailyMessages /> );
+
+const events = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
 const record = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
 const alternative = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
-const ephBlog = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
 const NewsNavigator = StackNavigator({
     Home: { screen: NewsList },
     Record: { screen: record },
     Alternative: { screen: alternative },
-    EphBlog: { screen: ephBlog }
+    Events: { screen: events }
+//    DM: { screen: dm }
     },
     { headerMode: 'none' }
 );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Button, Header, Icon, List, ListItem } from 'react-native-elements';
+import { Avatar, Button, FormLabel, Header, Icon, List, ListItem } from 'react-native-elements';
 
 export default class DiningList extends Component{
     render() {
@@ -14,32 +14,25 @@ export default class DiningList extends Component{
            },{
              id: '5',
              name: "Mission"
-           }
-         ]
-
-         const commuterList = [
-           {
+           },{
              id: '14',
              name: "Eco Cafe"
            },{
              id: '23',
              name: "Grab n Go"
+           },{
+             id: '25',
+             name: "'82 Grill"
            }
          ]
 
          const snackBarList = [
            {
              id: '24',
-             name: "Lee Snack Bar"
-           },{
-             id: '25',
-             name: "'82 Grill"
+             name: "Lee Snack Bar Calculator"
            },{
              id: '221',
-             name: "Whitmans' Late Night"
-           },{
-             id: '0',
-             name: "Lee After Dark"
+             name: "Whitmans' Late Night Calculator"
            }
          ]
 
@@ -57,10 +50,15 @@ export default class DiningList extends Component{
                          centerComponent={{ text: 'Dining', style: { fontSize: 22, color: '#ffffff' } }}
                          outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
 
-                     <List containerStyle={{marginBottom: 10}}>
+                     <View>
+                        <FormLabel>Halls</FormLabel>
+                     </View>
+
+                     <List containerStyle={{ marginTop: 0, marginBottom: 20 }}>
                        {
                          diningHallList.map((l, i) => (
                            <ListItem
+                             avatar={<Avatar icon={{name: 'local-dining'}} />}
                              key={i}
                              title={l.name}
                            />
@@ -68,18 +66,11 @@ export default class DiningList extends Component{
                        }
                      </List>
 
-                     <List containerStyle={{marginBottom: 10}}>
-                       {
-                         commuterList.map((l, i) => (
-                           <ListItem
-                             key={i}
-                             title={l.name}
-                           />
-                         ))
-                       }
-                     </List>
+                     <View>
+                        <FormLabel>Calculators</FormLabel>
+                     </View>
 
-                     <List containerStyle={{marginBottom: 10}}>
+                     <List containerStyle={{ marginTop: 0, marginBottom: 10 }}>
                        {
                          snackBarList.map((l, i) => (
                            <ListItem

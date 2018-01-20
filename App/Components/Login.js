@@ -24,11 +24,11 @@ export default class Login extends Component {
                 username: '',
                 password: '',
                 cookies: '',
-            }
+        }
     }
     someFn(x){
             return this.props.callbackFromParent(x);
-        }
+    }
 
     render() {
         return (
