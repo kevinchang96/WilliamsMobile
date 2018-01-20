@@ -13,4 +13,5 @@ react-native-elements --save
 react-native-animatable --save
 react-navigation
 react-native-html-parser
-npm i react-native-read-more-text --save
+native-base
+react-native-read-more-text --save

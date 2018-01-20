@@ -9,19 +9,26 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Button, ButtonGroup, Card, Header, Icon } from 'react-native-elements';
-import { StackNavigator } from 'react-navigation';
+import { DrawerNavigator, StackNavigator } from 'react-navigation';
 
-import Login from './App/Components/Login';
-import Logout from './App/Components/Logout';
-import Settings from './App/Components/Settings';
-import Factrak from './App/Components/Factrak';
-import FactrakCommentWindow from './App/Components/FactrakCommentWindow';
-//import DiningMenus from './App/Components/DiningMenus';
+import Settings from '../Components/Settings';
+import Factrak from '../Components/Factrak';
+import DiningMenus from '../Components/DiningMenus';
+import WebViewComponent from '../Components/WebViewComponent';
+import DiningList from '../Components/DiningList';
+import LinkList from '../Components/LinkList';
+import NewsList from '../Components/NewsList';
+import WeatherReader from '../Components/WeatherReader';
+import DailyMessages from '../Components/DailyMessages';
 
 class HomeScreen extends Component {
-    static navigationOptions = ({navigation}) => ({
-        title: 'Welcome',
-    });
+//    static navigationOptions = ({navigation}) => ({
+//        title: 'Welcome',
+//    });
+
+    static navigationOptions = {
+        drawerLabel: 'Home',
+      };
 
     state = {
         index: 0
@@ -42,10 +49,10 @@ class HomeScreen extends Component {
                         <Icon
                             name='menu'
                             color='white'
-                            onPress={() => navigate('Settings')} />
+                            onPress={() => this.props.navigation.navigate('DrawerToggle')} />
                     }
                     centerComponent={
-                        <Image source={require('./App/Assets/williams2.png')}
+                        <Image source={require('../Assets/williams2.png')}
                             style={{width: 173, height: 30}} />
                     }
                     rightComponent={
@@ -59,7 +66,7 @@ class HomeScreen extends Component {
                 <ScrollView style={styles.scrollContainer}>
                     <Card
                         title='WEATHER'
-                        image={require('./App/Assets/weather-week-report.png')}>
+                        image={require('../Assets/weather-week-report.png')}>
                         <Text style={{borderRadius: 5, marginBottom: 5}}>
                             This and above is where you implement all the current weather stuff.
                         </Text>
@@ -67,37 +74,36 @@ class HomeScreen extends Component {
                             rounded
                             icon={{name: 'wb-cloudy'}}
                             backgroundColor='#512698'
-                            fontFamily='Lato'
                             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='FORECAST' />
                     </Card>
 
                     <Card
                         title="TODAY'S MENU"
-                        image={require('./App/Assets/cutlery.png')}>
+                        image={require('../Assets/cutlery.png')}>
                         <Text style={{borderRadius: 5, marginBottom: 5}}>
-                            This and above is where you implement all the current weather stuff.
+                            This and above is where you implement all the current dining stuff.
                         </Text>
                         <Button
                             icon={{name: 'local-dining'}}
                             backgroundColor='#512698'
-                            fontFamily='Lato'
+                            onPress={() => navigate('DiningList')}
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='MENUS' />
                     </Card>
 
-                    <Button
-                        raised
-                        title={`Login`}
-                        rounded
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('Login')} />
-
-                    <Button
-                        raised
-                        title={`Logout`}
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('Logout')} />
+                    <Card
+                        title='DAILY MESSAGES'
+                        image={require('../Assets/text.png')}>
+                        <Text style={{borderRadius: 5, marginBottom: 5}}>
+                            This and above is where you implement all the current daily messages stuff.
+                        </Text>
+                        <Button
+                            icon={{name: 'line-weight'}}
+                            backgroundColor='#512698'
+                            buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                            title='MORE' />
+                    </Card>
 
                     <Button
                         raised
@@ -105,74 +111,62 @@ class HomeScreen extends Component {
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('Factrak')} />
 
+                    <Button
+                        raised
+                        title={`Links`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('LinkList')} />
+
+                    <Button
+                        raised
+                        title={`News`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('NewsList')} />
+
                     <Card
                         title='HELLO WORLD'
-                        image={require('./App/Assets/williamsldpi.png')}>
+                        image={require('../Assets/williamsldpi.png')}>
                         <Text style={{borderRadius: 5, marginBottom: 5}}>
                             The idea with React Native Elements is more about component structure than actual design.
                         </Text>
                         <Button
                             icon={{name: 'code'}}
                             backgroundColor='#512698'
-                            fontFamily='Lato'
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='VIEW NOW' />
                     </Card>
                 </ScrollView>
-
-                <ButtonGroup
-                    selectedBackgroundColor="orange"
-                    onPress={this.updateIndex}
-                    selectedIndex={this.state.index}
-                    buttons={footerButtons}
-                    innerBorderStyle={{width: 0}}
-
-
-                    containerStyle={{borderRadius: 0, padding: 5, height: 30}} />
             </View>
         );
     }
 }
 
-const settings = () => (
-    <Settings/>
-);
+const settings = () => ( <Settings/> );
 
-const login = () => (
-    <Login />
-);
+const diningMenus = () => ( <DiningMenus /> );
 
-const logout = () => (
-    <Logout />
-);
+const diningList = () => ( <DiningList /> );
 
-const factrak = ({navigation}) => (
-    <Factrak comments={(html) => navigation.navigate('FactrakCommentWindow',{html:html})}/>
-);
+const linkList = () => ( <LinkList /> );
 
-const factrakCommentWindow = ({navigation}) => (
-    <FactrakCommentWindow navigation={navigation}/>
-);
+const newsList = () => ( <NewsList /> );
+
+const factrak = ({navigation}) => (<Factrak />);
+
+const dailyMessages = () => ( <DailyMessages /> );
 
 const RootNavigator = StackNavigator({
-  Home: {
-    screen: HomeScreen,
-  },
-  Settings: {
-    screen: settings,
-  },
-  Login: {
-    screen: login,
-  },
-  Logout: {
-    screen: logout,
-  },
-  Factrak: {
-    screen: factrak,
-  },
-  FactrakCommentWindow: {
-    screen: factrakCommentWindow,
-  }
+    Home: { screen: HomeScreen },
+    Settings: { screen: settings },
+    DiningMenus: { screen: diningMenus },
+    Factrak: { screen: factrak },
+    DiningList: { screen: diningList },
+    LinkList: { screen: linkList },
+    NewsList: { screen: newsList },
+    DailyMessages: {screen: dailyMessages }
+},{
+    headerMode: 'none',
+//    initialRouteName: 'homeScreen'
 });
 
 const styles = StyleSheet.create({
@@ -200,13 +194,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.7)',
 //        padding: 15
     },
-    btnImage:
-    {
+    btnImage: {
         resizeMode: 'contain',
         width: '100%',
         tintColor: 'white'
+    },
+    icon: {
+        width: 24,
+        height: 24,
     }
-
 });
 
 export default RootNavigator;
