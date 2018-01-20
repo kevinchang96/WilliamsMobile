@@ -1,3 +1,7 @@
+/*
+ * Dysron Marshall
+ * (c) 01/2018
+ */
 import React, { Component } from 'react';
 import {
     AppRegistry,
@@ -13,29 +17,33 @@ import {
     } from 'react-native';
 import SuggestionCard from './SuggestionCard';
 import FactrakCommentWindow from './FactrakCommentWindow';
-import {StackNavigator} from 'react-navigation';
+import {StackNavigator, NavigationActions} from 'react-navigation';
 
+export class Factrak extends Component{
 
-export default class Factrak extends Component{
-
+    static navigationOptions = ({ navigation }) => ({ title: 'Factrak'});
     constructor(props){
         super();
         this.state = {
-                        jArr: [],               // JSON objects: {name/title: , id:#}
                         suggestions: [],        // array of suggestion cards
                         html: "",               // html text to be converted into document object
                         renderComments: false,  // indicates whether to render comments or not
+                        title: ""               // name of the course/professor
         };
     }
 
     componentDidUpdate(){
         if(this.state.renderComments){              // a check for dead links/unsuccessful requests
             this.setState({renderComments:false});
-            this.props.comments(this.state.html);   // callback func - send html to comment window
+            // send html to comment window
+            this.props.navigation.navigate('FactrakCommentWindow',{
+                                                                    html : this.state.html,
+                                                                    title : this.state.title
+                                                                  });
         }
     }
 
-    fetchHTML(url){
+    fetchHTML(url,title){
         fetch(url,
             {
             credentials: 'include',
@@ -48,18 +56,20 @@ export default class Factrak extends Component{
                 if(response.status == 200) response.text().then((text) => {
                     // if successful fetch, continue
                     this.setState({html : text});
-                    this.setState({renderComments:true});
+                    this.setState({title : title});
+                    this.setState({renderComments : true});
                 });
             });
     }
 
-    selected = (type,title,id) => {
+    handleSelection = (type,title,id) => {
+        console.log(id);
         const dir = (type == "name") ? "professors/" : "courses/";
         const url = "https://wso.williams.edu/factrak/" + dir + id;
-        this.fetchHTML(url);
+        this.fetchHTML(url,title);
     }
 
-    getSuggestions(text){
+    getSuggestions = (text) => {
        fetch("https://wso.williams.edu/factrak/autocomplete.json?q=" + text,
            {
             credentials: 'include',
@@ -72,22 +82,23 @@ export default class Factrak extends Component{
                 //console.log(response);
                 return response.json();
             }).then(jsonResponse => {
-                this.setState({jArr:jsonResponse});
-                //console.log(this.state.jArr);
+                this.createSuggestionBoxes(jsonResponse,this.handleSelection);
+            }).catch((err) => {
+                    console.log(err);
+                    // should route to the login screen
             });
     }
 
-    createSuggestionBoxes(selected){
-        this.state.suggestions = this.state.jArr.map(
+    createSuggestionBoxes = (jArr,handler) => {
+        const suggestions = jArr.map(
             function(current,i){
-                //console.log(current);
                 let type = Object.keys(current)[0];     // either name (professor) or title (course)
                 return(<SuggestionCard id={current['id']}
                         title={current['name'] || current['title']} type={type} key={i}
-                        selected={selected}/>);
+                        selected={handler}/>);
             }
         );
-        return this.state.suggestions;
+        this.setState({suggestions:suggestions})
     }
 
     render(){
@@ -101,12 +112,24 @@ export default class Factrak extends Component{
                     />
                 </View>
                 <View style={styles.suggestionsContainer}>
-                    {this.createSuggestionBoxes(this.selected)}
+                    {this.state.suggestions}
                 </View>
             </View>
         );
     }
 }
+
+const factrakCommentWindow = ({navigation}) => (
+    <FactrakCommentWindow navigation={navigation}/>
+);
+
+const FactrakNavigator = StackNavigator({
+    Home: { screen: Factrak },
+    FactrakCommentWindow: { screen: factrakCommentWindow,
+                            navigationOptions: ({navigation}) => ({
+                                title: `${navigation.state.params.title}`
+                            })}
+});
 
 const styles = StyleSheet.create({
     container: {
@@ -115,7 +138,6 @@ const styles = StyleSheet.create({
         //borderWidth: 2,
     },
     searchBox: {
-        padding: 0,
         //borderColor: '',
         //borderWidth: 4
     },
@@ -126,3 +148,4 @@ const styles = StyleSheet.create({
 
     },
 });
+export default FactrakNavigator;
