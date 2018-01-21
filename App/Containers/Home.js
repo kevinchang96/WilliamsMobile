@@ -18,6 +18,7 @@ import WebViewComponent from '../Components/WebViewComponent';
 import DiningList from '../Components/DiningList';
 import WeatherReader from '../Components/WeatherReader';
 import DailyMessages from '../Components/DailyMessages';
+import Facebook from '../Components/Facebook';
 
 class HomeScreen extends Component {
 //    static navigationOptions = ({navigation}) => ({
@@ -115,6 +116,12 @@ class HomeScreen extends Component {
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
                         onPress={() => navigate('Factrak')} />
 
+                    <Button
+                        raised
+                        title={`Facebook`}
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                        onPress={() => navigate('Facebook')} />
+
                     <Card
                         title='HELLO WORLD'
                         image={require('../Assets/williamsldpi.png')}>
@@ -141,6 +148,8 @@ const diningList = () => ( <DiningList /> );
 
 const factrak = ({navigation}) => (<Factrak />);
 
+const facebook = () => (<Facebook />);
+
 const dailyMessages = () => ( <DailyMessages /> );
 
 const RootNavigator = StackNavigator({
@@ -148,6 +157,7 @@ const RootNavigator = StackNavigator({
     Settings: { screen: settings },
     DiningMenus: { screen: diningMenus },
     Factrak: { screen: factrak },
+    Facebook: { screen: facebook },
     DiningList: { screen: diningList },
     DailyMessages: {screen: dailyMessages }
 },{
