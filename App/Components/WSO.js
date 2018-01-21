@@ -120,7 +120,7 @@ class WSO extends Component{
     render(){
         const { navigate } = this.props.navigation;
         return(
-         <View style={styles.container}>
+         <View style={{backgroundColor: '#DDDDDD'}}>
              <Header
                  leftComponent={
                      <Icon
