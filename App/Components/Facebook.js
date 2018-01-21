@@ -154,32 +154,33 @@ export default class Facebook extends Component{
                  else if (input.length == 14){ //only one student is returned
 
                     var nameInput = doc.getElementsByTagName("h3");
-                    var otherInput = doc.getElementsByTagName("h4");
+                    var h4Input = doc.getElementsByTagName("h4");
                     var h5Input = doc.getElementsByTagName("h5");
                     let student = {
                         name: nameInput[0].textContent,
-                        unix: otherInput[0].textContent, //gets unix
+                        unix: h4Input[0].textContent, //gets unix
                         suBox: '',
                         room: '',
                         homeTown: '',
-                        img: "https://wso.williams.edu/pic/" + otherInput[0].textContent
+                        img: "https://wso.williams.edu/pic/" + h4Input[0].textContent
                     }
-                    if(otherInput.length == 4){
-                        student.suBox = otherInput[1].textContent;
-                        student.room = otherInput[2].textContent;
-                        student.homeTown = otherInput[3].textContent;
+                    if(h4Input.length == 4){
+                        student.suBox = h4Input[1].textContent;
+                        student.room = h4Input[2].textContent;
+                        student.homeTown = h4Input[3].textContent;
                     }
                     else {
-                        for(i = 1; i < otherInput.length; i++){
-                            console.log("Text Content: " + h5Input[i+1].textContent);
-                            if(h5Input[i+1].textContent == "SU Box:"){
-                                student.suBox = otherInput[i].textContent;
+                        x = h5Input.length - h4Input.length;
+                        for(i = 1; i < h4Input.length; i++){
+                            console.log("Text Content: " + h5Input[i+x].textContent);
+                            if(h5Input[i+x].textContent == "SU Box:"){
+                                student.suBox = h4Input[i].textContent;
                             }
-                            else if(h5Input[i+1].textContent == "Room:"){
-                                student.room = otherInput[i].textContent;
+                            else if(h5Input[i+x].textContent == "Room:"){
+                                student.room = h4Input[i].textContent;
                             }
-                            else if(h5Input[i+1].textContent == "Hometown:"){
-                                student.homeTown = otherInput[i].textContent;
+                            else if(h5Input[i+x].textContent == "Hometown:"){
+                                student.homeTown = h4Input[i].textContent;
                             }
                         }
                     }
