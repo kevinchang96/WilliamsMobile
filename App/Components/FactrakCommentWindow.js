@@ -1,3 +1,8 @@
+/*
+ * Dysron Marshall
+ * (c) 01/2018
+ */
+
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -10,6 +15,9 @@ import {
   Image,
   FlatList
 } from 'react-native';
+import { Divider, Card } from 'react-native-elements';
+import ReadMore from 'react-native-read-more-text';
+
 
 export default class FactrakCommentWindow extends Component{
     constructor(props){
@@ -64,10 +72,9 @@ export default class FactrakCommentWindow extends Component{
 
         // contains review, retake/recommend, agree/disagree POST,
         const commentTexts = doc.getElementsByClassName('comment-text');
+
         const length = commentTexts.length;
-
         const commentDetails = doc.getElementsByClassName('comment-detail');    // postedWhen
-
         const commentContents = doc.getElementsByClassName('comment-content');
 
         let cards = [];     // contain comment cards
@@ -98,7 +105,7 @@ export default class FactrakCommentWindow extends Component{
             const child = childNodes[i];
             if(child.previousSibling && child.nextSibling){
                 if(child.tagName == 'p'){
-                    review.push(<Text key={i}>{child.textContent.trim()}</Text>);
+                    review.push(<Text key={i}>{child.textContent.trim() + '\n'}</Text>);
                 }
                 else if((child.previousSibling.tagName == 'br' &&
                         (child.nextSibling.tagName == 'br' || child.nextSibling.tagName == 'b')) ||
@@ -115,7 +122,6 @@ export default class FactrakCommentWindow extends Component{
         //console.log(responseComponents);
         //console.log(review);
         const postedWhen = commentDetail.childNodes[0].data.trim();
-
         const card = (<FactrakComment title={title} agreement={editedAgreeDisagree} review={review}
                         responseComponents={responseComponents}
                         postedWhen={postedWhen} key={id}/>);
@@ -126,7 +132,7 @@ export default class FactrakCommentWindow extends Component{
         return(
             <FlatList
                 data={this.state.arr}
-                renderItem={({item}) => <View>{item}</View>}
+                renderItem={({item}) => item}
             />
         );
     }
@@ -134,55 +140,44 @@ export default class FactrakCommentWindow extends Component{
 
 export class FactrakComment extends Component{
     // need to use the href value for the component to simulate actions
-    agree(){
-        console.log('agree');
-    }
-    disagree(){
-        console.log('disagree');
-    }
-    report(){
-        console.log('report');
-    }
+    // if length > 140, lastSpace = response.lastIndexOf(' ',140)
+    // truncatedResponse = response.slice(0,lastSpace) + '...';
+    // set truncated prop to true
+    // read more : npm i react-native-read-more-text --save
     render(){
         return(
-            <View style={styles.comment}>
-                <Text style={styles.title}>{this.props.title}</Text>
-                <Text style={styles.agreement}>{this.props.agreement}</Text>
-                {this.props.review}
-                {this.props.responseComponents}
-                <View style={styles.actions}>
-                    <TouchableOpacity title="Agree" onPress={this.agree}>
-                        <Image style={styles.button} source={require('../img/thumbs-up.png')}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity title="Disagree" onPress={this.disagree}>
-                        <Image style={styles.button} source={require('../img/thumbs-down.png')}/>
-                    </TouchableOpacity>
-                    <Button style={styles.button} title="Report" onPress={this.report}/>
+            <Card title={this.props.title}>
+                <View style={styles.container}>
+                    <Text style={styles.agreement}>{this.props.agreement}</Text>
+                    <ReadMore numberOfLines={3}>
+                        {this.props.review}
+                    </ReadMore>
+                    <Divider style={{ backgroundColor: 'gray' }} />
+                    {this.props.responseComponents}
+                    {/*<View style={styles.actions}>
+                        <Button style={styles.button} title="Agree" onPress={this.agree}/>
+                        <Button style={styles.button} title="Disagree" onPress={this.disagree}/>
+                        <Button style={styles.button} title="Report" onPress={this.report}/>
+                    </View>*/}
+                    <Text style={styles.postedWhen}>{this.props.postedWhen}</Text>
                 </View>
-                <Text>{this.props.postedWhen}</Text>
-            </View>
+            </Card>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    title:{
-        fontSize: 20
+    container: {
+        flex: 1
     },
     agreement:{
-
+        fontSize: 20,
+        color: 'black',
     },
-    review:{
-
-    },
-    responses:{
-
-    },
-    container: {
-
-    },
-    comment:{
-
+    reviews:{
+        paddingTop:5,
+        paddingBottom:5,
+        color: 'black'
     },
     button: {
         height: 20,
@@ -191,6 +186,9 @@ const styles = StyleSheet.create({
     actions: {
         flexDirection: 'row',
         justifyContent: 'space-around'
+    },
+    postedWhen: {
+        color: '#6f4993'
     }
 });
 

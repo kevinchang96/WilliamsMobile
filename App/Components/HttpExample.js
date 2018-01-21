@@ -1,3 +1,8 @@
+/**
+ * Kevin Chang
+ * (c) 01/2018
+ */
+
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 

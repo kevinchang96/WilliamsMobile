@@ -1,3 +1,8 @@
+/**
+ * David Ariyibi, Kevin Chang
+ * (c) 01/2018
+ */
+
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Header, Icon, List, ListItem } from 'react-native-elements';
@@ -11,13 +16,16 @@ class Settings extends Component{
     const { navigate } = this.props.navigation;
 
         const settingsList = [
-        {
-          name: 'Log In',
-          screen: 'Login',
-        },{
-          name: 'Log Out',
-          screen: 'Logout',
-        }
+            {
+                name: 'About',
+                screen: 'Login'
+            },{
+                name: 'Log In',
+                screen: 'Login',
+            },{
+                name: 'Log Out',
+                screen: 'Logout',
+            }
         ]
 
         return(
