@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 
 import { SearchBar } from 'react-native-elements'
-import StudentCard from './StudentCard';
+import StudentCard from './StudentCard'
+import StudentPage from './StudentPage'
 
 export default class Facebook extends Component{
 
@@ -93,24 +94,6 @@ export default class Facebook extends Component{
               });
     };
 
-    /*selected = (url) => {
-        fetch(url, {
-            method: 'GET'
-        })
-        .then((response) => response.text() ) // Transform the data into text
-        .then((responseText) => {
-            // Parse the text here
-            //console.log(responseText);
-            var DOMParser = require('react-native-html-parser').DOMParser;
-
-            let doc = new DOMParser().parseFromString(responseText,'text/html');
-            var input = doc.getElementsByTagName("input");
-            //console.log("Tags: " + input);
-            var key;
-
-          })
-
-    }*/
     getPeople(result){
         fetch('https://wso.williams.edu/facebook', {
                 method: 'POST',
@@ -133,10 +116,11 @@ export default class Facebook extends Component{
 
                 let doc = new DOMParser().parseFromString(responseText,'text/html');
                 var input = doc.getElementsByTagName("a");
+                var hasTable = doc.getElementsByTagName("thead");
 
                 var students = [input.length - 12];
 
-                if(input.length > 14){
+                if(hasTable.length > 0){      //if the web page is a table of students
                     for( i = 0; i < input.length - 1; i += 2 ){
                         if(i < 12)
                             continue;
@@ -152,7 +136,7 @@ export default class Facebook extends Component{
                                     name = {student.name}
                                     unix = {student.unix}
                                     img = {student.img}
-                                    key = {student.unix}
+                                    key = {student.info}
                                />
                         students[i-12] = card;
 
@@ -162,28 +146,76 @@ export default class Facebook extends Component{
                      }
                      this.setState({studentCards: students})
                  }
-                 else{
+                 else if (input.length == 14){ //only one student is returned
 
                     var nameInput = doc.getElementsByTagName("h3");
-                    var unixInput = doc.getElementsByTagName("h4");
+                    var otherInput = doc.getElementsByTagName("h4");
+                    var h5Input = doc.getElementsByTagName("h5");
                     let student = {
                         name: nameInput[0].textContent,
-                        unix: unixInput[0].textContent,
-                        img: "https://wso.williams.edu/pic/" + unixInput[0].textContent
+                        unix: otherInput[0].textContent, //gets unix
+                        suBox: '',
+                        room: '',
+                        homeTown: '',
+                        img: "https://wso.williams.edu/pic/" + otherInput[0].textContent
                     }
-                    card = <StudentCard
+                    if(otherInput.length == 4){
+                        student.suBox = otherInput[1].textContent;
+                        student.room = otherInput[2].textContent;
+                        student.homeTown = otherInput[3].textContent;
+                    }
+                    else {
+                        for(i = 1; i < otherInput.length; i++){
+                            console.log("Text Content: " + h5Input[i+1].textContent);
+                            if(h5Input[i+1].textContent == "SU Box:"){
+                                student.suBox = otherInput[i].textContent;
+                            }
+                            else if(h5Input[i+1].textContent == "Room:"){
+                                student.room = otherInput[i].textContent;
+                            }
+                            else if(h5Input[i+1].textContent == "Hometown:"){
+                                student.homeTown = otherInput[i].textContent;
+                            }
+                        }
+                    }
+                    card = <StudentPage
                                 name = {student.name}
                                 unix = {student.unix}
+                                suBox = {student.suBox}
+                                room = {student.room}
+                                homeTown = {student.homeTown}
                                 img = {student.img}
                                 key = {student.unix}
                            />
                     students[0] = card;
 
-                    console.log("Student: " + student.name);
-                    console.log("Unix: " + student.unix);
-
                     this.setState({studentCards: students})
+                    console.log("Input length: " + input.length)
                  }
+                 else{
+                    for( i = 0; i < input.length - 1; i++ ){
+                        if(i < 13)
+                            continue;
+
+                        let student = {
+                            name: input[i].textContent,
+                            unix: input[i+1].textContent,
+                            img: "https://wso.williams.edu/pic/" + input[i+1].textContent,
+                            info: input[i].getAttribute("href")
+                        }
+                        card = <StudentCard
+                                    name = {student.name}
+                                    unix = {student.unix}
+                                    img = {student.img}
+                                    key = {student.info}
+                               />
+                        students[i-13] = card;
+                        i+=2;
+                    }
+                    this.setState({studentCards: students});
+                    console.log("Input length: " + input.length);
+                }
+
         })
     }
 }
