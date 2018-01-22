@@ -64,7 +64,8 @@ class DiningList extends Component{
          const getAppList = [
            {
              name: "GET Website",
-             url: 'https://get.cbord.com/williamscollege/full/prelogin.php'
+             url: 'https://get.cbord.com/williamscollege/full/prelogin.php',
+             screen: 'WebViewPost'
            }
          ]
 
@@ -123,6 +124,7 @@ class DiningList extends Component{
                                      }
                               key={i}
                               title={l.name}
+                              onPress={() => {navigate(l.screen,{url: l.url})} }
                             />
                           ))
                         }
