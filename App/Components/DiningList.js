@@ -12,22 +12,28 @@ export default class DiningList extends Component{
          const diningHallList = [
            {
              id: '211',
-             name: "Whitmans' Marketplace"
+             name: "Whitmans' Marketplace",
+             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S211&date=today'
            },{
              id: '3',
-             name: "Driscoll"
+             name: "Driscoll",
+             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S3&date=today'
            },{
              id: '5',
-             name: "Mission"
+             name: "Mission",
+             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S5&date=today'
            },{
              id: '14',
-             name: "Eco Cafe"
+             name: "Eco Cafe",
+             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S14&date=today'
            },{
              id: '23',
-             name: "Grab n Go"
+             name: "Grab n Go",
+             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S23&date=today'
            },{
              id: '25',
-             name: "'82 Grill"
+             name: "'82 Grill",
+             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S25&date=today'
            }
          ]
 
