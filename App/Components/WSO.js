@@ -46,6 +46,7 @@ class WSO extends Component{
             let doc = new DOMParser({errorHandler:{warning:function(w){console.warn(w)},error:function(w){console.log(w)},fatalError:function(w){console.log(w)}}}).parseFromString(html,'text/html');
             var input = doc.getElementsByTagName("section");
             const links = input.item(0).getElementsByTagName("a");
+            console.log("Size: "+ links.item(0).attributes.item(0).value);
             var size = links.length;
             var temp = [5];
             for( var i = 1; i < 6; i++ ){
@@ -93,7 +94,7 @@ class WSO extends Component{
                 temp4[i-25] = jobs;
             };
             let temp5 = [5];
-            for( var i = 31; i < 36; i++ ){
+            for( var i = 31; i < 35; i++ ){
                 var rides = {
                     link: links.item(i).attributes.item(0).value,
                     text: links.item(i).textContent
