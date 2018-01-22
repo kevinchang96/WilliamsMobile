@@ -122,8 +122,17 @@ export default class Facebook extends Component{
                 let doc = new DOMParser().parseFromString(responseText,'text/html');
                 var input = doc.getElementsByTagName("a");
                 var hasTable = doc.getElementsByTagName("thead");
-
+                var hasResults = doc.getElementsByTagName("br");
                 var students = [input.length - 12];
+
+                if(hasResults.length == 1){
+                    text = <Text style=  {{color: "white", fontSize: 20}} key = 'one'>No Results</Text>
+                    students[0] = text;
+                    this.setState({studentCards: students})
+                    return;
+                }
+
+
 
                 if(hasTable.length > 0){      //if the web page is a table of students
                     for( i = 0; i < input.length - 1; i += 2 ){
@@ -142,6 +151,7 @@ export default class Facebook extends Component{
                                     unix = {student.unix}
                                     img = {student.img}
                                     key = {student.info}
+                                    onPress={this.submitForm}
                                />
                         students[i-12] = card;
 
@@ -222,6 +232,57 @@ export default class Facebook extends Component{
                     console.log("Input length: " + input.length);
                 }
 
+        })
+    }
+
+    clickButton(url){
+        fetch(url, {method: 'GET'})
+        .then((response) => response.text() ) // Transform the data into text
+            .then((responseText) => {
+
+            var nameInput = doc.getElementsByTagName("h3");
+            var h4Input = doc.getElementsByTagName("h4");
+            var h5Input = doc.getElementsByTagName("h5");
+            let student = {
+                name: nameInput[0].textContent,
+                unix: h4Input[0].textContent, //gets unix
+                suBox: '',
+                room: '',
+                homeTown: '',
+                img: "https://wso.williams.edu/pic/" + h4Input[0].textContent
+            }
+            if(h4Input.length == 4){
+                student.suBox = h4Input[1].textContent;
+                student.room = h4Input[2].textContent;
+                student.homeTown = h4Input[3].textContent;
+            }
+            else {
+                x = h5Input.length - h4Input.length;
+                for(i = 1; i < h4Input.length; i++){
+                    console.log("Text Content: " + h5Input[i+x].textContent);
+                    if(h5Input[i+x].textContent == "SU Box:"){
+                        student.suBox = h4Input[i].textContent;
+                    }
+                    else if(h5Input[i+x].textContent == "Room:"){
+                        student.room = h4Input[i].textContent;
+                    }
+                    else if(h5Input[i+x].textContent == "Hometown:"){
+                        student.homeTown = h4Input[i].textContent;
+                    }
+                }
+            }
+            card = <StudentPage
+                        name = {student.name}
+                        unix = {student.unix}
+                        suBox = {student.suBox}
+                        room = {student.room}
+                        homeTown = {student.homeTown}
+                        img = {student.img}
+                        key = {student.unix}
+                   />
+            students[0] = card;
+
+            this.setState({studentCards: students})
         })
     }
 }
