@@ -161,6 +161,7 @@ class WSO extends Component{
                              key={i}
                              title={u.text}
                              hideChevron={true}
+                             onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, name: 'Announcements'})} }
                           />
                          );
                      })

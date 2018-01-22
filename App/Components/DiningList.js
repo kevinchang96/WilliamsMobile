@@ -6,34 +6,48 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar, Button, Header, Icon, List, ListItem } from 'react-native-elements';
+import WebViewComponent from './WebViewComponent';
+import { DrawerNavigator, StackNavigator } from 'react-navigation';
 
-export default class DiningList extends Component{
+class DiningList extends Component{
+
+    constructor(props){
+        super(props);
+    }
+
     render() {
+    const { navigate } = this.props.navigation;
          const diningHallList = [
            {
              id: '211',
              name: "Whitmans' Marketplace",
-             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S211&date=today'
+             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S211&date=today',
+             screen: 'WebViewPost'
            },{
              id: '3',
              name: "Driscoll",
-             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S3&date=today'
+             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S3&date=today',
+             screen: 'WebViewPost'
            },{
              id: '5',
              name: "Mission",
-             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S5&date=today'
+             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S5&date=today',
+             screen: 'WebViewPost'
            },{
              id: '14',
              name: "Eco Cafe",
-             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S14&date=today'
+             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S14&date=today',
+             screen: 'WebViewPost'
            },{
              id: '23',
              name: "Grab n Go",
-             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S23&date=today'
+             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S23&date=today',
+             screen: 'WebViewPost'
            },{
              id: '25',
              name: "'82 Grill",
-             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S25&date=today'
+             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S25&date=today',
+             screen: 'WebViewPost'
            }
          ]
 
@@ -81,6 +95,7 @@ export default class DiningList extends Component{
                              avatar={<Icon name='local-dining' />}
                              key={i}
                              title={l.name}
+                             onPress={() => {navigate(l.screen,{url: l.url})} }
                            />
                          ))
                        }
@@ -153,4 +168,13 @@ const styles = StyleSheet.create({
 
 });
 
-AppRegistry.registerComponent('DiningList', () => DiningList );
+const webViewPost = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
+const DiningNavigator = StackNavigator({
+    Home: { screen: DiningList },
+    WebViewPost: { screen: webViewPost },
+  },
+    { headerMode: 'none' }
+);
+
+export default DiningNavigator;
