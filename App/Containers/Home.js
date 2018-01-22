@@ -8,23 +8,17 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Button, ButtonGroup, Card, Header, Icon } from 'react-native-elements';
+import { Button, ButtonGroup, Card, Header, Icon, List, ListItem } from 'react-native-elements';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 
 import Settings from '../Components/Settings';
-import Factrak from '../Components/Factrak';
 import DiningMenus from '../Components/DiningMenus';
 import WebViewComponent from '../Components/WebViewComponent';
 import DiningList from '../Components/DiningList';
 import WeatherReader from '../Components/WeatherReader';
 import DailyMessages from '../Components/DailyMessages';
-import Facebook from '../Components/Facebook';
 
 class HomeScreen extends Component {
-//    static navigationOptions = ({navigation}) => ({
-//        title: 'Welcome',
-//    });
-
     static navigationOptions = {
         drawerLabel: 'Home',
         drawerIcon: ({ tintColor }) => (
@@ -44,7 +38,28 @@ class HomeScreen extends Component {
 
     render() {
         const { navigate } = this.props.navigation;
-        const footerButtons = ['HOME','NEWS','WSO','LINKS']
+
+        const diningHoursList = [
+           {
+             id: '211',
+             name: "Whitmans' Marketplace"
+           },{
+             id: '3',
+             name: "Driscoll"
+           },{
+             id: '5',
+             name: "Mission"
+           },{
+             id: '14',
+             name: "Eco Cafe"
+           },{
+             id: '23',
+             name: "Grab n Go"
+           },{
+             id: '25',
+             name: "'82 Grill"
+           }
+         ]
 
         return (
             <View style={styles.container}>
@@ -106,21 +121,10 @@ class HomeScreen extends Component {
                         <Button
                             icon={{name: 'line-weight'}}
                             backgroundColor='#512698'
+                            onPress={() => navigate('DailyMessages')}
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='MORE' />
                     </Card>
-
-                    <Button
-                        raised
-                        title={`Factrak`}
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('Factrak')} />
-
-                    <Button
-                        raised
-                        title={`Facebook`}
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                        onPress={() => navigate('Facebook')} />
 
                     <Card
                         title='HELLO WORLD'
@@ -146,18 +150,12 @@ const diningMenus = () => ( <DiningMenus /> );
 
 const diningList = () => ( <DiningList /> );
 
-const factrak = ({navigation}) => (<Factrak />);
-
-const facebook = () => (<Facebook />);
-
 const dailyMessages = () => ( <DailyMessages /> );
 
 const RootNavigator = StackNavigator({
     Home: { screen: HomeScreen },
     Settings: { screen: settings },
     DiningMenus: { screen: diningMenus },
-    Factrak: { screen: factrak },
-    Facebook: { screen: facebook },
     DiningList: { screen: diningList },
     DailyMessages: {screen: dailyMessages }
 },{

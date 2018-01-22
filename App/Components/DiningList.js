@@ -51,6 +51,12 @@ export default class DiningList extends Component{
          return(
              <View style={styles.container}>
                  <Header
+                    leftComponent={
+                        <Icon
+                            name='chevron-left'
+                            color='white'
+                            onPress={() => this.props.navigation.goBack()} />
+                    }
                      centerComponent={
                          <Image source={require('../Assets/williams2.png')}
                          style={{width: 173, height: 30}} />
@@ -62,7 +68,7 @@ export default class DiningList extends Component{
                      outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
 
                  <ScrollView style={styles.scrollContainer}>
-                     <List containerStyle={{ marginTop: 0, marginBottom: 20 }}>
+                     <List containerStyle={{ marginTop: 10, marginBottom: 0 }}>
                        {
                          diningHallList.map((l, i) => (
                            <ListItem
@@ -74,7 +80,7 @@ export default class DiningList extends Component{
                        }
                      </List>
 
-                     <List containerStyle={{ marginTop: 0, marginBottom: 10 }}>
+                     <List containerStyle={{ marginTop: 10, marginBottom: 0 }}>
                        {
                          snackBarList.map((l, i) => (
                            <ListItem
@@ -86,7 +92,7 @@ export default class DiningList extends Component{
                        }
                      </List>
 
-                     <List containerStyle={{ marginTop: 0, marginBottom: 10 }}>
+                     <List containerStyle={{ marginTop: 10, marginBottom: 0 }}>
                         {
                           getAppList.map((l, i) => (
                             <ListItem

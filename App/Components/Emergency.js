@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Avatar, Button, Header, Icon, List, ListItem } from 'react-native-elements';
+import { Header, Icon, List, ListItem } from 'react-native-elements';
 
 export default class Emergency extends Component{
     static navigationOptions = {
@@ -18,33 +18,64 @@ export default class Emergency extends Component{
     };
 
     render() {
-         return(
-             <View style={styles.container}>
-                 <Header
-                     leftComponent={
-                         <Icon
-                             name='menu'
-                             color='white'
-                             onPress={() => this.props.navigation.navigate('DrawerToggle')} />
-                     }
-                     centerComponent={
-                         <Image source={require('../Assets/williams2.png')}
-                         style={{width: 173, height: 30}} />
-                     }
-                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
+        const emergencyList = [
+            {
+              name: "Police, Ambulance, Fire",
+              number: '413-458-5646'
+            },{
+              name: "Campus Safety & Security: Emergency",
+              number: '413-597-3551'
+            },{
+              name: "Campus Safety & Security: Non-Emergency",
+              number: '413-597-4444'
+            },{
+              name: "RASAN - Rape & Sexual Assault Network",
+              number: '413-597-4100'
+            },{
+              name: "Student Escort Service",
+              number: '413-597-4400'
+            }
+        ]
+        return(
+            <View style={styles.container}>
+                <Header
+                    leftComponent={
+                        <Icon
+                            name='menu'
+                            color='white'
+                            onPress={() => this.props.navigation.navigate('DrawerToggle')} />
+                    }
+                    centerComponent={
+                        <Image source={require('../Assets/williams2.png')}
+                            style={{width: 173, height: 30}} />
+                    }
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45, marginBottom: 10}} />
 
-                 <Header
-                     centerComponent={{ text: 'Emergency Numbers', style: { fontSize: 22, color: '#ffffff' } }}
-                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
+                <ScrollView style={styles.scrollContainer}>
+                    <Text style={styles.headerTextRed}>
+                        Emergency Numbers
+                    </Text>
 
-                 <ScrollView style={styles.scrollContainer}>
-                     <Text>
-                         Fill with hard-coded numbers or Webview to https://www.williams.edu/mobile-content/emergency-numbers/
-                     </Text>
-                 </ScrollView>
-             </View>
-         );
-     }
+                    <Text style={styles.text}>
+                        Call these numbers to save a life, report a fire, or stop a crime.
+                    </Text>
+
+                    <List containerStyle={{ marginTop: 0, marginBottom: 0 }}>
+                      {
+                        emergencyList.map((l, i) => (
+                          <ListItem
+                            key={i}
+                            title={l.name}
+                            subtitle={l.number}
+                            rightIcon={{name: 'call'}}
+                          />
+                        ))
+                      }
+                    </List>
+                </ScrollView>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -56,29 +87,22 @@ const styles = StyleSheet.create({
     scrollContainer: {
         flex: 1,
     },
-    scrollText: {
+    headerTextRed: {
+        color: 'red',
+        fontSize: 22,
+        textAlign: 'center',
+    },
+    headerTextBlack: {
         color: 'black',
-        fontSize: 18,
+        fontSize: 22,
+        textAlign: 'center',
     },
-    btn: {
-//        position: 'absolute',
-//        right: 25,
-//        bottom: 25,
-        borderRadius: 30,
-        width: 60,
-        height: 60,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.7)',
-//        padding: 15
-    },
-    btnImage:
-    {
-        resizeMode: 'contain',
-        width: '100%',
-        tintColor: 'white'
+    text: {
+        color: 'black',
+        fontSize: 14,
+        textAlign: 'center',
+        fontStyle: 'italic',
     }
-
 });
 
 AppRegistry.registerComponent('Emergency', () => Emergency );

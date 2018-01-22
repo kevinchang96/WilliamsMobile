@@ -80,7 +80,7 @@ class NewsList extends Component{
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
 
                 <ScrollView style={styles.scrollContainer}>
-                    <List containerStyle={{marginBottom: 10}}>
+                    <List containerStyle={{marginTop: 10, marginBottom: 10}}>
                       {
                         dmList.map((l, i) => (
                           <ListItem
@@ -91,7 +91,7 @@ class NewsList extends Component{
                       }
                     </List>
 
-                    <List containerStyle={{marginBottom: 10}}>
+                    <List containerStyle={{marginTop: 0, marginBottom: 10}}>
                       {
                         eventsList.map((l, i) => (
                           <ListItem
@@ -104,7 +104,7 @@ class NewsList extends Component{
                       }
                     </List>
 
-                    <List containerStyle={{marginBottom: 10}}>
+                    <List containerStyle={{marginTop: 0, marginBottom: 10}}>
                       {
                         newsList.map((l, i) => (
                           <ListItem

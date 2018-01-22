@@ -90,7 +90,7 @@ class LinkList extends Component{
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
 
                 <ScrollView style={styles.scrollContainer}>
-                    <List containerStyle={{marginBottom: 10}}>
+                    <List containerStyle={{marginTop: 10, marginBottom: 0}}>
                       {
                         resourceList.map((l, i) => (
                           <ListItem

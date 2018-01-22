@@ -8,7 +8,10 @@ import { AppRegistry, Image, Platform, StyleSheet, Text, ScrollView, View } from
 import { Card, Button, Header, Icon, List, ListItem } from 'react-native-elements';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import WebViewComponent from './WebViewComponent';
+
 import WSOPost from '../Components/WSOPost';
+import Facebook from '../Components/Facebook';
+import Factrak from '../Components/Factrak';
 
 class WSO extends Component{
     static navigationOptions = {
@@ -137,23 +140,35 @@ class WSO extends Component{
              />
 
              <ScrollView>
-                <Card title='Discussions'
-                    containerStyle={{padding: 10}}>
-                  {
-                    this.state.discussions.map((u, i) => {
-                        return(
-                        <ListItem
-                            key={i}
-                            title={u.text}
-                            hideChevron={true}
-                         />
-                        );
-                    })
-                  }
-                  <ListItem
-                    rightTitle='More'
-                  />
-                </Card>
+                 <Button
+                     raised
+                     title={`Factrak`}
+                     buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                     onPress={() => navigate('Factrak')} />
+
+                 <Button
+                     raised
+                     title={`Facebook`}
+                     buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                     onPress={() => navigate('Facebook')} />
+
+                 <Card title='Discussions'
+                     containerStyle={{padding: 10}}>
+                   {
+                     this.state.discussions.map((u, i) => {
+                         return(
+                         <ListItem
+                             key={i}
+                             title={u.text}
+                             hideChevron={true}
+                          />
+                         );
+                     })
+                   }
+                   <ListItem
+                     rightTitle='More'
+                   />
+                 </Card>
 
             <Card title='Announcements'
                 containerStyle={{padding: 10}}>
@@ -301,11 +316,17 @@ const webViewPost = ({navigation}) => ( <WebViewComponent navigation={navigation
 
 const wsoPost = ({navigation}) => ( <WSOPost navigation={navigation}/> );
 
+const factrak = ({navigation}) => (<Factrak />);
+
+const facebook = () => (<Facebook />);
+
 const PostNavigator = StackNavigator({
     Home: { screen: WSO },
     WebViewPost: { screen: webViewPost },
-    WSOPost: { screen: wsoPost }
-    },
+    WSOPost: { screen: wsoPost },
+    Factrak: { screen: factrak },
+    Facebook: { screen: facebook },
+  },
     { headerMode: 'none' }
 );
 

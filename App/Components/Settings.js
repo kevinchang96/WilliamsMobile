@@ -7,19 +7,16 @@ import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Header, Icon, List, ListItem } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
+import About from './About';
 import Login from './Login';
 import Logout from './Logout';
 
 class Settings extends Component{
     render(){
-
-    const { navigate } = this.props.navigation;
+        const { navigate } = this.props.navigation;
 
         const settingsList = [
             {
-                name: 'About',
-                screen: 'Login'
-            },{
                 name: 'Log In',
                 screen: 'Login',
             },{
@@ -31,6 +28,12 @@ class Settings extends Component{
         return(
             <View style={styles.container}>
                 <Header
+                    leftComponent={
+                        <Icon
+                            name='chevron-left'
+                            color='white'
+                            onPress={() => this.props.navigation.goBack()} />
+                    }
                     centerComponent={
                         <Image source={require('../Assets/williams2.png')}
                         style={{width: 173, height: 30}} />
@@ -52,8 +55,6 @@ class Settings extends Component{
                     ))
                   }
                 </List>
-
-                <Text>This is the Settings. (Dont worry, this is not done.)</Text>
             </View>
         );
     }
@@ -100,7 +101,7 @@ const logout = () => ( <Logout /> );
 const SettingsNavigator = StackNavigator({
     Home: { screen: Settings },
     Login: { screen: login },
-    Logout: { screen: logout }
+    Logout: { screen: logout },
 },{
     headerMode: 'none',
 });
