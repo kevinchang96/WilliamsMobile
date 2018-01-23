@@ -1,16 +1,19 @@
-/*
+/**
  * Dysron Marshall
  * (c) 01/2018
  */
 import React, { Component } from 'react';
 import {
   AppRegistry,
+  Image,
   Platform,
+  ScrollView,
   StyleSheet,
   Text,
   View,
-  ScrollView,
 } from 'react-native';
+import { Header, Icon } from 'react-native-elements';
+
 import EventsCard from './EventsCard';
 
 export default class EventsHelper extends Component {
@@ -79,6 +82,16 @@ export default class EventsHelper extends Component {
     render() {
         return (
             <View style={{paddingTop:Platform.OS === 'ios' ? 20 : 0}}>
+                <Header
+                    leftComponent={
+                        <Icon
+                            name='menu'
+                            color='white'
+                            onPress={() => this.props.navigation.navigate('DrawerToggle')} />
+                    }
+                    centerComponent={{ text: 'Events Helper', style: { fontSize: 22, color: '#ffffff' } }}
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+                />
                  <ScrollView>
                      {this.state.eventsCards}
                  </ScrollView>

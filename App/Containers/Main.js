@@ -26,7 +26,7 @@ class Main extends Component {
                     iterationCount="infinite"
                     direction="alternate"
                     delay={1000}
-                    onAnimationEnd={() => navigate('HomeScreen')}>
+                    >
 
                 </Animatable.Image>
             </View>
@@ -34,14 +34,17 @@ class Main extends Component {
     }
 }
 
-const SideMenuNavigator = DrawerNavigator({
-    Home: { screen: HomeScreen },
-    SideMenu: { screen: SideMenu }
-},{
-    initialRoute: 'Home',
-    drawerPosition: 'left'
-}
-);
+//const SideMenuNavigator = DrawerNavigator({
+//    Home: { screen: HomeScreen },
+//    SideMenu: { screen: SideMenu }
+//},{
+//    initialRoute: 'Home',
+//    drawerPosition: 'left'
+//}
+//);
+
+//
+//                    onAnimationEnd={() => navigate('HomeScreen')}
 
 const styles = StyleSheet.create({
     container: {

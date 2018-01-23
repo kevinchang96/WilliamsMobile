@@ -11,6 +11,14 @@ import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import ItemCalculator from './ItemCalculator';
 
 class DiningList extends Component{
+    static navigationOptions = {
+        drawerLabel: 'Dining',
+        drawerIcon: ({ tintColor }) => (
+            <Icon
+                name='local-dining'
+                color='white' />
+        ),
+    };
 
     constructor(props){
         super(props);
@@ -23,32 +31,32 @@ class DiningList extends Component{
              id: '211',
              name: "Whitmans' Marketplace",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S211&date=today',
-             screen: 'WebViewPost'
+             screen: 'WebViewPost',
            },{
              id: '3',
              name: "Driscoll",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S3&date=today',
-             screen: 'WebViewPost'
+             screen: 'WebViewPost',
            },{
              id: '5',
              name: "Mission",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S5&date=today',
-             screen: 'WebViewPost'
+             screen: 'WebViewPost',
            },{
              id: '14',
              name: "Eco Cafe",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S14&date=today',
-             screen: 'WebViewPost'
+             screen: 'WebViewPost',
            },{
              id: '23',
              name: "Grab n Go",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S23&date=today',
-             screen: 'WebViewPost'
+             screen: 'WebViewPost',
            },{
              id: '25',
              name: "'82 Grill",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S25&date=today',
-             screen: 'WebViewPost'
+             screen: 'WebViewPost',
            }
          ]
 
@@ -56,19 +64,21 @@ class DiningList extends Component{
            {
              id: '24',
              name: "Lee Snack Bar Calculator",
-             screen: "ItemCalculator"
+             url: 'https://dining.williams.edu/lee-after-dark/',
+             screen: "ItemCalculator",
            },{
              id: '221',
              name: "Whitmans' Late Night Calculator",
-             screen: "ItemCalculator"
+             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S221&date=today',
+             screen: "ItemCalculator",
            }
          ]
 
          const getAppList = [
            {
              name: "GET Website",
-             url: 'https://get.cbord.com/williamscollege/full/prelogin.php',
-             screen: 'WebViewPost'
+             url: 'https://idp.williams.edu/idp/profile/SAML2/Redirect/SSO?execution=e1s1',
+             screen: 'WebViewPost',
            }
          ]
 
@@ -77,19 +87,12 @@ class DiningList extends Component{
                  <Header
                     leftComponent={
                         <Icon
-                            name='chevron-left'
+                            name='menu'
                             color='white'
-                            onPress={() => this.props.navigation.goBack()} />
+                            onPress={() => this.props.navigation.navigate('DrawerOpen')} />
                     }
-                     centerComponent={
-                         <Image source={require('../Assets/williams2.png')}
-                         style={{width: 173, height: 30}} />
-                     }
-                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
-
-                 <Header
                      centerComponent={{ text: 'Dining', style: { fontSize: 22, color: '#ffffff' } }}
-                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
+                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
 
                  <ScrollView style={styles.scrollContainer}>
                      <List containerStyle={{ marginTop: 10, marginBottom: 0 }}>
@@ -128,6 +131,7 @@ class DiningList extends Component{
                                      }
                               key={i}
                               title={l.name}
+                              rightIcon={{name: 'launch'}}
                               onPress={() => {navigate(l.screen,{url: l.url})} }
                             />
                           ))

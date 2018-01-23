@@ -77,17 +77,8 @@ class LinkList extends Component{
                             onPress={() => this.props.navigation.navigate('DrawerToggle')}
                         />
                     }
-                    centerComponent={
-                        <Image
-                            source={require('../Assets/williams2.png')}
-                            style={{width: 173, height: 30}}
-                        />
-                    }
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
-
-                <Header
                     centerComponent={{ text: 'Links', style: { fontSize: 22, color: '#ffffff' } }}
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
 
                 <ScrollView style={styles.scrollContainer}>
                     <List containerStyle={{marginTop: 10, marginBottom: 0}}>
@@ -97,6 +88,7 @@ class LinkList extends Component{
                             avatar={l.icon}
                             key={i}
                             title={l.name}
+                            rightIcon={{name: 'launch'}}
                             onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }
                           />
                         ))

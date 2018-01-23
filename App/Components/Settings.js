@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Header, Icon, List, ListItem } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
+
 import About from './About';
 import Login from './Login';
 import Logout from './Logout';
@@ -34,15 +35,8 @@ class Settings extends Component{
                             color='white'
                             onPress={() => this.props.navigation.goBack()} />
                     }
-                    centerComponent={
-                        <Image source={require('../Assets/williams2.png')}
-                        style={{width: 173, height: 30}} />
-                    }
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
-
-                <Header
                     centerComponent={{ text: 'Settings', style: { fontSize: 22, color: '#ffffff' } }}
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
 
                 <List containerStyle={{marginBottom: 20}}>
                   {

@@ -45,17 +45,10 @@ export default class Emergency extends Component{
                             color='white'
                             onPress={() => this.props.navigation.navigate('DrawerToggle')} />
                     }
-                    centerComponent={
-                        <Image source={require('../Assets/williams2.png')}
-                            style={{width: 173, height: 30}} />
-                    }
+                    centerComponent={{ text: 'Emergency Numbers', style: { fontSize: 22, color: '#ffffff' } }}
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45, marginBottom: 10}} />
 
                 <ScrollView style={styles.scrollContainer}>
-                    <Text style={styles.headerTextRed}>
-                        Emergency Numbers
-                    </Text>
-
                     <Text style={styles.text}>
                         Call these numbers to save a life, report a fire, or stop a crime.
                     </Text>

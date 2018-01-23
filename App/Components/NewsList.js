@@ -9,6 +9,8 @@ import { Button, Header, Icon, List, ListItem } from 'react-native-elements';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import WebViewComponent from './WebViewComponent';
 
+import EventsHelper from './EventsHelper';
+
 class NewsList extends Component{
     static navigationOptions = {
         drawerLabel: 'Events & News',
@@ -67,17 +69,8 @@ class NewsList extends Component{
                             color='white'
                             onPress={() => this.props.navigation.navigate('DrawerToggle')} />
                     }
-                    centerComponent={
-                        <Image
-                            source={require('../Assets/williams2.png')}
-                            style={{width: 173, height: 30}}
-                        />
-                    }
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
-
-                <Header
                     centerComponent={{ text: 'Events & News', style: { fontSize: 22, color: '#ffffff' } }}
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
 
                 <ScrollView style={styles.scrollContainer}>
                     <List containerStyle={{marginTop: 10, marginBottom: 10}}>
@@ -86,7 +79,9 @@ class NewsList extends Component{
                           <ListItem
                             avatar={l.icon}
                             key={i}
-                            title={l.name} />
+                            title={l.name}
+                            onPress={() => navigate(l.screen)}
+                          />
                         ))
                       }
                     </List>
@@ -98,6 +93,7 @@ class NewsList extends Component{
                             avatar={l.icon}
                             key={i}
                             title={l.name}
+                            rightIcon={{name: 'launch'}}
                             onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }
                           />
                         ))
@@ -111,6 +107,7 @@ class NewsList extends Component{
                             avatar={l.icon}
                             key={i}
                             title={l.name}
+                            rightIcon={{name: 'launch'}}
                             onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }
                           />
                         ))
@@ -127,7 +124,6 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
-//        justifyContent: 'center',
         backgroundColor: '#512698', //'#DCD0FE',
     },
     scrollContainer: {
@@ -138,29 +134,9 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 18,
     },
-    btn: {
-//        position: 'absolute',
-//        right: 25,
-//        bottom: 25,
-        borderRadius: 30,
-        width: 60,
-        height: 60,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.7)',
-//        padding: 15
-    },
-    btnImage:
-    {
-        resizeMode: 'contain',
-        width: '100%',
-        tintColor: 'white'
-    }
-
 });
 
-
-//const dm = () => ( <DailyMessages /> );
+const dm = () => ( <EventsHelper /> );
 
 const events = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
@@ -177,9 +153,8 @@ const NewsNavigator = StackNavigator({
     Alternative: { screen: alternative },
     Events: { screen: events },
     Eagle: { screen: eagle },
-//    DM: { screen: dm }
-    },
-    { headerMode: 'none' }
+    DM: { screen: dm },
+  },{ headerMode: 'none' }
 );
 
 AppRegistry.registerComponent('NewsList', () => NewsList );

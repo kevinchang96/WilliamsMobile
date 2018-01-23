@@ -8,7 +8,7 @@ import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOp
 import { Avatar, Button, Header, Icon, List, ListItem } from 'react-native-elements';
 import { DrawerNavigator } from 'react-navigation';
 
-export default class About extends Component{
+export default class Profile extends Component{
     static navigationOptions = {
         drawerLabel: 'About',
         drawerIcon: ({ tintColor }) => (
@@ -30,27 +30,35 @@ export default class About extends Component{
             {
               name: 'David Ariyibi',
               role: 'Co-leader/Lead Front-End Engineer',
+              pic: ''
             },{
               name: 'Kevin Chang',
               role: 'Co-leader/Lead Back-End Engineer',
+              pic: ''
             },{
               name: 'William Fung',
               role: 'Mobile Engineer - Forecast',
+              pic: ''
             },{
               name: 'Dysron Marshall',
               role: 'Mobile Engineer - Factrack',
+              pic: ''
             },{
               name: 'Grace Mazzarella',
               role: 'Mobile Engineer - Weather',
+              pic: ''
             },{
               name: 'Alex Taylor',
               role: 'Mobile Engineer - Facebook',
+              pic: ''
             },{
               name: 'Nambi Williams',
               role: 'Mobile Engineer - Daily Messages',
+              pic: ''
             },{
               name: 'Professor Jeannie Albrecht',
               role: 'Advisor',
+              pic: ''
             }
         ]
 
@@ -61,13 +69,15 @@ export default class About extends Component{
                         <Icon
                             name='chevron-left'
                             color='white'
-                            onPress={() => this.props.navigation.goBack()}
-                        />
+                            onPress={() => this.props.navigation.goBack()} />
                     }
-                    centerComponent={{ text: 'About', style: { fontSize: 22, color: '#ffffff' } }}
+                    centerComponent={
+                        <Image source={require('../Assets/williams2.png')}
+                        style={{width: 173, height: 30}} />
+                    }
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45, marginBottom: 20}} />
 
-                <ScrollView style={styles.scrollContainer}>
+                <ScrollView style={styles.scrollContainer}>\
                     <List containerStyle={{ marginTop: 0, marginBottom: 10 }}>
                       {
                         infoList.map((l, i) => (
@@ -101,6 +111,7 @@ export default class About extends Component{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+//        justifyContent: 'center',
         backgroundColor: '#DDDDDD', //'#DCD0FE',
     },
     scrollContainer: {

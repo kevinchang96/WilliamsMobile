@@ -17,7 +17,6 @@ import WebViewComponent from '../Components/WebViewComponent';
 import DiningList from '../Components/DiningList';
 import WeatherReader from '../Components/WeatherReader';
 import DailyMessages from '../Components/DailyMessages';
-import EventsHelper from '../Components/EventsHelper';
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -39,28 +38,6 @@ class HomeScreen extends Component {
 
     render() {
         const { navigate } = this.props.navigation;
-
-        const diningHoursList = [
-           {
-             id: '211',
-             name: "Whitmans' Marketplace"
-           },{
-             id: '3',
-             name: "Driscoll"
-           },{
-             id: '5',
-             name: "Mission"
-           },{
-             id: '14',
-             name: "Eco Cafe"
-           },{
-             id: '23',
-             name: "Grab n Go"
-           },{
-             id: '25',
-             name: "'82 Grill"
-           }
-         ]
 
         return (
             <View style={styles.container}>
@@ -155,7 +132,7 @@ const RootNavigator = StackNavigator({
     Settings: { screen: settings },
     DiningMenus: { screen: diningMenus },
     DiningList: { screen: diningList },
-    DailyMessages: {screen: dailyMessages }
+    DailyMessages: {screen: dailyMessages },
 },{
     headerMode: 'none',
 //    initialRouteName: 'homeScreen'
