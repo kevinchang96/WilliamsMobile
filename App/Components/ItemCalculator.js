@@ -29,9 +29,9 @@ export default class ItemCalculator extends Component{
 
         updatePrice( isChecked, price ){
             if( isChecked ){
-                this.setState({currentBalance: this.state.currentBalance + price})
+                this.setState({currentBalance: Math.round((this.state.currentBalance + price)*100)/100})
             } else {
-                this.setState({currentBalance: this.state.currentBalance - price})
+                this.setState({currentBalance: Math.round((this.state.currentBalance - price)*100)/100})
             }
         }
 
