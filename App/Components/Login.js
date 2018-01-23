@@ -4,20 +4,10 @@
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableHighlight,
-  View
-} from 'react-native';
+import { AppRegistry, Platform, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import { Button, FormInput, FormLabel } from 'react-native-elements';
 
-
 export default class Login extends Component {
-
     constructor(props){
         super(props);
         this.state = {
@@ -63,10 +53,9 @@ export default class Login extends Component {
 
     _submitForm = () => {
         const {username,password,cookies} = this.state
-        // Other stuff
-        console.log("State information: " + JSON.stringify(this.state));
-        console.log("Username: "+ username);
-        console.log("Password: "+ password);
+        //console.log("State information: " + JSON.stringify(this.state));
+        //console.log("Username: "+ username);
+        //console.log("Password: "+ password);
 
         // Get form parameters
         fetch('https://wso.williams.edu/account/login', {
@@ -75,35 +64,28 @@ export default class Login extends Component {
           .then((response) => response.text() ) // Transform the data into text
           .then((responseText) => {
           // Parse the text here
-             console.log(responseText);
+             //console.log(responseText);
              var DOMParser = require('react-native-html-parser').DOMParser;
 
              let doc = new DOMParser().parseFromString(responseText,'text/html');
              var input = doc.getElementsByTagName("input");
-             console.log("Tags: " + input);
+             //console.log("Tags: " + input);
              var paramList = [input.length];
              for( i = 0; i < input.length; i++ ){
                 // Iterate through parameters
                 var key = input[i].getAttribute("name");
                 var value = input[i].getAttribute("value");
 
-                if( key == 'username' )
-                    value = username;
-                else if( key == 'password' )
-                    value = password;
+                if( key == 'username' ){ value = username; }
+                else if( key == 'password' ){ value = password; }
 
                 paramList[i] = key + "=" + encodeURIComponent(value);
-
                 console.log("Attr: " +input[i]);
              }
              var result = '';
-
              for( i = 0; i < paramList.length; i++ ){
-                if( result.length == 0 ){
-                    result = result + paramList[i];
-                } else {
-                    result = result + '&' + paramList[i];
-                }
+                if( result.length == 0 ){ result = result + paramList[i]; }
+                else { result = result + '&' + paramList[i]; }
              }
              console.log( "Result: " + result + "\nContent length: " + result.length );
              this._loginPost(result);
@@ -131,22 +113,14 @@ export default class Login extends Component {
            })
            .then(
             function(response) {
-               console.log(response.headers);
+               //console.log(response.headers);
                //console.log(response.headers.get("set-cookie"));
                var setCookies = response.headers.get("set-cookie");
-               console.log( "Set-Cookies: " + setCookies );
+               //console.log( "Set-Cookies: " + setCookies );
                this.setState( {cookies: setCookies} );
-
-                /*Cookie.get('https://wso.williams.edu/',
-                '_WSOonRails_session').then((cookie) => this.someFn(cookie));*/
-
-               console.log("State information: " + JSON.stringify(this.state));
+               //console.log("State information: " + JSON.stringify(this.state));
             }.bind(this)
            )
-           /*.then( (response) => response.text() )
-           .then( responseText => {
-                console.log(responseText);
-           })*/
        .catch((error) => {
           console.error(error);
        });

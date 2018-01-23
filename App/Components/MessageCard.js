@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Platform,
-  StyleSheet,
-  Image,
-  View
-} from 'react-native';
+import { AppRegistry, Platform, StyleSheet, Image, View } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Button, Text, Thumbnail, Icon, Left, Body } from 'native-base';
 
 export default class MessageCard extends Component{

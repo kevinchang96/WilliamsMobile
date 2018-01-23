@@ -7,7 +7,6 @@ import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Header, Icon, List, ListItem } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
-
 import About from './About';
 import Login from './Login';
 import Logout from './Logout';

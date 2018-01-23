@@ -4,16 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableHighlight
-} from 'react-native';
-
+import { AppRegistry, Platform, StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
 import { Button } from 'react-native-elements';
 
 
@@ -47,7 +38,7 @@ export default class Logout extends Component {
           })
           .then(
             function(response) {
-            console.log(response.headers);
+            //console.log(response.headers);
             }
           )
           /*.then((response) => response.text() ) // Transform the data into text

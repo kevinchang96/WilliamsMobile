@@ -23,7 +23,6 @@ class WSO extends Component{
         ),
     };
 
-
     constructor(props){
         super(props);
         this.state=
@@ -38,87 +37,89 @@ class WSO extends Component{
     }
 
     componentDidMount(){
-        var html = '';
         fetch('https://wso.williams.edu/', {method: 'GET'})
         .then( (response) => response.text() )
         .then( (responseText) => {
             const parts = responseText.split('center');
+            // Ill-formed html; must add single quotes
             const html = parts[0] + "\'center\'" + parts[1];
-
-            var DOMParser = require('react-native-html-parser').DOMParser;
-            let doc = new DOMParser({errorHandler:{warning:function(w){console.warn(w)},error:function(w){console.log(w)},fatalError:function(w){console.log(w)}}}).parseFromString(html,'text/html');
-            var input = doc.getElementsByTagName("section");
-            const links = input.item(0).getElementsByTagName("a");
-            console.log("Size: "+ links.item(0).attributes.item(0).value);
-            var size = links.length;
-            var temp = [5];
-            for( var i = 1; i < 6; i++ ){
-                var discussions = {
-                    link: links.item(i).attributes.item(0).value,
-                    text: links.item(i).textContent,
-                    screen: 'WebViewPost'
-                };
-                temp[i-1] = discussions;
-            };
-            var temp1 = [5];
-            for( var i = 7; i < 12; i++ ){
-                var announcements = {
-                    link: links.item(i).attributes.item(0).value,
-                    text: links.item(i).textContent,
-                    screen: 'WSOPost'
-                };
-                temp1[i-7] = announcements;
-            };
-            var temp2 = [5];
-            for( var i = 13; i < 18; i++ ){
-                var exchanges = {
-                    link: links.item(i).attributes.item(0).value,
-                    text: links.item(i).textContent,
-                    screen: 'WSOPost'
-                };
-                temp2[i-13] = exchanges;
-            };
-            var temp3 = [5];
-            for( var i = 19; i < 24; i++ ){
-                var lostNfound = {
-                    link: links.item(i).attributes.item(0).value,
-                    text: links.item(i).textContent,
-                    screen: 'WSOPost'
-                };
-                temp3[i-19] = lostNfound;
-            };
-            var temp4 = [5];
-            for( var i = 25; i < 30; i++ ){
-                var jobs = {
-                    link: links.item(i).attributes.item(0).value,
-                    text: links.item(i).textContent,
-                    screen: 'WSOPost'
-                };
-                temp4[i-25] = jobs;
-            };
-            let temp5 = [5];
-            for( var i = 31; i < 35; i++ ){
-                var rides = {
-                    link: links.item(i).attributes.item(0).value,
-                    text: links.item(i).textContent
-                };
-                temp5[i-31] = rides;
-            };
-            this.setState(
-                {
-                    discussions: temp,
-                    announcements: temp1,
-                    exchanges: temp2,
-                    lostNfound: temp3,
-                    jobs: temp4,
-                    rides: temp5
-                }
-            );
-        }
-        )
+            this._getInfo(html);
+        })
         .catch((error) => {
              console.error(error);
-          });
+        });
+    }
+
+    _getInfo = ( html ) => {
+        var DOMParser = require('react-native-html-parser').DOMParser;
+                    let doc = new DOMParser({errorHandler:{warning:function(w){console.warn(w)},error:function(w){console.log(w)},fatalError:function(w){console.log(w)}}}).parseFromString(html,'text/html');
+                    var input = doc.getElementsByTagName("section");
+                    const links = input.item(0).getElementsByTagName("a");
+                    console.log("Size: "+ links.item(0).attributes.item(0).value);
+                    var size = links.length;
+                    var temp = [5];
+                    for( var i = 1; i < 6; i++ ){
+                        var discussions = {
+                            link: links.item(i).attributes.item(0).value,
+                            text: links.item(i).textContent,
+                            screen: 'WebViewPost'
+                        };
+                        temp[i-1] = discussions;
+                    };
+                    var temp1 = [5];
+                    for( var i = 7; i < 12; i++ ){
+                        var announcements = {
+                            link: links.item(i).attributes.item(0).value,
+                            text: links.item(i).textContent,
+                            screen: 'WSOPost'
+                        };
+                        temp1[i-7] = announcements;
+                    };
+                    var temp2 = [5];
+                    for( var i = 13; i < 18; i++ ){
+                        var exchanges = {
+                            link: links.item(i).attributes.item(0).value,
+                            text: links.item(i).textContent,
+                            screen: 'WSOPost'
+                        };
+                        temp2[i-13] = exchanges;
+                    };
+                    var temp3 = [5];
+                    for( var i = 19; i < 24; i++ ){
+                        var lostNfound = {
+                            link: links.item(i).attributes.item(0).value,
+                            text: links.item(i).textContent,
+                            screen: 'WSOPost'
+                        };
+                        temp3[i-19] = lostNfound;
+                    };
+                    var temp4 = [5];
+                    for( var i = 25; i < 30; i++ ){
+                        var jobs = {
+                            link: links.item(i).attributes.item(0).value,
+                            text: links.item(i).textContent,
+                            screen: 'WSOPost'
+                        };
+                        temp4[i-25] = jobs;
+                    };
+                    let temp5 = [5];
+                    for( var i = 31; i < 35; i++ ){
+                        var rides = {
+                            link: links.item(i).attributes.item(0).value,
+                            text: links.item(i).textContent
+                        };
+                        temp5[i-31] = rides;
+                    };
+                    this.setState(
+                        {
+                            discussions: temp,
+                            announcements: temp1,
+                            exchanges: temp2,
+                            lostNfound: temp3,
+                            jobs: temp4,
+                            rides: temp5
+                        }
+                    );
     }
 
     render(){
@@ -140,13 +141,13 @@ class WSO extends Component{
                  <Button
                      raised
                      title={`Factrak`}
-                     buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                     buttonStyle={styles.buttonStyle}
                      onPress={() => navigate('Factrak')} />
 
                  <Button
                      raised
                      title={`Facebook`}
-                     buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
+                     buttonStyle={styles.buttonStyle}
                      onPress={() => navigate('Facebook')} />
 
                  <Card title='Discussions'
@@ -288,17 +289,13 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 18,
     },
-    btn: {
-//        position: 'absolute',
-//        right: 25,
-//        bottom: 25,
-        borderRadius: 30,
-        width: 60,
-        height: 60,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.7)',
-//        padding: 15
+    buttonStyle: {
+        borderRadius: 0,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 5,
+        marginBottom: 5,
+        backgroundColor: '#512698'
     },
     btnImage: {
         resizeMode: 'contain',

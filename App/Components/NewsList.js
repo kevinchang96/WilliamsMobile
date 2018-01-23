@@ -8,7 +8,6 @@ import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOp
 import { Button, Header, Icon, List, ListItem } from 'react-native-elements';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import WebViewComponent from './WebViewComponent';
-
 import EventsHelper from './EventsHelper';
 
 class NewsList extends Component{
