@@ -22,7 +22,6 @@ const drawers = DrawerNavigator({
     WSO: { screen: WSO },
     LinkList: { screen: LinkList },
     Emergency: { screen: Emergency },
-    About: { screen: About },
 },{
     initialRouteName: 'HomeScreen',
     drawerPosition: 'left',

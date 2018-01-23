@@ -76,42 +76,23 @@ class HomeScreen extends Component {
                     <Card
                         title="TODAY'S MENU"
                         image={require('../Assets/cutlery.png')}>
-                        <Text style={{borderRadius: 5, marginBottom: 5}}>
-                            This and above is where you implement all the current dining stuff.
-                        </Text>
                         <Button
                             icon={{name: 'local-dining'}}
                             backgroundColor='#512698'
                             onPress={() => navigate('DiningList')}
-                            buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
                             title='DINING' />
                     </Card>
 
                     <Card
                         title='DAILY MESSAGES'
                         image={require('../Assets/text.png')}>
-                        <Text style={{borderRadius: 5, marginBottom: 5}}>
-                            This and above is where you implement all the current daily messages stuff.
-                        </Text>
                         <Button
                             icon={{name: 'line-weight'}}
                             backgroundColor='#512698'
-                            buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
                             onPress={() => navigate('DailyMessages')}
                             title='MORE' />
-                    </Card>
-
-                    <Card
-                        title='HELLO WORLD'
-                        image={require('../Assets/williamsldpi.png')}>
-                        <Text style={{borderRadius: 5, marginBottom: 5}}>
-                            The idea with React Native Elements is more about component structure than actual design.
-                        </Text>
-                        <Button
-                            icon={{name: 'code'}}
-                            backgroundColor='#512698'
-                            buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                            title='VIEW NOW' />
                     </Card>
                 </ScrollView>
             </View>

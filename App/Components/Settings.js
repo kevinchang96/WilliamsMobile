@@ -17,11 +17,17 @@ class Settings extends Component{
 
         const settingsList = [
             {
+                name: 'About App',
+                screen: 'About',
+                icon: <Icon name='info' />
+            },{
                 name: 'Log In',
                 screen: 'Login',
+                icon: <Icon name='check' />
             },{
                 name: 'Log Out',
                 screen: 'Logout',
+                icon: <Icon name='close' />
             }
         ]
 
@@ -35,13 +41,14 @@ class Settings extends Component{
                             onPress={() => this.props.navigation.goBack()} />
                     }
                     centerComponent={{ text: 'Settings', style: { fontSize: 22, color: '#ffffff' } }}
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45, marginBottom: 0}} />
 
-                <List containerStyle={{marginBottom: 20}}>
+                <List containerStyle={{marginTop: 10}}>
                   {
                     settingsList.map((l, i) => (
                       <ListItem
                         key={i}
+                        avatar={l.icon}
                         title={l.name}
                         onPress={() => navigate(l.screen)}
                       />
@@ -88,12 +95,15 @@ const styles = StyleSheet.create({
 
 });
 
+const about = () => ( <About /> );
+
 const login = () => ( <Login /> );
 
 const logout = () => ( <Logout /> );
 
 const SettingsNavigator = StackNavigator({
     Home: { screen: Settings },
+    About: { screen: about },
     Login: { screen: login },
     Logout: { screen: logout },
 },{
