@@ -16,6 +16,7 @@ import DiningMenus from '../Components/DiningMenus';
 import WebViewComponent from '../Components/WebViewComponent';
 import DiningList from '../Components/DiningList';
 import WeatherReader from '../Components/WeatherReader';
+import DailyMessages from '../Components/DailyMessages';
 import EventsHelper from '../Components/EventsHelper';
 
 class HomeScreen extends Component {
@@ -84,17 +85,14 @@ class HomeScreen extends Component {
                 />
 
                 <ScrollView style={styles.scrollContainer}>
-                    <Card
+                    <Card containerStyle={{padding: 0}}
                         title='WEATHER'
                         image={require('../Assets/weather-week-report.png')}>
-                        <Text style={{borderRadius: 5, marginBottom: 5}}>
-                            This and above is where you implement all the current weather stuff.
-                        </Text>
                         <Button
                             rounded
                             icon={{name: 'wb-cloudy'}}
                             backgroundColor='#512698'
-                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
                             title='FORECAST' />
                     </Card>
 
@@ -122,7 +120,7 @@ class HomeScreen extends Component {
                             icon={{name: 'line-weight'}}
                             backgroundColor='#512698'
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                            onPress={() => navigate('EventsHelper')}
+                            onPress={() => navigate('DailyMessages')}
                             title='MORE' />
                     </Card>
 
@@ -150,14 +148,14 @@ const diningMenus = () => ( <DiningMenus /> );
 
 const diningList = () => ( <DiningList /> );
 
-const eventsHelper = () => ( <EventsHelper /> );
+const dailyMessages = () => ( <DailyMessages /> );
 
 const RootNavigator = StackNavigator({
     Home: { screen: HomeScreen },
     Settings: { screen: settings },
     DiningMenus: { screen: diningMenus },
     DiningList: { screen: diningList },
-    EventsHelper: {screen: eventsHelper }
+    DailyMessages: {screen: dailyMessages }
 },{
     headerMode: 'none',
 //    initialRouteName: 'homeScreen'
