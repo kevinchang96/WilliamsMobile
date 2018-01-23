@@ -30,11 +30,12 @@ const drawers = DrawerNavigator({
             marginVertical: 0,
         },
         iconContainerStyle: { opacity: 1 }
-    }
+    },
 });
 
 const styles = StyleSheet.create({
     container: {
+        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
     },
     icon: {

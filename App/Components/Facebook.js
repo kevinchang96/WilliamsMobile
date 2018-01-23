@@ -31,7 +31,8 @@ export default class Facebook extends Component{
 
     render(){
         return(
-            <View style= {{flex: 1, backgroundColor: "#512698"}}>
+            <View style= {{flex: 1, backgroundColor: "#512698",
+                            paddingTop: Platform.OS === 'ios' ? 20 : 0,}}>
                 <TextInput
                     style=  {{color: "white", fontSize: 20}}
                     placeholder = {this.state.searchFor}

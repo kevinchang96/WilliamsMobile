@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     container: {
+        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
         backgroundColor: '#512698',
     },

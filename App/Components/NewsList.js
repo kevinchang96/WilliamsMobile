@@ -125,6 +125,7 @@ class NewsList extends Component{
 
 const styles = StyleSheet.create({
     container: {
+        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
 //        justifyContent: 'center',
         backgroundColor: '#512698', //'#DCD0FE',

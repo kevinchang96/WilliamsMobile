@@ -124,7 +124,7 @@ class WSO extends Component{
     render(){
         const { navigate } = this.props.navigation;
         return(
-         <View style={{backgroundColor: '#DDDDDD'}}>
+         <View style={styles.container}>
              <Header
                  leftComponent={
                      <Icon
@@ -279,6 +279,7 @@ class WSO extends Component{
 
 const styles = StyleSheet.create({
     container: {
+        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
         justifyContent: 'center',
         backgroundColor: '#DDDDDD', //'#DCD0FE',

@@ -22,7 +22,7 @@ export default class Logout extends Component {
     render() {
         return (
         <View
-        paddingTop={10}>
+        paddingTop={20}>
             <Button
               title='Log Out'
               onPress={this._logout}
