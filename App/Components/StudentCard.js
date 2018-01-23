@@ -4,6 +4,7 @@ import {
   Platform,
   StyleSheet,
   Image,
+  TouchableOpacity,
   View
 } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Button, Text, Thumbnail, Icon, Left, Body } from 'native-base';
@@ -12,6 +13,7 @@ export default class StudentCard extends Component{
 
     render(){
         return(
+        <TouchableOpacity>
             <Card style={{flex: 0}}>
             <CardItem>
               <Left>
@@ -23,6 +25,7 @@ export default class StudentCard extends Component{
               </Left>
             </CardItem>
             </Card>
+        </TouchableOpacity>
         );
     }
 }
