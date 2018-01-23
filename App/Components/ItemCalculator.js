@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { Avatar, Button, Card, CheckBox, Header, Icon, List, ListItem } from 'react-native-elements';
-import LeesMealsList from './LeesMealsList.json';
-import LeesAlaCarteList from './LeesAlaCarteList.json';
-import LeesBeveragesList from './LeesBeveragesList.json';
-import LeesDessertsList from './LeesDessertsList.json';
+import LeeMealsList from './LeeMealsList.json';
+import LeeAlaCarteList from './LeeAlaCarteList.json';
+import LeeBeveragesList from './LeeBeveragesList.json';
+import LeeDessertsList from './LeeDessertsList.json';
 
 export default class ItemCalculator extends Component{
 
@@ -19,7 +19,7 @@ export default class ItemCalculator extends Component{
         }
 
         loadData(){
-            this.setState({ dataArray: LeesBeveragesList })
+            this.setState({ dataArray: LeeBeveragesList })
         }
 
         onClick( i ){
@@ -36,17 +36,6 @@ export default class ItemCalculator extends Component{
         }
 
     render(){
-
-        const WhitmansList = [
-            {
-                name: '',
-                description: ''
-            },{
-                name: '',
-                description: ''
-            }
-        ]
-
          return(
              <View style={styles.container}>
              <Header

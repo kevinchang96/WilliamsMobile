@@ -106,7 +106,8 @@ class WSO extends Component{
                     for( var i = 31; i < 35; i++ ){
                         var rides = {
                             link: links.item(i).attributes.item(0).value,
-                            text: links.item(i).textContent
+                            text: links.item(i).textContent,
+                            screen: 'WebViewPost'
                         };
                         temp5[i-31] = rides;
                     };
@@ -159,13 +160,14 @@ class WSO extends Component{
                              key={i}
                              title={u.text}
                              hideChevron={true}
-                             onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, name: 'Announcements'})} }
+                             onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link})} }
                           />
                          );
                      })
                    }
                    <ListItem
                      rightTitle='More'
+                     onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/discussions"})} }
                    />
                  </Card>
 
