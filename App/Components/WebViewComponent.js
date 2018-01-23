@@ -23,6 +23,8 @@ export default class WebViewComponent extends Component {
                 source={{uri: this.props.navigation.state.params.url}}
                 style={{paddingTop: Platform.OS === 'ios' ? 20 : 0}}
                 javaScriptEnabled={true}
+                scalesPageToFit={false}
+                initialScale={10}
             />
 
         </View>
