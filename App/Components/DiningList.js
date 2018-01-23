@@ -1,5 +1,5 @@
 /**
- * David Ariyibi
+ * David Ariyibi, Kevin Chang
  * (c) 01/2018
  */
 
@@ -8,6 +8,7 @@ import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOp
 import { Avatar, Button, Header, Icon, List, ListItem } from 'react-native-elements';
 import WebViewComponent from './WebViewComponent';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
+import ItemCalculator from './ItemCalculator';
 
 class DiningList extends Component{
 
@@ -54,10 +55,12 @@ class DiningList extends Component{
          const snackBarList = [
            {
              id: '24',
-             name: "Lee Snack Bar Calculator"
+             name: "Lee Snack Bar Calculator",
+             screen: "ItemCalculator"
            },{
              id: '221',
-             name: "Whitmans' Late Night Calculator"
+             name: "Whitmans' Late Night Calculator",
+             screen: "ItemCalculator"
            }
          ]
 
@@ -109,6 +112,7 @@ class DiningList extends Component{
                              avatar={<Icon name='exposure' />}
                              key={i}
                              title={l.name}
+                             onPress={() => navigate(l.screen)}
                            />
                          ))
                        }
@@ -172,9 +176,12 @@ const styles = StyleSheet.create({
 
 const webViewPost = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
+const itemCalculator = () => ( <ItemCalculator /> );
+
 const DiningNavigator = StackNavigator({
     Home: { screen: DiningList },
     WebViewPost: { screen: webViewPost },
+    ItemCalculator: { screen: itemCalculator }
   },
     { headerMode: 'none' }
 );

@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Honey Bun",
+    "description": "",
+    "checked": false,
+    "price": 1.25
+  },{
+    "name": "A la Mode",
+    "description": "",
+    "checked": false,
+    "price": 2.75
+  },{
+    "name": "Small Gelato",
+    "description": "",
+    "checked": false,
+    "price": 1.49
+  },{
+    "name": "Large Gelato",
+    "description": "",
+    "checked": false,
+    "price": 2.49
+  },{
+    "name": "Small Ice Cream",
+    "description": "",
+    "checked": false,
+    "price": 1.29
+  },{
+    "name": "Large Ice Cream",
+    "description": "",
+    "checked": false,
+    "price": 2.29
+  }
+]

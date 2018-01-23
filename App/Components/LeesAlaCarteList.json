@@ -1,0 +1,108 @@
+[
+  {
+    "name": "Egg Any Style (Cage Free) Each",
+    "description": "",
+    "checked": false,
+    "price": 1.00
+  },{
+    "name": "Create Your Own Omelet",
+    "description": "",
+    "checked": false,
+    "price": 2.69
+  },{
+    "name": "Toppings: (Each)",
+    "description": "Italian Sausage, Peppers, Onions, Mushrooms, Cheddar Cheese, Spinach, Tomato, Salsa, Bacon, Breakfast Sausage, Ham",
+    "checked": false,
+    "price": 1.00
+  },{
+    "name": "Cheese Omelet",
+    "description": "",
+    "checked": false,
+    "price": 2.69
+  },{
+    "name": "Bacon Ham Sausage (All Natural)",
+    "description": "",
+    "checked": false,
+    "price": 1.50
+  },{
+    "name": "Bagel Supreme**",
+    "description": "(available Gluten free upon request)",
+    "checked": false,
+    "price": 3.75
+  },{
+    "name": "Egg N' Bagel",
+    "description": "",
+    "checked": false,
+    "price": 3.25
+  },{
+    "name": "Egg McWilliams",
+    "description": "Item is available Gluten free upon request",
+    "checked": false,
+    "price": 3.25
+  },{
+    "name": "Breakfast Burrito**",
+    "description": "Item is available Gluten free upon request",
+    "checked": false,
+    "price": 3.25
+  },{
+    "name": "Hash Browns",
+    "description": "",
+    "checked": false,
+    "price": 1.49
+  },{
+    "name": "English Muffin",
+    "description": "",
+    "checked": false,
+    "price": 0.89
+  },{
+    "name": "Toasted Bagel",
+    "description": "",
+    "checked": false,
+    "price": 1.00
+  },{
+    "name": "White Wheat or Gluten Free Toast",
+    "description": "",
+    "checked": false,
+    "price": 1.00
+  },{
+    "name": "Fresh Fruit Bowl",
+    "description": "",
+    "checked": false,
+    "price": 2.50
+  },{
+    "name": "Peanut Butter",
+    "description": "",
+    "checked": false,
+    "price": 0.50
+  },{
+    "name": "Cream Cheese",
+    "description": "",
+    "checked": false,
+    "price": 0.50
+  },{
+    "name": "Preserves",
+    "description": "",
+    "checked": false,
+    "price": 0.50
+  },{
+    "name": "Battenkill Brittle",
+    "description": "",
+    "checked": false,
+    "price": 0.50
+  },{
+    "name": "Belgian Waffle",
+    "description": "Served with Ioka Pure Maple Syrup (available Gluten free upon request)",
+    "checked": false,
+    "price": 3.00
+  },{
+    "name": "3 Pancakes",
+    "description": "Served with Ioka Pure Maple Syrup",
+    "checked": false,
+    "price": 3.00
+  },{
+    "name": "Toppings (Each)",
+    "description": "Chocolate Chips, Walnuts, Strawberries, Blueberries, Mixed Berries, Peaches, or Apples (add to any Waffle or Pancake dish)",
+    "checked": false,
+    "price": 1.00
+  }
+]

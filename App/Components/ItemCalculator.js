@@ -27,6 +27,14 @@ export default class ItemCalculator extends Component{
             this.forceUpdate()
         }
 
+        updatePrice( isChecked, price ){
+            if( isChecked ){
+                this.setState({currentBalance: this.state.currentBalance + price})
+            } else {
+                this.setState({currentBalance: this.state.currentBalance - price})
+            }
+        }
+
     render(){
 
         const WhitmansList = [
@@ -63,16 +71,16 @@ export default class ItemCalculator extends Component{
                      this.state.dataArray.map((l, i) => (
                        <CheckBox
                          key={i}
-                         title={l.name + " ($" + l.price + ")"}
+                         title={l.name + " - ($" + l.price + ")"}
                          checked={this.state.dataArray[i].checked}
                          checkedColor='green'
-                         onPress={() => { this.onClick(i) } }
+                         onPress={() => { this.onClick(i); this.updatePrice(this.state.dataArray[i].checked,l.price) } }
                        />
                      ))
                    }
                  </List>
                 </ScrollView>
-                <View><Text style={{borderRadius: 15, marginBottom: 15}}>This is the footer!</Text></View>
+                <View><Text style={{borderRadius: 15, marginBottom: 15}}>The current balance: ${this.state.currentBalance}</Text></View>
              </View>
          );
     }
