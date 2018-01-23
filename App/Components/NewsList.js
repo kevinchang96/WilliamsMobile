@@ -17,7 +17,7 @@ class NewsList extends Component{
         drawerIcon: ({ tintColor }) => (
             <Icon
                 name='today'
-                color='white' />
+                color={tintColor} />
         ),
     };
 

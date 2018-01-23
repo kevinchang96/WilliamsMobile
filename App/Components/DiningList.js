@@ -16,7 +16,7 @@ class DiningList extends Component{
         drawerIcon: ({ tintColor }) => (
             <Icon
                 name='local-dining'
-                color='white' />
+                color={tintColor} />
         ),
     };
 
@@ -89,7 +89,7 @@ class DiningList extends Component{
                         <Icon
                             name='menu'
                             color='white'
-                            onPress={() => this.props.navigation.navigate('DrawerOpen')} />
+                            onPress={() => this.props.navigation.navigate('DrawerToggle')} />
                     }
                      centerComponent={{ text: 'Dining', style: { fontSize: 22, color: '#ffffff' } }}
                      outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
@@ -112,7 +112,7 @@ class DiningList extends Component{
                        {
                          snackBarList.map((l, i) => (
                            <ListItem
-                             avatar={<Icon name='exposure' />}
+                             avatar={<Icon name='iso' />}
                              key={i}
                              title={l.name}
                              onPress={() => navigate(l.screen)}

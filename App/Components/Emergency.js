@@ -13,7 +13,7 @@ export default class Emergency extends Component{
         drawerIcon: ({ tintColor }) => (
             <Icon
                 name='warning'
-                color='white' />
+                color={tintColor} />
         ),
     };
 

@@ -19,7 +19,7 @@ class WSO extends Component{
         drawerIcon: ({ tintColor }) => (
             <Icon
                 name='language'
-                color='white' />
+                color={tintColor} />
         ),
     };
 

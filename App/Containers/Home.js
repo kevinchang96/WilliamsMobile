@@ -24,7 +24,7 @@ class HomeScreen extends Component {
         drawerIcon: ({ tintColor }) => (
             <Icon
                 name='home'
-                color='white' />
+                color={tintColor} />
         ),
     };
 

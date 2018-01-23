@@ -15,7 +15,7 @@ class LinkList extends Component{
         drawerIcon: ({ tintColor }) => (
             <Icon
                 name='link'
-                color='white' />
+                color={tintColor} />
         ),
     };
 
