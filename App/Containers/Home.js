@@ -16,7 +16,7 @@ import DiningMenus from '../Components/DiningMenus';
 import WebViewComponent from '../Components/WebViewComponent';
 import DiningList from '../Components/DiningList';
 import WeatherReader from '../Components/WeatherReader';
-import DailyMessages from '../Components/DailyMessages';
+import EventsHelper from '../Components/EventsHelper';
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -121,8 +121,8 @@ class HomeScreen extends Component {
                         <Button
                             icon={{name: 'line-weight'}}
                             backgroundColor='#512698'
-                            onPress={() => navigate('DailyMessages')}
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                            onPress={() => navigate('EventsHelper')}
                             title='MORE' />
                     </Card>
 
@@ -150,14 +150,14 @@ const diningMenus = () => ( <DiningMenus /> );
 
 const diningList = () => ( <DiningList /> );
 
-const dailyMessages = () => ( <DailyMessages /> );
+const eventsHelper = () => ( <EventsHelper /> );
 
 const RootNavigator = StackNavigator({
     Home: { screen: HomeScreen },
     Settings: { screen: settings },
     DiningMenus: { screen: diningMenus },
     DiningList: { screen: diningList },
-    DailyMessages: {screen: dailyMessages }
+    EventsHelper: {screen: eventsHelper }
 },{
     headerMode: 'none',
 //    initialRouteName: 'homeScreen'
@@ -165,6 +165,7 @@ const RootNavigator = StackNavigator({
 
 const styles = StyleSheet.create({
     container: {
+        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
         justifyContent: 'center',
         backgroundColor: '#DDDDDD', //'#DCD0FE',
