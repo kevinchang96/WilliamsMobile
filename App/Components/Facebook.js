@@ -73,9 +73,14 @@ export default class Facebook extends Component{
                     key = input[i].getAttribute("name");
                     value = input[i].getAttribute("value");
 
-                    if( key == 'search' )
-                        value = this.state.searchFor;
-
+                    if( key == 'search' ){
+                        if(this.state.searchFor != ''){
+                            value = this.state.searchFor;
+                        }
+                        else {
+                            value = 'Rohan';
+                        }
+                    }
                     paramList[i] = key + "=" + encodeURIComponent(value);
 
                     //console.log("Attr: " + input[i]);
@@ -152,7 +157,6 @@ export default class Facebook extends Component{
                                     unix = {student.unix}
                                     img = {student.img}
                                     key = {student.info}
-                                    onPress={this.submitForm}
                                />
                         students[i-12] = card;
 
@@ -225,6 +229,7 @@ export default class Facebook extends Component{
                                     unix = {student.unix}
                                     img = {student.img}
                                     key = {student.info}
+                                    onPress={searchFor => {this.setState({searchFor:unix}); this.submitForm}}
                                />
                         students[i-13] = card;
                         i+=2;
