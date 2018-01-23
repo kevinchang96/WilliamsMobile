@@ -112,7 +112,7 @@ class DiningList extends Component{
                        {
                          snackBarList.map((l, i) => (
                            <ListItem
-                             avatar={<Icon name='iso' />}
+                             avatar={<Icon name='monetization-on' />}
                              key={i}
                              title={l.name}
                              onPress={() => navigate(l.screen)}

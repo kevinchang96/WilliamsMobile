@@ -15,7 +15,7 @@ import Factrak from '../Components/Factrak';
 
 class WSO extends Component{
     static navigationOptions = {
-        drawerLabel: 'WSO',
+        drawerLabel: 'W S O',
         drawerIcon: ({ tintColor }) => (
             <Icon
                 name='language'
@@ -134,22 +134,24 @@ class WSO extends Component{
                          color='white'
                          onPress={() => this.props.navigation.navigate('DrawerToggle')} />
                  }
-                 centerComponent={{ text: 'WSO', style: { fontSize: 22, color: '#ffffff' } }}
+                 centerComponent={{ text: 'W S O', style: { fontSize: 22, color: '#ffffff' } }}
                  outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
              />
 
              <ScrollView>
                  <Button
                      raised
-                     title={`Factrak`}
+                     title='Facebook'
+                     icon={{name: 'portrait'}}
                      buttonStyle={styles.buttonStyle}
-                     onPress={() => navigate('Factrak')} />
+                     onPress={() => navigate('Facebook')} />
 
                  <Button
                      raised
-                     title={`Facebook`}
+                     title='Factrak'
+                     icon={{name: 'thumbs-up-down'}}
                      buttonStyle={styles.buttonStyle}
-                     onPress={() => navigate('Facebook')} />
+                     onPress={() => navigate('Factrak')} />
 
                  <Card title='Discussions'
                      containerStyle={{padding: 10}}>
