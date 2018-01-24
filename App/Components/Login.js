@@ -76,6 +76,7 @@ export default class Login extends Component {
                 <FormInput
                     value={this.state.username}
                     placeholder='Username'
+                    placeholderTextColor={'white'}
                     onChangeText={username => this.setState({username})}
                     onSubmitEditing={(event) => {this.refs.passwordInput.focus()}} />
 
@@ -83,16 +84,19 @@ export default class Login extends Component {
                     secureTextEntry={true}
                     ref='passwordInput'
                     placeholder='Password'
+                    placeholderTextColor={'white'}
                     value={this.state.password}
                     onChangeText={password => this.setState({password})}
                     onSubmitEditing={this._submitForm} />
 
                 <Button
                   title='Submit'
+                  backgroundColor={'#9678B6'} //Purple mountain majesty
                   disabled={this.state.buttonDisabled}
                   disabledStyle={styles.disabled}
                   onPress={this._submitForm}
-                  outline={true} />
+                  outline={this.state.buttonDisabled}
+                  />
             </View>
          </View>
         );
@@ -161,14 +165,13 @@ export default class Login extends Component {
            .then(
             function(response) {
                //console.log(response.headers);
+               //console.log( response._bodyInit );
+               //console.log("T/F"+response._bodyInit.contains("https://pchanger.williams.edu/pchecker/"));
                //console.log(response.headers.get("set-cookie"));
                var setCookies = response.headers.get("set-cookie");
                //console.log( "Set-Cookies: " + setCookies );
 
-               this.setState( {cookies: setCookies, text: ""} );
-               this._loggedIn();
-               this._rememberMe();
-               /*if( setCookies.startsWith("_WSOonRails") ){
+               if( !response._bodyInit.contains("https://pchanger.williams.edu/pchecker/") ){
                 // Correct login attempt
                 this.setState( {cookies: setCookies, text: ""} );
                 this._loggedIn();
@@ -176,7 +179,7 @@ export default class Login extends Component {
                } else {
                 // Incorrect login attempt
                 this.setState({text: "Incorrect username or password! Please try again."});
-               }*/
+               }
 
                //console.log("State information: " + JSON.stringify(this.state));
             }.bind(this)
@@ -202,9 +205,8 @@ const styles = StyleSheet.create({
         height: 100,
     },
     disabled: {
-        backgroundColor: '#9678B6',
-        borderColor: '#9678B6' //Purple mountain majesty
-    },
+        backgroundColor: '#512698'
+    }
 });
 
 

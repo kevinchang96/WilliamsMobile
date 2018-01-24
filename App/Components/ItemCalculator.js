@@ -22,8 +22,17 @@ export default class ItemCalculator extends Component{
             this.setState({ dataArray: LeeBeveragesList })
         }
 
-        clear(){
-            console.log("Length of array: "+this.state.dataArray.length);
+        componentWillUnmount(){
+            this._clearAll();
+            //console.log("Length: "+ this.state.dataArray.length);
+        }
+
+        _clearAll(){
+            for( i = 0; i < this.state.dataArray.length; i++ ){
+                this.state.dataArray[i].checked = false;
+            }
+            this.setState({currentBalance: 0.0});
+            //console.log("Length (clear): "+ this.state.dataArray.length);
         }
 
         onClick( i ){
@@ -40,6 +49,7 @@ export default class ItemCalculator extends Component{
         }
 
     render(){
+    console.log("Rendering...");
          return(
              <View style={styles.container}>
              <Header
@@ -75,9 +85,15 @@ export default class ItemCalculator extends Component{
                 </ScrollView>
                 <View>
                     <Card containerStyle={{ marginTop: 5, marginBottom: 5, marginLeft: 5, marginRight: 5 }}>
-                        <Text style={ styles.titleText }>
-                        The current balance: ${this.state.currentBalance}
-                        </Text>
+                        <View style={{flexDirection: 'row', flex: 0}}>
+                            <Button
+                              title='Clear All'
+                              onPress={() => {this._clearAll()}}
+                            />
+                            <Text style={ styles.titleText }>
+                            The current balance: ${this.state.currentBalance}
+                            </Text>
+                        </View>
                     </Card>
                 </View>
              </View>

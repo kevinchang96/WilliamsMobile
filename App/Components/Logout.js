@@ -25,7 +25,7 @@ export default class Logout extends Component {
     async _loggedOut(){
         try{
             await AsyncStorage.setItem('isLoggedIn', '0');
-            //this.setState({buttonDisabled: true});
+            this.setState({buttonDisabled: true});
             console.log("Set pref => logged out!");
         } catch (error) {
             console.log( "An error has occurred! " + error );
@@ -57,10 +57,11 @@ export default class Logout extends Component {
 
             <Button
               title='Log Out'
+              backgroundColor={'#9678B6'} //Purple mountain majesty
               disabled={this.state.buttonDisabled}
               disabledStyle={styles.disabled}
               onPress={this._logout}
-              outline={true}
+              outline={this.state.buttonDisabled}
               />
 
          </View>
@@ -117,9 +118,8 @@ const styles = StyleSheet.create({
         height: 100,
     },
     disabled: {
-        backgroundColor: '#9678B6',
-        borderColor: '#9678B6' //Purple mountain majesty
-    },
+        backgroundColor: '#512698'
+    }
 });
 
 AppRegistry.registerComponent('Logout', () => Logout );
