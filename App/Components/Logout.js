@@ -31,10 +31,6 @@ export default class Logout extends Component {
               outline={true}
               />
 
-            <Overlay isVisible={true}>
-
-            </Overlay>
-
          </View>
         );
     }
