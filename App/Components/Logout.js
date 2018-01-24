@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, Platform, StyleSheet, Text, ScrollView, View, TextInput, TouchableHighlight } from 'react-native';
+import { AppRegistry, AsyncStorage, Platform, StyleSheet, Text, ScrollView, View, TextInput, TouchableHighlight } from 'react-native';
 import { Button, Header, Overlay } from 'react-native-elements';
 
 
@@ -13,9 +13,39 @@ export default class Logout extends Component {
     constructor(props){
             super(props);
             this.state = {
-                isVisible: false
+                isVisible: false,
+                buttonDisabled: false
             }
         }
+
+    componentDidMount(){
+        this._isLoggedIn();
+    }
+
+    async _loggedOut(){
+        try{
+            await AsyncStorage.setItem('isLoggedIn', '0');
+            this.setState({buttonDisabled: true});
+            console.log("Set pref => logged out!");
+        } catch (error) {
+            console.log( "An error has occurred! " + error );
+        }
+    }
+
+    async _isLoggedIn(){
+        try{
+            const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+            if( isLoggedIn == '1' ){
+                this.setState({buttonDisabled: false});
+                console.log("We have already logged in!");
+            } else {
+                this.setState({buttonDisabled: true});
+                console.log("We have yet to log in!");
+            }
+        } catch (error) {
+            console.log( "An error has occurred! " + error );
+        }
+    }
 
     render() {
         return (
@@ -27,6 +57,7 @@ export default class Logout extends Component {
 
             <Button
               title='Log Out'
+              disabled={this.state.buttonDisabled}
               onPress={this._logout}
               outline={true}
               />
@@ -54,8 +85,10 @@ export default class Logout extends Component {
                 if( response.status != "200" ){
                     //this.setState({isVisible: true});
                     console.log("Error");
+                } else {
+                    this._loggedOut();
                 }
-            }
+            }.bind(this)
           )
           /*.then((response) => response.text() ) // Transform the data into text
           .then((responseText) => {

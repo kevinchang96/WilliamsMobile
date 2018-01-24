@@ -22,6 +22,10 @@ export default class ItemCalculator extends Component{
             this.setState({ dataArray: LeeBeveragesList })
         }
 
+        clear(){
+            console.log("Length of array: "+this.state.dataArray.length);
+        }
+
         onClick( i ){
             this.state.dataArray[i].checked = !this.state.dataArray[i].checked;
             this.forceUpdate()
