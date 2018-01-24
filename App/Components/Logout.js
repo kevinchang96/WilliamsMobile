@@ -48,6 +48,7 @@ export default class Logout extends Component {
     }
 
     render() {
+    const { navigate } = this.props.navigation;
         return (
         <View style={styles.container}>
             <Header

@@ -59,6 +59,7 @@ export default class Login extends Component {
     }
 
     render() {
+    const { navigate } = this.props.navigation;
         return (
         <View style={styles.container}>
             <Header
@@ -66,7 +67,7 @@ export default class Login extends Component {
                     <Icon
                         name='chevron-left'
                         color='white'
-                        onPress={() => console.log(this)}/>
+                        onPress={() => this.props.navigation.goBack()}/>
                 }
                 centerComponent={{ text: 'Welcome!', style: { fontSize: 22, color: '#ffffff' } }}
                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}

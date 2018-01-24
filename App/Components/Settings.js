@@ -13,6 +13,7 @@ import Logout from './Logout';
 
 class Settings extends Component{
     render(){
+    const { navigate } = this.props.navigation;
         const settingsList = [
             {
                 name: 'About',
