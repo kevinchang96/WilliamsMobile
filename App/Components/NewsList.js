@@ -8,19 +8,9 @@ import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOp
 import { Button, Header, Icon, List, ListItem } from 'react-native-elements';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import WebViewComponent from './WebViewComponent';
-
 import EventsHelper from './EventsHelper';
 
 class NewsList extends Component{
-    static navigationOptions = {
-        drawerLabel: 'Events & News',
-        drawerIcon: ({ tintColor }) => (
-            <Icon
-                name='today'
-                color='white' />
-        ),
-    };
-
     render() {
         const { navigate } = this.props.navigation;
 
@@ -70,7 +60,7 @@ class NewsList extends Component{
                             onPress={() => this.props.navigation.navigate('DrawerToggle')} />
                     }
                     centerComponent={{ text: 'Events & News', style: { fontSize: 22, color: '#ffffff' } }}
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
 
                 <ScrollView style={styles.scrollContainer}>
                     <List containerStyle={{marginTop: 10, marginBottom: 10}}>
@@ -122,13 +112,12 @@ class NewsList extends Component{
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
         backgroundColor: '#512698', //'#DCD0FE',
     },
     scrollContainer: {
         flex: 1,
-        backgroundColor: '#DDDDDD',
+        backgroundColor: '#EEEEEE',
     },
     scrollText: {
         color: 'black',

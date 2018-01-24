@@ -4,28 +4,60 @@
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableHighlight,
-  View
-} from 'react-native';
-import { Button, FormInput, FormLabel } from 'react-native-elements';
-
+import { AppRegistry, AsyncStorage, Platform, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { Button, FormInput, Header } from 'react-native-elements';
 
 export default class Login extends Component {
-
     constructor(props){
         super(props);
         this.state = {
                 username: '',
                 password: '',
                 cookies: '',
+                text: '',
+                buttonDisabled: false
         }
     }
+
+    componentDidMount(){
+        this._isLoggedIn();
+    }
+
+    async _loggedIn(){
+        try{
+            await AsyncStorage.setItem('isLoggedIn', '1');
+            this.setState({buttonDisabled: true});
+            console.log("Set pref => logged in!");
+        } catch (error) {
+            console.log( "An error has occurred! " + error );
+        }
+    }
+
+    async _rememberMe(){
+        try{
+            await AsyncStorage.setItem('username', this.state.username);
+            await AsyncStorage.setItem('password', this.state.password);
+            console.log("Set pref => username/password!");
+        } catch (error) {
+            console.log( "An error has occurred! " + error );
+        }
+    }
+
+    async _isLoggedIn(){
+        try{
+            const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+            if( isLoggedIn == '1' ){
+                this.setState({buttonDisabled: true});
+                console.log("We have already logged in!");
+            } else {
+                this.setState({buttonDisabled: false});
+                console.log("We have yet to log in!");
+            }
+        } catch (error) {
+            console.log( "An error has occurred! " + error );
+        }
+    }
+
     someFn(x){
             return this.props.callbackFromParent(x);
     }
@@ -33,11 +65,14 @@ export default class Login extends Component {
     render() {
         return (
         <View style={styles.container}>
-            <View style={styles.title}>
-                <FormLabel>Log In</FormLabel>
-            </View>
+            <Header
+                 centerComponent={{ text: 'Welcome!', style: { fontSize: 22, color: '#ffffff' } }}
+                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+             />
 
             <View style={styles.container}>
+                <Text>{this.state.text}</Text>
+
                 <FormInput
                     value={this.state.username}
                     placeholder='Username'
@@ -54,6 +89,8 @@ export default class Login extends Component {
 
                 <Button
                   title='Submit'
+                  disabled={this.state.buttonDisabled}
+                  disabledStyle={styles.disabled}
                   onPress={this._submitForm}
                   outline={true} />
             </View>
@@ -63,10 +100,9 @@ export default class Login extends Component {
 
     _submitForm = () => {
         const {username,password,cookies} = this.state
-        // Other stuff
-        console.log("State information: " + JSON.stringify(this.state));
-        console.log("Username: "+ username);
-        console.log("Password: "+ password);
+        //console.log("State information: " + JSON.stringify(this.state));
+        //console.log("Username: "+ username);
+        //console.log("Password: "+ password);
 
         // Get form parameters
         fetch('https://wso.williams.edu/account/login', {
@@ -75,35 +111,28 @@ export default class Login extends Component {
           .then((response) => response.text() ) // Transform the data into text
           .then((responseText) => {
           // Parse the text here
-             console.log(responseText);
+             //console.log(responseText);
              var DOMParser = require('react-native-html-parser').DOMParser;
 
              let doc = new DOMParser().parseFromString(responseText,'text/html');
              var input = doc.getElementsByTagName("input");
-             console.log("Tags: " + input);
+             //console.log("Tags: " + input);
              var paramList = [input.length];
              for( i = 0; i < input.length; i++ ){
                 // Iterate through parameters
                 var key = input[i].getAttribute("name");
                 var value = input[i].getAttribute("value");
 
-                if( key == 'username' )
-                    value = username;
-                else if( key == 'password' )
-                    value = password;
+                if( key == 'username' ){ value = username; }
+                else if( key == 'password' ){ value = password; }
 
                 paramList[i] = key + "=" + encodeURIComponent(value);
-
                 console.log("Attr: " +input[i]);
              }
              var result = '';
-
              for( i = 0; i < paramList.length; i++ ){
-                if( result.length == 0 ){
-                    result = result + paramList[i];
-                } else {
-                    result = result + '&' + paramList[i];
-                }
+                if( result.length == 0 ){ result = result + paramList[i]; }
+                else { result = result + '&' + paramList[i]; }
              }
              console.log( "Result: " + result + "\nContent length: " + result.length );
              this._loginPost(result);
@@ -131,22 +160,27 @@ export default class Login extends Component {
            })
            .then(
             function(response) {
-               console.log(response.headers);
+               //console.log(response.headers);
                //console.log(response.headers.get("set-cookie"));
                var setCookies = response.headers.get("set-cookie");
-               console.log( "Set-Cookies: " + setCookies );
-               this.setState( {cookies: setCookies} );
+               //console.log( "Set-Cookies: " + setCookies );
 
-                /*Cookie.get('https://wso.williams.edu/',
-                '_WSOonRails_session').then((cookie) => this.someFn(cookie));*/
+               this.setState( {cookies: setCookies, text: ""} );
+               this._loggedIn();
+               this._rememberMe();
+               /*if( setCookies.startsWith("_WSOonRails") ){
+                // Correct login attempt
+                this.setState( {cookies: setCookies, text: ""} );
+                this._loggedIn();
+                this._rememberMe();
+               } else {
+                // Incorrect login attempt
+                this.setState({text: "Incorrect username or password! Please try again."});
+               }*/
 
-               console.log("State information: " + JSON.stringify(this.state));
+               //console.log("State information: " + JSON.stringify(this.state));
             }.bind(this)
            )
-           /*.then( (response) => response.text() )
-           .then( responseText => {
-                console.log(responseText);
-           })*/
        .catch((error) => {
           console.error(error);
        });
@@ -166,6 +200,10 @@ const styles = StyleSheet.create({
     icon: {
         width: 100,
         height: 100,
+    },
+    disabled: {
+        backgroundColor: '#9678B6',
+        borderColor: '#9678B6' //Purple mountain majesty
     },
 });
 

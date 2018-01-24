@@ -14,7 +14,7 @@ export default class About extends Component{
         drawerIcon: ({ tintColor }) => (
             <Icon
                 name='info'
-                color='white' />
+                color={tintColor} />
         ),
     };
 
@@ -35,19 +35,19 @@ export default class About extends Component{
               role: 'Co-leader/Lead Back-End Engineer',
             },{
               name: 'William Fung',
-              role: 'Mobile Engineer - Forecast',
+              role: 'Mobile Engineer',
             },{
               name: 'Dysron Marshall',
-              role: 'Mobile Engineer - Factrack',
+              role: 'Mobile Engineer',
             },{
               name: 'Grace Mazzarella',
-              role: 'Mobile Engineer - Weather',
+              role: 'Mobile Engineer',
             },{
               name: 'Alex Taylor',
-              role: 'Mobile Engineer - Facebook',
+              role: 'Mobile Engineer',
             },{
               name: 'Nambi Williams',
-              role: 'Mobile Engineer - Daily Messages',
+              role: 'Mobile Engineer',
             },{
               name: 'Professor Jeannie Albrecht',
               role: 'Advisor',
@@ -65,10 +65,10 @@ export default class About extends Component{
                         />
                     }
                     centerComponent={{ text: 'About', style: { fontSize: 22, color: '#ffffff' } }}
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45, marginBottom: 20}} />
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45, marginBottom: 0}} />
 
                 <ScrollView style={styles.scrollContainer}>
-                    <List containerStyle={{ marginTop: 0, marginBottom: 10 }}>
+                    <List containerStyle={{ marginTop: 10, marginBottom: 0 }}>
                       {
                         infoList.map((l, i) => (
                           <ListItem
@@ -81,7 +81,7 @@ export default class About extends Component{
                       }
                     </List>
 
-                    <List containerStyle={{ marginTop: 0, marginBottom: 10 }}>
+                    <List containerStyle={{ marginTop: 10, marginBottom: 0 }}>
                       {
                         workerList.map((l, i) => (
                           <ListItem

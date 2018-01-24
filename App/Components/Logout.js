@@ -4,30 +4,65 @@
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableHighlight
-} from 'react-native';
-
-import { Button } from 'react-native-elements';
+import { AppRegistry, AsyncStorage, Platform, StyleSheet, Text, ScrollView, View, TextInput, TouchableHighlight } from 'react-native';
+import { Button, Header, Overlay } from 'react-native-elements';
 
 
 export default class Logout extends Component {
 
+    constructor(props){
+            super(props);
+            this.state = {
+                isVisible: false,
+                buttonDisabled: false
+            }
+        }
+
+    componentDidMount(){
+        this._isLoggedIn();
+    }
+
+    async _loggedOut(){
+        try{
+            await AsyncStorage.setItem('isLoggedIn', '0');
+            //this.setState({buttonDisabled: true});
+            console.log("Set pref => logged out!");
+        } catch (error) {
+            console.log( "An error has occurred! " + error );
+        }
+    }
+
+    async _isLoggedIn(){
+        try{
+            const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+            if( isLoggedIn == '1' ){
+                this.setState({buttonDisabled: false});
+                console.log("We have already logged in!");
+            } else {
+                this.setState({buttonDisabled: true});
+                console.log("We have yet to log in!");
+            }
+        } catch (error) {
+            console.log( "An error has occurred! " + error );
+        }
+    }
+
     render() {
         return (
-        <View
-        paddingTop={20}>
+        <View style={styles.container}>
+            <Header
+                 centerComponent={{ text: 'Goodbye', style: { fontSize: 22, color: '#ffffff' } }}
+                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+             />
+
             <Button
               title='Log Out'
+              disabled={this.state.buttonDisabled}
+              disabledStyle={styles.disabled}
               onPress={this._logout}
               outline={true}
               />
+
          </View>
         );
     }
@@ -48,7 +83,13 @@ export default class Logout extends Component {
           .then(
             function(response) {
             console.log(response.headers);
-            }
+                if( response.status != "200" ){
+                    //this.setState({isVisible: true});
+                    console.log("Error");
+                } else {
+                    this._loggedOut();
+                }
+            }.bind(this)
           )
           /*.then((response) => response.text() ) // Transform the data into text
           .then((responseText) => {
@@ -60,5 +101,25 @@ export default class Logout extends Component {
           });
     };
 }
+
+const styles = StyleSheet.create({
+    title: {
+        backgroundColor: '#512698',
+        alignItems: 'center',
+    },
+    container: {
+        paddingTop: Platform.OS === 'ios' ? 20 : 0,
+        flex: 1,
+        backgroundColor: '#512698',
+    },
+    icon: {
+        width: 100,
+        height: 100,
+    },
+    disabled: {
+        backgroundColor: '#9678B6',
+        borderColor: '#9678B6' //Purple mountain majesty
+    },
+});
 
 AppRegistry.registerComponent('Logout', () => Logout );

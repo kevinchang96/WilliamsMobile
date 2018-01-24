@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
-import { Avatar, Button, CheckBox, Header, Icon, List, ListItem } from 'react-native-elements';
-import LeesMealsList from './LeesMealsList.json';
-import LeesAlaCarteList from './LeesAlaCarteList.json';
-import LeesBeveragesList from './LeesBeveragesList.json';
-//import LeesDessertsList from './LeesDessertsList.json';
+import { Avatar, Button, Card, CheckBox, Header, Icon, List, ListItem } from 'react-native-elements';
+import LeeMealsList from './LeeMealsList.json';
+import LeeAlaCarteList from './LeeAlaCarteList.json';
+import LeeBeveragesList from './LeeBeveragesList.json';
+import LeeDessertsList from './LeeDessertsList.json';
 
 export default class ItemCalculator extends Component{
 
     constructor(props){
             super(props);
             this.state=
-            { currentBalance: 0.0, dataArray: [] };
+            { currentBalance: 0.0, dataArray: [], fontColor: 'green' };
         }
 
         componentDidMount(){
@@ -19,7 +19,11 @@ export default class ItemCalculator extends Component{
         }
 
         loadData(){
-            this.setState({ dataArray: LeesBeveragesList })
+            this.setState({ dataArray: LeeBeveragesList })
+        }
+
+        clear(){
+            console.log("Length of array: "+this.state.dataArray.length);
         }
 
         onClick( i ){
@@ -29,24 +33,13 @@ export default class ItemCalculator extends Component{
 
         updatePrice( isChecked, price ){
             if( isChecked ){
-                this.setState({currentBalance: this.state.currentBalance + price})
+                this.setState({currentBalance: Math.round((this.state.currentBalance + price)*100)/100})
             } else {
-                this.setState({currentBalance: this.state.currentBalance - price})
+                this.setState({currentBalance: Math.round((this.state.currentBalance - price)*100)/100})
             }
         }
 
     render(){
-
-        const WhitmansList = [
-            {
-                name: '',
-                description: ''
-            },{
-                name: '',
-                description: ''
-            }
-        ]
-
          return(
              <View style={styles.container}>
              <Header
@@ -60,13 +53,13 @@ export default class ItemCalculator extends Component{
                       <Image source={require('../Assets/williams2.png')}
                       style={{width: 173, height: 30}} />
                   }
-                  outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
-            <ScrollView>
+                  outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
+            <ScrollView styles={styles.scrollContainer}>
             <Header
              centerComponent={{ text: 'A la Carte', style: { fontSize: 22, color: '#ffffff' } }}
              outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
 
-                <List containerStyle={{ marginTop: 10, marginBottom: 0 }}>
+                <List containerStyle={{ marginTop: 5, marginBottom: 5 }}>
                    {
                      this.state.dataArray.map((l, i) => (
                        <CheckBox
@@ -80,7 +73,13 @@ export default class ItemCalculator extends Component{
                    }
                  </List>
                 </ScrollView>
-                <View><Text style={{borderRadius: 15, marginBottom: 15}}>The current balance: ${this.state.currentBalance}</Text></View>
+                <View>
+                    <Card containerStyle={{ marginTop: 5, marginBottom: 5, marginLeft: 5, marginRight: 5 }}>
+                        <Text style={ styles.titleText }>
+                        The current balance: ${this.state.currentBalance}
+                        </Text>
+                    </Card>
+                </View>
              </View>
          );
     }
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
 //        justifyContent: 'center',
-        backgroundColor: '#DDDDDD', //'#DCD0FE',
+        backgroundColor: '#EEEEEE', //'#DCD0FE',
     },
     scrollContainer: {
         flex: 1,
@@ -100,23 +99,13 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 18,
     },
-    btn: {
-//        position: 'absolute',
-//        right: 25,
-//        bottom: 25,
-        borderRadius: 30,
-        width: 60,
-        height: 60,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.7)',
-//        padding: 15
-    },
-    btnImage:
+    titleText:
     {
-        resizeMode: 'contain',
-        width: '100%',
-        tintColor: 'white'
+        fontSize: 20,
+        fontWeight: 'bold',
+        borderRadius: 5,
+        marginBottom: 5,
+        color: 'black'
     }
 
 });

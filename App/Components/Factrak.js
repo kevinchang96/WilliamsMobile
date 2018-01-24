@@ -4,21 +4,13 @@
  */
 
 import React, { Component } from 'react';
-import {
-    AppRegistry,
-    Platform,
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    TouchableOpacity,
-    ImageBackground,
-    ScrollView,
-    Button
-    } from 'react-native';
+import { Alert, AppRegistry, AsyncStorage, Platform, StyleSheet, Text, View} from 'react-native';
 import SuggestionCard from './SuggestionCard';
 import FactrakCommentWindow from './FactrakCommentWindow';
-import {StackNavigator, NavigationActions} from 'react-navigation';
+import {StackNavigator} from 'react-navigation';
+import { FormInput, List } from 'react-native-elements';
+import Login from './Login';
+
 
 export class Factrak extends Component{
 
@@ -29,7 +21,8 @@ export class Factrak extends Component{
                         suggestions: [],        // array of suggestion cards
                         html: "",               // html text to be converted into document object
                         renderComments: false,  // indicates whether to render comments or not
-                        title: ""               // name of the course/professor
+                        title: "",               // name of the course/professor
+                        showText: <View></View>
         };
     }
 
@@ -37,10 +30,8 @@ export class Factrak extends Component{
         if(this.state.renderComments){              // a check for dead links/unsuccessful requests
             this.setState({renderComments:false});
             // send html to comment window
-            this.props.navigation.navigate('FactrakCommentWindow',{
-                                                                    html : this.state.html,
-                                                                    title : this.state.title
-                                                                  });
+            this.props.navigation.navigate('FactrakCommentWindow',
+                {html : this.state.html, title : this.state.title});
         }
     }
 
@@ -61,6 +52,22 @@ export class Factrak extends Component{
                     this.setState({renderComments : true});
                 });
             });
+    }
+
+    async checkIfLoggedIn(){
+        try{
+            const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+            if( isLoggedIn != '1' ){
+                console.log("We have yet to log in!");
+                this.setState({showText:
+                                <Text style={{textAlign:'center'}}>You must log in first</Text>});
+            }
+                console.log(isLoggedIn);
+                console.log(this);
+        } catch (error) {
+            console.log( "An error has occurred! " + error );
+        }
+
     }
 
     handleSelection = (type,title,id) => {
@@ -106,14 +113,18 @@ export class Factrak extends Component{
         return(
             <View style={styles.container}>
                 <View style={styles.searchBox}>
-                    <TextInput
+                    <FormInput
                         onChangeText={(text) => this.getSuggestions(text)}
                         placeholder="Search for a professor or course..."
                         autoCorrect={false}
+                        onFocus={() => this.checkIfLoggedIn()}
                     />
                 </View>
+                {this.state.showText}
                 <View style={styles.suggestionsContainer}>
-                    {this.state.suggestions}
+                    <List>
+                        {this.state.suggestions}
+                    </List>
                 </View>
             </View>
         );

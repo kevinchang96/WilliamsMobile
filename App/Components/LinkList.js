@@ -10,15 +10,6 @@ import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import WebViewComponent from './WebViewComponent';
 
 class LinkList extends Component{
-    static navigationOptions = {
-        drawerLabel: 'Links',
-        drawerIcon: ({ tintColor }) => (
-            <Icon
-                name='link'
-                color='white' />
-        ),
-    };
-
     render() {
         const { navigate } = this.props.navigation;
         const resourceList = [
@@ -78,7 +69,7 @@ class LinkList extends Component{
                         />
                     }
                     centerComponent={{ text: 'Links', style: { fontSize: 22, color: '#ffffff' } }}
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
 
                 <ScrollView style={styles.scrollContainer}>
                     <List containerStyle={{marginTop: 10, marginBottom: 0}}>
@@ -129,9 +120,8 @@ const LinkNavigator = StackNavigator({
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
-        backgroundColor: '#DDDDDD',
+        backgroundColor: '#EEEEEE',
     },
     scrollContainer: {
         flex: 1,

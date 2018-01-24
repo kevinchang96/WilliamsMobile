@@ -11,15 +11,6 @@ import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import ItemCalculator from './ItemCalculator';
 
 class DiningList extends Component{
-    static navigationOptions = {
-        drawerLabel: 'Dining',
-        drawerIcon: ({ tintColor }) => (
-            <Icon
-                name='local-dining'
-                color='white' />
-        ),
-    };
-
     constructor(props){
         super(props);
     }
@@ -84,15 +75,16 @@ class DiningList extends Component{
 
          return(
              <View style={styles.container}>
-                 <Header
-                    leftComponent={
-                        <Icon
-                            name='menu'
-                            color='white'
-                            onPress={() => this.props.navigation.navigate('DrawerOpen')} />
-                    }
-                     centerComponent={{ text: 'Dining', style: { fontSize: 22, color: '#ffffff' } }}
-                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
+                  <Header
+                      leftComponent={
+                          <Icon
+                              name='menu'
+                              color='white'
+                              onPress={() => this.props.navigation.navigate('DrawerToggle')} />
+                      }
+                      centerComponent={{ text: 'Dining', style: { fontSize: 22, color: '#ffffff' } }}
+                      outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
+                  />
 
                  <ScrollView style={styles.scrollContainer}>
                      <List containerStyle={{ marginTop: 10, marginBottom: 0 }}>
@@ -112,7 +104,7 @@ class DiningList extends Component{
                        {
                          snackBarList.map((l, i) => (
                            <ListItem
-                             avatar={<Icon name='exposure' />}
+                             avatar={<Icon name='monetization-on' />}
                              key={i}
                              title={l.name}
                              onPress={() => navigate(l.screen)}
@@ -148,7 +140,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
 //        justifyContent: 'center',
-        backgroundColor: '#DDDDDD', //'#DCD0FE',
+        backgroundColor: '#EEEEEE' //'#DCD0FE',
     },
     scrollContainer: {
         flex: 1,

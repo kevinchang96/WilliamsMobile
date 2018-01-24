@@ -14,16 +14,6 @@ import Facebook from '../Components/Facebook';
 import Factrak from '../Components/Factrak';
 
 class WSO extends Component{
-    static navigationOptions = {
-        drawerLabel: 'WSO',
-        drawerIcon: ({ tintColor }) => (
-            <Icon
-                name='language'
-                color='white' />
-        ),
-    };
-
-
     constructor(props){
         super(props);
         this.state=
@@ -38,87 +28,90 @@ class WSO extends Component{
     }
 
     componentDidMount(){
-        var html = '';
         fetch('https://wso.williams.edu/', {method: 'GET'})
         .then( (response) => response.text() )
         .then( (responseText) => {
             const parts = responseText.split('center');
+            // Ill-formed html; must add single quotes
             const html = parts[0] + "\'center\'" + parts[1];
-
-            var DOMParser = require('react-native-html-parser').DOMParser;
-            let doc = new DOMParser({errorHandler:{warning:function(w){console.warn(w)},error:function(w){console.log(w)},fatalError:function(w){console.log(w)}}}).parseFromString(html,'text/html');
-            var input = doc.getElementsByTagName("section");
-            const links = input.item(0).getElementsByTagName("a");
-            console.log("Size: "+ links.item(0).attributes.item(0).value);
-            var size = links.length;
-            var temp = [5];
-            for( var i = 1; i < 6; i++ ){
-                var discussions = {
-                    link: links.item(i).attributes.item(0).value,
-                    text: links.item(i).textContent,
-                    screen: 'WebViewPost'
-                };
-                temp[i-1] = discussions;
-            };
-            var temp1 = [5];
-            for( var i = 7; i < 12; i++ ){
-                var announcements = {
-                    link: links.item(i).attributes.item(0).value,
-                    text: links.item(i).textContent,
-                    screen: 'WSOPost'
-                };
-                temp1[i-7] = announcements;
-            };
-            var temp2 = [5];
-            for( var i = 13; i < 18; i++ ){
-                var exchanges = {
-                    link: links.item(i).attributes.item(0).value,
-                    text: links.item(i).textContent,
-                    screen: 'WSOPost'
-                };
-                temp2[i-13] = exchanges;
-            };
-            var temp3 = [5];
-            for( var i = 19; i < 24; i++ ){
-                var lostNfound = {
-                    link: links.item(i).attributes.item(0).value,
-                    text: links.item(i).textContent,
-                    screen: 'WSOPost'
-                };
-                temp3[i-19] = lostNfound;
-            };
-            var temp4 = [5];
-            for( var i = 25; i < 30; i++ ){
-                var jobs = {
-                    link: links.item(i).attributes.item(0).value,
-                    text: links.item(i).textContent,
-                    screen: 'WSOPost'
-                };
-                temp4[i-25] = jobs;
-            };
-            let temp5 = [5];
-            for( var i = 31; i < 35; i++ ){
-                var rides = {
-                    link: links.item(i).attributes.item(0).value,
-                    text: links.item(i).textContent
-                };
-                temp5[i-31] = rides;
-            };
-            this.setState(
-                {
-                    discussions: temp,
-                    announcements: temp1,
-                    exchanges: temp2,
-                    lostNfound: temp3,
-                    jobs: temp4,
-                    rides: temp5
-                }
-            );
-        }
-        )
+            this._getInfo(html);
+        })
         .catch((error) => {
              console.error(error);
-          });
+        });
+    }
+
+    _getInfo = ( html ) => {
+        var DOMParser = require('react-native-html-parser').DOMParser;
+                    let doc = new DOMParser({errorHandler:{warning:function(w){console.warn(w)},error:function(w){console.log(w)},fatalError:function(w){console.log(w)}}}).parseFromString(html,'text/html');
+                    var input = doc.getElementsByTagName("section");
+                    const links = input.item(0).getElementsByTagName("a");
+                    console.log("Size: "+ links.item(0).attributes.item(0).value);
+                    var size = links.length;
+                    var temp = [5];
+                    for( var i = 1; i < 6; i++ ){
+                        var discussions = {
+                            link: links.item(i).attributes.item(0).value,
+                            text: links.item(i).textContent,
+                            screen: 'WebViewPost'
+                        };
+                        temp[i-1] = discussions;
+                    };
+                    var temp1 = [5];
+                    for( var i = 7; i < 12; i++ ){
+                        var announcements = {
+                            link: links.item(i).attributes.item(0).value,
+                            text: links.item(i).textContent,
+                            screen: 'WSOPost'
+                        };
+                        temp1[i-7] = announcements;
+                    };
+                    var temp2 = [5];
+                    for( var i = 13; i < 18; i++ ){
+                        var exchanges = {
+                            link: links.item(i).attributes.item(0).value,
+                            text: links.item(i).textContent,
+                            screen: 'WSOPost'
+                        };
+                        temp2[i-13] = exchanges;
+                    };
+                    var temp3 = [5];
+                    for( var i = 19; i < 24; i++ ){
+                        var lostNfound = {
+                            link: links.item(i).attributes.item(0).value,
+                            text: links.item(i).textContent,
+                            screen: 'WSOPost'
+                        };
+                        temp3[i-19] = lostNfound;
+                    };
+                    var temp4 = [5];
+                    for( var i = 25; i < 30; i++ ){
+                        var jobs = {
+                            link: links.item(i).attributes.item(0).value,
+                            text: links.item(i).textContent,
+                            screen: 'WSOPost'
+                        };
+                        temp4[i-25] = jobs;
+                    };
+                    let temp5 = [5];
+                    for( var i = 31; i < 35; i++ ){
+                        var rides = {
+                            link: links.item(i).attributes.item(0).value,
+                            text: links.item(i).textContent,
+                            screen: 'WebViewPost'
+                        };
+                        temp5[i-31] = rides;
+                    };
+                    this.setState(
+                        {
+                            discussions: temp,
+                            announcements: temp1,
+                            exchanges: temp2,
+                            lostNfound: temp3,
+                            jobs: temp4,
+                            rides: temp5
+                        }
+                    );
     }
 
     render(){
@@ -132,22 +125,24 @@ class WSO extends Component{
                          color='white'
                          onPress={() => this.props.navigation.navigate('DrawerToggle')} />
                  }
-                 centerComponent={{ text: 'WSO', style: { fontSize: 22, color: '#ffffff' } }}
-                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+                 centerComponent={{ text: 'W S O', style: { fontSize: 22, color: '#ffffff' } }}
+                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
              />
 
              <ScrollView>
                  <Button
                      raised
-                     title={`Factrak`}
-                     buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                     onPress={() => navigate('Factrak')} />
+                     title='Facebook'
+                     icon={{name: 'portrait'}}
+                     buttonStyle={styles.buttonStyle}
+                     onPress={() => navigate('Facebook')} />
 
                  <Button
                      raised
-                     title={`Facebook`}
-                     buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                     onPress={() => navigate('Facebook')} />
+                     title='Factrak'
+                     icon={{name: 'thumbs-up-down'}}
+                     buttonStyle={styles.buttonStyle}
+                     onPress={() => navigate('Factrak')} />
 
                  <Card title='Discussions'
                      containerStyle={{padding: 10}}>
@@ -158,13 +153,14 @@ class WSO extends Component{
                              key={i}
                              title={u.text}
                              hideChevron={true}
-                             onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, name: 'Announcements'})} }
+                             onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link})} }
                           />
                          );
                      })
                    }
                    <ListItem
                      rightTitle='More'
+                     onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/discussions"})} }
                    />
                  </Card>
 
@@ -276,10 +272,9 @@ class WSO extends Component{
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#DDDDDD', //'#DCD0FE',
+        backgroundColor: '#EEEEEE', //'#DCD0FE',
     },
     scrollContainer: {
         flex: 1,
@@ -288,17 +283,13 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 18,
     },
-    btn: {
-//        position: 'absolute',
-//        right: 25,
-//        bottom: 25,
-        borderRadius: 30,
-        width: 60,
-        height: 60,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.7)',
-//        padding: 15
+    buttonStyle: {
+        borderRadius: 0,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 5,
+        marginBottom: 5,
+        backgroundColor: '#512698'
     },
     btnImage: {
         resizeMode: 'contain',
