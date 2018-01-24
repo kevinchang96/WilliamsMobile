@@ -1,3 +1,8 @@
+/**
+ * Alex Taylor
+ * (c) 01/2018
+ */
+
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -5,25 +10,19 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Text,
   View
 } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Button, Text, Thumbnail, Icon, Left, Body } from 'native-base';
+import { Card, ListItem, Button } from 'react-native-elements'
 
 export default class StudentCard extends Component{
 
     render(){
         return(
         <TouchableOpacity>
-            <Card style={{flex: 0}}>
-            <CardItem>
-              <Left>
-                <Thumbnail source={{uri: this.props.img}} />
-                <Body>
-                  <Text>{this.props.name}</Text>
-                  <Text note>Unix: {this.props.unix}</Text>
-                </Body>
-              </Left>
-            </CardItem>
+            <Card avatar = {{uri: this.props.img}}>
+                <Text>{this.props.name}</Text>
+                <Text note>Unix: {this.props.unix}</Text>
             </Card>
         </TouchableOpacity>
         );
