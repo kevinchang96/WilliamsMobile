@@ -43,7 +43,7 @@ export default class WSOPost extends Component{
 
     render(){
          return(
-             <View>
+             <View style={{paddingTop:20}}>
                  <Card title={this.props.navigation.state.params.name}
                      containerStyle={{padding: 10}}>
                    {

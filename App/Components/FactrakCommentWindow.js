@@ -139,11 +139,6 @@ export default class FactrakCommentWindow extends Component{
 }
 
 export class FactrakComment extends Component{
-    // need to use the href value for the component to simulate actions
-    // if length > 140, lastSpace = response.lastIndexOf(' ',140)
-    // truncatedResponse = response.slice(0,lastSpace) + '...';
-    // set truncated prop to true
-    // read more : npm i react-native-read-more-text --save
     render(){
         return(
             <Card title={this.props.title}>

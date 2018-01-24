@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const dm = () => ( <EventsHelper /> );
+const dm = ({navigation}) => ( <EventsHelper navigation={navigation}/> );
 
 const events = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 

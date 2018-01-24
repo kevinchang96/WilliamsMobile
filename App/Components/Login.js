@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, AsyncStorage, Platform, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
-import { Button, FormInput, Header } from 'react-native-elements';
+import { Button, FormInput, Header, Icon} from 'react-native-elements';
 
 export default class Login extends Component {
     constructor(props){
@@ -58,16 +58,18 @@ export default class Login extends Component {
         }
     }
 
-    someFn(x){
-            return this.props.callbackFromParent(x);
-    }
-
     render() {
         return (
         <View style={styles.container}>
             <Header
-                 centerComponent={{ text: 'Welcome!', style: { fontSize: 22, color: '#ffffff' } }}
-                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+                leftComponent={
+                    <Icon
+                        name='chevron-left'
+                        color='white'
+                        onPress={() => console.log(this)}/>
+                }
+                centerComponent={{ text: 'Welcome!', style: { fontSize: 22, color: '#ffffff' } }}
+                outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
              />
 
             <View style={styles.container}>
