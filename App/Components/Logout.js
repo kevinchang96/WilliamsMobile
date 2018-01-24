@@ -4,21 +4,37 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, Platform, StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
-import { Button } from 'react-native-elements';
+import { AppRegistry, Platform, StyleSheet, Text, ScrollView, View, TextInput, TouchableHighlight } from 'react-native';
+import { Button, Header, Overlay } from 'react-native-elements';
 
 
 export default class Logout extends Component {
 
+    constructor(props){
+            super(props);
+            this.state = {
+                isVisible: false
+            }
+        }
+
     render() {
         return (
-        <View
-        paddingTop={20}>
+        <View style={styles.container}>
+            <Header
+                 centerComponent={{ text: 'Goodbye', style: { fontSize: 22, color: '#ffffff' } }}
+                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+             />
+
             <Button
               title='Log Out'
               onPress={this._logout}
               outline={true}
               />
+
+            <Overlay isVisible={true}>
+
+            </Overlay>
+
          </View>
         );
     }
@@ -38,7 +54,11 @@ export default class Logout extends Component {
           })
           .then(
             function(response) {
-            //console.log(response.headers);
+            console.log(response.headers);
+                if( response.status != "200" ){
+                    //this.setState({isVisible: true});
+                    console.log("Error");
+                }
             }
           )
           /*.then((response) => response.text() ) // Transform the data into text
@@ -51,5 +71,21 @@ export default class Logout extends Component {
           });
     };
 }
+
+const styles = StyleSheet.create({
+    title: {
+        backgroundColor: '#512698',
+        alignItems: 'center',
+    },
+    container: {
+        paddingTop: Platform.OS === 'ios' ? 20 : 0,
+        flex: 1,
+        backgroundColor: '#512698',
+    },
+    icon: {
+        width: 100,
+        height: 100,
+    },
+});
 
 AppRegistry.registerComponent('Logout', () => Logout );

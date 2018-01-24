@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
-import { Button, FormInput, FormLabel } from 'react-native-elements';
+import { Button, FormInput, Header } from 'react-native-elements';
 
 export default class Login extends Component {
     constructor(props){
@@ -23,9 +23,10 @@ export default class Login extends Component {
     render() {
         return (
         <View style={styles.container}>
-            <View style={styles.title}>
-                <FormLabel>Log In</FormLabel>
-            </View>
+            <Header
+                 centerComponent={{ text: 'Welcome!', style: { fontSize: 22, color: '#ffffff' } }}
+                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+             />
 
             <View style={styles.container}>
                 <FormInput
@@ -113,10 +114,10 @@ export default class Login extends Component {
            })
            .then(
             function(response) {
-               //console.log(response.headers);
+               console.log(response.headers);
                //console.log(response.headers.get("set-cookie"));
                var setCookies = response.headers.get("set-cookie");
-               //console.log( "Set-Cookies: " + setCookies );
+               console.log( "Set-Cookies: " + setCookies );
                this.setState( {cookies: setCookies} );
                //console.log("State information: " + JSON.stringify(this.state));
             }.bind(this)

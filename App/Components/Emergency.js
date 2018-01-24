@@ -1,10 +1,10 @@
 /**
- * David Ariyibi
+ * David Ariyibi, Kevin Chang
  * (c) 01/2018
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { AppRegistry, Image, Linking, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Header, Icon, List, ListItem } from 'react-native-elements';
 
 export default class Emergency extends Component{
@@ -17,23 +17,32 @@ export default class Emergency extends Component{
         ),
     };
 
+    _call = ( phone ) => {
+        Linking.openURL( phone ).catch(err => console.error('An error occurred', err))
+    }
+
     render() {
         const emergencyList = [
             {
               name: "Police, Ambulance, Fire",
-              number: '413-458-5646'
+              number: '413-458-5646',
+              phone: 'tel:4134585646'
             },{
               name: "Campus Safety & Security: Emergency",
-              number: '413-597-3551'
+              number: '413-597-3551',
+              phone: 'tel:4135973551'
             },{
               name: "Campus Safety & Security: Non-Emergency",
-              number: '413-597-4444'
+              number: '413-597-4444',
+              phone: 'tel:4135974444'
             },{
               name: "RASAN - Rape & Sexual Assault Network",
-              number: '413-597-4100'
+              number: '413-597-4100',
+              phone: 'tel:4135974100'
             },{
               name: "Student Escort Service",
-              number: '413-597-4400'
+              number: '413-597-4400',
+              phone: 'tel:4135974400'
             }
         ]
         return(
@@ -61,6 +70,7 @@ export default class Emergency extends Component{
                             title={l.name}
                             subtitle={l.number}
                             rightIcon={{name: 'call'}}
+                            onPress={() => {this._call( l.phone )} }
                           />
                         ))
                       }
