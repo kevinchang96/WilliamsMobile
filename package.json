@@ -12,6 +12,7 @@
     "react-native": "0.51.0",
     "react-native-animatable": "^1.2.4",
     "react-native-cookie": "^0.2.0",
+    "react-native-dropdown-menu": "^1.1.0",
     "react-native-elements": "^0.19.0",
     "react-native-html-parser": "0.0.5",
     "react-native-read-more-text": "^1.0.0",

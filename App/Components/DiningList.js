@@ -7,10 +7,20 @@ import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar, Button, Header, Icon, List, ListItem } from 'react-native-elements';
 import WebViewComponent from './WebViewComponent';
+import DiningGrabber from './DiningGrabber';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import ItemCalculator from './ItemCalculator';
 
 class DiningList extends Component{
+    static navigationOptions = {
+        drawerLabel: 'Dining',
+        drawerIcon: ({ tintColor }) => (
+            <Icon
+                name='restaurant'
+                color={tintColor} />
+        ),
+    };
+
     constructor(props){
         super(props);
     }
@@ -23,31 +33,37 @@ class DiningList extends Component{
              name: "Whitmans' Marketplace",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S211&date=today',
              screen: 'WebViewPost',
+             icon: <Icon name='local-dining' />
            },{
              id: '3',
              name: "Driscoll",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S3&date=today',
              screen: 'WebViewPost',
+             icon: <Icon name='local-dining' />
            },{
              id: '5',
              name: "Mission",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S5&date=today',
              screen: 'WebViewPost',
+             icon: <Icon name='local-dining' />
            },{
              id: '14',
              name: "Eco Cafe",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S14&date=today',
              screen: 'WebViewPost',
+             icon: <Icon name='directions-run' />
            },{
              id: '23',
              name: "Grab n Go",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S23&date=today',
              screen: 'WebViewPost',
+             icon: <Icon name='directions-run' />
            },{
              id: '25',
              name: "'82 Grill",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S25&date=today',
              screen: 'WebViewPost',
+             icon: <Icon name='whatshot' />
            }
          ]
 
@@ -92,7 +108,7 @@ class DiningList extends Component{
                        {
                          diningHallList.map((l, i) => (
                            <ListItem
-                             avatar={<Icon name='local-dining' />}
+                             avatar={l.icon}
                              key={i}
                              title={l.name}
                              onPress={() => {navigate(l.screen,{url: l.url})} }
@@ -171,7 +187,7 @@ const styles = StyleSheet.create({
 
 });
 
-const webViewPost = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+const webViewPost = ({navigation}) => ( <DiningGrabber navigation={navigation}/> );
 
 const itemCalculator = () => ( <ItemCalculator /> );
 

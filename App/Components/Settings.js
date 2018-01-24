@@ -15,7 +15,7 @@ class Settings extends Component{
     render(){
         const settingsList = [
             {
-                name: 'About App',
+                name: 'About',
                 screen: 'About',
                 icon: <Icon name='info' />
             },{

@@ -91,7 +91,7 @@ export default class ItemCalculator extends Component{
                               onPress={() => {this._clearAll()}}
                             />
                             <Text style={ styles.titleText }>
-                            The current balance: ${this.state.currentBalance}
+                                Current amount: ${this.state.currentBalance}
                             </Text>
                         </View>
                     </Card>

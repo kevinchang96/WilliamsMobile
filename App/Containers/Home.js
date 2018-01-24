@@ -62,7 +62,7 @@ class HomeScreen extends Component {
                 />
 
                 <ScrollView style={styles.scrollContainer}>
-                    <Card containerStyle={{padding: 0}}
+                    <Card
                         title='WEATHER'
                         image={require('../Assets/weather-week-report.png')}>
                         <Button
@@ -77,7 +77,7 @@ class HomeScreen extends Component {
                         title="TODAY'S MENU"
                         image={require('../Assets/cutlery.png')}>
                         <Button
-                            icon={{name: 'local-dining'}}
+                            icon={{name: 'restaurant'}}
                             backgroundColor='#512698'
                             onPress={() => {this.props.navigation.navigate('DiningList')}}
                             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}

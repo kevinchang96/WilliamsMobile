@@ -14,6 +14,15 @@ import Facebook from '../Components/Facebook';
 import Factrak from '../Components/Factrak';
 
 class WSO extends Component{
+    static navigationOptions = {
+        drawerLabel: 'WSO',
+        drawerIcon: ({ tintColor }) => (
+            <Icon
+                name='language'
+                color={tintColor} />
+        ),
+    };
+
     constructor(props){
         super(props);
         this.state=
@@ -125,26 +134,26 @@ class WSO extends Component{
                          color='white'
                          onPress={() => this.props.navigation.navigate('DrawerToggle')} />
                  }
-                 centerComponent={{ text: 'W S O', style: { fontSize: 22, color: '#ffffff' } }}
+                 centerComponent={{ text: 'WSO', style: { fontSize: 22, color: '#ffffff' } }}
                  outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
              />
 
              <ScrollView>
                  <Button
                      raised
-                     title='Facebook'
-                     icon={{name: 'portrait'}}
+                     title='FACEBOOK'
+                     icon={{name: 'people'}}
                      buttonStyle={styles.buttonStyle}
                      onPress={() => navigate('Facebook')} />
 
                  <Button
                      raised
-                     title='Factrak'
+                     title='FACTRAK'
                      icon={{name: 'thumbs-up-down'}}
                      buttonStyle={styles.buttonStyle}
                      onPress={() => navigate('Factrak')} />
 
-                 <Card title='Discussions'
+                 <Card title='DISCUSSIONS'
                      containerStyle={{padding: 10}}>
                    {
                      this.state.discussions.map((u, i) => {
@@ -164,7 +173,7 @@ class WSO extends Component{
                    />
                  </Card>
 
-            <Card title='Announcements'
+            <Card title='ANNOUNCEMENTS'
                 containerStyle={{padding: 10}}>
               {
                 this.state.announcements.map((u, i) => {
@@ -184,7 +193,7 @@ class WSO extends Component{
               />
             </Card>
 
-            <Card title='Exchanges'
+            <Card title='EXCHANGES'
                 containerStyle={{padding: 10}}>
               {
                 this.state.exchanges.map((u, i) => {
@@ -204,7 +213,7 @@ class WSO extends Component{
               />
             </Card>
 
-            <Card title='Lost & Found'
+            <Card title='LOST & FOUND'
                 containerStyle={{padding: 10}}>
               {
                 this.state.lostNfound.map((u, i) => {
@@ -224,7 +233,7 @@ class WSO extends Component{
               />
             </Card>
 
-            <Card title='Jobs'
+            <Card title='JOBS'
                 containerStyle={{padding: 10}}>
               {
                 this.state.jobs.map((u, i) => {
@@ -244,7 +253,7 @@ class WSO extends Component{
               />
             </Card>
 
-            <Card title='Rides'
+            <Card title='RIDES'
                 containerStyle={{padding: 10}}>
               {
                 this.state.rides.map((u, i) => {

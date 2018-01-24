@@ -83,7 +83,7 @@ class NewsList extends Component{
                             avatar={l.icon}
                             key={i}
                             title={l.name}
-                            rightIcon={{name: 'launch'}}
+                            rightIcon={{name: 'open-in-browser'}}
                             onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }
                           />
                         ))
@@ -97,7 +97,7 @@ class NewsList extends Component{
                             avatar={l.icon}
                             key={i}
                             title={l.name}
-                            rightIcon={{name: 'launch'}}
+                            rightIcon={{name: 'open-in-browser'}}
                             onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }
                           />
                         ))
