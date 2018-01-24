@@ -8,15 +8,6 @@ import { AppRegistry, Image, Linking, Platform, ScrollView, StyleSheet, Text, To
 import { Header, Icon, List, ListItem } from 'react-native-elements';
 
 export default class Emergency extends Component{
-    static navigationOptions = {
-        drawerLabel: 'Emergency Numbers',
-        drawerIcon: ({ tintColor }) => (
-            <Icon
-                name='warning'
-                color={tintColor} />
-        ),
-    };
-
     _call = ( phone ) => {
         Linking.openURL( phone ).catch(err => console.error('An error occurred', err))
     }
@@ -55,7 +46,7 @@ export default class Emergency extends Component{
                             onPress={() => this.props.navigation.navigate('DrawerToggle')} />
                     }
                     centerComponent={{ text: 'Emergency Numbers', style: { fontSize: 22, color: '#ffffff' } }}
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45, marginBottom: 10}} />
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
 
                 <ScrollView style={styles.scrollContainer}>
                     <Text style={styles.text}>
@@ -83,7 +74,6 @@ export default class Emergency extends Component{
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
 //        justifyContent: 'center',
         backgroundColor: '#DDDDDD', //'#DCD0FE',

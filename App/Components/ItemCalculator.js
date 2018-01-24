@@ -53,7 +53,7 @@ export default class ItemCalculator extends Component{
                       <Image source={require('../Assets/williams2.png')}
                       style={{width: 173, height: 30}} />
                   }
-                  outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
+                  outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
             <ScrollView styles={styles.scrollContainer}>
             <Header
              centerComponent={{ text: 'A la Carte', style: { fontSize: 22, color: '#ffffff' } }}

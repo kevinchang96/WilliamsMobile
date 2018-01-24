@@ -17,11 +17,10 @@ export default class WebViewComponent extends Component {
                     <Image source={require('../Assets/williams2.png')}
                     style={{width: 173, height: 30}} />
                 }
-                outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}} />
+                outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
 
             <WebView
                 source={{uri: this.props.navigation.state.params.url}}
-                style={{paddingTop: Platform.OS === 'ios' ? 20 : 0}}
                 javaScriptEnabled={true}
                 scalesPageToFit={false}
                 initialScale={10}
