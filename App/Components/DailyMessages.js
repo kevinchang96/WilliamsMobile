@@ -13,7 +13,10 @@ import {
   TextInput,
   TouchableHighlight,
   ScrollView,
-  Dimensions
+  Dimensions,
+  Button,
+  DatePickerAndroid,
+  Header
 } from 'react-native';
 import MessageCard from './MessageCard';
 
@@ -51,7 +54,7 @@ export default class DailyMessages extends Component {
 
             let doc = new DOMParser().parseFromString(responseText,'text/html');
 
-            const root = doc.getElementsByClassName("printOnly");
+            const root = doc.getElementsByClassName("webOnly");
 
             //console.log("Root size " + root.length);
 
@@ -64,10 +67,10 @@ export default class DailyMessages extends Component {
 
             for (let i = 0; i < root.length; i++){
                 let card = this.createCard(root[i].firstChild.textContent, root[i].lastChild.textContent);
-                console.log(card);
+                //console.log(card);
                 messagecards.push(card);
             }
-            console.log(messagecards);
+           // console.log(messagecards);
 
             /*for (let i=0; i < root.length; i = i+2){
                 console.log(root[0].textContent);
@@ -94,6 +97,7 @@ export default class DailyMessages extends Component {
             text: lastChild.substring(0, lastChild.lastIndexOf("from")),
             src: lastChild.slice(lastChild.lastIndexOf("from")+5)
         }
+        console.log(message.text);
 
         card = <MessageCard
                     title = {message.title}
@@ -101,15 +105,34 @@ export default class DailyMessages extends Component {
                     src = {message.src}
                />
 
-        console.log(card);
+        //console.log(card);
         return card;
+    }
+
+    changeDate = () =>{
+        try {
+          const {action, year, month, day} = DatePickerAndroid.open({date: new Date()}, {mode: 'spinner'});
+          console.log(date);
+          if (action !== DatePickerAndroid.dismissedAction) {
+            return;
+          }
+        } catch ({code, message}) {
+          console.warn('Cannot open date picker', message);
+        }
+
     }
 
     render() {
         //this.getMessages();
-        console.log(this.state.titlesArray.length);
+        //console.log(this.state.titlesArray.length);
         return (
             <View>
+                 <Text> TODAY </Text>
+                 <Button
+                    title="Change Date"
+                    color= "purple"
+                    onPress={this.changeDate}
+                 />
                  <ScrollView>
                      {this.state.messageCards}
                  </ScrollView>
