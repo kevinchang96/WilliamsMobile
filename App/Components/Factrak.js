@@ -14,7 +14,6 @@ import Login from './Login';
 
 export class Factrak extends Component{
 
-    static navigationOptions = ({ navigation }) => ({ title: 'Factrak'});
     constructor(props){
         super();
         this.state = {

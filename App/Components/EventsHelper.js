@@ -81,16 +81,16 @@ export default class EventsHelper extends Component {
     }
     render() {
         return (
-            <View style={{paddingTop:Platform.OS === 'ios' ? 20 : 0}}>
+            <View>
                 <Header
                     leftComponent={
                         <Icon
-                            name='menu'
+                            name='chevron-left'
                             color='white'
-                            onPress={() => this.props.navigation.navigate('DrawerToggle')} />
+                            onPress={() => this.props.navigation.goBack()} />
                     }
                     centerComponent={{ text: 'Events Helper', style: { fontSize: 22, color: '#ffffff' } }}
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
                 />
                  <ScrollView>
                      {this.state.eventsCards}

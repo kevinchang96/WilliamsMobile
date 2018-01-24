@@ -13,8 +13,6 @@ import Logout from './Logout';
 
 class Settings extends Component{
     render(){
-        const { navigate } = this.props.navigation;
-
         const settingsList = [
             {
                 name: 'About App',
@@ -94,11 +92,11 @@ const styles = StyleSheet.create({
 
 });
 
-const about = () => ( <About /> );
+const about = ({navigation}) => ( <About navigation={navigation}/> );
 
-const login = () => ( <Login /> );
+const login = ({navigation}) => ( <Login navigation={navigation}/> );
 
-const logout = () => ( <Logout /> );
+const logout = ({navigation}) => ( <Logout navigation={navigation}/> );
 
 const SettingsNavigator = StackNavigator({
     Home: { screen: Settings },

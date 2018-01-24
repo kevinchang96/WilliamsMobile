@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, AsyncStorage, Platform, StyleSheet, Text, ScrollView, View, TextInput, TouchableHighlight } from 'react-native';
-import { Button, Header, Overlay } from 'react-native-elements';
+import { Button, Header, Overlay, Icon } from 'react-native-elements';
 
 
 export default class Logout extends Component {
@@ -51,8 +51,14 @@ export default class Logout extends Component {
         return (
         <View style={styles.container}>
             <Header
-                 centerComponent={{ text: 'Goodbye', style: { fontSize: 22, color: '#ffffff' } }}
-                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+                leftComponent={
+                    <Icon
+                        name='chevron-left'
+                        color='white'
+                        onPress={() => this.props.navigation.goBack()}/>
+                }
+                centerComponent={{ text: 'Goodbye', style: { fontSize: 22, color: '#ffffff' } }}
+                outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
              />
 
             <Button

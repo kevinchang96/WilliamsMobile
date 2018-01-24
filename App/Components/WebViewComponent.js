@@ -13,6 +13,12 @@ export default class WebViewComponent extends Component {
     return (
         <View style={styles.container}>
             <Header
+                leftComponent={
+                    <Icon
+                        name='chevron-left'
+                        color='white'
+                        onPress={() => this.props.navigation.goBack()}/>
+                }
                 centerComponent={
                     <Image source={require('../Assets/williams2.png')}
                     style={{width: 173, height: 30}} />
