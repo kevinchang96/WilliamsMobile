@@ -11,6 +11,7 @@ import {
     View,
     TouchableOpacity,
 } from 'react-native';
+import { ListItem } from 'react-native-elements'
 
 export default class SuggestionCard extends Component{
 
@@ -19,10 +20,12 @@ export default class SuggestionCard extends Component{
     }
     render(){
         return(
-            <TouchableOpacity style={styles.container}
-                onPress={this.sendData}>
-                {/* onPress will trigger navigation pass props to comment window */}
-                <Text>{this.props.title}</Text>
+            <TouchableOpacity>
+                <ListItem
+                    onPress={this.sendData}
+                    title={this.props.title}
+                    subtitle={(this.props.type == 'title') ? 'Course':'Professor'}
+                />
             </TouchableOpacity>
         );
     }
