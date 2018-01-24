@@ -1,12 +1,10 @@
+/*
+ * Nambi Williams
+ */
+
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Platform,
-  StyleSheet,
-  Image,
-  View
-} from 'react-native';
-import {Card, Button, Text, Divider} from 'react-native-elements';
+import { AppRegistry, Platform, StyleSheet, Image, View } from 'react-native';
+import { Card, Button, Text} from 'react-native-elements';
 
 export default class MessageCard extends Component{
 
