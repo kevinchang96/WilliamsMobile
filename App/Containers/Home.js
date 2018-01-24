@@ -79,7 +79,7 @@ class HomeScreen extends Component {
                         <Button
                             icon={{name: 'local-dining'}}
                             backgroundColor='#512698'
-                            onPress={() => navigate('DiningList')}
+                            onPress={() => {this.props.navigation.navigate('DiningList')}}
                             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
                             title='DINING' />
                     </Card>
@@ -104,15 +104,12 @@ const settings = () => ( <Settings/> );
 
 const diningMenus = () => ( <DiningMenus /> );
 
-const diningList = () => ( <DiningList /> );
-
 const dailyMessages = () => ( <DailyMessages /> );
 
 const RootNavigator = StackNavigator({
     Home: { screen: HomeScreen },
     Settings: { screen: settings },
     DiningMenus: { screen: diningMenus },
-    DiningList: { screen: diningList },
     DailyMessages: {screen: dailyMessages },
 },{
     headerMode: 'none',

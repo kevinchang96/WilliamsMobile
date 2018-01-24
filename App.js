@@ -32,7 +32,7 @@ const drawers = DrawerNavigator({
     DiningList: {
         screen: DiningList,
         navigationOptions: ({navigation}) => ({
-            drawerLabel: 'Dining',
+            drawerLabel: 'DiningList',
             drawerIcon: ({ tintColor }) => (
                 <Icon
                     name='local-dining'
