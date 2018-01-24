@@ -6,6 +6,8 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { DrawerNavigator, TabNavigator } from 'react-navigation';
+import { Card, Button, Header, Icon, List, ListItem } from 'react-native-elements';
+
 
 import LinkList from './App/Components/LinkList';
 import NewsList from './App/Components/NewsList';
@@ -16,12 +18,72 @@ import About from './App/Components/About';
 import DiningList from './App/Components/DiningList';
 
 const drawers = DrawerNavigator({
-    HomeScreen: { screen: HomeScreen },
-    DiningList: { screen: DiningList },
-    NewsList: { screen: NewsList },
-    WSO: { screen: WSO },
-    LinkList: { screen: LinkList },
-    Emergency: { screen: Emergency },
+    HomeScreen: {
+        screen: HomeScreen,
+        navigationOptions: ({navigation}) => ({
+            drawerLabel: 'Home',
+            drawerIcon: ({ tintColor }) => (
+                <Icon
+                    name='home'
+                    color={tintColor} />
+            ),
+        }),
+    },
+    DiningList: {
+        screen: DiningList,
+        navigationOptions: ({navigation}) => ({
+            drawerLabel: 'Dining',
+            drawerIcon: ({ tintColor }) => (
+                <Icon
+                    name='local-dining'
+                    color={tintColor} />
+            ),
+        })
+    },
+    NewsList: {
+        screen: NewsList,
+        navigationOptions: ({navigation}) => ({
+            drawerLabel: 'Events & News',
+            drawerIcon: ({ tintColor }) => (
+                <Icon
+                    name='today'
+                    color={tintColor} />
+            ),
+        })
+    },
+    WSO: {
+        screen: WSO,
+        navigationOptions: ({navigation}) => ({
+            drawerLabel: 'W S O',
+            drawerIcon: ({ tintColor }) => (
+                <Icon
+                    name='language'
+                    color={tintColor} />
+            ),
+        })
+    },
+    LinkList: {
+        screen: LinkList,
+        navigationOptions: ({navigation}) => ({
+            drawerLabel: 'Links',
+            drawerIcon: ({ tintColor }) => (
+                <Icon
+                    name='link'
+                    color={tintColor} />
+            ),
+        })
+    },
+    Emergency: {
+        screen: Emergency,
+        navigationOptions: ({navigation}) => ({
+            drawerLabel: 'Emergency Numbers',
+            drawerIcon: ({ tintColor }) => (
+                <Icon
+                    name='warning'
+                    color={tintColor} />
+            ),
+        })
+    },
 },{
     initialRouteName: 'HomeScreen',
     drawerPosition: 'left',
@@ -34,6 +96,7 @@ const drawers = DrawerNavigator({
         },
         iconContainerStyle: { opacity: 1 }
     },
+
 });
 
 const styles = StyleSheet.create({

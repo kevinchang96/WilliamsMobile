@@ -41,7 +41,7 @@ class Settings extends Component{
                             onPress={() => this.props.navigation.goBack()} />
                     }
                     centerComponent={{ text: 'Settings', style: { fontSize: 22, color: '#ffffff' } }}
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45, marginBottom: 0}} />
+                    outerContainerStyles={{backgroundColor: '#512698', padding: 10, height: 55}} />
 
                 <List containerStyle={{marginTop: 10}}>
                   {
@@ -62,7 +62,6 @@ class Settings extends Component{
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
 //        justifyContent: 'center',
         backgroundColor: '#DDDDDD', //'#DCD0FE',

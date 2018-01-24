@@ -14,15 +14,6 @@ import Facebook from '../Components/Facebook';
 import Factrak from '../Components/Factrak';
 
 class WSO extends Component{
-    static navigationOptions = {
-        drawerLabel: 'W S O',
-        drawerIcon: ({ tintColor }) => (
-            <Icon
-                name='language'
-                color={tintColor} />
-        ),
-    };
-
     constructor(props){
         super(props);
         this.state=
@@ -135,7 +126,7 @@ class WSO extends Component{
                          onPress={() => this.props.navigation.navigate('DrawerToggle')} />
                  }
                  centerComponent={{ text: 'W S O', style: { fontSize: 22, color: '#ffffff' } }}
-                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
              />
 
              <ScrollView>
@@ -281,7 +272,6 @@ class WSO extends Component{
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
         justifyContent: 'center',
         backgroundColor: '#DDDDDD', //'#DCD0FE',
