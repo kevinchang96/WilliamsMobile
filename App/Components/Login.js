@@ -90,6 +90,7 @@ export default class Login extends Component {
                 <Button
                   title='Submit'
                   disabled={this.state.buttonDisabled}
+                  disabledStyle={styles.disabled}
                   onPress={this._submitForm}
                   outline={true} />
             </View>
@@ -163,7 +164,11 @@ export default class Login extends Component {
                //console.log(response.headers.get("set-cookie"));
                var setCookies = response.headers.get("set-cookie");
                //console.log( "Set-Cookies: " + setCookies );
-               if( setCookies.startsWith("_WSOonRails") ){
+
+               this.setState( {cookies: setCookies, text: ""} );
+               this._loggedIn();
+               this._rememberMe();
+               /*if( setCookies.startsWith("_WSOonRails") ){
                 // Correct login attempt
                 this.setState( {cookies: setCookies, text: ""} );
                 this._loggedIn();
@@ -171,7 +176,7 @@ export default class Login extends Component {
                } else {
                 // Incorrect login attempt
                 this.setState({text: "Incorrect username or password! Please try again."});
-               }
+               }*/
 
                //console.log("State information: " + JSON.stringify(this.state));
             }.bind(this)
@@ -195,6 +200,10 @@ const styles = StyleSheet.create({
     icon: {
         width: 100,
         height: 100,
+    },
+    disabled: {
+        backgroundColor: '#9678B6',
+        borderColor: '#9678B6' //Purple mountain majesty
     },
 });
 
