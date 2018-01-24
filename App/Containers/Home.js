@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#DDDDDD', //'#DCD0FE',
+        backgroundColor: '#EEEEEE' //'#DCD0FE',
     },
     scrollContainer: {
         flex: 1,

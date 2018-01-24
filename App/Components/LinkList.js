@@ -121,7 +121,7 @@ const LinkNavigator = StackNavigator({
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#DDDDDD',
+        backgroundColor: '#EEEEEE',
     },
     scrollContainer: {
         flex: 1,
