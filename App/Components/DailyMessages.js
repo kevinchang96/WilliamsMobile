@@ -14,10 +14,9 @@ import {
   TouchableHighlight,
   ScrollView,
   Dimensions,
-  Button,
-  DatePickerAndroid,
-  Header
+  DatePickerAndroid
 } from 'react-native';
+import { Button, Header, Icon } from 'react-native-elements';
 import MessageCard from './MessageCard';
 
 export default class DailyMessages extends Component {
@@ -126,18 +125,37 @@ export default class DailyMessages extends Component {
         //this.getMessages();
         //console.log(this.state.titlesArray.length);
         return (
-            <View>
-                 <Text> TODAY </Text>
-                 <Button
-                    title="Change Date"
-                    color= "purple"
+            <View style={styles.container}>
+                <Header
+                    leftComponent={
+                        <Icon
+                            name='chevron-left'
+                            color='white'
+                            onPress={() => this.props.navigation.goBack()}
+                        />
+                    }
+                    centerComponent={{ text: 'Daily Messages', style: { fontSize: 22, color: '#ffffff' } }}
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55, marginBottom: 10}}
+                />
+
+                <Button
+                    title='TODAY'
+                    backgroundColor= '#512698'
                     onPress={this.changeDate}
-                 />
-                 <ScrollView>
-                     {this.state.messageCards}
-                 </ScrollView>
+                />
+
+                <ScrollView>
+                    {this.state.messageCards}
+                </ScrollView>
             </View>
 
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#EEEEEE' //'#DCD0FE',
+    }
+})

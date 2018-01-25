@@ -1,5 +1,5 @@
 /**
- * David Ariyibi
+ * David Ariyibi, Dysron Marshall
  * (c) 01/2018
  */
 
@@ -32,7 +32,7 @@ const drawers = DrawerNavigator({
     DiningList: {
         screen: DiningList,
         navigationOptions: ({navigation}) => ({
-            drawerLabel: 'DiningList',
+            drawerLabel: 'Dining',
             drawerIcon: ({ tintColor }) => (
                 <Icon
                     name='restaurant'
@@ -54,7 +54,7 @@ const drawers = DrawerNavigator({
     WSO: {
         screen: WSO,
         navigationOptions: ({navigation}) => ({
-            drawerLabel: 'W S O',
+            drawerLabel: 'WSO',
             drawerIcon: ({ tintColor }) => (
                 <Icon
                     name='language'

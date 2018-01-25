@@ -12,15 +12,6 @@ import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import ItemCalculator from './ItemCalculator';
 
 class DiningList extends Component{
-    static navigationOptions = {
-        drawerLabel: 'Dining',
-        drawerIcon: ({ tintColor }) => (
-            <Icon
-                name='restaurant'
-                color={tintColor} />
-        ),
-    };
-
     constructor(props){
         super(props);
     }
@@ -140,7 +131,7 @@ class DiningList extends Component{
                                      }
                               key={i}
                               title={l.name}
-                              rightIcon={{name: 'launch'}}
+                              rightIcon={{name: 'open-in-browser'}}
                               onPress={() => {navigate(l.screen,{url: l.url})} }
                             />
                           ))

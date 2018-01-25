@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, AsyncStorage, Platform, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { AppRegistry, AsyncStorage, Image, Platform, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import { Button, FormInput, Header, Icon} from 'react-native-elements';
 
 export default class Login extends Component {
@@ -75,6 +75,14 @@ export default class Login extends Component {
 
             <View style={styles.container}>
                 <Text>{this.state.text}</Text>
+
+                <View style={styles.imageContainer}>
+                    <Image
+                        style={styles.icon}
+                        resizeMode="cover"
+                         source={require('../Assets/williams-mobile-logo-2.png')}
+                    />
+                </View>
 
                 <FormInput
                     value={this.state.username}
@@ -203,9 +211,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#512698',
     },
+    imageContainer: {
+        alignItems: 'center',
+    },
     icon: {
-        width: 100,
-        height: 100,
+        width: 80,
+        height: 80,
     },
     disabled: {
         backgroundColor: '#512698'
