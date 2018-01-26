@@ -24,7 +24,6 @@ export default class ItemCalculator extends Component{
 
         componentWillUnmount(){
             this._clearAll();
-            //console.log("Length: "+ this.state.dataArray.length);
         }
 
         _clearAll(){
@@ -32,7 +31,6 @@ export default class ItemCalculator extends Component{
                 this.state.dataArray[i].checked = false;
             }
             this.setState({currentBalance: 0.0});
-            //console.log("Length (clear): "+ this.state.dataArray.length);
         }
 
         onClick( i ){
@@ -64,11 +62,20 @@ export default class ItemCalculator extends Component{
                       style={{width: 173, height: 30}} />
                   }
                   outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
-            <ScrollView styles={styles.scrollContainer}>
             <Header
-             centerComponent={{ text: 'A la Carte', style: { fontSize: 22, color: '#ffffff' } }}
-             outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}} />
-
+                leftComponent={<Icon
+                                 name='chevron-left'
+                                 color='white'
+                                 onPress={() => this.props.navigation.goBack()}
+                                />}
+                 centerComponent={{ text: 'A la Carte', style: { fontSize: 22, color: '#ffffff' } }}
+                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
+                 rightComponent={<Icon
+                                 name='chevron-right'
+                                 color='white'
+                                />}
+                 />
+            <ScrollView styles={styles.scrollContainer}>
                 <List containerStyle={{ marginTop: 5, marginBottom: 5 }}>
                    {
                      this.state.dataArray.map((l, i) => (
