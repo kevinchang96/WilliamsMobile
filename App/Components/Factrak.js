@@ -50,10 +50,12 @@ export class Factrak extends Component{
             }).then(response => {
                 if(response.status == 200) response.text().then((text) => {
                     // if successful fetch, continue
-                    this.setState({html : text});
-                    this.setState({title : title});
-                    this.setState({renderComments : true});
+                    this.setState({html : text, title : title, renderComments : true});
                 });
+                else{
+                    Alert.alert('Error', 'Results for this suggestion do not exist.',
+                      [{text: 'OK', onPress: () => console.log('OK Pressed')}],{ cancelable:false});
+                }
             });
     }
 
@@ -121,7 +123,8 @@ export class Factrak extends Component{
                         <Icon
                             name='chevron-left'
                             color='white'
-                            onPress={() => this.props.navigation.goBack()} />
+                            onPress={() => this.props.screenProps.goBack()}
+                            underlayColor='#512698'/>
                     }
                     centerComponent={{ text: 'Factrak', style: { fontSize: 22, color: '#ffffff' } }}
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
