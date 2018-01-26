@@ -68,6 +68,7 @@ class HomeScreen extends Component {
                         <Button
                             rounded
                             icon={{name: 'wb-cloudy'}}
+                            onPress={() => navigate('DiningMenus')}
                             backgroundColor='#512698'
                             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
                             title='FORECAST' />
