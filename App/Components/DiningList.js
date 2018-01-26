@@ -24,20 +24,27 @@ class DiningList extends Component{
              name: "Whitmans' Marketplace",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S211&date=today',
              screen: 'WebViewPost',
-             icon: <Icon name='local-dining' />
+             icon: <Icon name='local-dining' />,
+             pic: ('../Assets/paresky.jpg')
            },{
              id: '3',
              name: "Driscoll",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S3&date=today',
              screen: 'WebViewPost',
-             icon: <Icon name='local-dining' />
+             icon: <Icon name='local-dining' />,
+             pic: ('../Assets/dricoll.jpg')
            },{
              id: '5',
              name: "Mission",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S5&date=today',
              screen: 'WebViewPost',
-             icon: <Icon name='local-dining' />
-           },{
+             icon: <Icon name='local-dining' />,
+             pic: ('../Assets/mission.jpg')
+           }
+         ]
+
+         const otherHallList = [
+           {
              id: '14',
              name: "Eco Cafe",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S14&date=today',
@@ -103,7 +110,19 @@ class DiningList extends Component{
                              avatar={l.icon}
                              key={i}
                              title={l.name}
-                             onPress={() => {navigate(l.screen,{url: l.url})} }
+                             onPress={() => {navigate(l.screen, {url: l.url, title: l.name})} }
+                           />
+                         ))
+                       }
+                     </List>
+
+                     <List containerStyle={{ marginTop: 10, marginBottom: 0 }}>
+                       {
+                         otherHallList.map((l, i) => (
+                           <ListItem
+                             avatar={l.icon}
+                             key={i}
+                             title={l.name}
                            />
                          ))
                        }
@@ -126,14 +145,16 @@ class DiningList extends Component{
                         {
                           getAppList.map((l, i) => (
                             <ListItem
-                              avatar={<Image
-                                          source={require('../Assets/getlogo-150x150.png')}
-                                          style={{width: 24, height: 24}} />
-                                     }
+                              avatar={
+                                <Image
+                                    source={require('../Assets/getlogo-150x150.png')}
+                                    style={{width: 24, height: 24}}
+                                />
+                              }
                               key={i}
                               title={l.name}
                               rightIcon={{name: 'open-in-browser'}}
-                              onPress={() => {navigate(l.screen,{url: l.url})} }
+                              onPress={() => {navigate(l.screen,{url: l.url, title: l.name})} }
                             />
                           ))
                         }
@@ -179,7 +200,7 @@ const styles = StyleSheet.create({
 
 });
 
-const webViewPost = ({navigation}) => ( <DiningGrabber navigation={navigation}/> );
+const webViewPost = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
 const itemCalculator = () => ( <ItemCalculator /> );
 

@@ -85,7 +85,7 @@ class NewsList extends Component{
                             key={i}
                             title={l.name}
                             rightIcon={{name: 'open-in-browser'}}
-                            onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }
+                            onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url, title: l.name})} }
                           />
                         ))
                       }
@@ -99,7 +99,7 @@ class NewsList extends Component{
                             key={i}
                             title={l.name}
                             rightIcon={{name: 'open-in-browser'}}
-                            onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }
+                            onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url, title: l.name})} }
                           />
                         ))
                       }

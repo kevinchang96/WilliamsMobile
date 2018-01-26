@@ -1,0 +1,55 @@
+Links to Current Menus
+
+Driscoll
+BREAKFAST          http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S3&date=today&meal=BREAKFAST
+LUNCH              http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S3&date=today&meal=LUNCH
+DINNER             http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S3&date=today&meal=DINNER
+WILLIAMS' BAKESHOP http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S3&date=today&meal=WILLIAMS' BAKESHOP
+
+Mission
+BREAKFAST          http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S5&date=today&meal=BREAKFAST
+LUNCH              http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S5&date=today&meal=LUNCH
+DINNER             http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S5&date=today&meal=DINNER
+WILLIAMS' BAKESHOP http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S5&date=today&meal=WILLIAMS' BAKESHOP
+
+Whitman's
+BREAKFAST          http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S211&date=today&meal=BREAKFAST
+LUNCH              http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S211&date=today&meal=LUNCH
+DINNER             http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S211&date=today&meal=DINNER
+WILLIAMS' BAKESHOP http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S211&date=today&meal=WILLIAMS' BAKESHOP
+
+Eco Cafe
+LUNCH              http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S14&date=today&meal=LUNCH
+WILLIAMS' BAKESHOP http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S14&date=today&meal=WILLIAMS' BAKESHOP
+
+Grab & Go
+LUNCH              http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S23&date=today&meal=LUNCH
+WILLIAMS' BAKESHOP http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S23&date=today&meal=WILLIAMS' BAKESHOP
+
+
+Lee Snack Bar
+http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S24&date=today
+
+'82 Grill
+http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S25&date=today
+
+Whitmans' Late Night
+http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S221&date=today
+
+Lee After Dark
+https://dining.williams.edu/lee-after-dark/
+
+
+
+- Designed and co-created an Android application with the goal of consolidating many day-to-day sources of information including weather forecasts, dining hall menus, campus/community news, and Williams Students Online (WSO) features
+- Application also acts as a bridge, linking out to other campus resources as well as other niche, student-made applications
+- Liaisoned with sources including WSO, the Computer Science Dept, Alumni Relations, and Daily Messages in order to gain access to or help develop usable APIs
+- Initiated partnerships with WSO and the Computer Science Dept in order to ensure legitimacy, longevity, and upkeep of application as well as acquiring a server
+- Preparing for the beta launch as well as recruiting for the creation of the Apple counterpart with both the launch and creation set to begin this winter
+
+
+o Algorithms included: 
+- o Determining whether a text falls under one of a list of subjects/topics based on content and context
+- o Parsing to extract date and times of events from natural language text
+- o Quickly returning a filtered set of texts for an arbitrary set of filters
+- o Using contextual metadata for each announcement in order to provide more filter options and increase accuracy with near-zero loss to speed

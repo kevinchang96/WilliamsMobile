@@ -10,30 +10,40 @@ import { Header, Icon } from 'react-native-elements';
 export default class DiningGrabber extends Component {
     constructor(props){
         super();
-        this.state = {
-            _onMessage: "",
-        };
     }
+
+    state = {
+        data: ''
+    }
+
+    onMessage ( event ) {
+      console.log("HTML!!!!!!!!!!!!!!1:" , event.NativeEvent.data)
+
+//      this.setState({
+//          data: event
+//      })
+    }
+
     render() {
         console.log(this.props.navigation.state.params.url);
 
-        const jsCode = 'window.postMessage(document.getElementsByClassName("cbo_nn_itemGridTable"))'
+        const jsCode = 'window.postMessage(document.getElementsByClassName("cbo_nn_page"))'
         const jsCode2 = "window.postmessge($('body').html())"
 
         return (
             <View style={styles.container}>
                 <View style={styles.ncontainer}>
-                    <WebView
+                    <WebView style={styles.webview}
                         source={{uri: this.props.navigation.state.params.url}}
                         javaScriptEnabled={true}
                         initialScale={10}
-                        onMessage={this.state._onMessage}
                         injectedJavaScript={jsCode2}
+                        onMessage={this.onMessage}
                     />
                 </View>
 
                 <View>
-                    <Text>{this.state._onMessage}</Text>
+                    <Text>{event.nativeEvent.data}</Text>
                 </View>
             </View>
         );
@@ -48,6 +58,9 @@ const styles = StyleSheet.create({
     ncontainer: {
         flex: .5,
         backgroundColor: '#DDDDDD',
+    },
+    webview: {
+        height: 0,
     }
 });
 

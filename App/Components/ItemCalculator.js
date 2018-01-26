@@ -50,61 +50,57 @@ export default class ItemCalculator extends Component{
     console.log("Rendering...");
          return(
              <View style={styles.container}>
-             <Header
-                 leftComponent={
-                     <Icon
-                         name='chevron-left'
-                         color='white'
-                         onPress={() => this.props.navigation.goBack()}
-                         underlayColor='#512698'/>
-                 }
-                  centerComponent={
-                      <Image source={require('../Assets/williams2.png')}
-                      style={{width: 173, height: 30}} />
-                  }
-                  outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}/>
-            <Header
-                leftComponent={<Icon
-                                 name='chevron-left'
-                                 color='white'
-                                 onPress={() => this.props.navigation.goBack()}
-                                />}
-                 centerComponent={{ text: 'A la Carte', style: { fontSize: 22, color: '#ffffff' } }}
-                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
-                 underlayColor='#512698'
-                 rightComponent={<Icon
-                                 name='chevron-right'
-                                 color='white'
-                                />}
+                 <Header
+                     leftComponent={
+                         <Icon
+                             name='chevron-left'
+                             color='white'
+                             onPress={() => this.props.navigation.goBack()}
+                             underlayColor='#512698'/>
+                     }
+                     centerComponent={{ text: 'Calculator', style: { fontSize: 22, color: '#ffffff' } }}
+                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
                  />
-            <ScrollView styles={styles.scrollContainer}>
-                <List containerStyle={{ marginTop: 5, marginBottom: 5 }}>
-                   {
-                     this.state.dataArray.map((l, i) => (
-                       <CheckBox
-                         key={i}
-                         title={l.name + " - ($" + l.price + ")"}
-                         checked={this.state.dataArray[i].checked}
-                         checkedColor='green'
-                         onPress={() => { this.onClick(i); this.updatePrice(this.state.dataArray[i].checked,l.price) } }
-                       />
-                     ))
-                   }
-                 </List>
-                </ScrollView>
-                <View>
-                    <Card containerStyle={{ marginTop: 5, marginBottom: 5, marginLeft: 5, marginRight: 5 }}>
-                        <View style={{flexDirection: 'row', flex: 0}}>
-                            <Button
-                              title='Clear All'
-                              onPress={() => {this._clearAll()}}
-                            />
-                            <Text style={ styles.titleText }>
-                                Current amount: ${this.state.currentBalance}
-                            </Text>
-                        </View>
-                    </Card>
-                </View>
+
+                 <Header
+                     leftComponent={<Icon name='chevron-left' color='white' />}
+                     centerComponent={{ text: 'A la Carte', style: { fontSize: 22, color: '#ffffff' } }}
+                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}}
+                     underlayColor='#512698'
+                     rightComponent={<Icon name='chevron-right' color='white' />}
+                 />
+
+                 <ScrollView styles={styles.scrollContainer}>
+                     <List containerStyle={{ marginTop: 5, marginBottom: 5 }}>
+                       {
+                         this.state.dataArray.map((l, i) => (
+                           <CheckBox
+                             key={i}
+                             title={l.name + " - ($" + l.price + ")"}
+                             checked={this.state.dataArray[i].checked}
+                             checkedColor='green'
+                             onPress={() => { this.onClick(i); this.updatePrice(this.state.dataArray[i].checked,l.price) } }
+                           />
+                         ))
+                       }
+                     </List>
+                 </ScrollView>
+
+                 <View>
+                     <Card containerStyle={{ marginTop: 5, marginBottom: 5, marginLeft: 5, marginRight: 5 }}>
+                         <View style={styles.titleContainer}>
+                             <Text style={ styles.titleText }>
+                                 Current amount: ${this.state.currentBalance}
+                             </Text>
+                         </View>
+
+                         <Button
+                             title='Clear'
+                             icon={{name: 'refresh'}}
+                             onPress={() => {this._clearAll()}}
+                         />
+                     </Card>
+                 </View>
              </View>
          );
     }
@@ -124,13 +120,13 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 18,
     },
-    titleText:
-    {
+    titleContainer: {
+        alignItems: 'center',
+    },
+    titleText: {
         fontSize: 20,
         fontWeight: 'bold',
-        borderRadius: 5,
-        marginBottom: 5,
-        color: 'black'
+        color: 'black',
     }
 
 });

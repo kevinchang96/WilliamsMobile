@@ -14,6 +14,12 @@ class LinkList extends Component{
         const { navigate } = this.props.navigation;
         const resourceList = [
             {
+                id: '54',
+                name: "Fast Facts",
+                screen: 'FastFacts',
+                url: 'https://communications.williams.edu/media-relations/fast-facts/',
+                icon: <Icon name='compare-arrows' />
+            },{
                 id: '55',
                 name: "Campus Map",
                 screen: 'CampusMap',
@@ -79,8 +85,8 @@ class LinkList extends Component{
                             avatar={l.icon}
                             key={i}
                             title={l.name}
-                            rightIcon={{name: 'launch'}}
-                            onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url})} }
+                            rightIcon={{name: 'open-in-browser'}}
+                            onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url, title: l.name})} }
                           />
                         ))
                       }
@@ -90,6 +96,8 @@ class LinkList extends Component{
         );
     }
 }
+
+const fastFacts = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
 const campusMap = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
@@ -107,6 +115,7 @@ const ephSports = ({navigation}) => ( <WebViewComponent navigation={navigation}/
 
 const LinkNavigator = StackNavigator({
     Home: { screen: LinkList },
+    FastFacts: { screen: fastFacts },
     CampusMap: { screen: campusMap },
     LaundryView: { screen: laundryView },
     RouteShout: { screen: routeShout },

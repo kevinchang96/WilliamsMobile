@@ -15,7 +15,7 @@ import Settings from '../Components/Settings';
 import DiningMenus from '../Components/DiningMenus';
 import WebViewComponent from '../Components/WebViewComponent';
 import DiningList from '../Components/DiningList';
-import WeatherReader from '../Components/WeatherReader';
+//import WeatherReader from '../Components/WeatherReader';
 import DailyMessages from '../Components/DailyMessages';
 
 class HomeScreen extends Component {
@@ -97,6 +97,17 @@ class HomeScreen extends Component {
                             onPress={() => navigate('DailyMessages')}
                             title='MORE' />
                     </Card>
+
+                    <Card
+                        title='CAMPUS MAP'
+                        image={require('../Assets/campus-map.jpg')}>
+                        <Button
+                            icon={{name: 'search'}}
+                            backgroundColor='#512698'
+                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
+                            onPress={() => navigate('CampusMap', {url: 'http://map.williams.edu/map/?id=640', title: 'Campus Map'})}
+                            title='EXPLORE' />
+                    </Card>
                 </ScrollView>
             </View>
         );
@@ -109,11 +120,14 @@ const diningMenus = () => ( <DiningMenus /> );
 
 const dailyMessages = () => ( <DailyMessages /> );
 
+const campusMap = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
 const RootNavigator = StackNavigator({
     Home: { screen: HomeScreen },
     Settings: { screen: settings },
     DiningMenus: { screen: diningMenus },
     DailyMessages: {screen: dailyMessages },
+    CampusMap: { screen: campusMap },
 },{
     headerMode: 'none',
 //    initialRouteName: 'homeScreen'

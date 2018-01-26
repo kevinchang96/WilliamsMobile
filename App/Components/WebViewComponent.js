@@ -9,7 +9,7 @@ import { Header, Icon } from 'react-native-elements';
 
 export default class WebViewComponent extends Component {
   render() {
-  console.log(this.props.navigation.state.params.url);
+  console.log(this.props.navigation.state.params.url, this.props.navigation.state.params.name);
     return (
         <View style={styles.container}>
             <Header
@@ -20,10 +20,7 @@ export default class WebViewComponent extends Component {
                         onPress={() => this.props.navigation.goBack()}
                         underlayColor='#512698'/>
                 }
-                centerComponent={
-                    <Image source={require('../Assets/williams2.png')}
-                    style={{width: 173, height: 30}} />
-                }
+                centerComponent={{ text: this.props.navigation.state.params.name, style: { fontSize: 22, color: '#ffffff' } }}
                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
 
             <WebView
