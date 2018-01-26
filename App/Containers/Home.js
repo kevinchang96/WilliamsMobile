@@ -46,7 +46,8 @@ class HomeScreen extends Component {
                         <Icon
                             name='menu'
                             color='white'
-                            onPress={() => this.props.navigation.navigate('DrawerOpen')} />
+                            onPress={() => this.props.navigation.navigate('DrawerOpen')}
+                            underlayColor='#512698'/>
                     }
                     centerComponent={
                         <Image source={require('../Assets/williams2.png')}
@@ -56,7 +57,8 @@ class HomeScreen extends Component {
                         <Icon
                             name='settings'
                             color='white'
-                            onPress={() => navigate('Settings')} />
+                            onPress={() => navigate('Settings')}
+                            underlayColor='#512698'/>
                     }
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
                 />
@@ -101,7 +103,7 @@ class HomeScreen extends Component {
     }
 }
 
-const settings = () => ( <Settings/> );
+const settings = ({navigation}) => ( <Settings screenProps={navigation}/> );
 
 const diningMenus = () => ( <DiningMenus /> );
 

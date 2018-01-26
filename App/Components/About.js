@@ -62,7 +62,7 @@ export default class About extends Component{
                             name='chevron-left'
                             color='white'
                             onPress={() => this.props.navigation.goBack()}
-                        />
+                            underlayColor='#512698'/>
                     }
                     centerComponent={{ text: 'About', style: { fontSize: 22, color: '#ffffff' } }}
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55, marginBottom: 0}} />

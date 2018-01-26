@@ -55,13 +55,14 @@ export default class ItemCalculator extends Component{
                      <Icon
                          name='chevron-left'
                          color='white'
-                         onPress={() => this.props.navigation.goBack()} />
+                         onPress={() => this.props.navigation.goBack()}
+                         underlayColor='#512698'/>
                  }
                   centerComponent={
                       <Image source={require('../Assets/williams2.png')}
                       style={{width: 173, height: 30}} />
                   }
-                  outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
+                  outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}/>
             <Header
                 leftComponent={<Icon
                                  name='chevron-left'
@@ -70,6 +71,7 @@ export default class ItemCalculator extends Component{
                                 />}
                  centerComponent={{ text: 'A la Carte', style: { fontSize: 22, color: '#ffffff' } }}
                  outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
+                 underlayColor='#512698'
                  rightComponent={<Icon
                                  name='chevron-right'
                                  color='white'
