@@ -14,14 +14,14 @@ export default class WeatherObj extends Component {
       let w = new WeatherReader();
       let webInfo = w.state.data;
       let raw = JSON.parse('{"coord":{"lon":-73.2,"lat":42.71},"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04d"}],"base":"stations","main":{"temp":268.91,"pressure":1015,"humidity":63,"temp_min":267.15,"temp_max":270.15},"visibility":16093,"wind":{"speed":3.6,"deg":270},"clouds":{"all":90},"dt":1516377240,"sys":{"type":1,"id":1289,"message":0.004,"country":"US","sunrise":1516364263,"sunset":1516398614},"id":4955786,"name":"Williamstown","cod":200}'); // all the data
-      
+
       // temperature conversions
       let temp = raw.main.temp;   // temperature in Kelvins
       var tempF = Math.floor(temp*1.8 - 459.67);
       var tempC = Math.floor(temp - 273.15);
 
       this.state = {
-          
+
           test: webInfo,
 
           main: raw.weather[0].main,                  // main, eg. cloudy, sunny, etc.

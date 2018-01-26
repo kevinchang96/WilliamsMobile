@@ -8,11 +8,15 @@ import { Alert, AppRegistry, AsyncStorage, Platform, StyleSheet, Text, View} fro
 import SuggestionCard from './SuggestionCard';
 import FactrakCommentWindow from './FactrakCommentWindow';
 import {StackNavigator} from 'react-navigation';
-import { FormInput, List } from 'react-native-elements';
+import { FormInput, List, Header, Icon} from 'react-native-elements';
 import Login from './Login';
 
 
 export class Factrak extends Component{
+    static navigationOptions = {
+        title: 'Factrack',
+        header: null
+    }
 
     constructor(props){
         super();
@@ -110,16 +114,25 @@ export class Factrak extends Component{
 
     render(){
         return(
+
             <View style={styles.container}>
+                <Header
+                    leftComponent={
+                        <Icon
+                            name='chevron-left'
+                            color='white'
+                            onPress={() => this.props.navigation.goBack()} />
+                    }
+                    centerComponent={{ text: 'Factrak', style: { fontSize: 22, color: '#ffffff' } }}
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
+                />
                 <View style={styles.searchBox}>
                     <FormInput
                         onChangeText={(text) => this.getSuggestions(text)}
                         placeholder="Search for a professor or course..."
                         autoCorrect={false}
-                        onFocus={() => this.checkIfLoggedIn()}
                     />
                 </View>
-                {this.state.showText}
                 <View style={styles.suggestionsContainer}>
                     <List>
                         {this.state.suggestions}
@@ -138,7 +151,17 @@ const FactrakNavigator = StackNavigator({
     Home: { screen: Factrak },
     FactrakCommentWindow: { screen: factrakCommentWindow,
                             navigationOptions: ({navigation}) => ({
-                                title: `${navigation.state.params.title}`
+                                title: `${navigation.state.params.title}`,
+                                header:() => (<Header
+                                                  leftComponent={
+                                                      <Icon
+                                                          name='chevron-left'
+                                                          color='white'
+                                                          onPress={() => navigation.goBack()} />
+                                                  }
+                                                  centerComponent={{ text: `${navigation.state.params.title}`, style: { fontSize: 22, color: '#ffffff' } }}
+                                                  outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
+                                              />)
                             })}
 });
 
@@ -156,7 +179,6 @@ const styles = StyleSheet.create({
         //backgroundColor: 'white',
         //borderColor: 'black',
         //borderWidth: 2,
-
     },
 });
 export default FactrakNavigator;

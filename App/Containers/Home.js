@@ -58,7 +58,7 @@ class HomeScreen extends Component {
                             color='white'
                             onPress={() => navigate('Settings')} />
                     }
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
                 />
 
                 <ScrollView style={styles.scrollContainer}>
@@ -119,7 +119,6 @@ const RootNavigator = StackNavigator({
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
         justifyContent: 'center',
         backgroundColor: '#EEEEEE' //'#DCD0FE',
