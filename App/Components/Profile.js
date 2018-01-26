@@ -69,7 +69,8 @@ export default class Profile extends Component{
                         <Icon
                             name='chevron-left'
                             color='white'
-                            onPress={() => this.props.navigation.goBack()} />
+                            onPress={() => this.props.navigation.goBack()}
+                            underlayColor='#512698'/>
                     }
                     centerComponent={
                         <Image source={require('../Assets/williams2.png')}

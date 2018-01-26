@@ -56,7 +56,8 @@ export default class Logout extends Component {
                     <Icon
                         name='chevron-left'
                         color='white'
-                        onPress={() => this.props.navigation.goBack()}/>
+                        onPress={() => this.props.navigation.goBack()}
+                        underlayColor='#512698'/>
                 }
                 centerComponent={{ text: 'Goodbye', style: { fontSize: 22, color: '#ffffff' } }}
                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 45}}

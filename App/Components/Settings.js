@@ -37,7 +37,8 @@ class Settings extends Component{
                         <Icon
                             name='chevron-left'
                             color='white'
-                            onPress={() => this.props.navigation.goBack()} />
+                            onPress={() => this.props.screenProps.goBack()}
+                            underlayColor='#512698'/>
                     }
                     centerComponent={{ text: 'Settings', style: { fontSize: 22, color: '#ffffff' } }}
                     outerContainerStyles={{backgroundColor: '#512698', padding: 10, height: 55}} />

@@ -57,7 +57,8 @@ class NewsList extends Component{
                         <Icon
                             name='menu'
                             color='white'
-                            onPress={() => this.props.navigation.navigate('DrawerToggle')} />
+                            onPress={() => this.props.navigation.navigate('DrawerToggle')}
+                            underlayColor='#512698'/>
                     }
                     centerComponent={{ text: 'Events & News', style: { fontSize: 22, color: '#ffffff' } }}
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
