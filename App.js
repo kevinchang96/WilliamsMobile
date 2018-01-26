@@ -101,7 +101,6 @@ const drawers = DrawerNavigator({
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         flex: 1,
     },
     icon: {
@@ -109,6 +108,6 @@ const styles = StyleSheet.create({
         height: 24,
     }
 });
-
+console.disableYellowBox = true
 export default drawers;
 
