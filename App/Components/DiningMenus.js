@@ -1,11 +1,11 @@
 /**
- * Kevin Chang
+ * Kevin Chang, David Ariyibi
  * (c) 01/2018
  */
 
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, ScrollView, PixelRatio, Dimensions, Animated } from 'react-native';
-import { Button, ButtonGroup, List, ListItem } from 'react-native-elements';
+import { Button, Header, List, ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class DiningMenus extends Component {
@@ -63,7 +63,8 @@ export default class DiningMenus extends Component {
                                                      hideChevron={true}
                                                     /> );
                                     //console.log("Item: " + l.formal_name);
-                                    break;
+                default:            break;
+
             }
         });
         this.setState({breakfastArray: array0, lunchArray: array2, dinnerArray: array3 });
@@ -71,7 +72,27 @@ export default class DiningMenus extends Component {
 
     render() {
         return (
-        <View paddingTop={10}>
+        <View>
+            <Header
+                leftComponent={
+                    <Icon
+                        name='chevron-left'
+                        color='white'
+                        onPress={() => this.props.navigation.goBack()}
+                        underlayColor='#512698'/>
+                }
+                centerComponent={{ text: 'Hall', style: { fontSize: 22, color: '#ffffff' } }}
+                outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
+            />
+
+            <Header
+                leftComponent={<Icon name='chevron-left' color='white' onPress={() => this.decrementState()} />}
+                centerComponent={{ text: this.state.titleArray[Math.abs(this.state.stateIndex%4)], style: { fontSize: 22, color: '#ffffff' } }}
+                outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}}
+                underlayColor='#512698'
+                rightComponent={<Icon name='chevron-right' color='white' onPress={() => this.incrementState()} />}
+            />
+
             <ScrollView>
                 <ListItem
                     key={0}
