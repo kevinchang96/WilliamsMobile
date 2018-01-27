@@ -82,7 +82,7 @@ class HomeScreen extends Component {
                     </Tile>
 
                     <Tile
-                        imageSrc={require('../Assets/Williams_elevation.jpg')}
+                        imageSrc={require('../Assets/n.jpg')}
                         title="TODAY'S MENU"
                         caption="Daily Dining Needs"
                         activeOpacity={1}
