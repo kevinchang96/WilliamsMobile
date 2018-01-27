@@ -89,7 +89,6 @@ class DiningList extends Component{
 
          return(
              <View style={styles.container}>
-             {console.log(this)}
                   <Header
                       leftComponent={
                           <Icon
