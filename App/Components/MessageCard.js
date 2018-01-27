@@ -1,10 +1,11 @@
 /*
- * Nambi Williams
+ * Nambi Williams, David Ariyibi
+ * (c) 01/2018
  */
 
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Image, View } from 'react-native';
-import { Card, Button, Text} from 'react-native-elements';
+import { Button, Card, Divider, Text} from 'react-native-elements';
 
 export default class MessageCard extends Component{
 
@@ -13,17 +14,14 @@ export default class MessageCard extends Component{
             <Card
                 titleStyle={cardStyle.titleStyle}
                 title={this.props.title}>
-
                 <Text style={cardStyle.messageStyle}>{this.props.text}</Text>
+                <Divider style={{ backgroundColor: '#512698' }}/>
                 <Text style={cardStyle.srcStyle}>{this.props.src}</Text>
             </Card>
 
         );
     }
 }
-
-//titlestyle={{cardStyle.titleStyle}}>
-               //<Divider style={{ backgroundColor: '#512698' }}/>
 
 const cardStyle = StyleSheet.create({
      titleStyle:{
@@ -34,11 +32,12 @@ const cardStyle = StyleSheet.create({
      },
      messageStyle:{
         //fontFamily: 'Montserrat',
-        fontSize: 15
+        fontSize: 18,
+        marginBottom: 0,
      },
      srcStyle:{
         //fontFamily: 'Montserrat',
-        fontSize: 15,
+        fontSize: 16,
         fontStyle: 'italic'
      },
 });

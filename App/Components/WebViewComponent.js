@@ -1,5 +1,5 @@
 /**
- * Kevin Chang
+ * Kevin Chang, David Ariyibi, Dysron Marshall
  * (c) 01/2018
  */
 
@@ -9,7 +9,7 @@ import { Header, Icon } from 'react-native-elements';
 
 export default class WebViewComponent extends Component {
   render() {
-  console.log(this.props.navigation.state.params.url, this.props.navigation.state.params.name);
+  console.log(this.props.navigation.state.params.url, this.props.navigation.state.params.title);
     return (
         <View style={styles.container}>
             <Header
@@ -18,9 +18,10 @@ export default class WebViewComponent extends Component {
                         name='chevron-left'
                         color='white'
                         onPress={() => this.props.navigation.goBack()}
-                        underlayColor='#512698'/>
+                        underlayColor='#512698'
+                    />
                 }
-                centerComponent={{ text: this.props.navigation.state.params.name, style: { fontSize: 22, color: '#ffffff' } }}
+                centerComponent={{ text: this.props.navigation.state.params.title, style: { fontSize: 22, color: '#ffffff' } }}
                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
 
             <WebView

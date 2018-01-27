@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Button, ButtonGroup, Card, Header, Icon, List, ListItem } from 'react-native-elements';
+import { Button, ButtonGroup, Card, Header, Icon, List, ListItem, Tile } from 'react-native-elements';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 
 import Settings from '../Components/Settings';
@@ -64,50 +64,102 @@ class HomeScreen extends Component {
                 />
 
                 <ScrollView style={styles.scrollContainer}>
-                    <Card
-                        title='WEATHER'
-                        image={require('../Assets/weather-week-report.png')}>
+                    <Tile
+                        imageSrc={require('../Assets/Williams_College_students.jpg')}
+                        title="WEATHER"
+                        caption="Check the Forecast"
+                        activeOpacity={1}
+                        onPress={() => navigate('DiningMenus')}
+                        contentContainerStyle={{marginBottom: 20}}
+                    >
                         <Button
                             rounded
                             icon={{name: 'wb-cloudy'}}
                             onPress={() => navigate('DiningMenus')}
                             backgroundColor='#512698'
-                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
+                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='FORECAST' />
-                    </Card>
+                    </Tile>
 
-                    <Card
+                    <Tile
+                        imageSrc={require('../Assets/Williams_elevation.jpg')}
                         title="TODAY'S MENU"
-                        image={require('../Assets/cutlery.png')}>
+                        caption="Daily Dining Needs"
+                        activeOpacity={1}
+                        onPress={() => {this.props.navigation.navigate('DiningList')}}
+                        contentContainerStyle={{marginBottom: 20}}
+                    >
                         <Button
                             icon={{name: 'restaurant'}}
                             backgroundColor='#512698'
                             onPress={() => {this.props.navigation.navigate('DiningList')}}
-                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
+                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='DINING' />
-                    </Card>
+                    </Tile>
 
-                    <Card
-                        title='DAILY MESSAGES'
-                        image={require('../Assets/text.png')}>
+                    <Tile
+                        imageSrc={require('../Assets/schedule_box.png')}
+                        title="DAILY MESSAGES"
+                        caption="#1 Source of Information"
+                        activeOpacity={1}
+                        onPress={() => navigate('DailyMessages')}
+                        contentContainerStyle={{marginBottom: 20}}
+                    >
                         <Button
                             icon={{name: 'line-weight'}}
                             backgroundColor='#512698'
-                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
+                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             onPress={() => navigate('DailyMessages')}
                             title='MORE' />
-                    </Card>
+                    </Tile>
 
-                    <Card
-                        title='CAMPUS MAP'
-                        image={require('../Assets/campus-map.jpg')}>
+                    <Tile
+                        imageSrc={require('../Assets/Screen-Shot.png')}
+                        title="SOCIAL WILLIAMS"
+                        caption=""
+                        activeOpacity={1}
+                        onPress={() => navigate('Social', {url: 'https://www.williams.edu/social/', title: 'Social Williams'})}
+                        contentContainerStyle={{marginBottom: 20}}
+                    >
                         <Button
-                            icon={{name: 'search'}}
+                            icon={{name: 'share'}}
                             backgroundColor='#512698'
-                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
+                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                            onPress={() => navigate('Social', {url: 'https://www.williams.edu/social/', title: 'Social Williams'})}
+                            title='LOOK & SHARE' />
+                    </Tile>
+
+                    <Tile
+                        imageSrc={require('../Assets/Canvas-Mobile-App-Icon.png')}
+                        title="GLOW"
+                        caption="Because Grades"
+                        activeOpacity={1}
+                        onPress={() => navigate('Glow', {url: 'https://glow.williams.edu/login/ldap', title: 'Glow'})}
+                        contentContainerStyle={{marginBottom: 20}}
+                    >
+                        <Button
+                            icon={{name: 'input'}}
+                            backgroundColor='#512698'
+                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                            onPress={() => navigate('Glow', {url: 'https://glow.williams.edu/login/ldap', title: 'Glow'})}
+                            title='LOGIN' />
+                    </Tile>
+
+                    <Tile
+                        imageSrc={require('../Assets/colleges-maps.jpg')}
+                        title="CAMPUS MAP"
+                        caption="Sign Up for Tours!"
+                        activeOpacity={1}
+                        onPress={() => navigate('CampusMap', {url: 'http://map.williams.edu/map/?id=640', title: 'Campus Map'})}
+                        contentContainerStyle={{marginBottom: 20}}
+                    >
+                        <Button
+                            icon={{name: 'place'}}
+                            backgroundColor='#512698'
+                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             onPress={() => navigate('CampusMap', {url: 'http://map.williams.edu/map/?id=640', title: 'Campus Map'})}
                             title='EXPLORE' />
-                    </Card>
+                    </Tile>
                 </ScrollView>
             </View>
         );
@@ -122,12 +174,18 @@ const dailyMessages = () => ( <DailyMessages /> );
 
 const campusMap = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
+const glow = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
+const social = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
 const RootNavigator = StackNavigator({
     Home: { screen: HomeScreen },
     Settings: { screen: settings },
     DiningMenus: { screen: diningMenus },
     DailyMessages: {screen: dailyMessages },
+    Glow: { screen: glow },
     CampusMap: { screen: campusMap },
+    Social: { screen: social },
 },{
     headerMode: 'none',
 //    initialRouteName: 'homeScreen'

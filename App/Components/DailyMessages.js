@@ -1,5 +1,5 @@
 /*
- * Nambi Williams
+ * Nambi Williams, David Ariyibi
  * (c) 01/2018
  */
 
@@ -91,12 +91,16 @@ export default class DailyMessages extends Component {
     };
 
     createCard(firstChild, lastChild){
+        // removes the newlines
+        _title = firstChild.replace(/(\r\n|\n|\r)/gm," ");
+        _text = lastChild.substring(0, lastChild.lastIndexOf("from")).replace(/(\r\n|\n|\r)/gm," ");
+        _src = lastChild.slice(lastChild.lastIndexOf("from")+5).replace(/(\r\n|\n|\r)/gm," ");
+
         let message = {
-            title: firstChild,
-            text: lastChild.substring(0, lastChild.lastIndexOf("from")),
-            src: lastChild.slice(lastChild.lastIndexOf("from")+5)
+            title: _title,
+            text: _text,
+            src: _src
         }
-        console.log(message.text);
 
         card = <MessageCard
                     title = {message.title}

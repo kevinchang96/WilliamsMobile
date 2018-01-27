@@ -14,11 +14,17 @@ class LinkList extends Component{
         const { navigate } = this.props.navigation;
         const resourceList = [
             {
-                id: '54',
+                id: '53',
                 name: "Fast Facts",
                 screen: 'FastFacts',
                 url: 'https://communications.williams.edu/media-relations/fast-facts/',
-                icon: <Icon name='compare-arrows' />
+                icon: <Icon name='lightbulb-outline' />
+            },{
+                id: '54',
+                name: "Social Media Directory",
+                screen: 'SocialMedia',
+                url: 'https://communications.williams.edu/social-media-directory/',
+                icon: <Icon name='share' />
             },{
                 id: '55',
                 name: "Campus Map",
@@ -113,6 +119,8 @@ const courseCatalog = ({navigation}) => ( <WebViewComponent navigation={navigati
 
 const ephSports = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
+const socialMedia = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
 const LinkNavigator = StackNavigator({
     Home: { screen: LinkList },
     FastFacts: { screen: fastFacts },
@@ -122,7 +130,8 @@ const LinkNavigator = StackNavigator({
     BRTA: { screen: brta },
     AZ: { screen: az },
     CourseCatalog: { screen: courseCatalog },
-    EphSports: { screen: ephSports }
+    EphSports: { screen: ephSports },
+    SocialMedia: { screen: socialMedia },
     },
     { headerMode: 'none' }
 );
