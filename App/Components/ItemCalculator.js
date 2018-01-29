@@ -1,3 +1,7 @@
+/**
+ * Kevin Chang, Dysron Marshall
+ * (c) 01/2018
+ */
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { Avatar, Button, Card, CheckBox, Header, Icon, List, ListItem } from 'react-native-elements';
@@ -120,7 +124,7 @@ export default class ItemCalculator extends Component{
                  <View>
                      <Card containerStyle={{ marginTop: 5, marginBottom: 5, marginLeft: 5, marginRight: 5 }}>
                          <View style={styles.titleContainer}>
-                             <Text style={ styles.titleText }>
+                             <Text style={ (this.state.currentBalance <= 7) ? styles.titleText : styles.balanceOver}>
                                  Current amount: ${this.state.currentBalance}
                              </Text>
                          </View>
@@ -158,6 +162,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: 'black',
+    },
+    balanceOver: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'red',
     }
 
 });
