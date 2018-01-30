@@ -29,8 +29,7 @@ export default class Facebook extends Component{
 
     render(){
         return(
-            <View style= {{flex: 1, backgroundColor: "#eeeeee",
-                            paddingTop: Platform.OS === 'ios' ? 20 : 0,}}>
+            <View style= {{flex: 1, backgroundColor: "#eeeeee"}}>
                 <Header
                     leftComponent={
                         <Icon
