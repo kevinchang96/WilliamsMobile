@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     titleText: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: 'black',
+        color: 'green',
     },
     balanceOver: {
         fontSize: 20,

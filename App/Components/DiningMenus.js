@@ -60,8 +60,11 @@ export default class DiningMenus extends Component {
                 var cardList = []
                 for (var course in temp) {
                     if (temp.hasOwnProperty(course)) {
-                        cardList.push(<Card title={course}>
-                                         <List containerStyle={{padding: 0, marginBottom: 0}}>
+                        cardList.push(<Card title={course}
+                                         titleStyle={{color: '#512698', fontSize: 20, marginBottom: 0}}
+                                         dividerStyle={{height: 0}}
+                                         containerStyle={{marginTop: 10, marginBottom: 10}}>
+                                         <List containerStyle={{padding: 0, marginTop: 0, marginBottom: 0}}>
                                            {
                                              temp[course].map((l, i) => (
                                                <ListItem
@@ -73,7 +76,7 @@ export default class DiningMenus extends Component {
                                              ))
                                            }
                                          </List>
-                                       </Card>);
+                                      </Card>);
                     }
                 }
                 cards.push(cardList);
@@ -92,22 +95,17 @@ export default class DiningMenus extends Component {
 
     render() {
         return (
-        <View>
+        <View style={styles.container}>
             <Header
-                leftComponent={
-                    <Icon
-                        name='chevron-left'
-                        color='white'
-                        onPress={() => this.props.navigation.goBack()}
-                        underlayColor='#512698'/>
-                }
+                leftComponent={<Icon name='chevron-left' color='white' onPress={() => this.props.navigation.goBack()} underlayColor='#512698'/>}
                 centerComponent={{ text: this.props.navigation.state.params.title, style: { fontSize: 22, color: '#ffffff' } }}
                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
+                rightComponent={<Icon name='chevron-right' color='#512698' />}
             />
 
             <Header
                 leftComponent={<Icon name='chevron-left' color='white' onPress={() => this.decrementState()} />}
-                centerComponent={{ text: this.state.titleArray[Math.abs(this.state.stateIndex % this.state.titleArray.length)],
+                centerComponent={{ text: this.state.titleArray[Math.abs(this.state.stateIndex)],
                                    style: { fontSize: 20, color: '#ffffff' } }}
                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}}
                 underlayColor='#512698'
@@ -127,9 +125,9 @@ const styles = StyleSheet.create(
     container:
     {
         flex: 1,
-        backgroundColor: '#eee',
+        backgroundColor: '#eeeeee',
         justifyContent: 'center',
-        paddingTop: (Platform.OS == 'ios') ? 20 : 0
+//        paddingTop: (Platform.OS == 'ios') ? 20 : 0
     },
 
     viewHolder:

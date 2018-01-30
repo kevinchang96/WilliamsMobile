@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react';
 import WeatherCard from './WeatherCard.js';
-import { AppRegistry, Platform, StyleSheet, Image, View, Text } from 'react-native';
+import { AppRegistry, Platform, StyleSheet, Image, View, Text, ScrollView } from 'react-native';
 import { Avatar, Card, Button, Header, Icon, List, ListItem, Tile } from 'react-native-elements';
 //import WeatherReader from './WeatherReader';
 
@@ -132,30 +132,30 @@ export default class WeatherObj extends Component {
     render() {
         return (
             <View>
-              <Card
-                titleStyle={cardStyle.titleStyle}
-                title={'Wednesday'}>
-                <Text>Currently: {this.state.test}</Text>
-                <Text>Temperature: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
-                <Text>Humidity: {this.state.humidity}%</Text>
-                <Text>Wind speed: {this.state.mph} mph / {this.state.ms} m/s</Text>
-              </Card>
-              <Card
-                titleStyle={cardStyle.titleStyle}
-                title={'Thursday'}>
-                <Text>Currently: {this.state.test}</Text>
-                <Text>Temperature: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
-                <Text>Humidity: {this.state.humidity}%</Text>
-                <Text>Wind speed: {this.state.mph} mph / {this.state.ms} m/s</Text>
-              </Card>
-              <Card
-                titleStyle={cardStyle.titleStyle}
-                title={'Friday'}>
-                <Text>Currently: {this.state.test}</Text>
-                <Text>Temperature: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
-                <Text>Humidity: {this.state.humidity}%</Text>
-                <Text>Wind speed: {this.state.mph} mph / {this.state.ms} m/s</Text>
-              </Card>
+                <Header
+                    leftComponent={
+                        <Icon
+                            name='chevron-left'
+                            color='white'
+                            onPress={() => this.props.navigation.goBack()}
+                            underlayColor='#512698'/>
+                    }
+                    centerComponent={{ text: 'Weather', style: { fontSize: 22, color: '#ffffff' } }}
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
+                />
+
+                <Card
+                    titleStyle={cardStyle.titleStyle}
+                    title={'Someday, 99:00fm'}>
+                    <Text style={cardStyle.text}>Currently: {this.state.main}</Text>
+                    <Text style={cardStyle.text}>Temperature: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
+                    <Text style={cardStyle.text}>Humidity: {this.state.humidity}%</Text>
+                    <Text style={cardStyle.text}>Wind speed: {this.state.mph} mph / {this.state.ms} mps</Text>
+                </Card>
+
+                <ScrollView>
+                    <Text>Put forecast here.</Text>
+                </ScrollView>
             </View>
         )
     }
@@ -163,19 +163,23 @@ export default class WeatherObj extends Component {
 
 const cardStyle = StyleSheet.create({
      titleStyle:{
-        color: '#512698',
-        //backgroundColor: 'white',
-        //fontFamily: 'Comfortaa_bold',
-        fontSize: 20
+         color: '#512698',
+         //backgroundColor: 'white',
+         //fontFamily: 'Comfortaa_bold',
+         fontSize: 20
      },
      messageStyle:{
-        //fontFamily: 'Montserrat',
-        fontSize: 18,
-        marginBottom: 0,
+         //fontFamily: 'Montserrat',
+         fontSize: 18,
+         marginBottom: 0,
      },
      srcStyle:{
-        //fontFamily: 'Montserrat',
-        fontSize: 16,
-        fontStyle: 'italic'
+         //fontFamily: 'Montserrat',
+         fontSize: 16,
+         fontStyle: 'italic'
      },
+     text:{
+         color: 'black',
+         fontSize: 18
+     }
 });

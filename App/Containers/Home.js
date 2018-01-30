@@ -2,7 +2,7 @@
  * Kevin Chang
  * (c) 12/2017
  *
- * David Ariyibi, Dysron Marshall
+ * David Ariyibi, Dysron Marshall, William Fung
  * (c) 01/2018
  */
 
@@ -69,7 +69,6 @@ class HomeScreen extends Component {
                         title="WEATHER"
                         caption="Check the Forecast"
                         activeOpacity={1}
-                        onPress={() => navigate('Weather')}
                         contentContainerStyle={{marginBottom: 20}}
                     >
                         <Button
@@ -86,9 +85,7 @@ class HomeScreen extends Component {
                         title="TODAY'S MENU"
                         caption="Daily Dining Needs"
                         activeOpacity={1}
-                        onPress={() => {this.props.navigation.navigate('DiningList')}}
-                        contentContainerStyle={{marginBottom: 20}}
-                    >
+                        contentContainerStyle={{marginBottom: 20}}>
                         <Button
                             icon={{name: 'restaurant'}}
                             backgroundColor='#512698'
@@ -102,9 +99,7 @@ class HomeScreen extends Component {
                         title="DAILY MESSAGES"
                         caption="#1 Source of Information"
                         activeOpacity={1}
-                        onPress={() => navigate('DailyMessages')}
-                        contentContainerStyle={{marginBottom: 20}}
-                    >
+                        contentContainerStyle={{marginBottom: 20}}>
                         <Button
                             icon={{name: 'line-weight'}}
                             backgroundColor='#512698'
@@ -118,9 +113,7 @@ class HomeScreen extends Component {
                         title="SOCIAL WILLIAMS"
                         caption=""
                         activeOpacity={1}
-                        onPress={() => navigate('Social', {url: 'https://www.williams.edu/social/', title: 'Social Williams'})}
-                        contentContainerStyle={{marginBottom: 20}}
-                    >
+                        contentContainerStyle={{marginBottom: 20}}>
                         <Button
                             icon={{name: 'share'}}
                             backgroundColor='#512698'
@@ -134,9 +127,7 @@ class HomeScreen extends Component {
                         title="GLOW"
                         caption="Because Grades"
                         activeOpacity={1}
-                        onPress={() => navigate('Glow', {url: 'https://glow.williams.edu/login/ldap', title: 'Glow'})}
-                        contentContainerStyle={{marginBottom: 20}}
-                    >
+                        contentContainerStyle={{marginBottom: 20}}>
                         <Button
                             icon={{name: 'input'}}
                             backgroundColor='#512698'
@@ -150,9 +141,7 @@ class HomeScreen extends Component {
                         title="CAMPUS MAP"
                         caption="Sign Up for Tours!"
                         activeOpacity={1}
-                        onPress={() => navigate('CampusMap', {url: 'http://map.williams.edu/map/?id=640', title: 'Campus Map'})}
-                        contentContainerStyle={{marginBottom: 20}}
-                    >
+                        contentContainerStyle={{marginBottom: 20}}>
                         <Button
                             icon={{name: 'place'}}
                             backgroundColor='#512698'
@@ -166,19 +155,19 @@ class HomeScreen extends Component {
     }
 }
 
-const settings = ({navigation}) => ( <Settings screenProps={navigation}/> );
-
-const diningMenus = () => ( <DiningMenus /> );
+const campusMap = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
 const dailyMessages = ({navigation}) => ( <DailyMessages navigation={navigation} /> );
 
-const campusMap = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+const diningMenus = () => ( <DiningMenus /> );
 
 const glow = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
+const settings = ({navigation}) => ( <Settings screenProps={navigation}/> );
+
 const social = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
-const weather = () => ( <WeatherObj /> );
+const weather = ({navigation}) => ( <WeatherObj /> );
 
 const RootNavigator = StackNavigator({
     Home: { screen: HomeScreen },
@@ -188,7 +177,7 @@ const RootNavigator = StackNavigator({
     Glow: { screen: glow },
     CampusMap: { screen: campusMap },
     Social: { screen: social },
-    Weather: { screen: weather},
+    Weather: { screen: weather },
 },{
     headerMode: 'none',
 //    initialRouteName: 'homeScreen'
@@ -198,7 +187,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#EEEEEE' //'#DCD0FE',
+        backgroundColor: '#EEEEEE'
     },
     scrollContainer: {
         flex: 1,
@@ -208,16 +197,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     btn: {
-//        position: 'absolute',
-//        right: 25,
-//        bottom: 25,
         borderRadius: 30,
         width: 60,
         height: 60,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgba(0,0,0,0.7)',
-//        padding: 15
     },
     btnImage: {
         resizeMode: 'contain',
