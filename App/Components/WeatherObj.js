@@ -17,6 +17,8 @@ export default class WeatherObj extends Component {
       // let webInfo = w.state.data;
       let raw = JSON.parse('{"coord":{"lon":-73.2,"lat":42.71},"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04d"}],"base":"stations","main":{"temp":268.91,"pressure":1015,"humidity":63,"temp_min":267.15,"temp_max":270.15},"visibility":16093,"wind":{"speed":3.6,"deg":270},"clouds":{"all":90},"dt":1516377240,"sys":{"type":1,"id":1289,"message":0.004,"country":"US","sunrise":1516364263,"sunset":1516398614},"id":4955786,"name":"Williamstown","cod":200}'); // all the data
 
+
+
       // temperature conversions
       let temp = raw.main.temp;   // temperature in Kelvins
       var tempF = Math.floor(temp*1.8 - 459.67);
@@ -37,20 +39,58 @@ export default class WeatherObj extends Component {
       }
     }
 
-   //  componentDidMount() {
-   //   // this.fetchWeather();
-   //   // this.setState({test: 'something'});
-   //   let url = 'https://jsonplaceholder.typicode.com/posts/1';
-   //   fetch('http://api.openweathermap.org/data/2.5/weather?q=01267&APPID=5001beb19a0b0fa04fb3aa969e984f68', {method: 'GET',})
-   //   .then((response) => response.json())
-   //   .then((responseJson) => {
-   //     this.setState({test: JSON.parse(responseJson)});
-   //   })
-   //   .catch((error) => {
-   //     this.setState({test: 'error'});
-   //     console.log(error);
-   //   });
-   // }
+    componentDidMount() {
+      var errorMessage = "Unable to get weather information.";
+      var zipcode = "01267"; //Williamstown - Massachusetts
+      var query = "q=" + escape(
+            "select item from weather.forecast where location") +
+            "=\"" + zipcode + "\"";
+      var endPointURL = "http://query.yahooapis.com/v1/public/yql?" + query  +
+            "&format=json";
+
+      fetch(endPointURL, {method: 'GET',})
+      .then((response) => {
+        this.setState({test: response.query.results.channel.item.description});
+      })
+      .catch((error) => {
+        this.setState({test: errorMessage});
+        console.log(error);
+      });
+
+      // script.get(endPointURL, {
+      //   jsonp: "callback",
+      //   preventCache: true,
+      //   timeout: 3000
+      // }).then(function(response) {
+      //   try {
+      //     // document.getElementById("someDivID").innerHTML = response.query.results.channel.item.description;
+      //     this.setState({test: response.query.results.channel.item.description});
+      //   } catch (exception) {
+      //     alert(errorMessage);
+      //   }
+      // }, function(error) {
+      //   this.setState({test: errorMessage});
+      // });
+
+      // response.query.results.channel.item.description
+
+      // var queryURL = "https://query.yahooapis.com/v1/public/yql?q=select%20item.condition%20from%20weather.forecast%20where%20woeid%20%3D%202487889&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys/";
+      //
+      // this.getJSON(endPointURL, function (data) {
+      //
+      // var results = data.query.results
+      // var firstResult = results.channel.item.condition
+      // console.log(firstResult);
+      //
+      // var location = 'Unknown' // not returned in response
+      // var temp = firstResult.temp
+      // var text = firstResult.text
+      //
+      // this.setState({test: text});
+
+  //  })
+
+   }
 
 
     // get functions for each piece of information stored
@@ -92,14 +132,30 @@ export default class WeatherObj extends Component {
     render() {
         return (
             <View>
-            <Card
-              titleStyle={cardStyle.titleStyle}
-              title={'Weather'}>
-              <Text>Currently: {this.state.main}</Text>
-              <Text>Temperature: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
-              <Text>Humidity: {this.state.humidity}%</Text>
-              <Text>Wind speed: {this.state.mph} mph / {this.state.ms} m/s</Text>
-            </Card>
+              <Card
+                titleStyle={cardStyle.titleStyle}
+                title={'Wednesday'}>
+                <Text>Currently: {this.state.test}</Text>
+                <Text>Temperature: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
+                <Text>Humidity: {this.state.humidity}%</Text>
+                <Text>Wind speed: {this.state.mph} mph / {this.state.ms} m/s</Text>
+              </Card>
+              <Card
+                titleStyle={cardStyle.titleStyle}
+                title={'Thursday'}>
+                <Text>Currently: {this.state.test}</Text>
+                <Text>Temperature: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
+                <Text>Humidity: {this.state.humidity}%</Text>
+                <Text>Wind speed: {this.state.mph} mph / {this.state.ms} m/s</Text>
+              </Card>
+              <Card
+                titleStyle={cardStyle.titleStyle}
+                title={'Friday'}>
+                <Text>Currently: {this.state.test}</Text>
+                <Text>Temperature: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
+                <Text>Humidity: {this.state.humidity}%</Text>
+                <Text>Wind speed: {this.state.mph} mph / {this.state.ms} m/s</Text>
+              </Card>
             </View>
         )
     }
