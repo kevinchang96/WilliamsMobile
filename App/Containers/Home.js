@@ -69,13 +69,13 @@ class HomeScreen extends Component {
                         title="WEATHER"
                         caption="Check the Forecast"
                         activeOpacity={1}
-                        onPress={() => navigate('DiningMenus')}
+                        onPress={() => navigate('DailyMessages')}
                         contentContainerStyle={{marginBottom: 20}}
                     >
                         <Button
                             rounded
                             icon={{name: 'wb-cloudy'}}
-                            onPress={() => navigate('DiningMenus')}
+                            onPress={() => navigate('DailyMessages')}
                             backgroundColor='#512698'
                             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='FORECAST' />
