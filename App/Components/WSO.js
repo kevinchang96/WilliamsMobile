@@ -103,14 +103,14 @@ class WSO extends Component{
                         temp4[i-25] = jobs;
                     };
                     let temp5 = [5];
-                    for( var i = 31; i < 35; i++ ){
+                    /*for( var i = 31; i < 35; i++ ){
                         var rides = {
                             link: links.item(i).attributes.item(0).value,
                             text: links.item(i).textContent,
                             screen: 'WebViewPost'
                         };
                         temp5[i-31] = rides;
-                    };
+                    };*/
                     this.setState(
                         {
                             discussions: temp,

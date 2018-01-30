@@ -1,5 +1,5 @@
 /**
- * Kevin Chang
+ * Kevin Chang, Dysron Marshall
  * (c) 01/2018
  */
 
@@ -24,7 +24,7 @@ export default class Logout extends Component {
 
     async _loggedOut(){
         try{
-            await AsyncStorage.setItem('isLoggedIn', '0');
+            await AsyncStorage.multiSet([['isLoggedIn', '0'],['unix',""]]);
             this.setState({buttonDisabled: true});
             console.log("Set pref => logged out!");
         } catch (error) {
@@ -48,6 +48,7 @@ export default class Logout extends Component {
     }
 
     render() {
+    console.log(AsyncStorage.getItem('isLoggedIn'));
     const { navigate } = this.props.navigation;
         return (
         <View style={styles.container}>
@@ -79,17 +80,17 @@ export default class Logout extends Component {
     _logout = () => {
         // Logout
         fetch('https://wso.williams.edu/account/logout', {
-             method: 'GET',
-             headers: {
-               'Host': 'wso.williams.edu',
-               'Connection': 'keep-alive',
-               'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
-               'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-               'Accept-Language': 'en-US,en;q=0.8',
-               'Referer': 'https://wso.williams.edu/'
-             },
-          })
-          .then(
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Host': 'wso.williams.edu',
+                'Connection': 'keep-alive',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.8',
+                'Referer': 'https://wso.williams.edu/'
+            },
+        }).then(
             function(response) {
             console.log(response.headers);
                 if( response.status != "200" ){
@@ -98,8 +99,7 @@ export default class Logout extends Component {
                 } else {
                     this._loggedOut();
                 }
-            }.bind(this)
-          )
+        }.bind(this))
           /*.then((response) => response.text() ) // Transform the data into text
           .then((responseText) => {
              // Parse the text here

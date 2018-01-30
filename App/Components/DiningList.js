@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     btn: {
 //        position: 'absolute',
 //        right: 25,
-//        bottom: 25,
+//        bottom: 25
         borderRadius: 30,
         width: 60,
         height: 60,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
 
 const webViewPost = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
-const itemCalculator = () => ( <ItemCalculator /> );
+const itemCalculator = ({navigation}) => ( <ItemCalculator navigation={navigation}/> );
 
 const DiningNavigator = StackNavigator({
     Home: { screen: DiningList },

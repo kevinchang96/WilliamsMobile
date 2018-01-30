@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { AppRegistry, AsyncStorage, Image, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { DrawerItems, DrawerNavigator, SafeAreaView, TabNavigator } from 'react-navigation';
 import { Avatar, Card, Button, Header, Icon, List, ListItem, Tile } from 'react-native-elements';
 
@@ -16,21 +16,33 @@ import Emergency from './App/Components/Emergency';
 import About from './App/Components/About';
 import DiningList from './App/Components/DiningList';
 
+retrieveFromStorage = async(value) => {
+    try {
+        const val = await AsyncStorage.getItem(value);
+        if(val) return val;
+        return null;
+    }
+    catch (error) {console.log(error)}
+}
+const unix = retrieveFromStorage('unix');
+const username = retrieveFromStorage('username');
+console.log(unix);
+
 const CustomComponents = (props) => (
   <ScrollView style={styles.container}>
     <View style={{flex: 1, flexDirection: 'row', marginLeft: 20, marginTop: 20, marginBottom: 10}}>
       <Avatar
         large
         rounded
-        source={{uri: "https://wso.williams.edu/pic/kc13"}}
-        onPress={() => console.log("Works!")}
+        source={{uri:'https://wso.williams.edu/pic/' + unix._55}}
+        onPress={() => console.log(unix._55)}
         activeOpacity={0.7}
         containerStyle={{marginRight: 10}}
       />
 
       <View style={{flex: 1, flexDirection: 'column', marginTop: 5}}>
         <Text style={styles.text}>Ephraim Williams</Text>
-        <Text style={styles.subText}>ew18</Text>
+        <Text style={styles.subText}>{unix._55}</Text>
       </View>
     </View>
 

@@ -170,7 +170,7 @@ const settings = ({navigation}) => ( <Settings screenProps={navigation}/> );
 
 const diningMenus = () => ( <DiningMenus /> );
 
-const dailyMessages = () => ( <DailyMessages /> );
+const dailyMessages = ({navigation}) => ( <DailyMessages navigation={navigation} /> );
 
 const campusMap = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 

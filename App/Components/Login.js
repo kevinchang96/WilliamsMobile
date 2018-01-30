@@ -1,5 +1,5 @@
 /**
- * Kevin Chang, David Ariyibi
+ * Kevin Chang, David Ariyibi, Dysron Marshall
  * (c) 01/2018
  */
 
@@ -25,7 +25,7 @@ export default class Login extends Component {
 
     async _loggedIn(){
         try{
-            await AsyncStorage.setItem('isLoggedIn', '1');
+            await AsyncStorage.multiSet([['isLoggedIn', '1'],['unix',this.state.username]]);
             this.setState({buttonDisabled: true});
             console.log("Set pref => logged in!");
         } catch (error) {
@@ -35,8 +35,7 @@ export default class Login extends Component {
 
     async _rememberMe(){
         try{
-            await AsyncStorage.setItem('username', this.state.username);
-            await AsyncStorage.setItem('password', this.state.password);
+            await AsyncStorage.multiSet([['username', this.state.username],['password', this.state.password]]);
             console.log("Set pref => username/password!");
         } catch (error) {
             console.log( "An error has occurred! " + error );
@@ -86,6 +85,7 @@ export default class Login extends Component {
                 </View>
 
                 <FormInput
+                    autoCapitalize='none'
                     value={this.state.username}
                     placeholder='Username'
                     placeholderTextColor={'white'}
@@ -93,6 +93,7 @@ export default class Login extends Component {
                     onSubmitEditing={(event) => {this.refs.passwordInput.focus()}} />
 
                 <FormInput
+                    autoCapitalize='none'
                     secureTextEntry={true}
                     ref='passwordInput'
                     placeholder='Password'
@@ -182,10 +183,11 @@ export default class Login extends Component {
                //console.log(response.headers.get("set-cookie"));
                var setCookies = response.headers.get("set-cookie");
                //console.log( "Set-Cookies: " + setCookies );
-
-               if( !response._bodyInit.contains("https://pchanger.williams.edu/pchecker/") ){
+               if( response.status == 200 ){
+                console.log(response);
                 // Correct login attempt
                 this.setState( {cookies: setCookies, text: ""} );
+                console.log('successful attempt!!!!!')
                 this._loggedIn();
                 this._rememberMe();
                } else {
