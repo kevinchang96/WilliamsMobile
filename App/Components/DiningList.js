@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar, Button, Header, Icon, List, ListItem } from 'react-native-elements';
 import WebViewComponent from './WebViewComponent';
-import DiningGrabber from './DiningGrabber';
+import DiningMenus from './DiningMenus';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import ItemCalculator from './ItemCalculator';
 
@@ -20,43 +20,35 @@ class DiningList extends Component{
     const { navigate } = this.props.navigation;
          const diningHallList = [
            {
-             id: '211',
+             id: '208',
              name: "Whitmans' Marketplace",
-             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S211&date=today',
-             screen: 'WebViewPost',
+             screen: 'DiningMenus',
              icon: <Icon name='local-dining' />,
-             pic: ('../Assets/paresky.jpg')
            },{
-             id: '3',
+             id: '27',
              name: "Driscoll",
-             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S3&date=today',
-             screen: 'WebViewPost',
+             screen: 'DiningMenus',
              icon: <Icon name='local-dining' />,
-             pic: ('../Assets/dricoll.jpg')
            },{
-             id: '5',
+             id: '29',
              name: "Mission",
-             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S5&date=today',
-             screen: 'WebViewPost',
+             screen: 'DiningMenus',
              icon: <Icon name='local-dining' />,
-             pic: ('../Assets/mission.jpg')
+           },{
+             id: '38',
+             name: "Eco Cafe",
+             screen: 'DiningMenus',
+             icon: <Icon name='directions-run' />
+           },{
+             id: '209',
+             name: "Grab & Go",
+             screen: 'DiningMenus',
+             icon: <Icon name='directions-run' />
            }
          ]
 
          const otherHallList = [
            {
-             id: '14',
-             name: "Eco Cafe",
-             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S14&date=today',
-             screen: 'WebViewPost',
-             icon: <Icon name='directions-run' />
-           },{
-             id: '23',
-             name: "Grab n Go",
-             url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S23&date=today',
-             screen: 'WebViewPost',
-             icon: <Icon name='directions-run' />
-           },{
              id: '25',
              name: "'82 Grill",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S25&date=today',
@@ -109,7 +101,7 @@ class DiningList extends Component{
                              avatar={l.icon}
                              key={i}
                              title={l.name}
-                             onPress={() => {navigate(l.screen, {url: l.url, title: l.name})} }
+                             onPress={() => {navigate(l.screen, {id: l.id, title: l.name})} }
                            />
                          ))
                        }
@@ -181,7 +173,7 @@ const styles = StyleSheet.create({
     btn: {
 //        position: 'absolute',
 //        right: 25,
-//        bottom: 25
+//        bottom: 25,
         borderRadius: 30,
         width: 60,
         height: 60,
@@ -203,8 +195,11 @@ const webViewPost = ({navigation}) => ( <WebViewComponent navigation={navigation
 
 const itemCalculator = ({navigation}) => ( <ItemCalculator navigation={navigation}/> );
 
+const diningMenus = ({navigation}) => ( <DiningMenus navigation={navigation}/> );
+
 const DiningNavigator = StackNavigator({
     Home: { screen: DiningList },
+    DiningMenus: { screen: diningMenus },
     WebViewPost: { screen: webViewPost },
     ItemCalculator: { screen: itemCalculator }
   },

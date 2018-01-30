@@ -116,7 +116,6 @@ export class Factrak extends Component{
 
     render(){
         return(
-
             <View style={styles.container}>
                 <Header
                     leftComponent={
@@ -129,18 +128,17 @@ export class Factrak extends Component{
                     centerComponent={{ text: 'Factrak', style: { fontSize: 22, color: '#ffffff' } }}
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
                 />
-                <View style={styles.searchBox}>
-                    <FormInput
-                        onChangeText={(text) => this.getSuggestions(text)}
-                        placeholder="Search for a professor or course..."
-                        autoCorrect={false}
-                    />
-                </View>
-                <View style={styles.suggestionsContainer}>
-                    <List>
-                        {this.state.suggestions}
-                    </List>
-                </View>
+
+                <FormInput
+                    style={{color: "white", fontSize: 20}}
+                    onChangeText={(text) => this.getSuggestions(text)}
+                    placeholder="Search for a professor or course..."
+                    autoCorrect={false}
+                />
+
+                <List>
+                    {this.state.suggestions}
+                </List>
             </View>
         );
     }

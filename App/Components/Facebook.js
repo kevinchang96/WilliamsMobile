@@ -1,21 +1,19 @@
 /**
- * Alex Taylor
+ * Alex Taylor, David Ariyibi
  * (c) 01/2018
  */
 
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  Button,
   Platform,
+  ScrollView,
   StyleSheet,
   Text,
-  TextInput,
-  View,
-  ScrollView
+  View
 } from 'react-native';
 
-import { SearchBar } from 'react-native-elements'
+import { Button, FormInput, Header, Icon, SearchBar } from 'react-native-elements'
 import StudentCard from './StudentCard'
 import StudentPage from './StudentPage'
 
@@ -31,19 +29,35 @@ export default class Facebook extends Component{
 
     render(){
         return(
-            <View style= {{flex: 1, backgroundColor: "#512698",
+            <View style= {{flex: 1, backgroundColor: "#eeeeee",
                             paddingTop: Platform.OS === 'ios' ? 20 : 0,}}>
-                <TextInput
+                <Header
+                    leftComponent={
+                        <Icon
+                            name='chevron-left'
+                            color='white'
+                            onPress={() => this.props.screenProps.goBack()}
+                            underlayColor='#512698'/>
+                    }
+                    centerComponent={{ text: 'Facebook', style: { fontSize: 22, color: '#ffffff' } }}
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
+                />
+
+                <FormInput
                     style=  {{color: "white", fontSize: 20}}
                     placeholder = {this.state.searchFor}
-                    placeholderTextColor = "white"
+                    placeholderStyle = {{color: "white"}}
+                    autoCorrect={false}
                     onChangeText = {searchFor => this.setState({searchFor})}
                 />
+
                 <Button
-                    title="Search"
-                    color="gold"
+                    title="SEARCH"
+                    backgroundColor="#512698"
+                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                     onPress={this.submitForm}
                 />
+
                 <ScrollView>
                     {this.state.studentCards}
                 </ScrollView>

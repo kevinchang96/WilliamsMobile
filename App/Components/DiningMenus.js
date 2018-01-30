@@ -5,14 +5,19 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, ScrollView, PixelRatio, Dimensions, Animated } from 'react-native';
-import { Button, Header, List, ListItem } from 'react-native-elements';
+import { Button, Card, Header, List, ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class DiningMenus extends Component {
 
     constructor(){
         super()
-        this.state = { breakfastArray: [], brunchArray: [], lunchArray: [], dinnerArray: [], mealArray: [] }
+        this.state = {
+            mealArray: [],
+            cardArray: [],
+            stateIndex: 0,
+            titleArray: [],
+        }
     }
 
     componentDidMount(){
@@ -21,7 +26,7 @@ export default class DiningMenus extends Component {
 
     _getMeal = () => {
         var data = 'https://dining.williams.edu/wp-json/dining/service_units/'
-        fetch( data+'27',
+        fetch( data + this.props.navigation.state.params.id,
         { method: 'GET' })
         .then( (res) => res.json())
         .then( (responseJson) => {
@@ -32,42 +37,57 @@ export default class DiningMenus extends Component {
         });
     }
 
-    _parseArray = (data) => {
-        var array0 = [], array1 = [], array2 = [], array3 = [];
-        data.map( (l, i) => {
-            switch( l.meal ){
-                case "BREAKFAST":   array0.push( <ListItem
-                                                     key={i}
-                                                     title={l.formal_name}
-                                                     hideChevron={true}
-                                                    /> );
-                                    //console.log("Item: " + l.formal_name);
-                                    break;
-                case "BRUNCH":      array1.push( <ListItem
-                                                     key={i}
-                                                     title={l.formal_name}
-                                                     hideChevron={true}
-                                                    /> );
-                                    //console.log("Item: " + l.formal_name);
-                                    break;
-                case "LUNCH":       array2.push( <ListItem
-                                                     key={i}
-                                                     title={l.formal_name}
-                                                     hideChevron={true}
-                                                    /> );
-                                    //console.log("Item: " + l.formal_name);
-                                    break;
-                case "DINNER":      array3.push( <ListItem
-                                                     key={i}
-                                                     title={l.formal_name}
-                                                     hideChevron={true}
-                                                    /> );
-                                    //console.log("Item: " + l.formal_name);
-                default:            break;
+    _groupBy = (arr, property) => {
+        return arr.reduce(function(memo, x) {
+            if (!memo[x[property]]) { memo[x[property]] = []; }
+            memo[x[property]].push(x);
+            return memo;
+        }, {});
+    }
 
+    _parseArray = (data) => {
+        var meals = this._groupBy(data, "meal");
+        var titles = [];
+        var cards = [];
+        var temp = [];
+
+        for (var meal in meals) {
+            if (meals.hasOwnProperty(meal)) {
+                meals[meal] = this._groupBy(meals[meal], "course");
+                titles.push(meal);
+                temp = meals[meal];
+
+                var cardList = []
+                for (var course in temp) {
+                    if (temp.hasOwnProperty(course)) {
+                        cardList.push(<Card title={course}>
+                                         <List containerStyle={{padding: 0, marginBottom: 0}}>
+                                           {
+                                             temp[course].map((l, i) => (
+                                               <ListItem
+                                                 key={i}
+                                                 title={l.formal_name}
+                                                 subtitle={l.portion_size}
+                                                 hideChevron={true}
+                                               />
+                                             ))
+                                           }
+                                         </List>
+                                       </Card>);
+                    }
+                }
+                cards.push(cardList);
             }
-        });
-        this.setState({breakfastArray: array0, lunchArray: array2, dinnerArray: array3 });
+        }
+        this.setState({ mealArray: meals, cardArray: cards, titleArray: titles });
+    }
+
+    incrementState(){
+        this.setState({ stateIndex: (this.state.stateIndex + 1) % this.state.titleArray.length });
+    }
+
+    decrementState(){
+        this.setState({ stateIndex: (this.state.stateIndex + this.state.titleArray.length - 1) % this.state.titleArray.length });
     }
 
     render() {
@@ -81,43 +101,21 @@ export default class DiningMenus extends Component {
                         onPress={() => this.props.navigation.goBack()}
                         underlayColor='#512698'/>
                 }
-                centerComponent={{ text: 'Hall', style: { fontSize: 22, color: '#ffffff' } }}
+                centerComponent={{ text: this.props.navigation.state.params.title, style: { fontSize: 22, color: '#ffffff' } }}
                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
             />
 
             <Header
                 leftComponent={<Icon name='chevron-left' color='white' onPress={() => this.decrementState()} />}
-                centerComponent={{ text: this.state.titleArray[Math.abs(this.state.stateIndex%4)], style: { fontSize: 22, color: '#ffffff' } }}
+                centerComponent={{ text: this.state.titleArray[Math.abs(this.state.stateIndex % this.state.titleArray.length)],
+                                   style: { fontSize: 20, color: '#ffffff' } }}
                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}}
                 underlayColor='#512698'
                 rightComponent={<Icon name='chevron-right' color='white' onPress={() => this.incrementState()} />}
             />
 
             <ScrollView>
-                <ListItem
-                    key={0}
-                    title={'Breakfast'}
-                    hideChevron={true}
-                    />
-                <List containerStyle={{ marginTop: 0, marginBottom: 5 }}>
-                   { this.state.breakfastArray }
-                 </List>
-                 <ListItem
-                     key={1}
-                     title={'Lunch'}
-                     hideChevron={true}
-                 />
-                <List containerStyle={{ marginTop: 0, marginBottom: 5 }}>
-                   { this.state.lunchArray }
-                 </List>
-                 <ListItem
-                      key={2}
-                      title={'Dinner'}
-                      hideChevron={true}
-                  />
-                  <List containerStyle={{ marginTop: 0, marginBottom: 5 }}>
-                     { this.state.dinnerArray }
-                   </List>
+                {this.state.cardArray[this.state.stateIndex]}
             </ScrollView>
         </View>
         );

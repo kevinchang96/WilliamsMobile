@@ -17,5 +17,4 @@ react-native-animatable --save
 react-navigation  
 react-native-html-parser  
 native-base  
-react-native-read-more-text --save  
-react-native-dropdown-menu --save  
+react-native-read-more-text --save
