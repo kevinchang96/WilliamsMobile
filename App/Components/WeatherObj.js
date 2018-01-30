@@ -4,15 +4,17 @@
 // (c) 2018 Grace Mazzarella, William Fung
 
 import React, { Component } from 'react';
-import {View, Text} from 'react-native';
+import WeatherCard from './WeatherCard.js';
+import { AppRegistry, Platform, StyleSheet, Image, View, Text } from 'react-native';
+import { Avatar, Card, Button, Header, Icon, List, ListItem, Tile } from 'react-native-elements';
 //import WeatherReader from './WeatherReader';
 
 export default class WeatherObj extends Component {
     constructor(props) {
       super(props);
 
-      let w = new WeatherReader();
-      let webInfo = w.state.data;
+      // let w = new WeatherReader();
+      // let webInfo = w.state.data;
       let raw = JSON.parse('{"coord":{"lon":-73.2,"lat":42.71},"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04d"}],"base":"stations","main":{"temp":268.91,"pressure":1015,"humidity":63,"temp_min":267.15,"temp_max":270.15},"visibility":16093,"wind":{"speed":3.6,"deg":270},"clouds":{"all":90},"dt":1516377240,"sys":{"type":1,"id":1289,"message":0.004,"country":"US","sunrise":1516364263,"sunset":1516398614},"id":4955786,"name":"Williamstown","cod":200}'); // all the data
 
       // temperature conversions
@@ -22,7 +24,7 @@ export default class WeatherObj extends Component {
 
       this.state = {
 
-          test: webInfo,
+          test: '',
 
           main: raw.weather[0].main,                  // main, eg. cloudy, sunny, etc.
           description: raw.weather[0].description,    // a somewhat accurate blurb about the weather
@@ -34,6 +36,22 @@ export default class WeatherObj extends Component {
           mph: Math.ceil(raw.wind.speed*2.2369),      // speed in mi/hr (imperial units)
       }
     }
+
+   //  componentDidMount() {
+   //   // this.fetchWeather();
+   //   // this.setState({test: 'something'});
+   //   let url = 'https://jsonplaceholder.typicode.com/posts/1';
+   //   fetch('http://api.openweathermap.org/data/2.5/weather?q=01267&APPID=5001beb19a0b0fa04fb3aa969e984f68', {method: 'GET',})
+   //   .then((response) => response.json())
+   //   .then((responseJson) => {
+   //     this.setState({test: JSON.parse(responseJson)});
+   //   })
+   //   .catch((error) => {
+   //     this.setState({test: 'error'});
+   //     console.log(error);
+   //   });
+   // }
+
 
     // get functions for each piece of information stored
 
@@ -72,14 +90,36 @@ export default class WeatherObj extends Component {
     // a render function for testing
 
     render() {
-        //let w = '{"coord":{"lon":-73.2,"lat":42.71},"weather":[{"id":600,"main":"Snow","description":"light snow","icon":"13d"},{"id":701,"main":"Mist","description":"mist","icon":"50d"}],"base":"stations","main":{"temp":270.92,"pressure":1024,"humidity":86,"temp_min":270.15,"temp_max":272.15},"visibility":4828,"wind":{"speed":1.06,"deg":355.005},"clouds":{"all":90},"dt":1516204440,"sys":{"type":1,"id":2898,"message":0.0191,"country":"US","sunrise":1516191537,"sunset":1516225663},"id":4955786,"name":"Williamstown","cod":200}';
-        // this.storeData();
-        // console.log(this);
-        // console.log(this.state.main);
         return (
             <View>
-                <Text>{this.state.test}</Text>
+            <Card
+              titleStyle={cardStyle.titleStyle}
+              title={'Weather'}>
+              <Text>Currently: {this.state.main}</Text>
+              <Text>Temperature: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
+              <Text>Humidity: {this.state.humidity}%</Text>
+              <Text>Wind speed: {this.state.mph} mph / {this.state.ms} m/s</Text>
+            </Card>
             </View>
         )
     }
-}
+};
+
+const cardStyle = StyleSheet.create({
+     titleStyle:{
+        color: '#512698',
+        //backgroundColor: 'white',
+        //fontFamily: 'Comfortaa_bold',
+        fontSize: 20
+     },
+     messageStyle:{
+        //fontFamily: 'Montserrat',
+        fontSize: 18,
+        marginBottom: 0,
+     },
+     srcStyle:{
+        //fontFamily: 'Montserrat',
+        fontSize: 16,
+        fontStyle: 'italic'
+     },
+});

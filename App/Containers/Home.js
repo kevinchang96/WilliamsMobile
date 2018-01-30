@@ -15,7 +15,7 @@ import Settings from '../Components/Settings';
 import DiningMenus from '../Components/DiningMenus';
 import WebViewComponent from '../Components/WebViewComponent';
 import DiningList from '../Components/DiningList';
-//import WeatherReader from '../Components/WeatherReader';
+import WeatherObj from '../Components/WeatherObj';
 import DailyMessages from '../Components/DailyMessages';
 
 class HomeScreen extends Component {
@@ -69,13 +69,13 @@ class HomeScreen extends Component {
                         title="WEATHER"
                         caption="Check the Forecast"
                         activeOpacity={1}
-                        onPress={() => navigate('DiningMenus')}
+                        onPress={() => navigate('Weather')}
                         contentContainerStyle={{marginBottom: 20}}
                     >
                         <Button
                             rounded
                             icon={{name: 'wb-cloudy'}}
-                            onPress={() => navigate('DiningMenus')}
+                            onPress={() => navigate('Weather')}
                             backgroundColor='#512698'
                             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                             title='FORECAST' />
@@ -178,6 +178,8 @@ const glow = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
 const social = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
+const weather = () => ( <WeatherObj /> );
+
 const RootNavigator = StackNavigator({
     Home: { screen: HomeScreen },
     Settings: { screen: settings },
@@ -186,6 +188,7 @@ const RootNavigator = StackNavigator({
     Glow: { screen: glow },
     CampusMap: { screen: campusMap },
     Social: { screen: social },
+    Weather: { screen: weather},
 },{
     headerMode: 'none',
 //    initialRouteName: 'homeScreen'
