@@ -17,5 +17,5 @@ npm install react-native-animatable --save;
 npm install react-navigation;  
 npm install react-native-html-parser;  
 npm install native-base;  
-npm install react-native-read-more-text --save;
+npm install react-native-read-more-text --save;  
 npm install react-native-datepicker;
