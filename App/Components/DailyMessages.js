@@ -1,133 +1,100 @@
 /*
- * Nambi Williams, David Ariyibi
+ * Nambi Williams, David Ariyibi, Dysron Marshall
  * (c) 01/2018
  */
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableHighlight,
-  ScrollView,
-  Dimensions,
-  DatePickerAndroid
+    AppRegistry,
+    Platform,
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    TouchableHighlight,
+    ScrollView,
+    Dimensions,
+    FlatList,
 } from 'react-native';
 import { Button, Header, Icon } from 'react-native-elements';
 import MessageCard from './MessageCard';
+import DatePicker from 'react-native-datepicker'
+
 
 export default class DailyMessages extends Component {
-
-
     constructor(props){
         super(props);
+        date = new Date();
         this.state = {
-            messages: [],
-            renderMessages: false,
-            titlesArray: [],
-            messageCards: []
+            initialRender: true,
+            from: date,
+            to: date,
+            messageCards: [],
         };
-        this.getMessages();
     }
 
+    componentDidMount(){
+        this.getMessages({from:this.state.from, to:this.state.to, initialRender:false});
+    }
 
+    shouldComponentUpdate(nextProps, nextState){
+        return  (this.state.from != nextState.from) ||
+                (this.state.to != nextState.to) ||
+                 this.state.initialRender;
+    }
 
-    getMessages = () => {
+    convertDate = (dateObj) => {
+        return dateObj.getFullYear() + '/' + (dateObj.getMonth() + 1) + '/' + dateObj.getDate();
+    }
 
-        const request = new Request('https://web.williams.edu/messages/');
-        const test = request.credentials;
-        //console.log("Creds: "+ test.toString() );
-        fetch('https://web.williams.edu/messages/', {mode: 'no-cors'}, {method: 'GET'})
+    changeDate = (date,pickerName) => {
+        date = new Date(date.split('-'));
+        if(pickerName == 'fromDate') {
+            this.getMessages({from:date, to: this.state.to});
+        }
+        else {
+            this.getMessages({from: this.state.from, to:date});
+        }
+    }
+
+    getMessages = (json) => {
+        const url = (json.from != json.to) ?    // if dates are the same, then viewing single date
+                    'https://web.williams.edu/messages/index.php?' +    // so url is homepage
+                    'search_audience_student=on&search_audience_faculty=on&' +
+                    'search_audience_staff=on&begin_date=' +
+                    encodeURIComponent(this.convertDate(json.from)) + '&end_date=' +
+                    encodeURIComponent(this.convertDate(json.to)) + '&search_terms=&search_submit=Search' :
+                    'https://web.williams.edu/messages/';
+        //console.log(url);
+        fetch(url, {method: 'GET'})
         .then((response) => response.text() ) // Transform the data into text
         .then((responseText) => {
-
-            //console.log(responseText);
-            //console.log(responseText);
-
             let messagecards = [];
 
-            var DOMParser = require('react-native-html-parser').DOMParser;
+            const DOMParser = require('react-native-html-parser').DOMParser;
 
             let doc = new DOMParser().parseFromString(responseText,'text/html');
 
             const root = doc.getElementsByClassName("webOnly");
 
-            //console.log("Root size " + root.length);
-
-            /*let title = root[0].firstChild.textContent;
-            let text = root[0].lastChild.textContent;
-
-            console.log(text.substring(0, text.lastIndexOf("from")));
-            console.log(text.slice(text.lastIndexOf("from")+5));
-            console.log(root[0]);*/
-
             for (let i = 0; i < root.length; i++){
-                let card = this.createCard(root[i].firstChild.textContent, root[i].lastChild.textContent);
+                let card = this.createCard(root[i].firstChild.textContent, root[i].lastChild.textContent,i);
                 //console.log(card);
                 messagecards.push(card);
             }
-           // console.log(messagecards);
-
-            /*for (let i=0; i < root.length; i = i+2){
-                console.log(root[0].textContent);
-                console.log(root[0]);
-            }*/
-
-
-
-            this.setState({
-                messageCards: messagecards
-            });
-            //console.log(this.state);
-
-        })
-        .catch((error) => {
-           console.error(error);
-        });
-
+            this.setState(Object.assign({}, json, { messageCards: messagecards }));
+        }).catch((error) => { console.error(error)} );
     };
 
-    createCard(firstChild, lastChild){
-        // removes the newlines
-        _title = firstChild.replace(/(\r\n|\n|\r)/gm," ");
-        _text = lastChild.substring(0, lastChild.lastIndexOf("from")).replace(/(\r\n|\n|\r)/gm," ");
-        _src = lastChild.slice(lastChild.lastIndexOf("from")+5).replace(/(\r\n|\n|\r)/gm," ");
-
-        let message = {
-            title: _title,
-            text: _text,
-            src: _src
-        }
-
-        card = <MessageCard
-                    title = {message.title}
-                    text = {message.text}
-                    src = {message.src}
-               />
-
-        //console.log(card);
+    createCard(firstChild, lastChild, i){
+        title = firstChild.replace(/(\r\n|\n|\r)/gm," ");
+        text = lastChild.substring(0, lastChild.lastIndexOf("from")).replace(/(\r\n|\n|\r)/gm," ");
+        src = lastChild.slice(lastChild.lastIndexOf("from")+5).replace(/(\r\n|\n|\r)/gm," ");
+        card = <MessageCard title={title} text={text} src={src} key={i}/>
         return card;
     }
 
-    changeDate = () =>{
-        try {
-          const {action, year, month, day} = DatePickerAndroid.open({date: new Date()}, {mode: 'spinner'});
-          console.log(date);
-          if (action !== DatePickerAndroid.dismissedAction) {
-            return;
-          }
-        } catch ({code, message}) {
-          console.warn('Cannot open date picker', message);
-        }
-
-    }
-
     render() {
-        //this.getMessages();
-        //console.log(this.state.titlesArray.length);
         return (
             <View style={styles.container}>
                 <Header
@@ -141,16 +108,21 @@ export default class DailyMessages extends Component {
                     centerComponent={{ text: 'Daily Messages', style: { fontSize: 22, color: '#ffffff' } }}
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55, marginBottom: 10}}
                 />
-
-                <Button
-                    title='TODAY'
-                    backgroundColor= '#512698'
-                    onPress={this.changeDate}
-                />
-
-                <ScrollView>
-                    {this.state.messageCards}
-                </ScrollView>
+                <View style={styles.pickers}>
+                    <View>
+                        <Text>From</Text>
+                        <DatePicker confirmBtnText="Confirm" cancelBtnText="Cancel"
+                            date={this.state.from}
+                            onDateChange={(date) => this.changeDate(date,'fromDate')}/>
+                    </View>
+                    <View>
+                        <Text>To</Text>
+                        <DatePicker confirmBtnText="Confirm" cancelBtnText="Cancel"
+                            date={this.state.to}
+                            onDateChange={(date) => this.changeDate(date,'toDate')}/>
+                    </View>
+                </View>
+                <FlatList data={this.state.messageCards} renderItem={({item}) => item}/>
             </View>
 
         );
@@ -161,5 +133,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#EEEEEE' //'#DCD0FE',
-    }
+    },
+    pickers: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10
+    },
+
 })
