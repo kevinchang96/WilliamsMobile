@@ -48,7 +48,7 @@ export default class DailyMessages extends Component {
     }
 
     changeDate = (date,pickerName) => {
-        date = new Date(date.split('-'));
+        date = new Date(date);
         if(pickerName == 'fromDate') {
             this.getMessages({from:date, to: this.state.to});
         }
@@ -112,13 +112,13 @@ export default class DailyMessages extends Component {
                     <View>
                         <Text>From</Text>
                         <DatePicker confirmBtnText="Confirm" cancelBtnText="Cancel"
-                            date={this.state.from}
+                            format={'DD MMMM YYYY'} date={this.state.from}
                             onDateChange={(date) => this.changeDate(date,'fromDate')}/>
                     </View>
                     <View>
                         <Text>To</Text>
                         <DatePicker confirmBtnText="Confirm" cancelBtnText="Cancel"
-                            date={this.state.to}
+                            format={'DD MMMM YYYY'} date={this.state.to}
                             onDateChange={(date) => this.changeDate(date,'toDate')}/>
                     </View>
                 </View>
