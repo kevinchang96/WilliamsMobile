@@ -318,7 +318,7 @@ const wsoPost = ({navigation}) => ( <WSOPost navigation={navigation}/> );
 
 const factrak = ({navigation}) => (<Factrak screenProps={navigation}/>);
 
-const facebook = () => (<Facebook />);
+const facebook = ({navigation}) => (<Facebook navigation={navigation}/>);
 
 const PostNavigator = StackNavigator({
     Home: { screen: WSO },
