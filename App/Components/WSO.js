@@ -25,102 +25,37 @@ class WSO extends Component{
 
     constructor(props){
         super(props);
-        this.state=
-        {
-           discussions:[],
-           announcements:[],
-           exchanges:[],
-           lostNfound:[],
-           jobs:[],
-           rides:[]
-        };
+        this.state = { wso:[[],[],[],[],[],[]] };
     }
 
     componentDidMount(){
         fetch('https://wso.williams.edu/', {method: 'GET'})
         .then( (response) => response.text() )
-        .then( (responseText) => {
-            const parts = responseText.split('center');
-            // Ill-formed html; must add single quotes
-            const html = parts[0] + "\'center\'" + parts[1];
-            this._getInfo(html);
-        })
-        .catch((error) => {
-             console.error(error);
-        });
+        .then( (responseText) => { this._getInfo(responseText); })
+        .catch((error) => { console.error(error); });
     }
 
     _getInfo = ( html ) => {
         var DOMParser = require('react-native-html-parser').DOMParser;
-                    let doc = new DOMParser({errorHandler:{warning:function(w){console.warn(w)},error:function(w){console.log(w)},fatalError:function(w){console.log(w)}}}).parseFromString(html,'text/html');
-                    var input = doc.getElementsByTagName("section");
-                    const links = input.item(0).getElementsByTagName("a");
-                    console.log("Size: "+ links.item(0).attributes.item(0).value);
-                    var size = links.length;
-                    var temp = [5];
-                    for( var i = 1; i < 6; i++ ){
-                        var discussions = {
-                            link: links.item(i).attributes.item(0).value,
-                            text: links.item(i).textContent,
-                            screen: 'WebViewPost'
-                        };
-                        temp[i-1] = discussions;
-                    };
-                    var temp1 = [5];
-                    for( var i = 7; i < 12; i++ ){
-                        var announcements = {
-                            link: links.item(i).attributes.item(0).value,
-                            text: links.item(i).textContent,
-                            screen: 'WSOPost'
-                        };
-                        temp1[i-7] = announcements;
-                    };
-                    var temp2 = [5];
-                    for( var i = 13; i < 18; i++ ){
-                        var exchanges = {
-                            link: links.item(i).attributes.item(0).value,
-                            text: links.item(i).textContent,
-                            screen: 'WSOPost'
-                        };
-                        temp2[i-13] = exchanges;
-                    };
-                    var temp3 = [5];
-                    for( var i = 19; i < 24; i++ ){
-                        var lostNfound = {
-                            link: links.item(i).attributes.item(0).value,
-                            text: links.item(i).textContent,
-                            screen: 'WSOPost'
-                        };
-                        temp3[i-19] = lostNfound;
-                    };
-                    var temp4 = [5];
-                    for( var i = 25; i < 30; i++ ){
-                        var jobs = {
-                            link: links.item(i).attributes.item(0).value,
-                            text: links.item(i).textContent,
-                            screen: 'WSOPost'
-                        };
-                        temp4[i-25] = jobs;
-                    };
-                    let temp5 = [5];
-                    /*for( var i = 31; i < 35; i++ ){
-                        var rides = {
-                            link: links.item(i).attributes.item(0).value,
-                            text: links.item(i).textContent,
-                            screen: 'WebViewPost'
-                        };
-                        temp5[i-31] = rides;
-                    };*/
-                    this.setState(
-                        {
-                            discussions: temp,
-                            announcements: temp1,
-                            exchanges: temp2,
-                            lostNfound: temp3,
-                            jobs: temp4,
-                            rides: temp5
-                        }
-                    );
+        let doc = new DOMParser({errorHandler:{warning:function(w){console.warn(w)},error:function(w){console.log(w)},fatalError:function(w){console.log(w)}}}).parseFromString(html,'text/html');
+        var input = doc.getElementsByTagName("section");
+        const lists = input.item(0).getElementsByTagName("ul");
+        var tempCategory = new Array(lists.length);
+        for( var i = 0; i < lists.length; i++ ){
+            var category = lists.item(i);
+            var links = category.getElementsByTagName("a");
+            var tempLinks = new Array(links.length);
+            for( var j = 0; j < links.length; j++ ){
+                var temp = {
+                    link: links.item(j).attributes.item(0).value,
+                    text: links.item(j).textContent,
+                    screen: (i == 0) ? 'WebViewPost' : 'WSOPost'
+                }
+                tempLinks[j] = temp;
+            }
+            tempCategory[i] = tempLinks;
+        }
+        this.setState({ wso: tempCategory });
     }
 
     render(){
@@ -157,7 +92,7 @@ class WSO extends Component{
                  <Card title='DISCUSSIONS'
                      containerStyle={{padding: 10}}>
                    {
-                     this.state.discussions.map((u, i) => {
+                     this.state.wso[0].map((u, i) => {
                          return(
                          <ListItem
                              key={i}
@@ -177,7 +112,7 @@ class WSO extends Component{
             <Card title='ANNOUNCEMENTS'
                 containerStyle={{padding: 10}}>
               {
-                this.state.announcements.map((u, i) => {
+                this.state.wso[1].map((u, i) => {
                     return(
                     <ListItem
                         key={i}
@@ -197,7 +132,7 @@ class WSO extends Component{
             <Card title='EXCHANGES'
                 containerStyle={{padding: 10}}>
               {
-                this.state.exchanges.map((u, i) => {
+                this.state.wso[2].map((u, i) => {
                     return(
                     <ListItem
                         key={i}
@@ -217,7 +152,7 @@ class WSO extends Component{
             <Card title='LOST & FOUND'
                 containerStyle={{padding: 10}}>
               {
-                this.state.lostNfound.map((u, i) => {
+                this.state.wso[3].map((u, i) => {
                     return(
                     <ListItem
                         key={i}
@@ -237,7 +172,7 @@ class WSO extends Component{
             <Card title='JOBS'
                 containerStyle={{padding: 10}}>
               {
-                this.state.jobs.map((u, i) => {
+                this.state.wso[4].map((u, i) => {
                     return(
                     <ListItem
                         key={i}
@@ -257,7 +192,7 @@ class WSO extends Component{
             <Card title='RIDES'
                 containerStyle={{padding: 10}}>
               {
-                this.state.rides.map((u, i) => {
+                this.state.wso[5].map((u, i) => {
                     return(
                     <ListItem
                         key={i}
