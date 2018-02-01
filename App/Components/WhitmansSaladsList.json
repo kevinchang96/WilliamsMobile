@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Side Salad",
+    "description": "",
+    "checked": false,
+    "price": 1.75
+  },{
+    "name": "Chicken Caesar",
+    "description": "",
+    "checked": false,
+    "price": 4.25
+  },{
+    "name": "Seared Tofu",
+    "description": "",
+    "checked": false,
+    "price": 4.25
+  },{
+    "name": "Crispy Seitan",
+    "description": "",
+    "checked": false,
+    "price": 4.25
+  },{
+    "name": "Pita & Hummus",
+    "description": "",
+    "checked": false,
+    "price": 3.75
+  },{
+    "name": "Pita & Babaganoush",
+    "description": "",
+   "checked": false,
+    "price": 3.75
+  },{
+    "name": "Veggie Pocket",
+    "description": "",
+    "checked": false,
+    "price": 4.99
+  }
+]

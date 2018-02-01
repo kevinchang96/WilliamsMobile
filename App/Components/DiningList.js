@@ -63,11 +63,13 @@ class DiningList extends Component{
              name: "Lee Snack Bar Calculator",
              url: 'https://dining.williams.edu/lee-after-dark/',
              screen: "ItemCalculator",
+             flag: true
            },{
              id: '221',
              name: "Whitmans' Late Night Calculator",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S221&date=today',
              screen: "ItemCalculator",
+             flag: false
            }
          ]
 
@@ -126,7 +128,7 @@ class DiningList extends Component{
                              avatar={<Icon name='monetization-on' />}
                              key={i}
                              title={l.name}
-                             onPress={() => navigate(l.screen)}
+                             onPress={() => navigate(l.screen,{flag: l.flag})}
                            />
                          ))
                        }

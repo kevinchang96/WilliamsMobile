@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Chicken Tenders",
+    "description": "",
+    "checked": false,
+    "price": 4.99
+  },{
+    "name": "Mozzarella Sticks",
+    "description": "",
+   "checked": false,
+    "price": 3.25
+  },{
+    "name": "Fried Green Beans with Chipotle Ranch",
+    "description": "",
+    "checked": false,
+    "price": 2.50
+  },{
+    "name": "PB&J Sweet Potato Fries",
+    "description": "",
+    "checked": false,
+    "price": 2.50
+  },{
+    "name": "French Fries",
+    "description": "",
+    "checked": false,
+    "price": 1.75
+  },{
+    "name": "Onion Rings",
+    "description": "",
+    "checked": false,
+    "price": 2.00
+  },{
+    "name": "Buffalo Chips",
+    "description": "",
+    "checked": false,
+    "price": 2.25
+  },{
+    "name": "Sweet Potato Fries",
+    "description": "",
+    "checked": false,
+    "price": 2.00
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Falafel Meal",
+    "description": "",
+    "checked": false,
+    "price": 7.00
+  },{
+    "name": "Shawarma Meal",
+    "description": "",
+    "checked": false,
+    "price": 7.00
+  }
+]
