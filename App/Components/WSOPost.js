@@ -43,9 +43,20 @@ export default class WSOPost extends Component{
 
     render(){
          return(
-             <View style={{paddingTop:20}}>
-                 <Card title={this.props.navigation.state.params.name}
-                     containerStyle={{padding: 10}}>
+             <View style={styles.container}>
+             <Header
+                 leftComponent={
+                     <Icon
+                         name='chevron-left'
+                         color='white'
+                         onPress={() => this.props.navigation.goBack()}
+                         underlayColor='#512698'
+                     />
+                 }
+                 centerComponent={{ text: this.props.navigation.state.params.title, style: { fontSize: 22, color: '#ffffff' } }}
+                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
+
+                 <Card containerStyle={{padding: 10}}>
                    {
                         <View >
                             <ScrollView>
@@ -66,4 +77,12 @@ export default class WSOPost extends Component{
          );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#EEEEEE', //'#DCD0FE',
+    },
+});
+
 AppRegistry.registerComponent('WSOPost', () => WSOPost );

@@ -98,14 +98,14 @@ class WSO extends Component{
                              key={i}
                              title={u.text}
                              hideChevron={true}
-                             onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link})} }
+                             onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Discussions"})} }
                           />
                          );
                      })
                    }
                    <ListItem
                      rightTitle='More'
-                     onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/discussions"})} }
+                     onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/discussions", title: "Discussions"})} }
                    />
                  </Card>
 
@@ -118,14 +118,14 @@ class WSO extends Component{
                         key={i}
                         title={u.text}
                         hideChevron={true}
-                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, name: 'Announcements'})} }
+                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Announcements"})} }
                      />
                     );
                 })
               }
               <ListItem
                 rightTitle='More'
-                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/announcements"})} }
+                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/announcements", title: "Announcements"})} }
               />
             </Card>
 
@@ -138,14 +138,14 @@ class WSO extends Component{
                         key={i}
                         title={u.text}
                         hideChevron={true}
-                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, name: 'Exchanges'})} }
+                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Exchanges"})} }
                      />
                     );
                 })
               }
               <ListItem
                 rightTitle='More'
-                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/exchanges"})} }
+                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/exchanges", title: "Exchanges"})} }
               />
             </Card>
 
@@ -158,14 +158,14 @@ class WSO extends Component{
                         key={i}
                         title={u.text}
                         hideChevron={true}
-                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, name: 'Lost + Found'})} }
+                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Lost & Found"})} }
                      />
                     );
                 })
               }
               <ListItem
                 rightTitle='More'
-                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/lost_and_found"})} }
+                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/lost_and_found", title: "Lost & Found"})} }
               />
             </Card>
 
@@ -178,14 +178,14 @@ class WSO extends Component{
                         key={i}
                         title={u.text}
                         hideChevron={true}
-                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, name: 'Jobs'})} }
+                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Jobs"})} }
                      />
                     );
                 })
               }
               <ListItem
                 rightTitle='More'
-                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/jobs"})} }
+                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/jobs", title: "Jobs"})} }
               />
             </Card>
 
@@ -198,14 +198,14 @@ class WSO extends Component{
                         key={i}
                         title={u.text}
                         hideChevron={true}
-                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link})} }
+                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Rides"})} }
                      />
                     );
                 })
               }
               <ListItem
                 rightTitle='More'
-                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/rides"})} }
+                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/rides",title: "Rides"})} }
               />
             </Card>
 
