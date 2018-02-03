@@ -74,7 +74,7 @@ export default class WeatherObj extends Component {
       .then((response) => response.json())
       .then((responseData) => {
           this.setState({
-            title: responseData.query.results.channel.item.pubDate,
+            title: responseData.query.results.channel.item.forecast[0].date,
             main: responseData.query.results.channel.item.title,                                        // main, eg. cloudy, sunny, etc.
             description: responseData.query.results.channel.item.condition.text,                        // a somewhat accurate blurb about the weather
             icon: '',                                                                                   // http://openweathermap.org/img/w/<icon>.png pulls up a little weather icon
@@ -177,18 +177,13 @@ export default class WeatherObj extends Component {
                 <Card
                     titleStyle={cardStyle.titleStyle}
                     title={this.state.title}>
-                    <Text style={cardStyle.text}>{'Conditions for Williamstown, MA 01267'}</Text>
-                    <Text style={cardStyle.text}>Currently: {this.state.description}</Text>
+                    <Text style={cardStyle.text}>{'Williamstown, MA 01267'}</Text>
+                    <Text style={cardStyle.text}>Conditions: {this.state.description}</Text>
                     <Text style={cardStyle.text}>Temperature: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
                     <Text style={cardStyle.text}>Humidity: {this.state.humidity}%</Text>
                     <Text style={cardStyle.text}>Wind speed: {this.state.mph} mph / {this.state.ms} m/s</Text>
                 </Card>
                 <ScrollView>
-                  <Card
-                      titleStyle={cardStyle.titleStyle}
-                      title={'Forecast:'}>
-                  </Card>
-
                   <Card
                       titleStyle={cardStyle.titleStyle}
                       title={this.state.oneDay}>
@@ -224,7 +219,20 @@ export default class WeatherObj extends Component {
                       <Text style={cardStyle.text}>Conditions: {this.state.fiveText}</Text>
                       <Text style={cardStyle.text}>Temperature: {this.state.fiveHigh}°F / {this.state.fiveLow}°F</Text>
                   </Card>
-                  <Text>Powered by Yahoo!</Text>
+                  <Card
+                      titleStyle={cardStyle.titleStyle}
+                      title={'Powered by Yahoo!'}>
+                      <Text style={cardStyle.text}>{this.state.fiveDate}</Text>
+                      <Text style={cardStyle.text}>Conditions: {this.state.fiveText}</Text>
+                      <Text style={cardStyle.text}>Temperature: {this.state.fiveHigh}°F / {this.state.fiveLow}°F</Text>
+                  </Card>
+                  <Card
+                      titleStyle={cardStyle.titleStyle}
+                      title={this.state.fiveDay}>
+                      <Text style={cardStyle.text}>{this.state.fiveDate}</Text>
+                      <Text style={cardStyle.text}>Conditions: {this.state.fiveText}</Text>
+                      <Text style={cardStyle.text}>Temperature: {this.state.fiveHigh}°F / {this.state.fiveLow}°F</Text>
+                  </Card>
                 </ScrollView>
             </View>
         )
