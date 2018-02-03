@@ -20,77 +20,141 @@ export default class WeatherObj extends Component {
 
 
       // temperature conversions
-      let temp = raw.main.temp;   // temperature in Kelvins
-      var tempF = Math.floor(temp*1.8 - 459.67);
-      var tempC = Math.floor(temp - 273.15);
+      // let temp = raw.main.temp;   // temperature in Kelvins
+      // var tempF = Math.floor(temp*1.8 - 459.67);
+      // var tempC = Math.floor(temp - 273.15);
 
       this.state = {
 
-          test: '',
+          title: '',
+          main: '',                  // main, eg. cloudy, sunny, etc.
+          description: '',    // a somewhat accurate blurb about the weather
+          icon: '',                  // http://openweathermap.org/img/w/<icon>.png pulls up a little weather icon
+          fahrenheit: '',                          // temperature in Fahrenheit, floored because it's always colder than it seems
+          celsius: '',                             // temperature in Celsius
+          humidity: '',                // percent humidity
+          ms: '',              // speed in m/s (metric units), ceiling-ed because wind chill is real
+          mph: '',      // speed in mi/hr (imperial units)
 
-          main: raw.weather[0].main,                  // main, eg. cloudy, sunny, etc.
-          description: raw.weather[0].description,    // a somewhat accurate blurb about the weather
-          icon: raw.weather[0].icon,                  // http://openweathermap.org/img/w/<icon>.png pulls up a little weather icon
-          fahrenheit: tempF,                          // temperature in Fahrenheit, floored because it's always colder than it seems
-          celsius: tempC,                             // temperature in Celsius
-          humidity: raw.main.humidity,                // percent humidity
-          ms: Math.ceil(raw.wind.speed),              // speed in m/s (metric units), ceiling-ed because wind chill is real
-          mph: Math.ceil(raw.wind.speed*2.2369),      // speed in mi/hr (imperial units)
+          oneDate: '',
+          oneDay: '',
+          oneHigh: '',
+          oneLow: '',
+          oneText: '',
+
+          twoDate: '',
+          twoDay: '',
+          twoHigh: '',
+          twoLow: '',
+          twoText: '',
+
+          threeDate: '',
+          threeDay: '',
+          threeHigh: '',
+          threeLow: '',
+          threeText: '',
+
+          fourDate: '',
+          fourDay: '',
+          fourHigh: '',
+          fourLow: '',
+          fourText: '',
+
+          fiveDate: '',
+          fiveDay: '',
+          fiveHigh: '',
+          fiveLow: '',
+          fiveText: '',
+
+          // date1: '',
+          // day1: '',
+          // high1: '',
+          // low1: '',
+          // text1: '',
       }
     }
 
     componentDidMount() {
-      var errorMessage = "Unable to get weather information.";
-      var zipcode = "01267"; //Williamstown - Massachusetts
-      var query = "q=" + escape(
-            "select item from weather.forecast where location") +
-            "=\"" + zipcode + "\"";
-      var endPointURL = "http://query.yahooapis.com/v1/public/yql?" + query  +
-            "&format=json";
+      this.fetchData();
+   }
 
-      fetch(endPointURL, {method: 'GET',})
-      .then((response) => {
-        this.setState({test: response.query.results.channel.item.description});
+   convertToCelsius(tempF) {
+     return (Math.ceil((tempF - 32) * (5 / 9)));
+   }
+
+   convertToMS(mph) {
+     return (Math.ceil(2.237 * mph));
+   }
+
+   fetchData() {
+
+     const endPointURL = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22williamstown%2C%20ma%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
+     fetch(endPointURL)
+      .then((response) => response.json())
+      .then((responseData) => {
+          this.setState({
+            title: responseData.query.results.channel.item.pubDate,
+            main: responseData.query.results.channel.item.title,                  // main, eg. cloudy, sunny, etc.
+            description: responseData.query.results.channel.item.condition.text,    // a somewhat accurate blurb about the weather
+            icon: '',                  // http://openweathermap.org/img/w/<icon>.png pulls up a little weather icon
+            fahrenheit: responseData.query.results.channel.item.condition.temp,                          // temperature in Fahrenheit, floored because it's always colder than it seems
+            celsius: this.convertToCelsius(responseData.query.results.channel.item.condition.temp),                             // temperature in Celsius
+            humidity: responseData.query.results.channel.atmosphere.humidity,                // percent humidity
+            ms: this.convertToMS(responseData.query.results.channel.wind.speed),              // speed in m/s (metric units), ceiling-ed because wind chill is real
+            mph: responseData.query.results.channel.wind.speed,      // speed in mi/hr (imperial units)
+          })
+          // call back in setState to calculate temperatureInC after temperatureGot's state is changed,
+          // since setState is async, temperatureGot may still have old value due
+          // this.setState(
+          //   {temperatureGot: responseData.query.results.channel.item.condition.temp},
+          //     function afterTemperatureGot () {this.convertTemperatureToC();}
+          // )
+          this.setState({
+            oneDate: responseData.query.results.channel.item.forecast[1].date,
+            oneDay: responseData.query.results.channel.item.forecast[1].day,
+            oneHigh: responseData.query.results.channel.item.forecast[1].high,
+            oneLow: responseData.query.results.channel.item.forecast[1].low,
+            oneText: responseData.query.results.channel.item.forecast[1].text,
+
+            twoDate: responseData.query.results.channel.item.forecast[2].date,
+            twoDay: responseData.query.results.channel.item.forecast[2].day,
+            twoHigh: responseData.query.results.channel.item.forecast[2].high,
+            twoLow: responseData.query.results.channel.item.forecast[2].low,
+            twoText: responseData.query.results.channel.item.forecast[2].text,
+
+            threeDate: responseData.query.results.channel.item.forecast[3].date,
+            threeDay: responseData.query.results.channel.item.forecast[3].day,
+            threeHigh: responseData.query.results.channel.item.forecast[3].high,
+            threeLow: responseData.query.results.channel.item.forecast[3].low,
+            threeText: responseData.query.results.channel.item.forecast[3].text,
+
+            fourDate: responseData.query.results.channel.item.forecast[4].date,
+            fourDay: responseData.query.results.channel.item.forecast[4].day,
+            fourHigh: responseData.query.results.channel.item.forecast[4].high,
+            fourLow: responseData.query.results.channel.item.forecast[4].low,
+            fourText: responseData.query.results.channel.item.forecast[4].text,
+
+            fiveDate: responseData.query.results.channel.item.forecast[5].date,
+            fiveDay: responseData.query.results.channel.item.forecast[5].day,
+            fiveHigh: responseData.query.results.channel.item.forecast[5].high,
+            fiveLow: responseData.query.results.channel.item.forecast[5].low,
+            fiveText: responseData.query.results.channel.item.forecast[5].text,
+          })
+          // for (let i = 1; i < 2; i++) {
+          //   this.setState({
+          //     date + i: responseData.query.results.channel.item.forecast[1].date,
+          //     day + i: responseData.query.results.channel.item.forecast[1].day,
+          //     high + i: responseData.query.results.channel.item.forecast[1].high,
+          //     low + i: responseData.query.results.channel.item.forecast[1].low,
+          //     text + i: responseData.query.results.channel.item.forecast[1].text,
+          //   })
+          // }
       })
       .catch((error) => {
-        this.setState({test: errorMessage});
-        console.log(error);
-      });
-
-      // script.get(endPointURL, {
-      //   jsonp: "callback",
-      //   preventCache: true,
-      //   timeout: 3000
-      // }).then(function(response) {
-      //   try {
-      //     // document.getElementById("someDivID").innerHTML = response.query.results.channel.item.description;
-      //     this.setState({test: response.query.results.channel.item.description});
-      //   } catch (exception) {
-      //     alert(errorMessage);
-      //   }
-      // }, function(error) {
-      //   this.setState({test: errorMessage});
-      // });
-
-      // response.query.results.channel.item.description
-
-      // var queryURL = "https://query.yahooapis.com/v1/public/yql?q=select%20item.condition%20from%20weather.forecast%20where%20woeid%20%3D%202487889&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys/";
-      //
-      // this.getJSON(endPointURL, function (data) {
-      //
-      // var results = data.query.results
-      // var firstResult = results.channel.item.condition
-      // console.log(firstResult);
-      //
-      // var location = 'Unknown' // not returned in response
-      // var temp = firstResult.temp
-      // var text = firstResult.text
-      //
-      // this.setState({test: text});
-
-  //  })
-
-   }
+        this.setState({title: 'Unable to display weather'});
+      })
+      .done();
+  }
 
 
     // get functions for each piece of information stored
@@ -146,15 +210,55 @@ export default class WeatherObj extends Component {
 
                 <Card
                     titleStyle={cardStyle.titleStyle}
-                    title={'Someday, 99:00fm'}>
-                    <Text style={cardStyle.text}>Currently: {this.state.main}</Text>
+                    title={this.state.title}>
+                    <Text style={cardStyle.text}>{'Conditions for Williamstown, MA 01267'}</Text>
+                    <Text style={cardStyle.text}>Currently: {this.state.description}</Text>
                     <Text style={cardStyle.text}>Temperature: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
                     <Text style={cardStyle.text}>Humidity: {this.state.humidity}%</Text>
-                    <Text style={cardStyle.text}>Wind speed: {this.state.mph} mph / {this.state.ms} mps</Text>
+                    <Text style={cardStyle.text}>Wind speed: {this.state.mph} mph / {this.state.ms} m/s</Text>
                 </Card>
-
                 <ScrollView>
-                    <Text>Put forecast here.</Text>
+                  <Card
+                      titleStyle={cardStyle.titleStyle}
+                      title={'Next five days:'}>
+                  </Card>
+
+                  <Card
+                      titleStyle={cardStyle.titleStyle}
+                      title={this.state.oneDay}>
+                      <Text style={cardStyle.text}>{this.state.oneDate}</Text>
+                      <Text style={cardStyle.text}>Conditions: {this.state.oneText}</Text>
+                      <Text style={cardStyle.text}>Temperature: {this.state.oneHigh}°F / {this.state.oneLow}°F</Text>
+                  </Card>
+                  <Card
+                      titleStyle={cardStyle.titleStyle}
+                      title={this.state.twoDay}>
+                      <Text style={cardStyle.text}>{this.state.twoDate}</Text>
+                      <Text style={cardStyle.text}>Conditions: {this.state.twoText}</Text>
+                      <Text style={cardStyle.text}>Temperature: {this.state.twoHigh}°F / {this.state.twoLow}°F</Text>
+                  </Card>
+                  <Card
+                      titleStyle={cardStyle.titleStyle}
+                      title={this.state.threeDay}>
+                      <Text style={cardStyle.text}>{this.state.threeDate}</Text>
+                      <Text style={cardStyle.text}>Conditions: {this.state.threeText}</Text>
+                      <Text style={cardStyle.text}>Temperature: {this.state.threeHigh}°F / {this.state.threeLow}°F</Text>
+                  </Card>
+                  <Card
+                      titleStyle={cardStyle.titleStyle}
+                      title={this.state.fourDay}>
+                      <Text style={cardStyle.text}>{this.state.fourDate}</Text>
+                      <Text style={cardStyle.text}>Conditions: {this.state.fourText}</Text>
+                      <Text style={cardStyle.text}>Temperature: {this.state.fourHigh}°F / {this.state.fourLow}°F</Text>
+                  </Card>
+                  <Card
+                      titleStyle={cardStyle.titleStyle}
+                      title={this.state.fiveDay}>
+                      <Text style={cardStyle.text}>{this.state.fiveDate}</Text>
+                      <Text style={cardStyle.text}>Conditions: {this.state.fiveText}</Text>
+                      <Text style={cardStyle.text}>Temperature: {this.state.fiveHigh}°F / {this.state.fiveLow}°F</Text>
+                  </Card>
+                  <Text>Powered by Yahoo!</Text>
                 </ScrollView>
             </View>
         )
