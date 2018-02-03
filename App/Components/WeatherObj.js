@@ -1,41 +1,28 @@
-// A WIP
-// Need to test that this actually works, possibly without hooking it up to WeatherReader.js
+// A done did it
 // A class to keep track useful information about Williamstown's current weather conditions
 // (c) 2018 Grace Mazzarella, William Fung
 
 import React, { Component } from 'react';
-import WeatherCard from './WeatherCard.js';
 import { AppRegistry, Platform, StyleSheet, Image, View, Text, ScrollView } from 'react-native';
 import { Avatar, Card, Button, Header, Icon, List, ListItem, Tile } from 'react-native-elements';
-//import WeatherReader from './WeatherReader';
 
 export default class WeatherObj extends Component {
     constructor(props) {
       super(props);
 
-      // let w = new WeatherReader();
-      // let webInfo = w.state.data;
-      let raw = JSON.parse('{"coord":{"lon":-73.2,"lat":42.71},"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04d"}],"base":"stations","main":{"temp":268.91,"pressure":1015,"humidity":63,"temp_min":267.15,"temp_max":270.15},"visibility":16093,"wind":{"speed":3.6,"deg":270},"clouds":{"all":90},"dt":1516377240,"sys":{"type":1,"id":1289,"message":0.004,"country":"US","sunrise":1516364263,"sunset":1516398614},"id":4955786,"name":"Williamstown","cod":200}'); // all the data
-
-
-
-      // temperature conversions
-      // let temp = raw.main.temp;   // temperature in Kelvins
-      // var tempF = Math.floor(temp*1.8 - 459.67);
-      // var tempC = Math.floor(temp - 273.15);
-
       this.state = {
 
           title: '',
-          main: '',                  // main, eg. cloudy, sunny, etc.
+          main: '',           // main, eg. cloudy, sunny, etc.
           description: '',    // a somewhat accurate blurb about the weather
-          icon: '',                  // http://openweathermap.org/img/w/<icon>.png pulls up a little weather icon
-          fahrenheit: '',                          // temperature in Fahrenheit, floored because it's always colder than it seems
-          celsius: '',                             // temperature in Celsius
-          humidity: '',                // percent humidity
-          ms: '',              // speed in m/s (metric units), ceiling-ed because wind chill is real
-          mph: '',      // speed in mi/hr (imperial units)
+          icon: '',           // http://openweathermap.org/img/w/<icon>.png pulls up a little weather icon
+          fahrenheit: '',     // temperature in Fahrenheit, floored because it's always colder than it seems
+          celsius: '',        // temperature in Celsius
+          humidity: '',       // percent humidity
+          ms: '',             // speed in m/s (metric units), ceiling-ed because wind chill is real
+          mph: '',            // speed in mi/hr (imperial units)
 
+          //storage for forecast data; found iterating through it to be troublesome and a half
           oneDate: '',
           oneDay: '',
           oneHigh: '',
@@ -170,7 +157,7 @@ export default class WeatherObj extends Component {
         return (this.state.mph);
     }
 
-    // a render function for testing
+    // a render function for displaying
 
     render() {
         return (
