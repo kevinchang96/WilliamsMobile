@@ -108,20 +108,23 @@ export default class DailyMessages extends Component {
                     centerComponent={{ text: 'Daily Messages', style: { fontSize: 22, color: '#ffffff' } }}
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55, marginBottom: 10}}
                 />
+
                 <View style={styles.pickers}>
                     <View>
-                        <Text>From</Text>
+                        <Text style={styles.text}>From</Text>
                         <DatePicker confirmBtnText="Confirm" cancelBtnText="Cancel"
                             format={'DD MMMM YYYY'} date={this.state.from}
                             onDateChange={(date) => this.changeDate(date,'fromDate')}/>
                     </View>
+
                     <View>
-                        <Text>To</Text>
+                        <Text style={styles.text}>To</Text>
                         <DatePicker confirmBtnText="Confirm" cancelBtnText="Cancel"
                             format={'DD MMMM YYYY'} date={this.state.to}
                             onDateChange={(date) => this.changeDate(date,'toDate')}/>
                     </View>
                 </View>
+
                 <FlatList data={this.state.messageCards} renderItem={({item}) => item}/>
             </View>
 
@@ -139,5 +142,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         padding: 10
     },
-
+    text: {
+        fontSize: 18,
+        color: 'black'
+    }
 })

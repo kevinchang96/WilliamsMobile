@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import GrillList from './GrillList.json';
 import GrillSubsList from './GrillSubsList.json';
 import GrillWingsList from './GrillWingsList.json';
+import GrillPizzaSauce from './GrillPizzaSauce.json';
 
 export default class GrillMenu extends Component {
 
@@ -17,8 +18,11 @@ export default class GrillMenu extends Component {
         super()
         this.state = {
             stateArray: [[],[],[]],
+            sauceArray: [GrillList,[],[]],
             stateIndex: 0,
-            titleArray: ['Pizza/Nachos/Salad','Subs','Wings']
+            titleArray: ['Pizza/Nachos/Salad','Subs','Wings'],
+            sub1Array: ['Toppings (3 - Pizza, 2 - Nachos/Salad)', '', ''],
+            sub0Array: ['Sauce (Pizza Only)', '', ''],
         }
     }
 
@@ -29,7 +33,7 @@ export default class GrillMenu extends Component {
 
     _loadData = () => {
         var temp = [];
-        temp.push(GrillList);
+        temp.push(GrillPizzaSauce);
         temp.push(GrillSubsList);
         temp.push(GrillWingsList);
         this.setState({ stateArray: temp });
@@ -63,17 +67,35 @@ export default class GrillMenu extends Component {
             />
 
             <ScrollView>
+                <Text style={styles.subtitle}>{this.state.sub0Array[this.state.stateIndex]}</Text>
+
                 <List containerStyle={{ marginTop: 5, marginBottom: 5 }}>
                    {
                      this.state.stateArray[this.state.stateIndex].map((l, i) => (
                        <ListItem
                          key={i}
                          title={l.name}
+                         subtitle={l.description}
                          hideChevron={true}
                         />
                      ))
                    }
-                 </List>
+                </List>
+
+                <Text style={styles.subtitle}>{this.state.sub1Array[this.state.stateIndex]}</Text>
+
+                <List containerStyle={{ marginTop: 5, marginBottom: 5 }}>
+                   {
+                     this.state.sauceArray[this.state.stateIndex].map((l, i) => (
+                       <ListItem
+                         key={i}
+                         title={l.name}
+                         subtitle={l.description}
+                         hideChevron={true}
+                        />
+                     ))
+                   }
+                </List>
             </ScrollView>
         </View>
         );
@@ -98,10 +120,15 @@ const styles = StyleSheet.create(
         alignItems: 'center',
         margin: 4
     },
-
-    text:
-    {
+    text:{
         color: 'white',
         fontSize: 25
+    },
+    subtitle:{
+        marginTop: 10,
+        marginLeft: 20,
+        color: '#512698',
+        fontSize: 18,
+        fontWeight: 'bold',
     }
 });

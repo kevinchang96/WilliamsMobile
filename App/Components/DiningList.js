@@ -54,7 +54,7 @@ class DiningList extends Component{
              name: "'82 Grill",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S25&date=today',
              screen: 'GrillMenu',
-             icon: <Icon name='whatshot' />
+             icon: <Icon name='local-pizza' />
            }
          ]
 
@@ -77,7 +77,7 @@ class DiningList extends Component{
          const getAppList = [
            {
              name: "GET Website",
-             url: 'https://idp.williams.edu/idp/profile/SAML2/Redirect/SSO?execution=e1s1',
+             url: 'https://get.cbord.com/williamscollege/full/prelogin.php',
              screen: 'WebViewPost',
            }
          ]

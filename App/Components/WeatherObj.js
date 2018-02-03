@@ -22,6 +22,8 @@ export default class WeatherObj extends Component {
           ms: '',             // speed in m/s (metric units), ceiling-ed because wind chill is real
           mph: '',            // speed in mi/hr (imperial units)
 
+          forecast: [],
+
           //storage for forecast data; found iterating through it to be troublesome and a half
           oneDate: '',
           oneDay: '',
@@ -73,17 +75,21 @@ export default class WeatherObj extends Component {
      fetch(endPointURL)
       .then((response) => response.json())
       .then((responseData) => {
+          console.log(responseData.query.results.channel.item.forecast);
+
           this.setState({
             title: responseData.query.results.channel.item.forecast[0].date,
             main: responseData.query.results.channel.item.title,                                        // main, eg. cloudy, sunny, etc.
             description: responseData.query.results.channel.item.condition.text,                        // a somewhat accurate blurb about the weather
-            icon: '',                                                                                   // http://openweathermap.org/img/w/<icon>.png pulls up a little weather icon
+            icon: responseData.query.results.channel.item.condition.code,                                                                                   // http://openweathermap.org/img/w/<icon>.png pulls up a little weather icon
             fahrenheit: responseData.query.results.channel.item.condition.temp,                         // temperature in Fahrenheit, floored because it's always colder than it seems
             celsius: this.convertToCelsius(responseData.query.results.channel.item.condition.temp),     // temperature in Celsius
             humidity: responseData.query.results.channel.atmosphere.humidity,                           // percent humidity
             ms: this.convertToMS(responseData.query.results.channel.wind.speed),                        // speed in m/s (metric units), ceiling-ed because wind chill is real
             mph: responseData.query.results.channel.wind.speed,                                         // speed in mi/hr (imperial units)
-          })
+            forecast: responseData.query.results.channel.item.forecast,
+          });
+
           this.setState({
             oneDate: responseData.query.results.channel.item.forecast[1].date,
             oneDay: responseData.query.results.channel.item.forecast[1].day,
@@ -114,7 +120,7 @@ export default class WeatherObj extends Component {
             fiveHigh: responseData.query.results.channel.item.forecast[5].high,
             fiveLow: responseData.query.results.channel.item.forecast[5].low,
             fiveText: responseData.query.results.channel.item.forecast[5].text,
-          })
+          });
       })
       .catch((error) => {
         this.setState({title: 'Unable to display weather'});
@@ -160,6 +166,8 @@ export default class WeatherObj extends Component {
     // a render function for displaying
 
     render() {
+        const { navigate } = this.props.navigation;
+
         return (
             <View>
                 <Header
@@ -177,87 +185,140 @@ export default class WeatherObj extends Component {
                 <Card
                     titleStyle={cardStyle.titleStyle}
                     title={this.state.title}>
-                    <Text style={cardStyle.text}>{'Williamstown, MA 01267'}</Text>
-                    <Text style={cardStyle.text}>Conditions: {this.state.description}</Text>
-                    <Text style={cardStyle.text}>Temperature: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
-                    <Text style={cardStyle.text}>Humidity: {this.state.humidity}%</Text>
-                    <Text style={cardStyle.text}>Wind speed: {this.state.mph} mph / {this.state.ms} m/s</Text>
+                    <View style={{flexDirection: 'row'}}>
+                        <Avatar
+                            large
+                            rounded
+                            source={{uri: "http://l.yimg.com/a/i/us/we/52/" + this.state.icon + ".gif"}}
+                            onPress={() => console.log("Works!")}
+                            activeOpacity={0}
+                        />
+
+                        <View style={{flex: 1, flexDirection: 'column', marginLeft: 20}}>
+                            {/*<Text style={cardStyle.text}>{'Williamstown, MA 01267'}</Text>*/}
+                            <Text style={cardStyle.atext}>{this.state.description}</Text>
+                            <Text style={cardStyle.text}>Temp: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
+                            <Text style={cardStyle.text}>Humidity: {this.state.humidity}%</Text>
+                            <Text style={cardStyle.text}>Wind: {this.state.mph} mph / {this.state.ms} m/s</Text>
+                        </View>
+                    </View>
                 </Card>
+
                 <ScrollView>
-                  <Card
-                      titleStyle={cardStyle.titleStyle}
-                      title={this.state.oneDay}>
-                      <Text style={cardStyle.text}>{this.state.oneDate}</Text>
-                      <Text style={cardStyle.text}>Conditions: {this.state.oneText}</Text>
-                      <Text style={cardStyle.text}>Temperature: {this.state.oneHigh}°F / {this.state.oneLow}°F</Text>
-                  </Card>
-                  <Card
-                      titleStyle={cardStyle.titleStyle}
-                      title={this.state.twoDay}>
-                      <Text style={cardStyle.text}>{this.state.twoDate}</Text>
-                      <Text style={cardStyle.text}>Conditions: {this.state.twoText}</Text>
-                      <Text style={cardStyle.text}>Temperature: {this.state.twoHigh}°F / {this.state.twoLow}°F</Text>
-                  </Card>
-                  <Card
-                      titleStyle={cardStyle.titleStyle}
-                      title={this.state.threeDay}>
-                      <Text style={cardStyle.text}>{this.state.threeDate}</Text>
-                      <Text style={cardStyle.text}>Conditions: {this.state.threeText}</Text>
-                      <Text style={cardStyle.text}>Temperature: {this.state.threeHigh}°F / {this.state.threeLow}°F</Text>
-                  </Card>
-                  <Card
-                      titleStyle={cardStyle.titleStyle}
-                      title={this.state.fourDay}>
-                      <Text style={cardStyle.text}>{this.state.fourDate}</Text>
-                      <Text style={cardStyle.text}>Conditions: {this.state.fourText}</Text>
-                      <Text style={cardStyle.text}>Temperature: {this.state.fourHigh}°F / {this.state.fourLow}°F</Text>
-                  </Card>
-                  <Card
-                      titleStyle={cardStyle.titleStyle}
-                      title={this.state.fiveDay}>
-                      <Text style={cardStyle.text}>{this.state.fiveDate}</Text>
-                      <Text style={cardStyle.text}>Conditions: {this.state.fiveText}</Text>
-                      <Text style={cardStyle.text}>Temperature: {this.state.fiveHigh}°F / {this.state.fiveLow}°F</Text>
-                  </Card>
-                  <Card
-                      titleStyle={cardStyle.titleStyle}
-                      title={'Powered by Yahoo!'}>
-                      <Text style={cardStyle.text}>{this.state.fiveDate}</Text>
-                      <Text style={cardStyle.text}>Conditions: {this.state.fiveText}</Text>
-                      <Text style={cardStyle.text}>Temperature: {this.state.fiveHigh}°F / {this.state.fiveLow}°F</Text>
-                  </Card>
-                  <Card
-                      titleStyle={cardStyle.titleStyle}
-                      title={this.state.fiveDay}>
-                      <Text style={cardStyle.text}>{this.state.fiveDate}</Text>
-                      <Text style={cardStyle.text}>Conditions: {this.state.fiveText}</Text>
-                      <Text style={cardStyle.text}>Temperature: {this.state.fiveHigh}°F / {this.state.fiveLow}°F</Text>
-                  </Card>
+                    <List
+                      containerStyle={{marginBottom: 20}}>
+                      {
+                        this.state.forecast.map((l, i) => (
+                          <Card style={cardStyle.card}
+                              titleStyle={cardStyle.titleStyle}
+                              title={l.day}>
+                              <Avatar
+                                small
+                                rounded
+                                source={{uri: "http://l.yimg.com/a/i/us/we/52/" + l.code + ".gif"}}
+                                onPress={() => console.log("Works!")}
+                                activeOpacity={0}
+                              />
+                              <Text style={cardStyle.text}>{l.text}</Text>
+                              <Text style={cardStyle.text}>{l.high}°F</Text>
+                              <Text style={cardStyle.text}>{l.low}°F</Text>
+                          </Card>
+                        ))
+                      }
+                    </List>
                 </ScrollView>
+
+
+                {/*<ScrollView>
+                    <Card
+                        titleStyle={cardStyle.titleStyle}
+                        title={this.state.oneDay}>
+                        <Text style={cardStyle.text}>{this.state.oneDate}</Text>
+                        <Text style={cardStyle.text}>Conditions: {this.state.oneText}</Text>
+                        <Text style={cardStyle.text}>Temperature: {this.state.oneHigh}°F / {this.state.oneLow}°F</Text>
+                    </Card>
+
+                    <Card
+                        titleStyle={cardStyle.titleStyle}
+                        title={this.state.twoDay}>
+                        <Text style={cardStyle.text}>{this.state.twoDate}</Text>
+                        <Text style={cardStyle.text}>Conditions: {this.state.twoText}</Text>
+                        <Text style={cardStyle.text}>Temperature: {this.state.twoHigh}°F / {this.state.twoLow}°F</Text>
+                    </Card>
+
+                    <Card
+                        titleStyle={cardStyle.titleStyle}
+                        title={this.state.threeDay}>
+                        <Text style={cardStyle.text}>{this.state.threeDate}</Text>
+                        <Text style={cardStyle.text}>Conditions: {this.state.threeText}</Text>
+                        <Text style={cardStyle.text}>Temperature: {this.state.threeHigh}°F / {this.state.threeLow}°F</Text>
+                    </Card>
+
+                    <Card
+                        titleStyle={cardStyle.titleStyle}
+                        title={this.state.fourDay}>
+                        <Text style={cardStyle.text}>{this.state.fourDate}</Text>
+                        <Text style={cardStyle.text}>Conditions: {this.state.fourText}</Text>
+                        <Text style={cardStyle.text}>Temperature: {this.state.fourHigh}°F / {this.state.fourLow}°F</Text>
+                    </Card>
+
+                    <Card
+                        titleStyle={cardStyle.titleStyle}
+                        title={this.state.fiveDay}>
+                        <Text style={cardStyle.text}>{this.state.fiveDate}</Text>
+                        <Text style={cardStyle.text}>Conditions: {this.state.fiveText}</Text>
+                        <Text style={cardStyle.text}>Temperature: {this.state.fiveHigh}°F / {this.state.fiveLow}°F</Text>
+                    </Card>
+
+                    <Card
+                        titleStyle={cardStyle.titleStyle}
+                        title={'Powered by Yahoo!'}>
+                        <Text style={cardStyle.text}>{this.state.fiveDate}</Text>
+                        <Text style={cardStyle.text}>Conditions: {this.state.fiveText}</Text>
+                        <Text style={cardStyle.text}>Temperature: {this.state.fiveHigh}°F / {this.state.fiveLow}°F</Text>
+                    </Card>
+
+                    <Card style={cardStyle.card}
+                        titleStyle={cardStyle.titleStyle}
+                        title={this.state.fiveDay}>
+                        <Text style={cardStyle.text}>{this.state.fiveDate}</Text>
+                        <Text style={cardStyle.text}>Conditions: {this.state.fiveText}</Text>
+                        <Text style={cardStyle.text}>Temperature: {this.state.fiveHigh}°F / {this.state.fiveLow}°F</Text>
+                    </Card>
+                </ScrollView>*/}
             </View>
         )
     }
 };
 
 const cardStyle = StyleSheet.create({
-     titleStyle:{
-         color: '#512698',
-         //backgroundColor: 'white',
-         //fontFamily: 'Comfortaa_bold',
-         fontSize: 20
-     },
-     messageStyle:{
-         //fontFamily: 'Montserrat',
-         fontSize: 18,
-         marginBottom: 0,
-     },
-     srcStyle:{
-         //fontFamily: 'Montserrat',
-         fontSize: 16,
-         fontStyle: 'italic'
-     },
-     text:{
-         color: 'black',
-         fontSize: 18
-     }
+    titleStyle:{
+        color: '#512698',
+        //backgroundColor: 'white',
+        //fontFamily: 'Comfortaa_bold',
+        fontSize: 20
+    },
+    messageStyle:{
+        //fontFamily: 'Montserrat',
+        fontSize: 18,
+        marginBottom: 0,
+    },
+    srcStyle:{
+        //fontFamily: 'Montserrat',
+        fontSize: 16,
+        fontStyle: 'italic'
+    },
+    atext:{
+        color: 'black',
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    text:{
+        color: 'black',
+        fontSize: 18
+    },
+    card:{
+        marginTop: 10,
+        marginBottom: 10,
+    }
 });

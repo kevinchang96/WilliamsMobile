@@ -167,7 +167,7 @@ const settings = ({navigation}) => ( <Settings screenProps={navigation}/> );
 
 const social = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
-const weather = ({navigation}) => ( <WeatherObj /> );
+const weather = ({navigation}) => ( <WeatherObj navigation={navigation}/> );
 
 const RootNavigator = StackNavigator({
     Home: { screen: HomeScreen },

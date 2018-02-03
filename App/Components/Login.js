@@ -74,16 +74,6 @@ export default class Login extends Component {
              />
 
             <View style={styles.container}>
-                <Text>{this.state.text}</Text>
-
-                <View style={styles.imageContainer}>
-                    <Image
-                        style={styles.icon}
-                        resizeMode="cover"
-                         source={require('../Assets/williams-mobile-logo-2.png')}
-                    />
-                </View>
-
                 <FormInput
                     autoCapitalize='none'
                     value={this.state.username}
@@ -103,13 +93,14 @@ export default class Login extends Component {
                     onSubmitEditing={this._submitForm} />
 
                 <Button
-                  title='Submit'
-                  backgroundColor={'#9678B6'} //Purple mountain majesty
-                  disabled={this.state.buttonDisabled}
-                  disabledStyle={styles.disabled}
-                  onPress={this._submitForm}
-                  outline={this.state.buttonDisabled}
-                  />
+                    title='Submit'
+                    backgroundColor={'#9678B6'} //Purple mountain majesty
+                    disabled={this.state.buttonDisabled}
+                    disabledStyle={styles.disabled}
+                    onPress={this._submitForm}
+                    outline={this.state.buttonDisabled} />
+
+                <Text style={{color: 'red'}}>{this.state.text}</Text>
             </View>
          </View>
         );
