@@ -149,6 +149,19 @@ class HomeScreen extends Component {
                             onPress={() => navigate('CampusMap', {url: 'http://map.williams.edu/map/?id=640', title: 'Campus Map'})}
                             title='EXPLORE' />
                     </Tile>
+
+                    <Tile
+                        imageSrc={require('../Assets/622053-636434848199382271-16x9.jpg')}
+                        title="FEEDBACK"
+                        activeOpacity={1}
+                        contentContainerStyle={{marginBottom: 20}}>
+                        <Button
+                            icon={{name: 'edit'}}
+                            backgroundColor='#512698'
+                            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                            onPress={() => navigate('Feedback', {url: 'https://goo.gl/forms/lxgT7UtuGuYDKr5z2', title: 'Feedback'})}
+                            title='GIVE INPUT' />
+                    </Tile>
                 </ScrollView>
             </View>
         );
@@ -160,6 +173,8 @@ const campusMap = ({navigation}) => ( <WebViewComponent navigation={navigation}/
 const dailyMessages = ({navigation}) => ( <DailyMessages navigation={navigation} /> );
 
 const diningMenus = () => ( <DiningMenus /> );
+
+const feedback = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
 const glow = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
@@ -178,6 +193,7 @@ const RootNavigator = StackNavigator({
     CampusMap: { screen: campusMap },
     Social: { screen: social },
     Weather: { screen: weather },
+    Feedback: { screen: feedback },
 },{
     headerMode: 'none',
 //    initialRouteName: 'homeScreen'
