@@ -65,12 +65,6 @@ export default class WeatherObj extends Component {
           fiveHigh: '',
           fiveLow: '',
           fiveText: '',
-
-          // date1: '',
-          // day1: '',
-          // high1: '',
-          // low1: '',
-          // text1: '',
       }
     }
 
@@ -94,21 +88,15 @@ export default class WeatherObj extends Component {
       .then((responseData) => {
           this.setState({
             title: responseData.query.results.channel.item.pubDate,
-            main: responseData.query.results.channel.item.title,                  // main, eg. cloudy, sunny, etc.
-            description: responseData.query.results.channel.item.condition.text,    // a somewhat accurate blurb about the weather
-            icon: '',                  // http://openweathermap.org/img/w/<icon>.png pulls up a little weather icon
-            fahrenheit: responseData.query.results.channel.item.condition.temp,                          // temperature in Fahrenheit, floored because it's always colder than it seems
-            celsius: this.convertToCelsius(responseData.query.results.channel.item.condition.temp),                             // temperature in Celsius
-            humidity: responseData.query.results.channel.atmosphere.humidity,                // percent humidity
-            ms: this.convertToMS(responseData.query.results.channel.wind.speed),              // speed in m/s (metric units), ceiling-ed because wind chill is real
-            mph: responseData.query.results.channel.wind.speed,      // speed in mi/hr (imperial units)
+            main: responseData.query.results.channel.item.title,                                        // main, eg. cloudy, sunny, etc.
+            description: responseData.query.results.channel.item.condition.text,                        // a somewhat accurate blurb about the weather
+            icon: '',                                                                                   // http://openweathermap.org/img/w/<icon>.png pulls up a little weather icon
+            fahrenheit: responseData.query.results.channel.item.condition.temp,                         // temperature in Fahrenheit, floored because it's always colder than it seems
+            celsius: this.convertToCelsius(responseData.query.results.channel.item.condition.temp),     // temperature in Celsius
+            humidity: responseData.query.results.channel.atmosphere.humidity,                           // percent humidity
+            ms: this.convertToMS(responseData.query.results.channel.wind.speed),                        // speed in m/s (metric units), ceiling-ed because wind chill is real
+            mph: responseData.query.results.channel.wind.speed,                                         // speed in mi/hr (imperial units)
           })
-          // call back in setState to calculate temperatureInC after temperatureGot's state is changed,
-          // since setState is async, temperatureGot may still have old value due
-          // this.setState(
-          //   {temperatureGot: responseData.query.results.channel.item.condition.temp},
-          //     function afterTemperatureGot () {this.convertTemperatureToC();}
-          // )
           this.setState({
             oneDate: responseData.query.results.channel.item.forecast[1].date,
             oneDay: responseData.query.results.channel.item.forecast[1].day,
@@ -140,15 +128,6 @@ export default class WeatherObj extends Component {
             fiveLow: responseData.query.results.channel.item.forecast[5].low,
             fiveText: responseData.query.results.channel.item.forecast[5].text,
           })
-          // for (let i = 1; i < 2; i++) {
-          //   this.setState({
-          //     date + i: responseData.query.results.channel.item.forecast[1].date,
-          //     day + i: responseData.query.results.channel.item.forecast[1].day,
-          //     high + i: responseData.query.results.channel.item.forecast[1].high,
-          //     low + i: responseData.query.results.channel.item.forecast[1].low,
-          //     text + i: responseData.query.results.channel.item.forecast[1].text,
-          //   })
-          // }
       })
       .catch((error) => {
         this.setState({title: 'Unable to display weather'});
@@ -220,7 +199,7 @@ export default class WeatherObj extends Component {
                 <ScrollView>
                   <Card
                       titleStyle={cardStyle.titleStyle}
-                      title={'Next five days:'}>
+                      title={'Forecast:'}>
                   </Card>
 
                   <Card
