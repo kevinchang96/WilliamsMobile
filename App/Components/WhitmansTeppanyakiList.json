@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Vegan Grilled Cheese",
+    "description": "",
+    "checked": false,
+    "price": 2.10
+  },{
+    "name": "Vegan Grilled Cheese & Tomato",
+    "description": "",
+    "checked": false,
+    "price": 2.40
+  },{
+    "name": "Vegan Gardenburger",
+    "description": "",
+    "checked": false,
+    "price": 4.29
+  },{
+    "name": "Vegan Quesadilla",
+    "description": "",
+    "checked": false,
+    "price": 3.50
+  },{
+    "name": "Vegan Falafel",
+    "description": "",
+    "checked": false,
+    "price": 4.99
+  },{
+    "name": "Veggie Burrito",
+    "description": "",
+    "checked": false,
+    "price": 4.29
+  }
+]

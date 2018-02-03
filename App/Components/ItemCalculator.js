@@ -9,6 +9,14 @@ import LeeMealsList from './LeeMealsList.json';
 import LeeAlaCarteList from './LeeAlaCarteList.json';
 import LeeBeveragesList from './LeeBeveragesList.json';
 import LeeDessertsList from './LeeDessertsList.json';
+import WhitmansBeveragesList from './WhitmansBeveragesList.json';
+import WhitmansDeliList from './WhitmansDeliList.json';
+import WhitmansDessertsList from './WhitmansDessertsList.json';
+import WhitmansFryerList from './WhitmansFryerList.json';
+import WhitmansGrillList from './WhitmansGrillList.json';
+import WhitmansMealList from './WhitmansMealList.json';
+import WhitmansSaladsList from './WhitmansSaladsList.json';
+import WhitmansTeppanyakiList from './WhitmansTeppanyakiList.json';
 
 export default class ItemCalculator extends Component{
 
@@ -16,11 +24,25 @@ export default class ItemCalculator extends Component{
             super(props);
             this.state=
             {   currentBalance: 0.0,
-                stateIndex: 1,
-                stateArray: [],
-                dataArray: [],
-                titleArray: ['A la Carte', 'Beverages', 'Desserts', 'Meals'],
-                fontColor: 'green'
+                stateIndex: 0,
+                stateArray: [[]],
+                titleArray: [
+                    [
+                        'A la Carte',
+                        'Beverages',
+                        'Desserts',
+                        'Meals'
+                    ],[
+                        'From the Deli',
+                        'From the Grill',
+                        'From the Fryer',
+                        'Beverages',
+                        'Teppanyaki',
+                        'Salads',
+                        'Make a Meal',
+                        'Desserts'
+                    ]
+                ]
             };
         }
 
@@ -29,20 +51,23 @@ export default class ItemCalculator extends Component{
         }
 
         loadData(){
-            var temp0 = LeeAlaCarteList;
-            var temp1 = LeeBeveragesList;
-            var temp2 = LeeDessertsList;
-            var temp3 = LeeMealsList;
             var temp = [];
-
-            temp.push(temp1);
-            temp.push(temp2);
-            temp.push(temp3);
-            temp.push(temp0);
-
-            this.setState({ stateArray: temp, dataArray: temp0, stateIndex: 0 });
-            //this.setState({ dataArray: LeeBeveragesList });
-
+            if( this.props.navigation.state.params.flag ){
+                temp.push(LeeAlaCarteList);
+                temp.push(LeeBeveragesList);
+                temp.push(LeeDessertsList);
+                temp.push(LeeMealsList);
+            } else {
+                temp.push(WhitmansDeliList);
+                temp.push(WhitmansGrillList);
+                temp.push(WhitmansFryerList);
+                temp.push(WhitmansBeveragesList);
+                temp.push(WhitmansTeppanyakiList);
+                temp.push(WhitmansSaladsList);
+                temp.push(WhitmansMealList);
+                temp.push(WhitmansDessertsList);
+            }
+            this.setState({ stateArray: temp });
         }
 
         componentWillUnmount(){
@@ -59,7 +84,7 @@ export default class ItemCalculator extends Component{
         }
 
         onClick( i ){
-            this.state.dataArray[i].checked = !this.state.dataArray[i].checked;
+            this.state.stateArray[this.state.stateIndex][i].checked = !this.state.stateArray[this.state.stateIndex][i].checked;
             this.forceUpdate()
         }
 
@@ -72,17 +97,22 @@ export default class ItemCalculator extends Component{
         }
 
         incrementState(){
-            this.setState({ stateIndex: this.state.stateIndex + 1, dataArray: this.state.stateArray[Math.abs(this.state.stateIndex%4)] });
+            if( this.props.navigation.state.params.flag ){
+                this.setState({stateIndex: (this.state.stateIndex + 1)%4});
+            } else {
+                this.setState({stateIndex: (this.state.stateIndex + 1)%8});
+            }
         }
 
         decrementState(){
-            this.setState({ stateIndex: this.state.stateIndex + 3, dataArray: this.state.stateArray[Math.abs((this.state.stateIndex-2)%4)] });
+            if( this.props.navigation.state.params.flag ){
+                this.setState({stateIndex: (this.state.stateIndex + 3)%4});
+            } else {
+                this.setState({stateIndex: (this.state.stateIndex + 7)%8});
+            }
         }
 
     render(){
-    //console.log(this.state.stateIndex);
-    //console.log("Mod: "+(this.state.stateIndex%4));
-    //console.log(this.state.stateIndex);
          return(
              <View style={styles.container}>
                  <Header
@@ -99,7 +129,7 @@ export default class ItemCalculator extends Component{
 
                  <Header
                      leftComponent={<Icon name='chevron-left' color='white' onPress={() => this.decrementState()} />}
-                     centerComponent={{ text: this.state.titleArray[Math.abs(this.state.stateIndex%4)], style: { fontSize: 22, color: '#ffffff' } }}
+                     centerComponent={{ text: (this.props.navigation.state.params.flag) ? this.state.titleArray[0][this.state.stateIndex] : this.state.titleArray[1][this.state.stateIndex], style: { fontSize: 22, color: '#ffffff' } }}
                      outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}}
                      underlayColor='#512698'
                      rightComponent={<Icon name='chevron-right' color='white' onPress={() => this.incrementState()} />}
@@ -108,13 +138,14 @@ export default class ItemCalculator extends Component{
                  <ScrollView styles={styles.scrollContainer}>
                      <List containerStyle={{ marginTop: 5, marginBottom: 5 }}>
                        {
-                         this.state.dataArray.map((l, i) => (
+
+                         this.state.stateArray[this.state.stateIndex].map((l, i) => (
                            <CheckBox
                              key={i}
                              title={l.name + " - ($" + l.price + ")"}
-                             checked={this.state.dataArray[i].checked}
+                             checked={this.state.stateArray[this.state.stateIndex][i].checked}
                              checkedColor='green'
-                             onPress={() => { this.onClick(i); this.updatePrice(this.state.dataArray[i].checked,l.price) } }
+                             onPress={() => { this.onClick(i); this.updatePrice(this.state.stateArray[this.state.stateIndex][i].checked,l.price) } }
                            />
                          ))
                        }

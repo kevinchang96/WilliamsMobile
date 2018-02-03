@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Hot Tea",
+    "description": "",
+    "checked": false,
+    "price": 1.25
+  },{
+    "name": "Hot Coffee",
+    "description": "",
+    "checked": false,
+    "price": 1.25
+  },{
+    "name": "Juice",
+    "description": "",
+    "checked": false,
+    "price": 1.25
+  },{
+    "name": "Soy Milk",
+    "description": "",
+    "checked": false,
+    "price": 1.25
+  },{
+    "name": "Milk",
+    "description": "",
+    "checked": false,
+    "price": 1.25
+  },{
+    "name": "Soda",
+    "description": "",
+    "checked": false,
+    "price": 1.25
+  },{
+    "name": "Smoothies (w/ real fruit)",
+    "description": "Flavors: Mango, Banana, Triple Berry, Strawberry Banana, Strawberry, Raspberry",
+    "checked": false,
+    "price": 2.99
+  },{
+    "name": "Frosts",
+    "description": "Flavors: Vanilla, Chocolate, Mint Chip, Coffee, Cookies & Cream, Strawberry",
+    "checked": false,
+    "price": 2.30
+  }
+]

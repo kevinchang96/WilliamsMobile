@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Cookie",
+    "description": "",
+    "checked": false,
+    "price": 1.00
+  },{
+    "name": "Dessert",
+    "description": "",
+    "checked": false,
+    "price": 1.00
+  },{
+    "name": "Honeybun",
+    "description": "",
+    "checked": false,
+    "price": 1.25
+  },{
+    "name": "Fruit",
+    "description": "",
+    "checked": false,
+    "price": 1.00
+  },{
+    "name": "Sundae",
+    "description": "",
+    "checked": false,
+    "price": 2.95
+  },{
+    "name": "Ice Cream Dish",
+    "description": "",
+    "checked": false,
+    "price": 1.30
+  },{
+    "name": "Small Gelato",
+    "description": "",
+    "checked": false,
+    "price": 1.50
+  },{
+    "name": "Large Gelato",
+    "description": "",
+    "checked": false,
+    "price": 2.50
+  }
+]

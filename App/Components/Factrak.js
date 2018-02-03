@@ -21,11 +21,11 @@ export class Factrak extends Component{
     constructor(props){
         super();
         this.state = {
-                        suggestions: [],        // array of suggestion cards
-                        html: "",               // html text to be converted into document object
-                        renderComments: false,  // indicates whether to render comments or not
-                        title: "",               // name of the course/professor
-                        showText: <View></View>
+            suggestions: [],        // array of suggestion cards
+            html: "",               // html text to be converted into document object
+            renderComments: false,  // indicates whether to render comments or not
+            title: "",               // name of the course/professor
+            showText: <View></View>
         };
     }
 
@@ -128,14 +128,12 @@ export class Factrak extends Component{
                     centerComponent={{ text: 'Factrak', style: { fontSize: 22, color: '#ffffff' } }}
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
                 />
-
                 <FormInput
                     style={{color: "white", fontSize: 20}}
                     onChangeText={(text) => this.getSuggestions(text)}
                     placeholder="Search for a professor or course..."
                     autoCorrect={false}
                 />
-
                 <List>
                     {this.state.suggestions}
                 </List>
@@ -150,20 +148,18 @@ const factrakCommentWindow = ({navigation}) => (
 
 const FactrakNavigator = StackNavigator({
     Home: { screen: Factrak },
-    FactrakCommentWindow: { screen: factrakCommentWindow,
-                            navigationOptions: ({navigation}) => ({
-                                title: `${navigation.state.params.title}`,
-                                header:() => (<Header
-                                                  leftComponent={
-                                                      <Icon
-                                                          name='chevron-left'
-                                                          color='white'
-                                                          onPress={() => navigation.goBack()} />
-                                                  }
-                                                  centerComponent={{ text: `${navigation.state.params.title}`, style: { fontSize: 22, color: '#ffffff' } }}
-                                                  outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
-                                              />)
-                            })}
+    FactrakCommentWindow:
+        {   screen: factrakCommentWindow,
+            navigationOptions: ({navigation}) => ({
+                title: `${navigation.state.params.title}`,
+                header:() => (<Header leftComponent={ <Icon name='chevron-left' color='white'
+                                                        onPress={() => navigation.goBack()}/>}
+                                      centerComponent={{ text: `${navigation.state.params.title}`,
+                                                        style: { fontSize: 22, color: '#ffffff' } }}
+                                      outerContainerStyles={{backgroundColor: '#512698',
+                                                            borderBottomWidth: 0, padding: 10,
+                                                            height: 55}}/>)
+            })}
 });
 
 const styles = StyleSheet.create({

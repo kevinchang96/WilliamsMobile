@@ -41,12 +41,11 @@ const CustomComponents = (props) => (
       />
 
       <View style={{flex: 1, flexDirection: 'column', marginTop: 5}}>
-        <Text style={styles.text}>Not Logged In</Text>
         <Text style={styles.subText}>{unix._55}</Text>
       </View>
     </View>
 
-    <SafeAreaView style={styles.container} forceInset={{top: 'always', horizontal: 'never'}}>
+    <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
       <DrawerItems {...props} />
     </SafeAreaView>
   </ScrollView>
@@ -163,3 +162,4 @@ const styles = StyleSheet.create({
 });
 console.disableYellowBox = true
 export default drawers;
+

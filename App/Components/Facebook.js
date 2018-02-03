@@ -29,14 +29,13 @@ export default class Facebook extends Component{
 
     render(){
         return(
-            <View style= {{flex: 1, backgroundColor: "#eeeeee",
-                            paddingTop: Platform.OS === 'ios' ? 20 : 0,}}>
+            <View style= {{flex: 1, backgroundColor: "#eeeeee"}}>
                 <Header
                     leftComponent={
                         <Icon
                             name='chevron-left'
                             color='white'
-                            onPress={() => this.props.screenProps.goBack()}
+                            onPress={() => this.props.navigation.goBack()}
                             underlayColor='#512698'/>
                     }
                     centerComponent={{ text: 'Facebook', style: { fontSize: 22, color: '#ffffff' } }}

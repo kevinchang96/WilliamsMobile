@@ -1,0 +1,61 @@
+[
+  {
+    "name": "Hamburger",
+    "description": "",
+    "checked": false,
+    "price": 2.50
+  },{
+    "name": "Cheeseburger",
+    "description": "",
+    "checked": false,
+    "price": 2.75
+  },{
+    "name": "Bacon Cheeseburger",
+    "description": "",
+    "checked": false,
+    "price": 3.20
+  },{
+    "name": "Grilled Cheese",
+    "description": "",
+    "price": 2.10
+  },{
+    "name": "Grilled Cheese with Tomato",
+    "description": "",
+    "checked": false,
+    "price": 2.40
+  },{
+    "name": "Grilled Cheese with Bacon",
+    "description": "",
+    "checked": false,
+    "price": 3.20
+  },{
+    "name": "Tuna Melt",
+    "description": "",
+    "checked": false,
+    "price": 3.75
+  },{
+    "name": "Grilled Chicken",
+    "description": "",
+    "price": 4.25
+  },{
+    "name": "Moroccan Chicken",
+    "description": "",
+    "checked": false,
+    "price": 4.99
+  },{
+    "name": "Chicken Shawarma",
+    "description": "",
+   "checked": false,
+    "price": 4.99
+  },{
+    "name": "Chicken Patty",
+    "description": "",
+    "checked": false,
+    "price": 4.25
+  },{
+    "name": "Hot Dog",
+    "description": "",
+   "checked": false,
+    "price": 1.70
+  }
+]
