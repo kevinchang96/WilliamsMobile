@@ -1,0 +1,27 @@
+[
+  {
+    "name": "BLT",
+    "description": "Bacon, Lettuce, Tomato, Side of Mayo"
+  },{
+    "name": "Pepperoni",
+    "description": "Red Sauce, Pepperoni, Mozzarella Cheese, Banana Peppers"
+  },{
+    "name": "Hot Ham & Swiss",
+    "description": "Ham, Swiss Cheese, Banana Peppers, Lettuce, Tomato, Side of Mayo"
+  },{
+    "name": "Classic Italian",
+    "description": "Pepperoni, Ham, Salami, Provolone, Lettuce, Tomato, Banana Peppers, Olive Oil"
+  },{
+    "name": "Sausage, Peppers & Onion",
+    "description": "Red Sauce, Italian Sausage Crumbles, Green Pepper, Onion, Mozzarella Cheese"
+  },{
+    "name": "Toasted Turkey Melt",
+    "description": "Turkey, Provolone, Tomato, Lettuce, Side of Mayo"
+  },{
+    "name": "Toasted Eggplant Parmesan",
+    "description": "Roasted Eggplant, Roasted Tomato, Red Sauce, Smoked Gouda, Parmesan Cheese"
+  },{
+    "name": "Toasted Turkey Club",
+    "description": "Turkey, Bacon, Provolone, Tomato, Lettuce, Side of Mayo"
+  }
+]

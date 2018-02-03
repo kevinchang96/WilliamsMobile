@@ -10,6 +10,7 @@ import WebViewComponent from './WebViewComponent';
 import DiningMenus from './DiningMenus';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import ItemCalculator from './ItemCalculator';
+import GrillMenu from '../Components/GrillMenu';
 
 class DiningList extends Component{
     constructor(props){
@@ -52,7 +53,7 @@ class DiningList extends Component{
              id: '25',
              name: "'82 Grill",
              url: 'http://nutrition.williams.edu/NetNutrition/Home.aspx?unit=S25&date=today',
-             screen: 'WebViewPost',
+             screen: 'GrillMenu',
              icon: <Icon name='whatshot' />
            }
          ]
@@ -116,6 +117,7 @@ class DiningList extends Component{
                              avatar={l.icon}
                              key={i}
                              title={l.name}
+                             onPress={() => navigate(l.screen)}
                            />
                          ))
                        }
@@ -199,11 +201,14 @@ const itemCalculator = ({navigation}) => ( <ItemCalculator navigation={navigatio
 
 const diningMenus = ({navigation}) => ( <DiningMenus navigation={navigation}/> );
 
+const grillMenu = ({navigation}) => ( <GrillMenu navigation={navigation}/> );
+
 const DiningNavigator = StackNavigator({
     Home: { screen: DiningList },
     DiningMenus: { screen: diningMenus },
     WebViewPost: { screen: webViewPost },
-    ItemCalculator: { screen: itemCalculator }
+    ItemCalculator: { screen: itemCalculator },
+    GrillMenu: { screen: grillMenu }
   },
     { headerMode: 'none' }
 );
