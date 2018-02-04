@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, AsyncStorage, Image, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { AppRegistry, AsyncStorage, Image, ImageBackground, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { DrawerItems, DrawerNavigator, SafeAreaView, TabNavigator } from 'react-navigation';
 import { Avatar, Card, Button, Header, Icon, List, ListItem, Tile } from 'react-native-elements';
 
@@ -26,24 +26,25 @@ retrieveFromStorage = async(value) => {
 }
 const unix = retrieveFromStorage('unix');
 const username = retrieveFromStorage('username');
-console.log(unix);
 
 const CustomComponents = (props) => (
   <ScrollView style={styles.container}>
-    <View style={{flex: 1, flexDirection: 'row', marginLeft: 20, marginTop: 20, marginBottom: 10}}>
-      <Avatar
-        large
-        rounded
-        source={{uri:'https://wso.williams.edu/pic/' + unix._55}}
-        onPress={() => console.log(unix._55)}
-        activeOpacity={0.7}
-        containerStyle={{marginRight: 10}}
-      />
+    <ImageBackground style={styles.backgroundImage}
+        source={require('./App/Assets/800px_COLOURBOX19515073_.png')}>
+        <View style={styles.profile}>
+          <Avatar
+            large
+            rounded
+            source={{uri:'https://wso.williams.edu/pic/' + unix._55}}
+            onPress={() => console.log(unix._55)}
+            activeOpacity={0.7}
+            containerStyle={{marginRight: 10}} />
 
-      <View style={{flex: 1, flexDirection: 'column', marginTop: 5}}>
-        <Text style={styles.subText}>{unix._55}</Text>
-      </View>
-    </View>
+          {/*<View style={{flex: 1, flexDirection: 'column', marginTop: 25}}>
+            <Text style={styles.text}>{unix._55}</Text>
+          </View>*/}
+        </View>
+    </ImageBackground>
 
     <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
       <DrawerItems {...props} />
@@ -127,9 +128,7 @@ const drawers = DrawerNavigator({
     contentOptions: {
         activeTintColor: '#ffcc33',
         inactiveTintColor: 'white',
-        itemsContainerStyle: {
-            marginVertical: 0,
-        },
+        itemsContainerStyle: { marginVertical: 0 },
         iconContainerStyle: { opacity: 1 }
     },
 
@@ -140,24 +139,28 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     profile: {
-        flex: 1,
+        flex: 2,
         flexDirection: 'row',
-        marginLeft: 20,
+        justifyContent: 'center',
+//        marginLeft: 20,
         marginTop: 20,
-        marginBottom: 10,
+        marginBottom: 20,
     },
     icon: {
         width: 24,
         height: 24,
     },
     text: {
+        marginLeft: 10,
         color: 'white',
-        fontSize: 16,
-        fontWeight: 'bold'
+        fontSize: 22,
+        fontWeight: 'normal',
+        textShadowColor: '#aaaaaa',
+        textShadowRadius: 20,
     },
-    subText: {
-        color: 'white',
-        fontSize: 16
+    backgroundImage: {
+        flex: 1,
+        resizeMode: 'cover', // or 'stretch'
     }
 });
 console.disableYellowBox = true

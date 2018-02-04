@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         textAlign: 'center',
         fontStyle: 'italic',
+        marginTop: 10,
     }
 });
 

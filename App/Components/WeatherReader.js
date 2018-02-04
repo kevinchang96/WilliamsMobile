@@ -1,3 +1,10 @@
+
+//***Slate for deletion***//
+//***Grace declares this trash***//
+
+
+
+
 // A WIP
 // Can fetch JSON from openweather
 // A class which fetches JSON data from the openweathermap api, runs it through a WeatherObj and renders the information

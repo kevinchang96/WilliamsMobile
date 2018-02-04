@@ -9,6 +9,16 @@ import { Avatar, Button, Header, Icon, List, ListItem } from 'react-native-eleme
 import { DrawerNavigator } from 'react-navigation';
 
 export default class About extends Component{
+    constructor(){
+        super()
+        this.state = {
+            workerList: [],
+            acknowList: [],
+            workerTitle: '',
+            acknowTitle: '',
+        }
+    }
+
     static navigationOptions = {
         drawerLabel: 'About',
         drawerIcon: ({ tintColor }) => (
@@ -18,15 +28,9 @@ export default class About extends Component{
         ),
     };
 
-    render() {
-        const infoList = [
-            {
-              title: 'App Version',
-              sub: '0.2.0'
-            }
-        ]
 
-        const workerList = [
+    showEasterEgg = () => {
+        const easterList0 = [
             {
               name: 'David Ariyibi',
               role: 'Co-leader/Lead Front-End Engineer',
@@ -45,12 +49,52 @@ export default class About extends Component{
             },{
               name: 'Alex Taylor',
               role: 'Mobile Engineer',
+            }
+        ]
+
+        const easterList1 = [
+            {
+              name: 'Professor Jeannie Albrecht',
+              role: 'Advisor',
             },{
               name: 'Nambi Williams',
               role: 'Mobile Engineer',
-            },{
-              name: 'Professor Jeannie Albrecht',
-              role: 'Advisor',
+            }
+        ]
+
+        var easterList2 = [];
+
+        var easterList2 = easterList0.map((l, i) => (
+                            <ListItem
+                              key={i}
+                              title={l.name}
+                              subtitle={l.role}
+                              hideChevron={true}
+                            />
+                          ));
+
+        var easterList3 = [];
+
+        var easterList3 = easterList1.map((l, i) => (
+                            <ListItem
+                              key={i}
+                              title={l.name}
+                              subtitle={l.role}
+                              hideChevron={true}
+                            />
+                          ));
+
+        this.setState({ workerList: easterList2,
+                        acknowList: easterList3,
+                        workerTitle: 'Contributors',
+                        acknowTitle: 'Acknowledgements' });
+    }
+
+    render() {
+        const infoList = [
+            {
+              title: 'App Version',
+              sub: '0.2.0'
             }
         ]
 
@@ -75,22 +119,23 @@ export default class About extends Component{
                             key={i}
                             title={l.title}
                             subtitle={l.sub}
-
+                            onLongPress={this.showEasterEgg}
+                            hideChevron={true}
                           />
                         ))
                       }
                     </List>
 
-                    <List containerStyle={{ marginTop: 10, marginBottom: 0 }}>
-                      {
-                        workerList.map((l, i) => (
-                          <ListItem
-                            key={i}
-                            title={l.name}
-                            subtitle={l.role}
-                          />
-                        ))
-                      }
+                    <Text>{this.workerTitle}</Text>
+
+                    <List containerStyle={{padding: 0, marginTop: 0, marginBottom: 0}}>
+                        {this.workerList}
+                    </List>
+
+                    <Text>{this.acknowTitle}</Text>
+
+                    <List containerStyle={{padding: 0, marginTop: 0, marginBottom: 0}}>
+                        {this.acknowList}
                     </List>
                 </ScrollView>
             </View>
