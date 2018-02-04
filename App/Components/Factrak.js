@@ -19,7 +19,7 @@ export class Factrak extends Component{
     }
 
     constructor(props){
-        super();
+        super(props);
         this.state = {
             suggestions: [],        // array of suggestion cards
             html: "",               // html text to be converted into document object

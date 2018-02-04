@@ -76,7 +76,7 @@ class DiningList extends Component{
          const getAppList = [
            {
              name: "GET Website",
-             url: 'https://idp.williams.edu/idp/profile/SAML2/Redirect/SSO?execution=e1s1',
+             url: 'https://get.cbord.com/williamscollege/full/prelogin.php',
              screen: 'WebViewPost',
            }
          ]
