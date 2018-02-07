@@ -109,6 +109,7 @@ export default class DiningMenus extends Component {
                                    style: { fontSize: 20, color: '#ffffff' } }}
                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}}
                 underlayColor='#512698'
+                innerContainerStyles={{paddingLeft:75,paddingRight:75}}
                 rightComponent={<Icon name='chevron-right' color='white' onPress={() => this.incrementState()} />}
             />
 
