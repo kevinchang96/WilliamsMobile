@@ -18,11 +18,18 @@ import { Card, ListItem, Button } from 'react-native-elements'
 export default class StudentCard extends Component{
 
     render(){
+    console.log(this.props.fun);
         return(
         <TouchableOpacity>
-            <Card avatar = {{uri: this.props.img}}>
+            <Card
+            flexDirection='row'>
+                <Image
+                 style={{height:100,width:100,marginRight:10}}
+                 source= {{uri: this.props.img}}/>
+                <View>
                 <Text>{this.props.name}</Text>
                 <Text note>Unix: {this.props.unix}</Text>
+                </View>
             </Card>
         </TouchableOpacity>
         );
