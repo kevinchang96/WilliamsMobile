@@ -26,6 +26,18 @@ class LinkList extends Component{
                 url: 'https://communications.williams.edu/social-media-directory/',
                 icon: <Icon name='share' />
             },{
+                id: '52',
+                name: "Student Academic Records",
+                screen: 'Sarah',
+                url: 'https://sarah.williams.edu/',
+                icon: <Icon name='folder-open' />
+            },{
+                id: '51',
+                name: "Human Resources",
+                screen: 'Ephr',
+                url: 'http://ephr.williams.edu/',
+                icon: <Icon name='supervisor-account' />
+            },{
                 id: '55',
                 name: "Campus Map",
                 screen: 'CampusMap',
@@ -105,6 +117,10 @@ class LinkList extends Component{
 
 const fastFacts = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
+const sarah = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
+const ephr = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
+
 const campusMap = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
 
 const laundryView = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
@@ -132,6 +148,8 @@ const LinkNavigator = StackNavigator({
     CourseCatalog: { screen: courseCatalog },
     EphSports: { screen: ephSports },
     SocialMedia: { screen: socialMedia },
+    Sarah: { screen: sarah },
+    Ephr: { screen: ephr },
     },
     { headerMode: 'none' }
 );

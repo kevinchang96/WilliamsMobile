@@ -15,7 +15,7 @@ export default class MessageCard extends Component{
                 titleStyle={cardStyle.titleStyle}
                 title={this.props.title}>
                 <Text style={cardStyle.messageStyle}>{this.props.text}</Text>
-                <Divider style={{ backgroundColor: '#512698' }}/>
+                <Divider style={{ backgroundColor: '#512698', height: 0.5}}/>
                 <Text style={cardStyle.srcStyle}>{this.props.src}</Text>
             </Card>
 
@@ -33,7 +33,7 @@ const cardStyle = StyleSheet.create({
      messageStyle:{
         //fontFamily: 'Montserrat',
         fontSize: 18,
-        marginBottom: 0,
+        marginBottom: 5,
      },
      srcStyle:{
         //fontFamily: 'Montserrat',

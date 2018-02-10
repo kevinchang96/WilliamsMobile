@@ -153,7 +153,7 @@ export default class Facebook extends Component{
                 var students = [input.length - 12];
 
                 if(hasResults.length == 1){
-                    text = <Text style=  {{color: "white", fontSize: 20}} key = 'one'>No Results</Text>
+                    text = <Text style=  {{color: "black", fontSize: 20}} key = 'one'>No Results</Text>
                     students[0] = text;
                     this.setState({studentCards: students})
                     return;
