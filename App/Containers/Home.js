@@ -65,7 +65,7 @@ class HomeScreen extends Component {
 
                 <ScrollView style={styles.scrollContainer}>
                     <Tile
-                        imageSrc={require('../Assets/20161021-202543-20160605__p_eag-l-williamsgrad1.jpg')}
+                        imageSrc={require('../Assets/RS34677_2014_Mountain_Day_KQ_0138-1024x683.jpg')}
                         title="WEATHER"
                         caption="Check the Forecast"
                         activeOpacity={1}
@@ -137,7 +137,7 @@ class HomeScreen extends Component {
                     </Tile>
 
                     <Tile
-                        imageSrc={require('../Assets/colleges-maps.jpg')}
+                        imageSrc={require('../Assets/13-hollander.jpg')}
                         title="CAMPUS MAP"
                         caption="Sign Up for Tours!"
                         activeOpacity={1}

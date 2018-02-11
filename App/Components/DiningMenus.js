@@ -122,25 +122,19 @@ export default class DiningMenus extends Component {
 
 const styles = StyleSheet.create(
 {
-    container:
-    {
+    container:{
         flex: 1,
         backgroundColor: '#eeeeee',
-        justifyContent: 'center',
-//        paddingTop: (Platform.OS == 'ios') ? 20 : 0
+//        justifyContent: 'center',
     },
-
-    viewHolder:
-    {
+    viewHolder:{
         height: 55,
         backgroundColor: 'blue',
         justifyContent: 'center',
         alignItems: 'center',
         margin: 4
     },
-
-    text:
-    {
+    text:{
         color: 'white',
         fontSize: 25
     }

@@ -1,5 +1,5 @@
 /**
- * Alex Taylor, David Ariyibi
+ * Alex Taylor, David Ariyibi, Kevin Chang
  * (c) 01/2018
  */
 
@@ -195,7 +195,7 @@ export default class Facebook extends Component{
                     var h4Input = doc.getElementsByTagName("h4");
                     var h5Input = doc.getElementsByTagName("h5");
                     let student = {
-                        name: nameInput[0].textContent,
+                        name: nameInput[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim(),
                         unix: h4Input[0].textContent, //gets unix
                         suBox: '',
                         room: '',

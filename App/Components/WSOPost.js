@@ -1,7 +1,11 @@
+/**
+ * Kevin Chang, David Ariyibi
+ * (c) 01/2018
+ */
+
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { Button, ButtonGroup, Card, Header, Icon } from 'react-native-elements';
-
 
 export default class WSOPost extends Component{
 
@@ -58,19 +62,13 @@ export default class WSOPost extends Component{
 
                  <Card containerStyle={{padding: 10}}>
                    {
-                        <View >
-                            <ScrollView>
-                                 <Text style={{borderRadius: 5, marginBottom: 5}}>
-                                     {this.state.title}
-                                 </Text>
-                                <Text style={{borderRadius: 5, marginBottom: 5}}>
-                                     {this.state.text}
-                                 </Text>
-                                <Text style={{borderRadius: 5, marginBottom: 5}}>
-                                    Posted by: {this.state.name}
-                                </Text>
-                            </ScrollView>
-                        </View>
+                    <View>
+                        <ScrollView>
+                            <Text style={styles.nameText}>{this.state.title}</Text>
+                            <Text style={styles.subText}>{this.state.text}</Text>
+                            <Text style={styles.subText}>Posted by: {this.state.name}</Text>
+                        </ScrollView>
+                    </View>
                    }
                  </Card>
              </View>
@@ -83,6 +81,18 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#EEEEEE', //'#DCD0FE',
     },
+    nameText:{
+        color: '#512698',
+        fontSize: 14,
+        borderRadius: 5,
+        marginBottom: 5
+    },
+    subText:{
+        color: 'black',
+        fontSize: 12,
+        borderRadius: 5,
+        marginBottom: 5
+    }
 });
 
 AppRegistry.registerComponent('WSOPost', () => WSOPost );
