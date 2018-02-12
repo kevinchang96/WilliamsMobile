@@ -5,8 +5,7 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, ScrollView, PixelRatio, Dimensions, Animated } from 'react-native';
-import { Button, Card, Header, List, ListItem } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Button, Card, Header, Icon, List, ListItem } from 'react-native-elements';
 
 export default class DiningMenus extends Component {
 
@@ -105,11 +104,9 @@ export default class DiningMenus extends Component {
 
             <Header
                 leftComponent={<Icon name='chevron-left' color='white' onPress={() => this.decrementState()} />}
-                centerComponent={{ text: this.state.titleArray[Math.abs(this.state.stateIndex)],
-                                   style: { fontSize: 20, color: '#ffffff' } }}
+                centerComponent={{ text: this.state.titleArray[Math.abs(this.state.stateIndex)], style: { fontSize: 20, color: '#ffffff' } }}
                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 35}}
                 underlayColor='#512698'
-                innerContainerStyles={{paddingLeft:75,paddingRight:75}}
                 rightComponent={<Icon name='chevron-right' color='white' onPress={() => this.incrementState()} />}
             />
 

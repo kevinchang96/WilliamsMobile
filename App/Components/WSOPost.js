@@ -60,11 +60,13 @@ export default class WSOPost extends Component{
                  centerComponent={{ text: this.props.navigation.state.params.title, style: { fontSize: 22, color: '#ffffff' } }}
                  outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
 
-                 <Card containerStyle={{padding: 10}}>
+                 <Card
+                    title={this.state.title}
+                    titleStyle={styles.nameText}
+                    containerStyle={{padding: 10}}>
                    {
                     <View>
                         <ScrollView>
-                            <Text style={styles.nameText}>{this.state.title}</Text>
                             <Text style={styles.subText}>{this.state.text}</Text>
                             <Text style={styles.subText}>Posted by: {this.state.name}</Text>
                         </ScrollView>
@@ -83,13 +85,13 @@ const styles = StyleSheet.create({
     },
     nameText:{
         color: '#512698',
-        fontSize: 14,
+        fontSize: 16,
         borderRadius: 5,
         marginBottom: 5
     },
     subText:{
         color: 'black',
-        fontSize: 12,
+        fontSize: 14,
         borderRadius: 5,
         marginBottom: 5
     }
