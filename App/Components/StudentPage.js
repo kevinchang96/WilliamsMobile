@@ -22,7 +22,8 @@ export default class StudentPage extends Component{
     render(){
         return(
             <Card flexDirection='row'>
-                <Image source={{uri: this.props.img}} style={{height: 120, width: 120, marginRight: 10}}/>
+                <Image source={{uri: this.props.img}}
+                        style={{height: 120, width: 120, marginRight: 10}}/>
                 <View>
                     <Text style={styles.nameText}>{this.props.name}</Text>
 
@@ -32,11 +33,11 @@ export default class StudentPage extends Component{
                     <Text style={styles.subText}>SU Box</Text>
                     <Text>{this.props.suBox}</Text>
 
-                    <Text style={styles.subText}>Room</Text>
-                    <Text>{this.props.room}</Text>
+                    {(this.props.room) ? [<Text style={styles.subText}>Room</Text>,
+                        <Text>{this.props.room}</Text>] : null}
 
-                    <Text style={styles.subText}>Hometown</Text>
-                    <Text>{this.props.homeTown}</Text>
+                    {(this.props.homeTown) ? [<Text style={styles.subText}>Hometown</Text>,
+                        <Text>{this.props.homeTown}</Text>] : null}
                 </View>
             </Card>
         );
