@@ -11,23 +11,43 @@
     "price": 2.75
   },{
     "name": "Small Gelato",
-    "description": "",
+    "description": "Assorted flavors.",
     "checked": false,
     "price": 1.49
   },{
     "name": "Large Gelato",
-    "description": "",
+    "description": "Assorted flavors.",
     "checked": false,
     "price": 2.49
   },{
     "name": "Small Ice Cream",
-    "description": "",
+    "description": "Chocolate or vanilla ice cream.",
     "checked": false,
     "price": 1.29
   },{
     "name": "Large Ice Cream",
-    "description": "",
+    "description": "Chocolate or vanilla ice cream.",
     "checked": false,
     "price": 2.29
+  },{
+    "name": "Happy & Healthy Snack Bags",
+    "description": "Assorted mixes/flavors.",
+    "checked": false,
+    "price": 2.50
+  },{
+    "name": "Garuka Bars",
+    "description": "All natural honey and nut granola energy bars.",
+    "checked": false,
+    "price": 3.25
+  },{
+    "name": "Monkey Chew",
+    "description": "Assorted granola bars (Gluten Free and Nut Free options).",
+    "checked": false,
+    "price": 2.25
+  },{
+    "name": "Awake Bar",
+    "description": "Assorted caffeinated chocolate/granola bars.",
+    "checked": false,
+    "price": 1.75
   }
 ]

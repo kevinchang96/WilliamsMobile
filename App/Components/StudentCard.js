@@ -1,6 +1,9 @@
 /**
  * Alex Taylor
  * (c) 01/2018
+ *
+ * David Ariyibi
+ * (c) 02/2018
  */
 
 import React, { Component } from 'react';
@@ -18,15 +21,34 @@ import { Card, ListItem, Button } from 'react-native-elements'
 export default class StudentCard extends Component{
 
     render(){
+    console.log(this.props.fun);
         return(
         <TouchableOpacity>
-            <Card avatar = {{uri: this.props.img}}>
-                <Text>{this.props.name}</Text>
-                <Text note>Unix: {this.props.unix}</Text>
+            <Card
+            flexDirection='row'>
+                <Image
+                 style={{height:80,width:80,marginRight:10}}
+                 source= {{uri: this.props.img}}/>
+                <View>
+                    <Text style={styles.nameText}>{this.props.name}</Text>
+                    <Text style={styles.unixText}>{this.props.unix}</Text>
+                </View>
             </Card>
         </TouchableOpacity>
         );
     }
 }
+
+const styles = StyleSheet.create(
+{
+    nameText:{
+        color: '#512698',
+        fontSize: 16
+    },
+    unixText:{
+        color: 'black',
+        fontSize: 14
+    }
+});
 
 AppRegistry.registerComponent('StudentCard', () => StudentCard );

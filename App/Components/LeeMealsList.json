@@ -1,17 +1,12 @@
 [
   {
-    "name": "Pancakes with Choice of Toppings",
-    "description": "3 with Topping, Choice of Breakfast Meat, Fruit Cup, Beverage",
+    "name": "Pancakes",
+    "description": "Stack of 3 pancakes, 1 topping, choice of meat, hashbrown, choice of drink.",
     "checked": false,
     "price": 7.00
   },{
-    "name": "Belgian Waffle with Choice of Toppings",
-    "description": "With Topping, Choice of Breakfast Meat, Fruit Cup, Beverage",
-    "checked": false,
-    "price": 7.00
-  },{
-    "name": "Vegan Blueberry Banana French Toast",
-    "description": "Fruit Cup, Beverage",
+    "name": "Lee Stacker",
+    "description": "2 pieces of choice toast, stacked with 2 pieces of choice meat, any style eggs and cheese with a choice of drink.",
     "checked": false,
     "price": 7.00
   },{

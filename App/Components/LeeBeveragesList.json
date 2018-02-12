@@ -35,7 +35,7 @@
     "checked": false,
     "price": 0.99
   },{
-    "name": "Juice",
+    "name": "Cranberry/Orange Juice",
     "description": "",
     "checked": false,
     "price": 1.49
@@ -49,6 +49,11 @@
     "description": "",
     "checked": false,
     "price": 1.49
+  },{
+    "name": "Odwalla Smoothies",
+    "description": "",
+    "checked": false,
+    "price": 3.25
   },{
     "name": "Soda",
     "description": "",

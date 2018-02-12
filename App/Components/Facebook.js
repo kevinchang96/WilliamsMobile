@@ -1,5 +1,5 @@
 /**
- * Alex Taylor, David Ariyibi
+ * Alex Taylor, David Ariyibi, Kevin Chang
  * (c) 01/2018
  */
 
@@ -23,7 +23,8 @@ export default class Facebook extends Component{
         super(props);
         this.state = {
             searchFor: 'Search',
-            studentCards: []
+            studentCards: [],
+            token: ''
         };
     }
 
@@ -77,6 +78,7 @@ export default class Facebook extends Component{
                 let doc = new DOMParser().parseFromString(responseText,'text/html');
                 var input = doc.getElementsByTagName("input");
                 //console.log("Tags: " + input);
+
                 var paramList = [input.length];
                 var key;
                 var value;
@@ -89,10 +91,14 @@ export default class Facebook extends Component{
                     if( key == 'search' ){
                         if(this.state.searchFor != ''){
                             value = this.state.searchFor;
+                            console.log("Search for this: " + this.state.searchFor);
                         }
                         else {
                             value = 'Rohan';
                         }
+                    } else if( key == 'authenticity_token' ){
+                        this.setState({token: value});
+                        //console.log("Authenticity token: " + value );
                     }
                     paramList[i] = key + "=" + encodeURIComponent(value);
 
@@ -140,12 +146,14 @@ export default class Facebook extends Component{
 
                 let doc = new DOMParser().parseFromString(responseText,'text/html');
                 var input = doc.getElementsByTagName("a");
+                console.log("Input: "+ input);
+                console.log("Input length: "+ input.length);
                 var hasTable = doc.getElementsByTagName("thead");
                 var hasResults = doc.getElementsByTagName("br");
                 var students = [input.length - 12];
 
                 if(hasResults.length == 1){
-                    text = <Text style=  {{color: "white", fontSize: 20}} key = 'one'>No Results</Text>
+                    text = <Text style=  {{color: "black", fontSize: 20}} key = 'one'>No Results</Text>
                     students[0] = text;
                     this.setState({studentCards: students})
                     return;
@@ -159,9 +167,9 @@ export default class Facebook extends Component{
                             continue;
 
                         let student = {
-                                name: input[i].textContent,
-                                unix: input[i + 1].textContent,
-                                img: "https://wso.williams.edu/pic/" + input[i + 1].textContent,
+                                name: input[i + 1].textContent,
+                                unix: input[i + 2].textContent,
+                                img: "https://wso.williams.edu/pic/" + input[i + 2].textContent,
                                 info: input[i].getAttribute("href")
                             };
 
@@ -175,17 +183,19 @@ export default class Facebook extends Component{
 
                         console.log("Student: " + student.name);
                         console.log("Unix: " + student.unix);
+                        console.log("Img: " + student.img);
                         console.log("Input length: " + input.length)
                      }
                      this.setState({studentCards: students})
                  }
-                 else if (input.length == 14){ //only one student is returned
+                 else if (input.length == 15){ //only one student is returned
 
                     var nameInput = doc.getElementsByTagName("h3");
+                    console.log("Name input: "+ nameInput[0].textContent);
                     var h4Input = doc.getElementsByTagName("h4");
                     var h5Input = doc.getElementsByTagName("h5");
                     let student = {
-                        name: nameInput[0].textContent,
+                        name: nameInput[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim(),
                         unix: h4Input[0].textContent, //gets unix
                         suBox: '',
                         room: '',
@@ -232,17 +242,18 @@ export default class Facebook extends Component{
                             continue;
 
                         let student = {
-                            name: input[i].textContent,
-                            unix: input[i+1].textContent,
-                            img: "https://wso.williams.edu/pic/" + input[i+1].textContent,
+                            name: input[i+1].textContent,
+                            unix: input[i+2].textContent,
+                            img: "https://wso.williams.edu/pic/" + input[i+2].textContent,
                             info: input[i].getAttribute("href")
                         }
+
                         card = <StudentCard
                                     name = {student.name}
                                     unix = {student.unix}
                                     img = {student.img}
                                     key = {student.info}
-                                    onPress={searchFor => {this.setState({searchFor:unix}); this.submitForm}}
+                                    fun = {console.log("Got it!")}
                                />
                         students[i-13] = card;
                         i+=2;

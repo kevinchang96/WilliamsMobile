@@ -67,35 +67,42 @@ export default class GrillMenu extends Component {
             />
 
             <ScrollView>
-                <Text style={styles.subtitle}>{this.state.sub0Array[this.state.stateIndex]}</Text>
 
-                <List containerStyle={{ marginTop: 5, marginBottom: 5 }}>
-                   {
-                     this.state.stateArray[this.state.stateIndex].map((l, i) => (
-                       <ListItem
-                         key={i}
-                         title={l.name}
-                         subtitle={l.description}
-                         hideChevron={true}
-                        />
-                     ))
-                   }
-                </List>
+                <Card title={this.state.sub0Array[this.state.stateIndex]}
+                    titleStyle={{color: '#512698', fontSize: 20, marginBottom: 0}}
+                    dividerStyle={{height: 0}}
+                    containerStyle={{ marginTop: 5, marginBottom: 5 }}>
+                    <List containerStyle={{padding: 0, marginTop: 0, marginBottom: 0}}>
+                      {
+                        this.state.stateArray[this.state.stateIndex].map((l, i) => (
+                          <ListItem
+                            key={i}
+                            title={l.name}
+                            subtitle={l.description}
+                            hideChevron={true}
+                           />
+                        ))
+                      }
+                    </List>
+                </Card>
 
-                <Text style={styles.subtitle}>{this.state.sub1Array[this.state.stateIndex]}</Text>
-
-                <List containerStyle={{ marginTop: 5, marginBottom: 5 }}>
-                   {
-                     this.state.sauceArray[this.state.stateIndex].map((l, i) => (
-                       <ListItem
-                         key={i}
-                         title={l.name}
-                         subtitle={l.description}
-                         hideChevron={true}
-                        />
-                     ))
-                   }
-                </List>
+                <Card title={this.state.sub1Array[this.state.stateIndex]}
+                    titleStyle={{color: '#512698', fontSize: 20, marginBottom: 0}}
+                    dividerStyle={{height: 0}}
+                    containerStyle={{ marginTop: 5, marginBottom: 5 }}>
+                    <List containerStyle={{padding: 0, marginTop: 0, marginBottom: 0}}>
+                      {
+                        this.state.sauceArray[this.state.stateIndex].map((l, i) => (
+                           <ListItem
+                             key={i}
+                             title={l.name}
+                             subtitle={l.description}
+                             hideChevron={true}
+                           />
+                        ))
+                      }
+                    </List>
+                </Card>
             </ScrollView>
         </View>
         );
@@ -104,16 +111,13 @@ export default class GrillMenu extends Component {
 
 const styles = StyleSheet.create(
 {
-    container:
-    {
+    container:{
         flex: 1,
         backgroundColor: '#eeeeee',
         justifyContent: 'center',
 //        paddingTop: (Platform.OS == 'ios') ? 20 : 0
     },
-
-    viewHolder:
-    {
+    viewHolder:{
         height: 55,
         backgroundColor: 'blue',
         justifyContent: 'center',

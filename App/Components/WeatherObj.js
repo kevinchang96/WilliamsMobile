@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Image, View, Text, ScrollView } from 'react-native';
-import { Avatar, Card, Button, Header, Icon, List, ListItem, Tile } from 'react-native-elements';
+import { Avatar, Card, Button, Divider, Header, Icon, List, ListItem, Tile } from 'react-native-elements';
 
 export default class WeatherObj extends Component {
     constructor(props) {
@@ -22,38 +22,42 @@ export default class WeatherObj extends Component {
           ms: '',             // speed in m/s (metric units), ceiling-ed because wind chill is real
           mph: '',            // speed in mi/hr (imperial units)
 
+          city: '',
+          country: '',
+          dow: '',
           forecast: [],
+          footer: '',
 
           //storage for forecast data; found iterating through it to be troublesome and a half
-          oneDate: '',
-          oneDay: '',
-          oneHigh: '',
-          oneLow: '',
-          oneText: '',
-
-          twoDate: '',
-          twoDay: '',
-          twoHigh: '',
-          twoLow: '',
-          twoText: '',
-
-          threeDate: '',
-          threeDay: '',
-          threeHigh: '',
-          threeLow: '',
-          threeText: '',
-
-          fourDate: '',
-          fourDay: '',
-          fourHigh: '',
-          fourLow: '',
-          fourText: '',
-
-          fiveDate: '',
-          fiveDay: '',
-          fiveHigh: '',
-          fiveLow: '',
-          fiveText: '',
+//          oneDate: '',
+//          oneDay: '',
+//          oneHigh: '',
+//          oneLow: '',
+//          oneText: '',
+//
+//          twoDate: '',
+//          twoDay: '',
+//          twoHigh: '',
+//          twoLow: '',
+//          twoText: '',
+//
+//          threeDate: '',
+//          threeDay: '',
+//          threeHigh: '',
+//          threeLow: '',
+//          threeText: '',
+//
+//          fourDate: '',
+//          fourDay: '',
+//          fourHigh: '',
+//          fourLow: '',
+//          fourText: '',
+//
+//          fiveDate: '',
+//          fiveDay: '',
+//          fiveHigh: '',
+//          fiveLow: '',
+//          fiveText: '',
       }
     }
 
@@ -75,52 +79,57 @@ export default class WeatherObj extends Component {
      fetch(endPointURL)
       .then((response) => response.json())
       .then((responseData) => {
-          console.log(responseData.query.results.channel.item.forecast);
+          console.log(responseData.query.results.channel);
 
           this.setState({
             title: responseData.query.results.channel.item.forecast[0].date,
-            main: responseData.query.results.channel.item.title,                                        // main, eg. cloudy, sunny, etc.
-            description: responseData.query.results.channel.item.condition.text,                        // a somewhat accurate blurb about the weather
-            icon: responseData.query.results.channel.item.condition.code,                                                                                   // http://openweathermap.org/img/w/<icon>.png pulls up a little weather icon
-            fahrenheit: responseData.query.results.channel.item.condition.temp,                         // temperature in Fahrenheit, floored because it's always colder than it seems
-            celsius: this.convertToCelsius(responseData.query.results.channel.item.condition.temp),     // temperature in Celsius
-            humidity: responseData.query.results.channel.atmosphere.humidity,                           // percent humidity
-            ms: this.convertToMS(responseData.query.results.channel.wind.speed),                        // speed in m/s (metric units), ceiling-ed because wind chill is real
-            mph: responseData.query.results.channel.wind.speed,                                         // speed in mi/hr (imperial units)
-            forecast: responseData.query.results.channel.item.forecast,
+            main: responseData.query.results.channel.item.title,                                            // main, eg. cloudy, sunny, etc.
+            description: responseData.query.results.channel.item.condition.text,                            // a somewhat accurate blurb about the weather
+            icon: responseData.query.results.channel.item.condition.code,                                   // http://openweathermap.org/img/w/<icon>.png pulls up a little weather icon
+            fahrenheit: responseData.query.results.channel.item.condition.temp + "°F",                      // temperature in Fahrenheit, floored because it's always colder than it seems
+            celsius: " / " + this.convertToCelsius(responseData.query.results.channel.item.condition.temp) + "°C",  // temperature in Celsius
+            humidity: responseData.query.results.channel.atmosphere.humidity  + "%",                        // percent humidity
+            ms: this.convertToMS(responseData.query.results.channel.wind.speed)  + " m/s",                  // speed in m/s (metric units), ceiling-ed because wind chill is real
+            mph: responseData.query.results.channel.wind.speed  + " mph",                                   // speed in mi/hr (imperial units)
+
+            city: responseData.query.results.channel.location.city,
+            country: responseData.query.results.channel.location.country,
+            dow: responseData.query.results.channel.lastBuildDate.substring(0,3),
+            forecast: responseData.query.results.channel.item.forecast,                                     // list of forecast info
+            footer: responseData.query.results.channel.description,
           });
 
-          this.setState({
-            oneDate: responseData.query.results.channel.item.forecast[1].date,
-            oneDay: responseData.query.results.channel.item.forecast[1].day,
-            oneHigh: responseData.query.results.channel.item.forecast[1].high,
-            oneLow: responseData.query.results.channel.item.forecast[1].low,
-            oneText: responseData.query.results.channel.item.forecast[1].text,
-
-            twoDate: responseData.query.results.channel.item.forecast[2].date,
-            twoDay: responseData.query.results.channel.item.forecast[2].day,
-            twoHigh: responseData.query.results.channel.item.forecast[2].high,
-            twoLow: responseData.query.results.channel.item.forecast[2].low,
-            twoText: responseData.query.results.channel.item.forecast[2].text,
-
-            threeDate: responseData.query.results.channel.item.forecast[3].date,
-            threeDay: responseData.query.results.channel.item.forecast[3].day,
-            threeHigh: responseData.query.results.channel.item.forecast[3].high,
-            threeLow: responseData.query.results.channel.item.forecast[3].low,
-            threeText: responseData.query.results.channel.item.forecast[3].text,
-
-            fourDate: responseData.query.results.channel.item.forecast[4].date,
-            fourDay: responseData.query.results.channel.item.forecast[4].day,
-            fourHigh: responseData.query.results.channel.item.forecast[4].high,
-            fourLow: responseData.query.results.channel.item.forecast[4].low,
-            fourText: responseData.query.results.channel.item.forecast[4].text,
-
-            fiveDate: responseData.query.results.channel.item.forecast[5].date,
-            fiveDay: responseData.query.results.channel.item.forecast[5].day,
-            fiveHigh: responseData.query.results.channel.item.forecast[5].high,
-            fiveLow: responseData.query.results.channel.item.forecast[5].low,
-            fiveText: responseData.query.results.channel.item.forecast[5].text,
-          });
+//          this.setState({
+//            oneDate: responseData.query.results.channel.item.forecast[1].date,
+//            oneDay: responseData.query.results.channel.item.forecast[1].day,
+//            oneHigh: responseData.query.results.channel.item.forecast[1].high,
+//            oneLow: responseData.query.results.channel.item.forecast[1].low,
+//            oneText: responseData.query.results.channel.item.forecast[1].text,
+//
+//            twoDate: responseData.query.results.channel.item.forecast[2].date,
+//            twoDay: responseData.query.results.channel.item.forecast[2].day,
+//            twoHigh: responseData.query.results.channel.item.forecast[2].high,
+//            twoLow: responseData.query.results.channel.item.forecast[2].low,
+//            twoText: responseData.query.results.channel.item.forecast[2].text,
+//
+//            threeDate: responseData.query.results.channel.item.forecast[3].date,
+//            threeDay: responseData.query.results.channel.item.forecast[3].day,
+//            threeHigh: responseData.query.results.channel.item.forecast[3].high,
+//            threeLow: responseData.query.results.channel.item.forecast[3].low,
+//            threeText: responseData.query.results.channel.item.forecast[3].text,
+//
+//            fourDate: responseData.query.results.channel.item.forecast[4].date,
+//            fourDay: responseData.query.results.channel.item.forecast[4].day,
+//            fourHigh: responseData.query.results.channel.item.forecast[4].high,
+//            fourLow: responseData.query.results.channel.item.forecast[4].low,
+//            fourText: responseData.query.results.channel.item.forecast[4].text,
+//
+//            fiveDate: responseData.query.results.channel.item.forecast[5].date,
+//            fiveDay: responseData.query.results.channel.item.forecast[5].day,
+//            fiveHigh: responseData.query.results.channel.item.forecast[5].high,
+//            fiveLow: responseData.query.results.channel.item.forecast[5].low,
+//            fiveText: responseData.query.results.channel.item.forecast[5].text,
+//          });
       })
       .catch((error) => {
         this.setState({title: 'Unable to display weather'});
@@ -169,7 +178,7 @@ export default class WeatherObj extends Component {
         const { navigate } = this.props.navigation;
 
         return (
-            <View>
+            <View style={cardStyle.container}>
                 <Header
                     leftComponent={
                         <Icon
@@ -182,51 +191,73 @@ export default class WeatherObj extends Component {
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
                 />
 
-                <Card
-                    titleStyle={cardStyle.titleStyle}
-                    title={this.state.title}>
-                    <View style={{flexDirection: 'row'}}>
-                        <Avatar
-                            large
-                            rounded
-                            source={{uri: "http://l.yimg.com/a/i/us/we/52/" + this.state.icon + ".gif"}}
-                            onPress={() => console.log("Works!")}
-                            activeOpacity={0}
-                        />
-
-                        <View style={{flex: 1, flexDirection: 'column', marginLeft: 20}}>
-                            {/*<Text style={cardStyle.text}>{'Williamstown, MA 01267'}</Text>*/}
-                            <Text style={cardStyle.atext}>{this.state.description}</Text>
-                            <Text style={cardStyle.text}>Temp: {this.state.fahrenheit}°F / {this.state.celsius}°C</Text>
-                            <Text style={cardStyle.text}>Humidity: {this.state.humidity}%</Text>
-                            <Text style={cardStyle.text}>Wind: {this.state.mph} mph / {this.state.ms} m/s</Text>
-                        </View>
-                    </View>
-                </Card>
-
                 <ScrollView>
+                    <Card>
+                        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                            <Image style={{marginLeft: 10, width: 120, height: 120}}
+                                source={{uri: "http://l.yimg.com/a/i/us/we/52/" + this.state.icon + ".gif"}}/>
+
+                            <View style={{flex: 1, flexDirection: 'column', marginLeft: 20}}>
+                                <Text style={cardStyle.tempText}>{this.state.fahrenheit}<Text style={cardStyle.text}>{this.state.celsius}</Text></Text>
+                                <Text style={cardStyle.condText}>{this.state.description}</Text>
+                            </View>
+                        </View>
+
+                        <Divider style={{ backgroundColor: 'gray' }}/>
+
+                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, marginLeft: 20, marginRight: 20}}>
+                            <View style={{flexDirection: 'column', alignItems: 'center'}}>
+                                <Icon
+                                  name='date-range'
+                                  color='gray'
+                                  size={30}/>
+                                <Text style={cardStyle.underText}>{this.state.dow}</Text>
+                            </View>
+
+                            <View style={{flexDirection: 'column', alignItems: 'center'}}>
+                                <Icon
+                                  name='toys'
+                                  color='gray'
+                                  size={30}/>
+                                <Text style={cardStyle.underText}>{this.state.mph}</Text>
+                            </View>
+
+                            <View style={{flexDirection: 'column', alignItems: 'center'}}>
+                                <Icon
+                                  name='hot-tub'
+                                  color='gray'
+                                  size={30}/>
+                                <Text style={cardStyle.underText}>{this.state.humidity}</Text>
+                            </View>
+                        </View>
+                    </Card>
+
                     <List
-                      containerStyle={{marginBottom: 20}}>
+                      containerStyle={{marginBottom: 10, backgroundColor: "#eeeeee"}}>
                       {
                         this.state.forecast.map((l, i) => (
-                          <Card style={cardStyle.card}
-                              titleStyle={cardStyle.titleStyle}
-                              title={l.day}>
-                              <Avatar
-                                small
-                                rounded
-                                source={{uri: "http://l.yimg.com/a/i/us/we/52/" + l.code + ".gif"}}
-                                onPress={() => console.log("Works!")}
-                                activeOpacity={0}
-                              />
-                              <Text style={cardStyle.text}>{l.text}</Text>
-                              <Text style={cardStyle.text}>{l.high}°F</Text>
-                              <Text style={cardStyle.text}>{l.low}°F</Text>
+                          <Card style={cardStyle.card}>
+                              <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                                  <View style={{flexDirection: 'row'}}>
+                                      <Image style={{width: 35, height: 35}}
+                                        source={{uri: "http://l.yimg.com/a/i/us/we/52/" + l.code + ".gif"}}/>
+                                      <Text style={cardStyle.titleStyle}>   {l.day}</Text>
+                                  </View>
+                                  <Text style={cardStyle.text}>{l.text}</Text>
+                                  <Text style={cardStyle.text}>{l.high}°  {l.low}°</Text>
+                              </View>
+
                           </Card>
                         ))
                       }
                     </List>
+
+                    <View style={cardStyle.footerText}>
+                        <Text>{this.state.footer}</Text>
+                    </View>
                 </ScrollView>
+
+
 
 
                 {/*<ScrollView>
@@ -292,9 +323,12 @@ export default class WeatherObj extends Component {
 };
 
 const cardStyle = StyleSheet.create({
+    container:{
+        flex: 1,
+        backgroundColor: '#eeeeee',
+    },
     titleStyle:{
         color: '#512698',
-        //backgroundColor: 'white',
         //fontFamily: 'Comfortaa_bold',
         fontSize: 20
     },
@@ -308,14 +342,29 @@ const cardStyle = StyleSheet.create({
         fontSize: 16,
         fontStyle: 'italic'
     },
-    atext:{
+    tempText:{
         color: 'black',
-        fontSize: 20,
+        fontSize: 60,
         fontWeight: 'bold',
+        marginBottom: -10,
+    },
+    condText:{
+        color: '#512698',
+        fontSize: 24
+    },
+    underText:{
+        marginTop: 5,
+        color: 'gray',
+        fontSize: 20
+    },
+    footerText:{
+        color: 'gray',
+        fontSize: 1,
+        alignItems: 'center',
     },
     text:{
         color: 'black',
-        fontSize: 18
+        fontSize: 20
     },
     card:{
         marginTop: 10,

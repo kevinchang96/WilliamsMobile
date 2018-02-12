@@ -44,11 +44,14 @@ class WSO extends Component{
         for( var i = 0; i < lists.length; i++ ){
             var category = lists.item(i);
             var links = category.getElementsByTagName("a");
+            var dates = category.getElementsByClassName("list-date");
             var tempLinks = new Array(links.length);
             for( var j = 0; j < links.length; j++ ){
+//                console.log(links.item(j).toString() + ' ---> ' + dates.item(j).toString());
                 var temp = {
                     link: links.item(j).attributes.item(0).value,
-                    text: links.item(j).textContent,
+                    text: links.item(j).textContent.trim(),
+                    time: dates.item(j).textContent.trim(),
                     screen: (i == 0) ? 'WebViewPost' : 'WSOPost'
                 }
                 tempLinks[j] = temp;
@@ -75,141 +78,148 @@ class WSO extends Component{
              />
 
              <ScrollView>
-                 <Button
-                     raised
-                     title='FACEBOOK'
+                 <Button title='FACEBOOK'
                      icon={{name: 'people'}}
                      buttonStyle={styles.buttonStyle}
                      onPress={() => navigate('Facebook')} />
 
-                 <Button
-                     raised
-                     title='FACTRAK'
+                 <Button title='FACTRAK'
                      icon={{name: 'thumbs-up-down'}}
-                     buttonStyle={styles.buttonStyle}
+                     buttonStyle={styles.buttonTStyle}
                      onPress={() => navigate('Factrak')} />
 
-                 <Card title='DISCUSSIONS'
-                     containerStyle={{padding: 10}}>
+                 <Button title='DISCUSSIONS'
+                     buttonStyle={styles.buttonTStyle}
+                     onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/discussions", title: "Discussions"})} } />
+
+                 <Card containerStyle={{marginTop: 0, padding: 0}}>
                    {
                      this.state.wso[0].map((u, i) => {
                          return(
                          <ListItem
                              key={i}
                              title={u.text}
+                             titleContainerStyle={{justifyContent: 'flex-start'}}
+                             rightTitle={u.time}
+                             rightTitleContainerStyle={{justifyContent: 'flex-end'}}
                              hideChevron={true}
                              onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Discussions"})} }
                           />
                          );
                      })
                    }
-                   <ListItem
-                     rightTitle='More'
-                     onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/discussions", title: "Discussions"})} }
-                   />
                  </Card>
 
-            <Card title='ANNOUNCEMENTS'
-                containerStyle={{padding: 10}}>
-              {
-                this.state.wso[1].map((u, i) => {
-                    return(
-                    <ListItem
-                        key={i}
-                        title={u.text}
-                        hideChevron={true}
-                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Announcements"})} }
-                     />
-                    );
-                })
-              }
-              <ListItem
-                rightTitle='More'
-                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/announcements", title: "Announcements"})} }
-              />
-            </Card>
+                 <Button title='ANNOUNCEMENTS'
+                     buttonStyle={styles.buttonTStyle}
+                     onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/announcements", title: "Announcements"})} } />
 
-            <Card title='EXCHANGES'
-                containerStyle={{padding: 10}}>
-              {
-                this.state.wso[2].map((u, i) => {
-                    return(
-                    <ListItem
-                        key={i}
-                        title={u.text}
-                        hideChevron={true}
-                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Exchanges"})} }
-                     />
-                    );
-                })
-              }
-              <ListItem
-                rightTitle='More'
-                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/exchanges", title: "Exchanges"})} }
-              />
-            </Card>
+                 <Card containerStyle={{marginTop: 0, padding: 0}}>
+                   {
+                     this.state.wso[1].map((u, i) => {
+                         return(
+                         <ListItem
+                             key={i}
+                             title={u.text}
+                             titleContainerStyle={{justifyContent: 'flex-start'}}
+                             rightTitle={u.time}
+                             rightTitleContainerStyle={{justifyContent: 'flex-end'}}
+                             hideChevron={true}
+                             onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Announcements"})} }
+                          />
+                         );
+                     })
+                   }
+                 </Card>
 
-            <Card title='LOST & FOUND'
-                containerStyle={{padding: 10}}>
-              {
-                this.state.wso[3].map((u, i) => {
-                    return(
-                    <ListItem
-                        key={i}
-                        title={u.text}
-                        hideChevron={true}
-                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Lost & Found"})} }
-                     />
-                    );
-                })
-              }
-              <ListItem
-                rightTitle='More'
-                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/lost_and_found", title: "Lost & Found"})} }
-              />
-            </Card>
+                 <Button title='EXCHANGES'
+                      buttonStyle={styles.buttonTStyle}
+                      onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/exchanges", title: "Exchanges"})} } />
 
-            <Card title='JOBS'
-                containerStyle={{padding: 10}}>
-              {
-                this.state.wso[4].map((u, i) => {
-                    return(
-                    <ListItem
-                        key={i}
-                        title={u.text}
-                        hideChevron={true}
-                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Jobs"})} }
-                     />
-                    );
-                })
-              }
-              <ListItem
-                rightTitle='More'
-                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/jobs", title: "Jobs"})} }
-              />
-            </Card>
+                 <Card containerStyle={{marginTop: 0, padding: 0}}>
+                   {
+                     this.state.wso[2].map((u, i) => {
+                         return(
+                         <ListItem
+                             key={i}
+                             title={u.text}
+                             titleContainerStyle={{justifyContent: 'flex-start'}}
+                             rightTitle={u.time}
+                             rightTitleContainerStyle={{justifyContent: 'flex-end'}}
+                             hideChevron={true}
+                             onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Exchanges"})} }
+                          />
+                         );
+                     })
+                   }
+                 </Card>
 
-            <Card title='RIDES'
-                containerStyle={{padding: 10}}>
-              {
-                this.state.wso[5].map((u, i) => {
-                    return(
-                    <ListItem
-                        key={i}
-                        title={u.text}
-                        hideChevron={true}
-                        onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Rides"})} }
-                     />
-                    );
-                })
-              }
-              <ListItem
-                rightTitle='More'
-                onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/rides",title: "Rides"})} }
-              />
-            </Card>
+                 <Button title='LOST & FOUND'
+                     buttonStyle={styles.buttonTStyle}
+                     onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/lost_and_found", title: "Lost & Found"})} } />
 
-              </ScrollView>
+                 <Card containerStyle={{marginTop: 0, padding: 0}}>
+                   {
+                     this.state.wso[3].map((u, i) => {
+                         return(
+                         <ListItem
+                             key={i}
+                             title={u.text}
+                             titleContainerStyle={{justifyContent: 'flex-start'}}
+                             rightTitle={u.time}
+                             rightTitleContainerStyle={{justifyContent: 'flex-end'}}
+                             hideChevron={true}
+                             onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Lost & Found"})} }
+                          />
+                         );
+                     })
+                   }
+                 </Card>
+
+                 <Button title='JOBS'
+                     buttonStyle={styles.buttonTStyle}
+                     onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/jobs", title: "Jobs"})} } />
+
+                 <Card containerStyle={{marginTop: 0, padding: 0}}>
+                   {
+                     this.state.wso[4].map((u, i) => {
+                         return(
+                         <ListItem
+                             key={i}
+                             title={u.text}
+                             containerStyle={{alignItems: 'flex-start'}}
+                             titleContainerStyle={{justifyContent: 'flex-start'}}
+                             rightTitle={u.time}
+                             rightTitleContainerStyle={{justifyContent: 'flex-end'}}
+                             hideChevron={true}
+                             onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Jobs"})} }
+                          />
+                         );
+                     })
+                   }
+                 </Card>
+
+                 <Button title='RIDES'
+                     buttonStyle={styles.buttonTStyle}
+                     onPress={() => {navigate("WebViewPost",{url: "https://wso.williams.edu/rides",title: "Rides"})} } />
+
+                 <Card containerStyle={{marginTop: 0, marginBottom: 10, padding: 0}}>
+                   {
+                     this.state.wso[5].map((u, i) => {
+                         return(
+                         <ListItem
+                             key={i}
+                             title={u.text}
+                             titleContainerStyle={{justifyContent: 'flex-start'}}
+                             rightTitle={u.time}
+                             rightTitleContainerStyle={{justifyContent: 'flex-end'}}
+                             onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Rides"})} }
+                          />
+                         );
+                     })
+                   }
+                 </Card>
+             </ScrollView>
          </View>
         );
     }
@@ -230,10 +240,18 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         borderRadius: 0,
-        marginLeft: 5,
-        marginRight: 5,
-        marginTop: 5,
-        marginBottom: 5,
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 10,
+        marginBottom: 0,
+        backgroundColor: '#512698'
+    },
+    buttonTStyle: {
+        borderRadius: 0,
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 15,
+        marginBottom: 0,
         backgroundColor: '#512698'
     },
     btnImage: {
