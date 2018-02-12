@@ -1,5 +1,5 @@
 /**
- * Alex Taylor, David Ariyibi, Kevin Chang
+ * Alex Taylor, David Ariyibi, Kevin Chang, Dysron Marshall
  * (c) 01/2018
  */
 
@@ -8,7 +8,6 @@ import {
   AppRegistry,
   Platform,
   FlatList,
-  ScrollView,
   StyleSheet,
   Text,
   View
@@ -25,45 +24,7 @@ export default class Facebook extends Component{
         this.state = {
             searchFor: 'Search',
             studentCards: [],
-            token: ''
         };
-    }
-
-    render(){
-        return(
-            <View style= {{flex: 1, backgroundColor: "#eeeeee"}}>
-                <Header
-                    leftComponent={
-                        <Icon
-                            name='chevron-left'
-                            color='white'
-                            onPress={() => this.props.navigation.goBack()}
-                            underlayColor='#512698'/>
-                    }
-                    centerComponent={{ text: 'Facebook', style: { fontSize: 22, color: '#ffffff' } }}
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
-                />
-
-                <FormInput
-                    style=  {{color: "white", fontSize: 20}}
-                    placeholder = {this.state.searchFor}
-                    placeholderStyle = {{color: "white"}}
-                    autoCorrect={false}
-                    onChangeText = {searchFor => this.setState({searchFor})}
-                />
-
-                <Button
-                    title="SEARCH"
-                    backgroundColor="#512698"
-                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                    onPress={() => this.getPeople(this.state.searchFor)}
-                />
-
-                <ScrollView>
-                    {this.state.studentCards}
-                </ScrollView>
-            </View>
-        );
     }
 
     getPeople(result){
@@ -77,49 +38,28 @@ export default class Facebook extends Component{
           body: "search=" + result
       }).then((response) => response.text() ) // Transform the data into text
             .then((responseText) => {
-                var DOMParser = require('react-native-html-parser').DOMParser;
-
+                const DOMParser = require('react-native-html-parser').DOMParser;
                 let doc = new DOMParser().parseFromString(responseText,'text/html');
                 var input = doc.getElementsByTagName("a");
                 //console.log("Input: "+ input);
                 //console.log("Input length: "+ input.length);
                 var hasTable = doc.getElementsByTagName("thead");
                 var hasResults = doc.getElementsByTagName("br");
-                var students = [input.length - 12];
+                var students = [];
 
                 if(hasResults.length == 1){
-                    text = <Text style=  {{color: "black", fontSize: 20}} key = 'one'>No Results</Text>
-                    students[0] = text;
-                    this.setState({studentCards: students})
-                    return;
+                    students.push(<Text style={styles.noResults}>No Results</Text>);
                 }
-
-                if(hasTable.length > 0){      //if the web page is a table of students
+                else if(hasTable.length > 0){      //if the web page is a table of students
                     for( i = 0; i < input.length - 1; i += 2 ){
-                        if(i < 12)
-                            continue;
-
-                        let student = {
-                                name: input[i + 1].textContent,
-                                unix: input[i + 2].textContent,
-                                img: "https://wso.williams.edu/pic/" + input[i + 2].textContent,
-                                info: input[i].getAttribute("href")
-                            };
-
-                        card = <StudentCard
-                                    name = {student.name}
-                                    unix = {student.unix}
-                                    img = {student.img}
-                                    key = {student.info}
-                               />
-                        students[i-12] = card;
-
-                        //console.log("Student: " + student.name);
-                      //  console.log("Unix: " + student.unix);
-                      //  console.log("Img: " + student.img);
-                      //  console.log("Input length: " + input.length)
+                        if(i < 12) continue;
+                        const name = input[i + 1].textContent;
+                        const unix = input[i + 2].textContent;
+                        const img = "https://wso.williams.edu/pic/" + input[i + 2].textContent;
+                        const info = input[i].getAttribute("href");
+                        students.push(<StudentCard name={name} unix={unix}
+                                                  img={img} info={info} key={unix}/>)
                      }
-                     this.setState({studentCards: students})
                  }
                  else if (input.length == 15){ //only one student is returned
 
@@ -127,126 +67,159 @@ export default class Facebook extends Component{
                     //console.log("Name input: "+ nameInput[0].textContent);
                     var h4Input = doc.getElementsByTagName("h4");
                     var h5Input = doc.getElementsByTagName("h5");
-                    let student = {
-                        name: nameInput[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim(),
-                        unix: h4Input[0].textContent, //gets unix
-                        suBox: '',
-                        room: '',
-                        homeTown: '',
-                        img: "https://wso.williams.edu/pic/" + h4Input[0].textContent
-                    }
+
+                    const name = nameInput[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim();
+                    const unix = h4Input[0].textContent; //gets unix
+                    let suBox = '';
+                    let room = '';
+                    let homeTown = '';
+                    const img = "https://wso.williams.edu/pic/" + h4Input[0].textContent
+
                     if(h4Input.length == 4){
-                        student.suBox = h4Input[1].textContent;
-                        student.room = h4Input[2].textContent;
-                        student.homeTown = h4Input[3].textContent;
+                        suBox = h4Input[1].textContent;
+                        room = h4Input[2].textContent;
+                        homeTown = h4Input[3].textContent;
                     }
                     else {
                         x = h5Input.length - h4Input.length;
                         for(i = 1; i < h4Input.length; i++){
-//console.log("Text Content: " + h5Input[i+x].textContent);
+                          //console.log("Text Content: " + h5Input[i+x].textContent);
                             if(h5Input[i+x].textContent == "SU Box:"){
-                                student.suBox = h4Input[i].textContent;
+                                suBox = h4Input[i].textContent;
                             }
                             else if(h5Input[i+x].textContent == "Room:"){
-                                student.room = h4Input[i].textContent;
+                                room = h4Input[i].textContent;
                             }
                             else if(h5Input[i+x].textContent == "Hometown:"){
-                                student.homeTown = h4Input[i].textContent;
+                                homeTown = h4Input[i].textContent;
                             }
                         }
                     }
-                    card = <StudentPage
-                                name = {student.name}
-                                unix = {student.unix}
-                                suBox = {student.suBox}
-                                room = {student.room}
-                                homeTown = {student.homeTown}
-                                img = {student.img}
-                                key = {student.unix}
-                           />
-                    students[0] = card;
-
-                    this.setState({studentCards: students})
+                    students.push(<StudentPage name={name} unix={unix}
+                                  suBox={suBox} room={room}
+                                  homeTown={homeTown} img={img}
+                                  key={unix} />);
                     //console.log("Input length: " + input.length)
                  }
                  else{
                     for( i = 0; i < input.length - 1; i++ ){
-                        if(i < 13)
-                            continue;
+                        if(i < 13) continue;
+                        const name = input[i+1].textContent;
+                        const unix = input[i+2].textContent;
+                        const img = "https://wso.williams.edu/pic/" + input[i+2].textContent;
+                        const info = input[i].getAttribute("href");
 
-                        let student = {
-                            name: input[i+1].textContent,
-                            unix: input[i+2].textContent,
-                            img: "https://wso.williams.edu/pic/" + input[i+2].textContent,
-                            info: input[i].getAttribute("href")
-                        }
-
-                        card = <StudentCard
-                                    name = {student.name}
-                                    unix = {student.unix}
-                                    img = {student.img}
-                                    key = {student.info}
-                               />
-                               console.log(card.key)
-                        students[i-13] = card;
+                        //console.log(card.key)
+                        students.push(card = <StudentCard name={name}
+                                              unix={unix} img={img} key={unix}/>);
                         i+=2;
                     }
-                    this.setState({studentCards: students});
                     //console.log("Input length: " + input.length);
                 }
-
+                console.log(students);
+                this.setState({studentCards: students});
         })
     }
 
-    clickButton(url){
+  /*  clickButton(url){
         fetch(url, {method: 'GET'})
         .then((response) => response.text() ) // Transform the data into text
             .then((responseText) => {
 
-            var nameInput = doc.getElementsByTagName("h3");
-            var h4Input = doc.getElementsByTagName("h4");
-            var h5Input = doc.getElementsByTagName("h5");
-            let student = {
-                name: nameInput[0].textContent,
-                unix: h4Input[0].textContent, //gets unix
-                suBox: '',
-                room: '',
-                homeTown: '',
-                img: "https://wso.williams.edu/pic/" + h4Input[0].textContent
-            }
+            const nameInput = doc.getElementsByTagName("h3");
+            const h4Input = doc.getElementsByTagName("h4");
+            const h5Input = doc.getElementsByTagName("h5");
+            const name = nameInput[0].textContent;
+            const unix = h4Input[0].textContent; //gets unix
+            let suBox = '';
+            let room = '';
+            let homeTown = '';
+            const img = "https://wso.williams.edu/pic/" + h4Input[0].textContent;
+
             if(h4Input.length == 4){
-                student.suBox = h4Input[1].textContent;
-                student.room = h4Input[2].textContent;
-                student.homeTown = h4Input[3].textContent;
+                suBox = h4Input[1].textContent;
+                room = h4Input[2].textContent;
+                homeTown = h4Input[3].textContent;
             }
             else {
                 x = h5Input.length - h4Input.length;
                 for(i = 1; i < h4Input.length; i++){
                   //  console.log("Text Content: " + h5Input[i+x].textContent);
                     if(h5Input[i+x].textContent == "SU Box:"){
-                        student.suBox = h4Input[i].textContent;
+                        suBox = h4Input[i].textContent;
                     }
                     else if(h5Input[i+x].textContent == "Room:"){
-                        student.room = h4Input[i].textContent;
+                        room = h4Input[i].textContent;
                     }
                     else if(h5Input[i+x].textContent == "Hometown:"){
-                        student.homeTown = h4Input[i].textContent;
+                        homeTown = h4Input[i].textContent;
                     }
                 }
             }
-            card = <StudentPage
-                        name = {student.name}
-                        unix = {student.unix}
-                        suBox = {student.suBox}
-                        room = {student.room}
-                        homeTown = {student.homeTown}
-                        img = {student.img}
-                        key = {student.unix}
-                   />
-            students[0] = card;
-            console.log(students);
+            students.push(<StudentPage name={name} unix={unix} suBox={suBox}
+                            room={room} homeTown={homeTown} img={img}
+                            key={unix}/>);
+
+            //console.log("these are the items");
+            //console.log(students);
             this.setState({studentCards: students})
         })
+    }*/
+
+    render(){
+        return(
+            <View style={styles.container}>
+                <Header
+                    leftComponent={
+                        <Icon
+                            name='chevron-left'
+                            color='white'
+                            onPress={() => this.props.navigation.goBack()}
+                            underlayColor='#512698'/>
+                    }
+                    centerComponent={{text: 'Facebook', style:{ fontSize: 22, color: '#ffffff' }}}
+                    outerContainerStyles={{backgroundColor: '#512698', padding: 10, height: 55}}
+                />
+                <View style={styles.searchArea}>
+                  <FormInput
+                      containerStyle={styles.form}
+                      placeholder={"Look up a person..."}
+                      placeholderStyle={{color: "white"}}
+                      autoCorrect={false}
+                      onChangeText={searchFor => this.setState({searchFor})}
+                  />
+                  <Button
+                      title="SEARCH"
+                      backgroundColor="#512698"
+                      buttonStyle={{paddingBottom: 10}}
+                      onPress={() => this.getPeople(this.state.searchFor)}
+                  />
+                </View>
+                <FlatList
+                    data={this.state.studentCards}
+                    renderItem={({item}) => item}
+                />
+            </View>
+        );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#eeeeee"
+    },
+    form: {
+      color: "white",
+      fontSize: 20,
+      paddingBottom: 5
+    },
+    noResults: {
+      color: "black",
+      fontSize: 20
+    },
+    searchArea: {
+      paddingBottom: 20
+    }
+});
 AppRegistry.registerComponent('Facebook', () => Facebook );

@@ -21,7 +21,6 @@ import { Card, ListItem, Button } from 'react-native-elements'
 export default class StudentCard extends Component{
 
     render(){
-    console.log(this.props.fun);
         return(
         <TouchableOpacity>
             <Card
