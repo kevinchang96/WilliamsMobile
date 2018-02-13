@@ -20,22 +20,27 @@ import { Card, ListItem, Button } from 'react-native-elements'
 
 export default class StudentCard extends Component{
 
-    render(){
-        return(
-        <TouchableOpacity>
-            <Card
-            flexDirection='row'>
-                <Image
-                 style={{height:80,width:80,marginRight:10}}
-                 source= {{uri: this.props.img}}/>
-                <View>
-                    <Text style={styles.nameText}>{this.props.name}</Text>
-                    <Text style={styles.unixText}>{this.props.unix}</Text>
-                </View>
-            </Card>
-        </TouchableOpacity>
-        );
-    }
+  pressed = () => {
+    console.log("pressed");
+    this.props.pressed(this.props.unix);
+  }
+  render(){
+      console.log(this);
+      return(
+      <TouchableOpacity onPress={() => this.pressed()}>
+          <Card
+          flexDirection='row'>
+              <Image
+               style={{height:80,width:80,marginRight:10}}
+               source= {{uri: this.props.img}}/>
+              <View>
+                  <Text style={styles.nameText}>{this.props.name}</Text>
+                  <Text style={styles.unixText}>{this.props.unix}</Text>
+              </View>
+          </Card>
+      </TouchableOpacity>
+      );
+  }
 }
 
 const styles = StyleSheet.create(

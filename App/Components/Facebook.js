@@ -27,7 +27,7 @@ export default class Facebook extends Component{
         };
     }
 
-    getPeople(result){
+    getPeople = (result) => {
       fetch("https://wso.williams.edu/facebook",
         {method:"POST",
           credentials: 'include',
@@ -46,64 +46,30 @@ export default class Facebook extends Component{
                 var hasTable = doc.getElementsByTagName("thead");
                 var hasResults = doc.getElementsByTagName("br");
                 var students = [];
+                //console.log(input);
 
                 if(hasResults.length == 1){
                     students.push(<Text style={styles.noResults}>No Results</Text>);
                 }
                 else if(hasTable.length > 0){      //if the web page is a table of students
-                    for( i = 0; i < input.length - 1; i += 2 ){
-                        if(i < 12) continue;
+                    for( i = 12; i < input.length - 1; i += 2 ){
+                        //console.log(input[i+2]);
                         const name = input[i + 1].textContent;
                         const unix = input[i + 2].textContent;
                         const img = "https://wso.williams.edu/pic/" + input[i + 2].textContent;
                         const info = input[i].getAttribute("href");
+
                         students.push(<StudentCard name={name} unix={unix}
-                                                  img={img} info={info} key={unix}/>)
+                                                  img={img} info={info} key={unix}
+                                                  pressed={(unix) => this.cardPressed(unix)}/>)
                      }
                  }
                  else if (input.length == 15){ //only one student is returned
-
-                    var nameInput = doc.getElementsByTagName("h3");
-                    //console.log("Name input: "+ nameInput[0].textContent);
-                    var h4Input = doc.getElementsByTagName("h4");
-                    var h5Input = doc.getElementsByTagName("h5");
-
-                    const name = nameInput[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim();
-                    const unix = h4Input[0].textContent; //gets unix
-                    let suBox = '';
-                    let room = '';
-                    let homeTown = '';
-                    const img = "https://wso.williams.edu/pic/" + h4Input[0].textContent
-
-                    if(h4Input.length == 4){
-                        suBox = h4Input[1].textContent;
-                        room = h4Input[2].textContent;
-                        homeTown = h4Input[3].textContent;
-                    }
-                    else {
-                        x = h5Input.length - h4Input.length;
-                        for(i = 1; i < h4Input.length; i++){
-                          //console.log("Text Content: " + h5Input[i+x].textContent);
-                            if(h5Input[i+x].textContent == "SU Box:"){
-                                suBox = h4Input[i].textContent;
-                            }
-                            else if(h5Input[i+x].textContent == "Room:"){
-                                room = h4Input[i].textContent;
-                            }
-                            else if(h5Input[i+x].textContent == "Hometown:"){
-                                homeTown = h4Input[i].textContent;
-                            }
-                        }
-                    }
-                    students.push(<StudentPage name={name} unix={unix}
-                                  suBox={suBox} room={room}
-                                  homeTown={homeTown} img={img}
-                                  key={unix} />);
+                    students.push(this.getStudentPage(doc));
                     //console.log("Input length: " + input.length)
                  }
                  else{
-                    for( i = 0; i < input.length - 1; i++ ){
-                        if(i < 13) continue;
+                    for( i = 13; i < input.length - 1; i++ ){
                         const name = input[i+1].textContent;
                         const unix = input[i+2].textContent;
                         const img = "https://wso.williams.edu/pic/" + input[i+2].textContent;
@@ -111,60 +77,57 @@ export default class Facebook extends Component{
 
                         //console.log(card.key)
                         students.push(card = <StudentCard name={name}
-                                              unix={unix} img={img} key={unix}/>);
+                                              unix={unix} img={img} key={unix}
+                                              pressed={(unix) => this.cardPressed(unix)}/>);
                         i+=2;
                     }
                     //console.log("Input length: " + input.length);
                 }
-                console.log(students);
+                //console.log(students);
                 this.setState({studentCards: students});
         })
     }
-
-  /*  clickButton(url){
-        fetch(url, {method: 'GET'})
-        .then((response) => response.text() ) // Transform the data into text
-            .then((responseText) => {
-
-            const nameInput = doc.getElementsByTagName("h3");
-            const h4Input = doc.getElementsByTagName("h4");
-            const h5Input = doc.getElementsByTagName("h5");
-            const name = nameInput[0].textContent;
-            const unix = h4Input[0].textContent; //gets unix
-            let suBox = '';
-            let room = '';
-            let homeTown = '';
-            const img = "https://wso.williams.edu/pic/" + h4Input[0].textContent;
-
-            if(h4Input.length == 4){
-                suBox = h4Input[1].textContent;
-                room = h4Input[2].textContent;
-                homeTown = h4Input[3].textContent;
-            }
-            else {
-                x = h5Input.length - h4Input.length;
-                for(i = 1; i < h4Input.length; i++){
-                  //  console.log("Text Content: " + h5Input[i+x].textContent);
-                    if(h5Input[i+x].textContent == "SU Box:"){
-                        suBox = h4Input[i].textContent;
-                    }
-                    else if(h5Input[i+x].textContent == "Room:"){
-                        room = h4Input[i].textContent;
-                    }
-                    else if(h5Input[i+x].textContent == "Hometown:"){
-                        homeTown = h4Input[i].textContent;
-                    }
-                }
-            }
-            students.push(<StudentPage name={name} unix={unix} suBox={suBox}
-                            room={room} homeTown={homeTown} img={img}
-                            key={unix}/>);
-
-            //console.log("these are the items");
-            //console.log(students);
-            this.setState({studentCards: students})
-        })
-    }*/
+    getStudentPage = (doc) => {
+      var nameInput = doc.getElementsByTagName("h3");
+      //console.log("Name input: "+ nameInput[0].textContent);
+      var h4Input = doc.getElementsByTagName("h4");
+      var h5Input = doc.getElementsByTagName("h5");
+      const name = nameInput[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim();
+      const unix = h4Input[0].textContent; //gets unix
+      let suBox = '';
+      let room = '';
+      let homeTown = '';
+      const img = "https://wso.williams.edu/pic/" + h4Input[0].textContent
+      if(h4Input.length == 4){
+          suBox = h4Input[1].textContent;
+          room = h4Input[2].textContent;
+          homeTown = h4Input[3].textContent;
+      }
+      else {
+          x = h5Input.length - h4Input.length;
+          for(i = 1; i < h4Input.length; i++){
+            //console.log("Text Content: " + h5Input[i+x].textContent);
+              if(h5Input[i+x].textContent == "SU Box:"){
+                  suBox = h4Input[i].textContent;
+              }
+              else if(h5Input[i+x].textContent == "Room:"){
+                  room = h4Input[i].textContent;
+              }
+              else if(h5Input[i+x].textContent == "Hometown:"){
+                  homeTown = h4Input[i].textContent;
+              }
+          }
+      }
+      return <StudentPage name={name} unix={unix}
+                    suBox={suBox} room={room}
+                    homeTown={homeTown} img={img}
+                    key={unix}/>;
+    }
+    cardPressed = (unix) => {
+      console.log("here");
+      console.log(unix);
+      this.getPeople(unix);
+    }
 
     render(){
         return(
