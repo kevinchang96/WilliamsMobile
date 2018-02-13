@@ -25,7 +25,6 @@ export default class StudentCard extends Component{
     this.props.pressed(this.props.unix);
   }
   render(){
-      console.log(this);
       return(
       <TouchableOpacity onPress={() => this.pressed()}>
           <Card

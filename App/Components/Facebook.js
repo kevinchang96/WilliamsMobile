@@ -46,8 +46,6 @@ export default class Facebook extends Component{
                 var hasTable = doc.getElementsByTagName("thead");
                 var hasResults = doc.getElementsByTagName("br");
                 var students = [];
-                //console.log(input);
-
                 if(hasResults.length == 1){
                     students.push(<Text style={styles.noResults}>No Results</Text>);
                 }
@@ -58,10 +56,10 @@ export default class Facebook extends Component{
                         const unix = input[i + 2].textContent;
                         const img = "https://wso.williams.edu/pic/" + input[i + 2].textContent;
                         const info = input[i].getAttribute("href");
-
                         students.push(<StudentCard name={name} unix={unix}
                                                   img={img} info={info} key={unix}
-                                                  pressed={(unix) => this.cardPressed(unix)}/>)
+                                                  pressed={(unix) => this.cardPressed(unix)}/>);
+
                      }
                  }
                  else if (input.length == 15){ //only one student is returned
@@ -79,6 +77,7 @@ export default class Facebook extends Component{
                         students.push(card = <StudentCard name={name}
                                               unix={unix} img={img} key={unix}
                                               pressed={(unix) => this.cardPressed(unix)}/>);
+
                         i+=2;
                     }
                     //console.log("Input length: " + input.length);
@@ -88,6 +87,7 @@ export default class Facebook extends Component{
         })
     }
     getStudentPage = (doc) => {
+      //return <Text> Nothing </Text>;
       var nameInput = doc.getElementsByTagName("h3");
       //console.log("Name input: "+ nameInput[0].textContent);
       var h4Input = doc.getElementsByTagName("h4");
@@ -124,8 +124,6 @@ export default class Facebook extends Component{
                     key={unix}/>;
     }
     cardPressed = (unix) => {
-      console.log("here");
-      console.log(unix);
       this.getPeople(unix);
     }
 
@@ -147,7 +145,6 @@ export default class Facebook extends Component{
                   <FormInput
                       containerStyle={styles.form}
                       placeholder={"Look up a person..."}
-                      placeholderStyle={{color: "white"}}
                       autoCorrect={false}
                       onChangeText={searchFor => this.setState({searchFor})}
                   />
