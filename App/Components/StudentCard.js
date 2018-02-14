@@ -16,13 +16,13 @@ import {
   Text,
   View
 } from 'react-native';
-import { Card, ListItem, Button } from 'react-native-elements'
+import { Card, Button } from 'react-native-elements'
 
 export default class StudentCard extends Component{
 
   pressed = () => {
-    console.log("pressed");
-    this.props.pressed(this.props.unix);
+    console.log(this);
+    this.props.pressed(this._reactInternalFiber.alternate.key);
   }
   render(){
       return(

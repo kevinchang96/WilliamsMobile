@@ -5,6 +5,7 @@
 
 import React, { Component } from 'react';
 import {
+  Alert,
   AppRegistry,
   Platform,
   FlatList,
@@ -27,44 +28,48 @@ export default class Facebook extends Component{
         };
     }
 
-    getPeople = (result) => {
-      fetch("https://wso.williams.edu/facebook",
+    getPeople = (url="https://wso.williams.edu/facebook", result=null) => {
+      fetch(url,
         {method:"POST",
           credentials: 'include',
           headers: {
                   'Content-Type': 'application/x-www-form-urlencoded',
                   "Accept": "text/html"
             },
-          body: "search=" + result
+          body: "search=" + ((result) ? result : this.state.searchFor)
       }).then((response) => response.text() ) // Transform the data into text
             .then((responseText) => {
                 const DOMParser = require('react-native-html-parser').DOMParser;
                 let doc = new DOMParser().parseFromString(responseText,'text/html');
-                var input = doc.getElementsByTagName("a");
+                const input = doc.getElementsByTagName("a");
                 //console.log("Input: "+ input);
                 //console.log("Input length: "+ input.length);
-                var hasTable = doc.getElementsByTagName("thead");
-                var hasResults = doc.getElementsByTagName("br");
-                var students = [];
-                if(hasResults.length == 1){
+                const hasTable = doc.getElementsByTagName("thead");
+                const hasResults = doc.getElementsByTagName("br");
+                let students = [];
+                // console.log("hasTable");
+                // console.log(hasTable);
+                // console.log("hasResults");
+                // console.log(hasResults);
+                // console.log("input");
+                // console.log(input);
+                if(hasResults.length == 1){ // No results
                     students.push(<Text style={styles.noResults}>No Results</Text>);
                 }
-                else if(hasTable.length > 0){      //if the web page is a table of students
+                if(hasTable.length){      // Table of students without pictures
                     for( i = 12; i < input.length - 1; i += 2 ){
-                        //console.log(input[i+2]);
                         const name = input[i + 1].textContent;
                         const unix = input[i + 2].textContent;
                         const img = "https://wso.williams.edu/pic/" + input[i + 2].textContent;
-                        const info = input[i].getAttribute("href");
+                        const info = input[i+2].getAttribute("href");
+                        const id = input[i+1].getAttribute("href");
                         students.push(<StudentCard name={name} unix={unix}
-                                                  img={img} info={info} key={unix}
-                                                  pressed={(unix) => this.cardPressed(unix)}/>);
-
+                                                  img={img} info={info} key={id}
+                                                  pressed={(id) => this.cardPressed(id)}/>);
                      }
                  }
-                 else if (input.length == 15){ //only one student is returned
+                 else if (input.length == 15){ // 1 student returned
                     students.push(this.getStudentPage(doc));
-                    //console.log("Input length: " + input.length)
                  }
                  else{
                     for( i = 13; i < input.length - 1; i++ ){
@@ -72,22 +77,20 @@ export default class Facebook extends Component{
                         const unix = input[i+2].textContent;
                         const img = "https://wso.williams.edu/pic/" + input[i+2].textContent;
                         const info = input[i].getAttribute("href");
-
+                        const id = input[i+1].getAttribute("href"); // = "/facebook/users/XXXX"
                         //console.log(card.key)
                         students.push(card = <StudentCard name={name}
-                                              unix={unix} img={img} key={unix}
-                                              pressed={(unix) => this.cardPressed(unix)}/>);
+                                              unix={unix} info={info} img={img} key={id}
+                                              pressed={(id) => this.cardPressed(id)}/>);
 
                         i+=2;
                     }
-                    //console.log("Input length: " + input.length);
                 }
                 //console.log(students);
                 this.setState({studentCards: students});
         })
     }
     getStudentPage = (doc) => {
-      //return <Text> Nothing </Text>;
       var nameInput = doc.getElementsByTagName("h3");
       //console.log("Name input: "+ nameInput[0].textContent);
       var h4Input = doc.getElementsByTagName("h4");
@@ -120,11 +123,21 @@ export default class Facebook extends Component{
       }
       return <StudentPage name={name} unix={unix}
                     suBox={suBox} room={room}
-                    homeTown={homeTown} img={img}
-                    key={unix}/>;
+                    homeTown={homeTown} img={img}/>;
     }
-    cardPressed = (unix) => {
-      this.getPeople(unix);
+
+    cardPressed = (id) => {
+      fetch("https://wso.williams.edu"+id, {method:"GET", credentials: 'include',
+                  headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    "Accept": "text/html"
+                  },
+                }).then((response) => response.text()) // Transform the data into text
+                  .then((responseText) => {
+                    const DOMParser = require('react-native-html-parser').DOMParser;
+                    let doc = new DOMParser().parseFromString(responseText,'text/html');
+                    console.log(doc);
+                    this.setState({studentCards:[this.getStudentPage(doc)]})});
     }
 
     render(){
@@ -152,7 +165,7 @@ export default class Facebook extends Component{
                       title="SEARCH"
                       backgroundColor="#512698"
                       buttonStyle={{paddingBottom: 10}}
-                      onPress={() => this.getPeople(this.state.searchFor)}
+                      onPress={() => this.getPeople()}
                   />
                 </View>
                 <FlatList
