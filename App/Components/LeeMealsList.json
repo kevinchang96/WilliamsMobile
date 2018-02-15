@@ -3,21 +3,25 @@
     "name": "Pancakes",
     "description": "Stack of 3 pancakes, 1 topping, choice of meat, hashbrown, choice of drink.",
     "checked": false,
+    "count": 0,
     "price": 7.00
   },{
     "name": "Lee Stacker",
     "description": "2 pieces of choice toast, stacked with 2 pieces of choice meat, any style eggs and cheese with a choice of drink.",
     "checked": false,
+    "count": 0,
     "price": 7.00
   },{
     "name": "Rise and Shine",
     "description": "2 Eggs (Any Style), Choice of Breakfast Meat, Hash Browns, Toast or English Muffin, Beverage",
     "checked": false,
+    "count": 0,
     "price": 7.00
   },{
     "name": "Create Your Own Omelet",
     "description": "3 Toppings, Hash Browns, Toast or English Muffin, Beverage",
     "checked": false,
+    "count": 0,
     "price": 7.00
   }
 ]

@@ -3,66 +3,85 @@
     "name": "Coffee",
     "description": "Dean's Beans Fair Trade",
     "checked": false,
+    "count": 0,
     "price": 0.99
   },{
     "name": "Hot Tea",
     "description": "Harney's & Son's Fair Trade",
     "checked": false,
+    "count": 0,
     "price": 0.99
   },{
     "name": "Hot Chocolate",
     "checked": false,
     "description": "",
+    "count": 0,
     "price": 0.99
   },{
     "name": "Latte",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 1.49
   },{
     "name": "Cappuccino",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 1.49
   },{
     "name": "Espresso",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 1.49
   },{
     "name": "Double Espresso",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 0.99
   },{
-    "name": "Cranberry/Orange Juice",
+    "name": "Cranberry Juice",
     "description": "",
     "checked": false,
+    "count": 0,
+    "price": 1.49
+  },{
+    "name": "Orange Juice",
+    "description": "",
+    "checked": false,
+    "count": 0,
     "price": 1.49
   },{
     "name": "Milk",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 1.29
   },{
     "name": "Soy Milk",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 1.49
   },{
-    "name": "Odwalla Smoothies",
+    "name": "Odwallas",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 3.25
   },{
     "name": "Soda",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 0.89
   },{
     "name": "Frost",
     "description": "with Malt ($0.50 extra)",
     "checked": false,
+    "count": 0,
     "price": 2.30
   }
 ]

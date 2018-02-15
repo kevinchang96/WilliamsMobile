@@ -3,59 +3,73 @@
     "name": "Hamburger",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 2.50
   },{
     "name": "Cheeseburger",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 2.75
   },{
     "name": "Bacon Cheeseburger",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 3.20
   },{
     "name": "Grilled Cheese",
     "description": "",
+    "checked": false,
+    "count": 0,
     "price": 2.10
   },{
-    "name": "Grilled Cheese with Tomato",
+    "name": "GC w/ Tomato",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 2.40
   },{
-    "name": "Grilled Cheese with Bacon",
+    "name": "GC w/ Bacon",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 3.20
   },{
     "name": "Tuna Melt",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 3.75
   },{
     "name": "Grilled Chicken",
     "description": "",
+    "checked": false,
+    "count": 0,
     "price": 4.25
   },{
     "name": "Moroccan Chicken",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 4.99
   },{
     "name": "Chicken Shawarma",
     "description": "",
-   "checked": false,
+    "checked": false,
+    "count": 0,
     "price": 4.99
   },{
     "name": "Chicken Patty",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 4.25
   },{
     "name": "Hot Dog",
     "description": "",
    "checked": false,
+    "count": 0,
     "price": 1.70
   }
 ]
