@@ -21,8 +21,16 @@ import { Card, Button } from 'react-native-elements'
 export default class StudentCard extends Component{
 
   pressed = () => {
-    console.log(this);
-    this.props.pressed(this._reactInternalFiber.alternate.key);
+    const profile = fetch("https://wso.williams.edu"+this.props.id, {method:"GET", credentials: 'include',
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                  "Accept": "text/html"
+                },
+              }).then((response) => response.text()) // Transform the data into text
+                .then((responseText) => {
+                  const DOMParser = require('react-native-html-parser').DOMParser;
+                  let doc = new DOMParser().parseFromString(responseText,'text/html');
+                  this.props.pressed(doc);});
   }
   render(){
       return(

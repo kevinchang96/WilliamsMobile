@@ -18,6 +18,16 @@ import { Button, FormInput, Header, Icon, SearchBar } from 'react-native-element
 import StudentCard from './StudentCard'
 import StudentPage from './StudentPage'
 
+ alert = (value) => {Alert.alert(
+'Alert Title',
+value,
+[
+{text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+{text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+{text: 'OK', onPress: () => console.log('OK Pressed')},
+],
+{ cancelable: false }
+)}
 export default class Facebook extends Component{
 
     constructor(props){
@@ -28,8 +38,8 @@ export default class Facebook extends Component{
         };
     }
 
-    getPeople = (url="https://wso.williams.edu/facebook", result=null) => {
-      fetch(url,
+    getPeople = (result=null) => {
+      fetch("https://wso.williams.edu/facebook",
         {method:"POST",
           credentials: 'include',
           headers: {
@@ -40,7 +50,7 @@ export default class Facebook extends Component{
       }).then((response) => response.text() ) // Transform the data into text
             .then((responseText) => {
                 const DOMParser = require('react-native-html-parser').DOMParser;
-                let doc = new DOMParser().parseFromString(responseText,'text/html');
+                const doc = new DOMParser().parseFromString(responseText,'text/html');
                 const input = doc.getElementsByTagName("a");
                 //console.log("Input: "+ input);
                 //console.log("Input length: "+ input.length);
@@ -56,7 +66,7 @@ export default class Facebook extends Component{
                 if(hasResults.length == 1){ // No results
                     students.push(<Text style={styles.noResults}>No Results</Text>);
                 }
-                if(hasTable.length){      // Table of students without pictures
+                if(hasTable.length){      // Table of students without pictures.
                     for( i = 12; i < input.length - 1; i += 2 ){
                         const name = input[i + 1].textContent;
                         const unix = input[i + 2].textContent;
@@ -65,24 +75,24 @@ export default class Facebook extends Component{
                         const id = input[i+1].getAttribute("href");
                         students.push(<StudentCard name={name} unix={unix}
                                                   img={img} info={info} key={id}
-                                                  pressed={(id) => this.cardPressed(id)}/>);
+                                                  id={id} pressed={(profile) => this.getStudentPage(profile)}/>);
                      }
                  }
                  else if (input.length == 15){ // 1 student returned
-                    students.push(this.getStudentPage(doc));
+                    this.getStudentPage(doc);
+                    return;
                  }
                  else{
-                    for( i = 13; i < input.length - 1; i++ ){
+                    for( i = 13; i < input.length - 1; i++ ){ // Table of students with pictures.
                         const name = input[i+1].textContent;
                         const unix = input[i+2].textContent;
                         const img = "https://wso.williams.edu/pic/" + input[i+2].textContent;
                         const info = input[i].getAttribute("href");
                         const id = input[i+1].getAttribute("href"); // = "/facebook/users/XXXX"
                         //console.log(card.key)
-                        students.push(card = <StudentCard name={name}
-                                              unix={unix} info={info} img={img} key={id}
-                                              pressed={(id) => this.cardPressed(id)}/>);
-
+                        students.push(<StudentCard name={name} unix={unix}
+                                              info={info} img={img} key={id}
+                                              id={id} pressed={(profile) => this.getStudentPage(profile)}/>);
                         i+=2;
                     }
                 }
@@ -91,10 +101,10 @@ export default class Facebook extends Component{
         })
     }
     getStudentPage = (doc) => {
-      var nameInput = doc.getElementsByTagName("h3");
+      const nameInput = doc.getElementsByTagName("h3");
       //console.log("Name input: "+ nameInput[0].textContent);
-      var h4Input = doc.getElementsByTagName("h4");
-      var h5Input = doc.getElementsByTagName("h5");
+      const h4Input = doc.getElementsByTagName("h4");
+      const h5Input = doc.getElementsByTagName("h5");
       const name = nameInput[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim();
       const unix = h4Input[0].textContent; //gets unix
       let suBox = '';
@@ -121,13 +131,14 @@ export default class Facebook extends Component{
               }
           }
       }
-      return <StudentPage name={name} unix={unix}
+      const card = <StudentPage name={name} unix={unix}
                     suBox={suBox} room={room}
                     homeTown={homeTown} img={img}/>;
+      this.setState({studentCards: [card]})
     }
 
     cardPressed = (id) => {
-      fetch("https://wso.williams.edu"+id, {method:"GET", credentials: 'include',
+      const profile = fetch("https://wso.williams.edu"+id, {method:"GET", credentials: 'include',
                   headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     "Accept": "text/html"
@@ -136,8 +147,10 @@ export default class Facebook extends Component{
                   .then((responseText) => {
                     const DOMParser = require('react-native-html-parser').DOMParser;
                     let doc = new DOMParser().parseFromString(responseText,'text/html');
-                    console.log(doc);
-                    this.setState({studentCards:[this.getStudentPage(doc)]})});
+                    return doc;})
+      const page = this.getStudentPage(profile);
+      //this.setState({studentCards:[this.getStudentPage(profile)]});
+        this.setState({studentCards:[<Text style={styles.noResults}>No Results</Text>]});
     }
 
     render(){
