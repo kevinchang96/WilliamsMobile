@@ -5,8 +5,7 @@
 
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, ScrollView, PixelRatio, Dimensions, Animated } from 'react-native';
-import { Button, Card, Header, List, ListItem } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Button, Card, Header, Icon, List, ListItem } from 'react-native-elements';
 import GrillList from './GrillList.json';
 import GrillSubsList from './GrillSubsList.json';
 import GrillWingsList from './GrillWingsList.json';
@@ -67,11 +66,10 @@ export default class GrillMenu extends Component {
             />
 
             <ScrollView>
-
                 <Card title={this.state.sub0Array[this.state.stateIndex]}
-                    titleStyle={{color: '#512698', fontSize: 20, marginBottom: 0}}
+                    titleStyle={{color: '#512698', fontSize: 20, marginTop: 10, marginBottom: 0}}
                     dividerStyle={{height: 0}}
-                    containerStyle={{ marginTop: 5, marginBottom: 5 }}>
+                    containerStyle={{ marginTop: 5, marginBottom: 5, padding: 0 }}>
                     <List containerStyle={{padding: 0, marginTop: 0, marginBottom: 0}}>
                       {
                         this.state.stateArray[this.state.stateIndex].map((l, i) => (
@@ -87,9 +85,9 @@ export default class GrillMenu extends Component {
                 </Card>
 
                 <Card title={this.state.sub1Array[this.state.stateIndex]}
-                    titleStyle={{color: '#512698', fontSize: 20, marginBottom: 0}}
+                    titleStyle={{color: '#512698', fontSize: 20, marginTop: 10, marginBottom: 0}}
                     dividerStyle={{height: 0}}
-                    containerStyle={{ marginTop: 5, marginBottom: 5 }}>
+                    containerStyle={{ marginTop: 5, marginBottom: 5, padding: 0 }}>
                     <List containerStyle={{padding: 0, marginTop: 0, marginBottom: 0}}>
                       {
                         this.state.sauceArray[this.state.stateIndex].map((l, i) => (

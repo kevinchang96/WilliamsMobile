@@ -164,7 +164,7 @@ export default class ItemCalculator extends Component{
                      <Card containerStyle={{ marginTop: 5, marginBottom: 5, marginLeft: 5, marginRight: 5 }}>
                          <View style={styles.titleContainer}>
                              <Text style={ (this.state.currentBalance <= 7) ? styles.titleText : styles.balanceOver}>
-                                 Current amount: ${this.state.currentBalance}
+                                 Current Amount: ${this.state.currentBalance}
                              </Text>
                          </View>
 

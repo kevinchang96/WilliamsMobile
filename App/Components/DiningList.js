@@ -18,7 +18,7 @@ class DiningList extends Component{
     }
 
     render() {
-    const { navigate } = this.props.navigation;
+        const { navigate } = this.props.navigation;
          const diningHallList = [
            {
              id: '208',

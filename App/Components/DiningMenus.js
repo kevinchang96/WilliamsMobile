@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, ScrollView, PixelRatio, Dimensions, Animated } from 'react-native';
+import { AppRegistry, Flatlist, Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, ScrollView, PixelRatio, Dimensions, Animated } from 'react-native';
 import { Button, Card, Header, Icon, List, ListItem } from 'react-native-elements';
 
 export default class DiningMenus extends Component {
@@ -60,16 +60,15 @@ export default class DiningMenus extends Component {
                 for (var course in temp) {
                     if (temp.hasOwnProperty(course)) {
                         cardList.push(<Card title={course}
-                                         titleStyle={{color: '#512698', fontSize: 20, marginBottom: 0}}
+                                         titleStyle={{color: '#512698', fontSize: 20, marginTop: 15, marginBottom: 0}}
                                          dividerStyle={{height: 0}}
-                                         containerStyle={{marginTop: 10, marginBottom: 10}}>
+                                         containerStyle={{marginTop: 0, marginBottom: 10, padding: 0}}>
                                          <List containerStyle={{padding: 0, marginTop: 0, marginBottom: 0}}>
                                            {
                                              temp[course].map((l, i) => (
                                                <ListItem
                                                  key={i}
                                                  title={l.formal_name}
-                                                 subtitle={l.portion_size}
                                                  hideChevron={true}
                                                />
                                              ))
