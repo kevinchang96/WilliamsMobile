@@ -1,6 +1,7 @@
-// A done did it
-// A class to keep track useful information about Williamstown's current weather conditions
-// (c) 2018 Grace Mazzarella, William Fung
+/**
+ * Grace Mazzarella, William Fung, David Ariyibi
+ * (c) 01/2018
+ */
 
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Image, View, Text, ScrollView } from 'react-native';
@@ -192,7 +193,7 @@ export default class WeatherObj extends Component {
                 />
 
                 <ScrollView>
-                    <Card>
+                    <Card style={cardStyle.card}>
                         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
                             <Image style={{marginLeft: 10, width: 120, height: 120}}
                                 source={{uri: "http://l.yimg.com/a/i/us/we/52/" + this.state.icon + ".gif"}}/>
@@ -233,13 +234,13 @@ export default class WeatherObj extends Component {
                     </Card>
 
                     <List
-                      containerStyle={{marginBottom: 10, backgroundColor: "#eeeeee"}}>
+                      containerStyle={{marginTop: 0, marginBottom: 10, backgroundColor: "#eeeeee"}}>
                       {
                         this.state.forecast.map((l, i) => (
                           <Card style={cardStyle.card}>
                               <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
                                   <View style={{flexDirection: 'row'}}>
-                                      <Image style={{width: 35, height: 35}}
+                                      <Image style={{width: 30, height: 30}}
                                         source={{uri: "http://l.yimg.com/a/i/us/we/52/" + l.code + ".gif"}}/>
                                       <Text style={cardStyle.titleStyle}>   {l.day}</Text>
                                   </View>
@@ -256,9 +257,6 @@ export default class WeatherObj extends Component {
                         <Text>{this.state.footer}</Text>
                     </View>
                 </ScrollView>
-
-
-
 
                 {/*<ScrollView>
                     <Card
@@ -367,7 +365,7 @@ const cardStyle = StyleSheet.create({
         fontSize: 20
     },
     card:{
-        marginTop: 10,
-        marginBottom: 10,
+        marginTop: 0,
+        marginBottom: 5,
     }
 });

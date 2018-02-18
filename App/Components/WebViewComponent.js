@@ -12,6 +12,7 @@ export default class WebViewComponent extends Component {
         super()
         this.state = {
             canGoBack: false,
+            url: "",
         }
     }
 
@@ -23,6 +24,14 @@ export default class WebViewComponent extends Component {
 
     onBack() {
       this.refs[WEBVIEW_REF].goBack();
+    }
+
+    onForward() {
+      this.refs[WEBVIEW_REF].goForward();
+    }
+
+    onReload() {
+      this.refs[WEBVIEW_REF].reload();
     }
 
     render() {
@@ -50,10 +59,12 @@ export default class WebViewComponent extends Component {
                     onNavigationStateChange={this.onNavigationStateChange.bind(this)}
                 />
 
-                <Button
-                    title='BACK'
-                    buttonStyle={styles.buttonStyle}
-                    onPress={this.onBack.bind(this)}
+                <Header
+                    leftComponent={<Icon name='chevron-left' color='white' onPress={this.onBack.bind(this)} />}
+                    centerComponent={<Icon name='replay' color='white' onPress={this.onReload.bind(this)} />}
+                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 50}}
+                    underlayColor='#512698'
+                    rightComponent={<Icon name='chevron-right' color='white' onPress={this.onForward.bind(this)} />}
                 />
             </View>
         );

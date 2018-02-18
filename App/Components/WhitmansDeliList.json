@@ -3,31 +3,37 @@
     "name": "Deli Sandwich",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 4.10
   },{
     "name": "Italian",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 4.99
   },{
     "name": "Pastrami Reuben",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 4.99
   },{
     "name": "Deli Special",
     "description": "",
-   "checked": false,
+    "checked": false,
+    "count": 0,
     "price": 2.50
   },{
     "name": "Egg McWilliams",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 2.95
   },{
     "name": "Breakfast Burrito",
     "description": "",
    "checked": false,
+    "count": 0,
     "price": 2.95
   }
 ]

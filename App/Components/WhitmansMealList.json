@@ -3,11 +3,13 @@
     "name": "Falafel Meal",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 7.00
   },{
     "name": "Shawarma Meal",
     "description": "",
     "checked": false,
+    "count": 0,
     "price": 7.00
   }
 ]

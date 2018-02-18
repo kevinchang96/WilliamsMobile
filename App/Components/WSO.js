@@ -100,9 +100,7 @@ class WSO extends Component{
                              key={i}
                              title={u.text}
                              titleContainerStyle={{justifyContent: 'flex-start'}}
-                             rightTitle={u.time}
-                             rightTitleContainerStyle={{justifyContent: 'flex-end'}}
-                             hideChevron={true}
+                             rightIcon={<Text>{u.time}</Text>}
                              onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Discussions"})} }
                           />
                          );
@@ -122,9 +120,7 @@ class WSO extends Component{
                              key={i}
                              title={u.text}
                              titleContainerStyle={{justifyContent: 'flex-start'}}
-                             rightTitle={u.time}
-                             rightTitleContainerStyle={{justifyContent: 'flex-end'}}
-                             hideChevron={true}
+                             rightIcon={<Text>{u.time}</Text>}
                              onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Announcements"})} }
                           />
                          );
@@ -144,9 +140,7 @@ class WSO extends Component{
                              key={i}
                              title={u.text}
                              titleContainerStyle={{justifyContent: 'flex-start'}}
-                             rightTitle={u.time}
-                             rightTitleContainerStyle={{justifyContent: 'flex-end'}}
-                             hideChevron={true}
+                             rightIcon={<Text>{u.time}</Text>}
                              onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Exchanges"})} }
                           />
                          );
@@ -166,9 +160,7 @@ class WSO extends Component{
                              key={i}
                              title={u.text}
                              titleContainerStyle={{justifyContent: 'flex-start'}}
-                             rightTitle={u.time}
-                             rightTitleContainerStyle={{justifyContent: 'flex-end'}}
-                             hideChevron={true}
+                             rightIcon={<Text>{u.time}</Text>}
                              onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Lost & Found"})} }
                           />
                          );
@@ -189,9 +181,7 @@ class WSO extends Component{
                              title={u.text}
                              containerStyle={{alignItems: 'flex-start'}}
                              titleContainerStyle={{justifyContent: 'flex-start'}}
-                             rightTitle={u.time}
-                             rightTitleContainerStyle={{justifyContent: 'flex-end'}}
-                             hideChevron={true}
+                             rightIcon={<Text>{u.time}</Text>}
                              onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Jobs"})} }
                           />
                          );
@@ -211,8 +201,7 @@ class WSO extends Component{
                              key={i}
                              title={u.text}
                              titleContainerStyle={{justifyContent: 'flex-start'}}
-                             rightTitle={u.time}
-                             rightTitleContainerStyle={{justifyContent: 'flex-end'}}
+                             rightIcon={<Text>{u.time}</Text>}
                              onPress={() => {navigate(u.screen,{url: "https://wso.williams.edu"+u.link, title: "Rides"})} }
                           />
                          );

@@ -17,6 +17,7 @@ import WhitmansGrillList from './WhitmansGrillList.json';
 import WhitmansMealList from './WhitmansMealList.json';
 import WhitmansSaladsList from './WhitmansSaladsList.json';
 import WhitmansTeppanyakiList from './WhitmansTeppanyakiList.json';
+import Item from './Item';
 
 export default class ItemCalculator extends Component{
 
@@ -77,7 +78,7 @@ export default class ItemCalculator extends Component{
         _clearAll(){
             for( i = 0; i < this.state.stateArray.length; i++ ){
                 for( j = 0; j < this.state.stateArray[i].length; j++ ){
-                    this.state.stateArray[i][j].checked = false;
+                    this.state.stateArray[i][j].count = 0;
                 }
             }
             this.setState({currentBalance: 0.0});
@@ -88,11 +89,13 @@ export default class ItemCalculator extends Component{
             this.forceUpdate()
         }
 
-        updatePrice( isChecked, price ){
-            if( isChecked ){
-                this.setState({currentBalance: Math.round((this.state.currentBalance + price)*100)/100})
+        updatePrice = ( bool, price, j ) => {
+            if( bool ){
+                this.setState({currentBalance: Math.round((this.state.currentBalance + price)*100)/100 });
+                this.state.stateArray[this.state.stateIndex][j].count++;
             } else {
-                this.setState({currentBalance: Math.round((this.state.currentBalance - price)*100)/100})
+                this.setState({currentBalance: Math.round((this.state.currentBalance - price)*100)/100 });
+                this.state.stateArray[this.state.stateIndex][j].count--;
             }
         }
 
@@ -140,13 +143,18 @@ export default class ItemCalculator extends Component{
                        {
 
                          this.state.stateArray[this.state.stateIndex].map((l, i) => (
-                           <CheckBox
+                           /*{<CheckBox
                              key={i}
                              title={l.name + " - ($" + l.price + ")"}
                              checked={this.state.stateArray[this.state.stateIndex][i].checked}
                              checkedColor='green'
                              onPress={() => { this.onClick(i); this.updatePrice(this.state.stateArray[this.state.stateIndex][i].checked,l.price) } }
-                           />
+                           />}*/
+                           <ListItem
+                                key={i}
+                                title={l.name + " - ($" + l.price + ")"}
+                                rightIcon={<Item changeState={this.updatePrice} price={l.price} change={this.state.globalCount} count={this.state.stateArray[this.state.stateIndex][i].count} item={i} />}
+                              />
                          ))
                        }
                      </List>
@@ -156,7 +164,7 @@ export default class ItemCalculator extends Component{
                      <Card containerStyle={{ marginTop: 5, marginBottom: 5, marginLeft: 5, marginRight: 5 }}>
                          <View style={styles.titleContainer}>
                              <Text style={ (this.state.currentBalance <= 7) ? styles.titleText : styles.balanceOver}>
-                                 Current amount: ${this.state.currentBalance}
+                                 Current Amount: ${this.state.currentBalance}
                              </Text>
                          </View>
 
