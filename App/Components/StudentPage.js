@@ -30,8 +30,8 @@ export default class StudentPage extends Component{
                     <Text style={styles.subText}>Unix</Text>
                     <Text>{this.props.unix}</Text>
 
-                    <Text style={styles.subText}>SU Box</Text>
-                    <Text>{this.props.suBox}</Text>
+                    {(this.props.suBox) ? [<Text style={styles.subText}>SU Box</Text>,
+                        <Text>{this.props.suBox}</Text>] : null}
 
                     {(this.props.room) ? [<Text style={styles.subText}>Room</Text>,
                         <Text>{this.props.room}</Text>] : null}
