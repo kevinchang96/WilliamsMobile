@@ -39,15 +39,9 @@ export default class WebViewComponent extends Component {
         return (
             <View style={styles.container}>
                 <Header
-                    leftComponent={
-                        <Icon
-                            name='chevron-left'
-                            color='white'
-                            onPress={() => this.props.navigation.goBack()}
-                            underlayColor='#512698'
-                        />
-                    }
+                    leftComponent={<Icon name='chevron-left' color='white' onPress={() => this.props.navigation.goBack()} />}
                     centerComponent={{ text: this.props.navigation.state.params.title, style: { fontSize: 22, color: '#ffffff' } }}
+                    underlayColor='#512698'
                     outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
 
                 <WebView style={{flex: 1}}
