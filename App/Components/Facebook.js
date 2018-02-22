@@ -105,7 +105,8 @@ export default class Facebook extends Component{
       //console.log("Name input: "+ nameInput[0].textContent);
       const h4Input = doc.getElementsByTagName("h4");
       const h5Input = doc.getElementsByTagName("h5");
-      const name = nameInput[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim();
+      let name = nameInput[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim();
+      name = (name.indexOf("(me)") > 0) ? name.replace("(me)","").trim() + " (me)" : name;
       const unix = h4Input[0].textContent; //gets unix
       let suBox = '';
       let room = '';
