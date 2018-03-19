@@ -35,7 +35,7 @@ const CustomComponents = (props) => (
           <Avatar
             large
             rounded
-            source={{uri:'https://wso.williams.edu/pic/dzm1'/* + unix._55*/}}
+            source={{uri:'https://wso.williams.edu/pic/'/* + unix._55*/}}
             onPress={() => console.log(unix._55)}
             activeOpacity={0.7}
             containerStyle={{marginRight: 10}} />
