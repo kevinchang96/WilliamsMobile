@@ -65,8 +65,6 @@ export default class EventsHelper extends Component {
             let child = childNodes[i];
             groups.push(child.textContent);
         }
-        console.log(groups);
-        console.log(childNodes);
         if(groups && groups[0].includes(",")){
           date = groups[0];
           groups = groups.slice(1);
@@ -76,7 +74,6 @@ export default class EventsHelper extends Component {
 
     getMessageDetails = (element) => {
         const childNodes = element.childNodes[0].childNodes;
-
         const title = childNodes[0].textContent.trim().replace(/(\r\n|\n|\r)/gm," ");
         const fullMessage = childNodes[2].textContent.trim().replace(/(\r\n|\n|\r)/gm," ");
         const lastFromIndex = fullMessage.lastIndexOf(' from ');
@@ -86,7 +83,7 @@ export default class EventsHelper extends Component {
     }
 
     createCard = (audienceElement,tableElements, i) => {
-        const audienceAndDate = this.getAudienceAndDate(audienceElement);             // 'Students, Faculty, etc.'
+        const audienceAndDate = this.getAudienceAndDate(audienceElement);    // 'Students, Faculty, etc.'
         const messageDetails = this.getMessageDetails(tableElements); // {title, message, from]}
         const card = <MessageCard title={messageDetails.title} text={messageDetails.message}
                       src={messageDetails.from} key={i} audience={audienceAndDate.audience}
@@ -108,8 +105,6 @@ export default class EventsHelper extends Component {
       .then((responseText) => {
         const DOMParser = require('react-native-html-parser').DOMParser;
         const doc = new DOMParser().parseFromString(responseText,'text/html');
-        const date = doc.getElementById('date_heading').textContent;
-
         const audienceElements = doc.getElementsByClassName('audience message_cell_new');
         const tableElements = doc.getElementsByClassName('message_cell_new');
         const length = audienceElements.$$length;
@@ -117,7 +112,7 @@ export default class EventsHelper extends Component {
         for(let i = 0; i < length; i++){
             cards.push(this.createCard(audienceElements[i],tableElements[i],i));
         }
-        this.setState(Object.assign({}, json, { messageCards: cards }))
+        this.setState(Object.assign({}, json, { messageCards: cards }));
       }).catch((error) => { console.error(error)} );
     }
 
