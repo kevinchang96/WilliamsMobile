@@ -128,15 +128,16 @@ class HomeScreen extends Component {
                       {
                         homeList.map((l, i) => (
                           <Tile
-                              featured
+                              featured={true}
                               imageSrc={l.image}
                               title={l.title}
                               activeOpacity={1}
                               onPress={l.nav}
                               captionStyle={{fontSize: 0}}
-                              titleStyle={{fontSize: 30, justifyContent: 'center', alignContents: 'center'}}
-                              containerStyle={{height: 200, justifyContent: 'center', alignContents: 'center', marginTop: 5}}
-                              contentContainerStyle={{marginBottom: 10}}>
+                              titleStyle={{fontSize: 30, justifyContent: 'center', alignContent: 'center'}}
+                              containerStyle={{height: 200, justifyContent: 'center', alignContent: 'center', marginTop: 5}}
+                              contentContainerStyle={{marginBottom: 10}}
+                              key={i}>
 
                               <Button
                                   rounded

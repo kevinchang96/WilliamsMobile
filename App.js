@@ -16,7 +16,7 @@ import Emergency from './App/Components/Emergency';
 import About from './App/Components/About';
 import DiningList from './App/Components/DiningList';
 
-retrieveFromStorage = async(value) => {
+/*retrieveFromStorage = async(value) => {
     try {
         const val = await AsyncStorage.getItem(value);
         if(val) return val;
@@ -26,7 +26,7 @@ retrieveFromStorage = async(value) => {
 }
 const unix = retrieveFromStorage('unix');
 const username = retrieveFromStorage('username');
-
+*/
 const CustomComponents = (props) => (
   <ScrollView style={styles.container}>
     <ImageBackground style={styles.backgroundImage}
@@ -35,7 +35,7 @@ const CustomComponents = (props) => (
           <Avatar
             large
             rounded
-            source={{uri:'https://wso.williams.edu/pic/' + unix._55}}
+            source={{uri:'https://wso.williams.edu/pic/dzm1'/* + unix._55*/}}
             onPress={() => console.log(unix._55)}
             activeOpacity={0.7}
             containerStyle={{marginRight: 10}} />
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     },
     backgroundImage: {
         flex: 1,
-        resizeMode: 'cover', // or 'stretch'
+        //resizeMode: 'cover', // or 'stretch'
     }
 });
 console.disableYellowBox = true

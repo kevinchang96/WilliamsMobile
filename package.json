@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "native-base": "^2.3.7",
+    "native-base": "^2.3.10",
     "react": "16.2.0",
     "react-native": "0.51.0",
     "react-native-animatable": "^1.2.4",
@@ -20,7 +20,7 @@
     "react-native-vector-icons": "^4.5.0",
     "react-native-view-more-text": "^1.4.3",
     "react-native-webbrowser-with-back": "^1.0.36",
-    "react-navigation": "^1.0.0-beta.27",
+    "react-navigation": "^1.5.7",
     "react-open-weather": "^0.3.0",
     "underscore": "^1.8.3"
   },
