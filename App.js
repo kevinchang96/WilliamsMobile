@@ -3,12 +3,17 @@
  * (c) 01/2018
  */
 
+ /**
+  * Kevin Chang
+  * (c) 06/2018
+  */
+
 import React, { Component } from 'react';
 import { AppRegistry, AsyncStorage, Image, ImageBackground, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { DrawerItems, DrawerNavigator, SafeAreaView, TabNavigator } from 'react-navigation';
 import { Avatar, Card, Button, Header, Icon, List, ListItem, Tile } from 'react-native-elements';
 
-import LinkList from './App/Components/LinkList';
+import LinkList from './App/Containers/Links';
 import NewsList from './App/Components/NewsList';
 import HomeScreen from './App/Containers/Home';
 import WSO from './App/Components/WSO';

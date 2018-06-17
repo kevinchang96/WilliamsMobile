@@ -4,12 +4,13 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Avatar, Button, Header, Icon, List, ListItem } from 'react-native-elements';
+import { AppRegistry, ScrollView, View } from 'react-native';
+import { Avatar, Icon, List, ListItem } from 'react-native-elements';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import WebViewComponent from './WebViewComponent';
+import styles from '../Utils/Style';
 
-class LinkList extends Component{
+export default class LinkList extends Component{
     render() {
         const { navigate } = this.props.navigation;
         const resourceList = [
@@ -84,17 +85,6 @@ class LinkList extends Component{
 
         return (
             <View style={styles.container}>
-                <Header
-                    leftComponent={
-                        <Icon
-                            name='menu'
-                            color='white'
-                            onPress={() => this.props.navigation.navigate('DrawerToggle')}
-                            underlayColor='#512698'/>
-                    }
-                    centerComponent={{ text: 'Links', style: { fontSize: 22, color: '#ffffff' } }}
-                    outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}} />
-
                 <ScrollView style={styles.scrollContainer}>
                     <List containerStyle={{marginTop: 10, marginBottom: 0}}>
                       {
@@ -104,7 +94,7 @@ class LinkList extends Component{
                             key={i}
                             title={l.name}
                             rightIcon={{name: 'open-in-browser'}}
-                            onPress={() => {console.log(l.screen);navigate(l.screen,{url: l.url, title: l.name})} }
+                            onPress={() => {navigate(l.screen,{url: l.url, title: l.name})} }
                           />
                         ))
                       }
@@ -115,73 +105,4 @@ class LinkList extends Component{
     }
 }
 
-const fastFacts = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
-
-const sarah = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
-
-const ephr = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
-
-const campusMap = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
-
-const laundryView = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
-
-const routeShout = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
-
-const brta = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
-
-const az = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
-
-const courseCatalog = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
-
-const ephSports = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
-
-const socialMedia = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
-
-const LinkNavigator = StackNavigator({
-    Home: { screen: LinkList },
-    FastFacts: { screen: fastFacts },
-    CampusMap: { screen: campusMap },
-    LaundryView: { screen: laundryView },
-    RouteShout: { screen: routeShout },
-    BRTA: { screen: brta },
-    AZ: { screen: az },
-    CourseCatalog: { screen: courseCatalog },
-    EphSports: { screen: ephSports },
-    SocialMedia: { screen: socialMedia },
-    Sarah: { screen: sarah },
-    Ephr: { screen: ephr },
-    },
-    { headerMode: 'none' }
-);
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#EEEEEE',
-    },
-    scrollContainer: {
-        flex: 1,
-    },
-    scrollText: {
-        color: 'black',
-        fontSize: 18,
-    },
-    btn: {
-        borderRadius: 30,
-        width: 60,
-        height: 60,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.7)'
-    },
-    btnImage:
-    {
-        resizeMode: 'contain',
-        width: '100%',
-        tintColor: 'white'
-    }
-});
-
 AppRegistry.registerComponent( 'LinkList', () => LinkList );
-
-export default LinkNavigator;
