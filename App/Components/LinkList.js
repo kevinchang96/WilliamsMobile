@@ -8,7 +8,7 @@ import { AppRegistry, ScrollView, View } from 'react-native';
 import { Avatar, Icon, List, ListItem } from 'react-native-elements';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import WebViewComponent from './WebViewComponent';
-import styles from '../Utils/Style';
+import styles from '../Styles/Style';
 
 export default class LinkList extends Component{
     render() {

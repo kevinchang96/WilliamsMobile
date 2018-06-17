@@ -8,7 +8,7 @@ import { AppRegistry, Text, ScrollView, View } from 'react-native';
 import { Card, Button, Icon, List, ListItem } from 'react-native-elements';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 
-import styles from '../Utils/Style';
+import styles from '../Styles/Style';
 
 export default class WSOList extends Component{
 

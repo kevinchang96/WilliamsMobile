@@ -9,7 +9,7 @@ import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import WebViewComponent from '../Components/WebViewComponent';
 
 import MyHeader from '../Components/MyHeader';
-import styles from '../Utils/Style';
+import styles from '../Styles/Style';
 import LinkList from '../Components/LinkList';
 
 class Links extends Component{

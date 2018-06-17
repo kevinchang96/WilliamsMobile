@@ -6,7 +6,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { Button, ButtonGroup, Card, Header, Icon } from 'react-native-elements';
-//import styles from '../Utils/Style';
 
 export default class WSOPost extends Component{
 

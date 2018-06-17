@@ -6,10 +6,10 @@
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, ScrollView, PixelRatio, Dimensions, Animated } from 'react-native';
 import { Button, Card, Header, Icon, List, ListItem } from 'react-native-elements';
-import GrillList from './GrillList.json';
-import GrillSubsList from './GrillSubsList.json';
-import GrillWingsList from './GrillWingsList.json';
-import GrillPizzaSauce from './GrillPizzaSauce.json';
+import GrillList from '../Resources/GrillList.json';
+import GrillSubsList from '../Resources/GrillSubsList.json';
+import GrillWingsList from '../Resources/GrillWingsList.json';
+import GrillPizzaSauce from '../Resources/GrillPizzaSauce.json';
 
 export default class GrillMenu extends Component {
 

@@ -8,7 +8,7 @@ import { AppRegistry, Image, ScrollView, View } from 'react-native';
 import { Avatar, Icon, List, ListItem } from 'react-native-elements';
 
 import MyHeader from '../Components/MyHeader';
-import styles from '../Utils/Style';
+import styles from '../Styles/Style';
 
 export default class DiningList extends Component{
     constructor(props){

@@ -6,7 +6,7 @@
  import React, { Component } from 'react';
  import { AppRegistry, ScrollView } from 'react-native';
  import { Button, List, Tile } from 'react-native-elements';
- import styles from '../Utils/Style'
+ import styles from '../Styles/Style'
 
  export default class HomeList extends Component{
 

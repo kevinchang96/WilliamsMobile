@@ -7,7 +7,7 @@ import { AppRegistry, Image } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 import { DrawerNavigator } from 'react-navigation';
 
-import style from '../Utils/Style'
+import style from '../Styles/Style'
 
 export default class HomeHeader extends Component {
 

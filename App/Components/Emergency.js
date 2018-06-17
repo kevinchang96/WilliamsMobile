@@ -6,8 +6,8 @@
 import React, { Component } from 'react';
 import { AppRegistry, Linking, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
-import styles from '../Utils/Style';
-import EmergencyNumbers from '../Components/EmergencyNumbers';
+import styles from '../Styles/Style';
+import EmergencyNumbers from '../Resources/EmergencyNumbers';
 
 export default class Emergency extends Component{
     _call = ( phone ) => {

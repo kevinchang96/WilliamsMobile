@@ -13,7 +13,7 @@ import WebViewComponent from '../Components/WebViewComponent';
 import WSOPost from '../Components/WSOPost';
 import Facebook from '../Components/Facebook';
 import Factrak from '../Components/Factrak';
-import styles from '../Utils/Style';
+import styles from '../Styles/Style';
 
 class WSO extends Component{
     static navigationOptions = {

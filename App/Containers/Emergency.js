@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import { AppRegistry, View } from 'react-native';
 import MyHeader from '../Components/MyHeader';
 import MyEmergency from '../Components/Emergency';
-import styles from '../Utils/Style';
+import styles from '../Styles/Style';
 
 export default class Emergency extends Component{
     render() {

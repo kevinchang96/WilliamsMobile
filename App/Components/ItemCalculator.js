@@ -5,18 +5,18 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
 import { Avatar, Button, Card, CheckBox, Header, Icon, List, ListItem } from 'react-native-elements';
-import LeeMealsList from './LeeMealsList.json';
-import LeeAlaCarteList from './LeeAlaCarteList.json';
-import LeeBeveragesList from './LeeBeveragesList.json';
-import LeeDessertsList from './LeeDessertsList.json';
-import WhitmansBeveragesList from './WhitmansBeveragesList.json';
-import WhitmansDeliList from './WhitmansDeliList.json';
-import WhitmansDessertsList from './WhitmansDessertsList.json';
-import WhitmansFryerList from './WhitmansFryerList.json';
-import WhitmansGrillList from './WhitmansGrillList.json';
-import WhitmansMealList from './WhitmansMealList.json';
-import WhitmansSaladsList from './WhitmansSaladsList.json';
-import WhitmansTeppanyakiList from './WhitmansTeppanyakiList.json';
+import LeeMealsList from '../Resources/LeeMealsList.json';
+import LeeAlaCarteList from '../Resources/LeeAlaCarteList.json';
+import LeeBeveragesList from '../Resources/LeeBeveragesList.json';
+import LeeDessertsList from '../Resources/LeeDessertsList.json';
+import WhitmansBeveragesList from '../Resources/WhitmansBeveragesList.json';
+import WhitmansDeliList from '../Resources/WhitmansDeliList.json';
+import WhitmansDessertsList from '../Resources/WhitmansDessertsList.json';
+import WhitmansFryerList from '../Resources/WhitmansFryerList.json';
+import WhitmansGrillList from '../Resources/WhitmansGrillList.json';
+import WhitmansMealList from '../Resources/WhitmansMealList.json';
+import WhitmansSaladsList from '../Resources/WhitmansSaladsList.json';
+import WhitmansTeppanyakiList from '../Resources/WhitmansTeppanyakiList.json';
 import Item from './Item';
 
 export default class ItemCalculator extends Component{

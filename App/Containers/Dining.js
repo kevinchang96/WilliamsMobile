@@ -14,7 +14,7 @@ import GrillMenu from '../Components/GrillMenu';
 
 import MyHeader from '../Components/MyHeader';
 import DiningList from '../Components/DiningList';
-import styles from '../Utils/Style';
+import styles from '../Styles/Style';
 
 
 class Dining extends Component{

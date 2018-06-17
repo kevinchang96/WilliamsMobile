@@ -19,7 +19,7 @@ import WeatherObj from '../Components/WeatherObj';
 import DailyMessages from '../Components/DailyMessages';
 import HomeList from '../Components/HomeList';
 import HomeHeader from '../Components/HomeHeader'
-import styles from '../Utils/Style'
+import styles from '../Styles/Style'
 
 class HomeScreen extends Component {
     static navigationOptions = {
