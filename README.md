@@ -22,6 +22,8 @@ npm install react-native-html-parser;
 npm install native-base;  
 npm install react-native-read-more-text --save;  
 npm install react-native-datepicker;
+npm install --save-dev style-loader;
+npm install --save-dev css-loader;
 
 ### Bundling Javascript (Android only):
 react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/

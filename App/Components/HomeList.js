@@ -4,14 +4,14 @@
  */
 
  import React, { Component } from 'react';
- import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
- import { Button, List, ListItem, Tile } from 'react-native-elements';
- import Styles from '../Containers/Home'
+ import { AppRegistry, ScrollView } from 'react-native';
+ import { Button, List, Tile } from 'react-native-elements';
+ import styles from '../Utils/Style'
 
  export default class HomeList extends Component{
 
     render(){
-
+        const { navigate } = this.props.navigation;
         const homeList = [
                           {
                             id: 0,
@@ -106,38 +106,5 @@
 
     }
  }
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: '#EEEEEE'
-    },
-    scrollContainer: {
-        flex: 1,
-    },
-    scrollText: {
-        color: 'black',
-        fontSize: 18,
-    },
-    btn: {
-        borderRadius: 30,
-        width: 60,
-        height: 60,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.7)',
-    },
-    btnImage: {
-        resizeMode: 'contain',
-        width: '100%',
-        tintColor: 'white'
-    },
-    icon: {
-        width: 24,
-        height: 24,
-    }
-});
 
  AppRegistry.registerComponent('HomeList', () => HomeList );
