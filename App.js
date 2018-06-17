@@ -19,7 +19,7 @@ import HomeScreen from './App/Containers/Home';
 import WSO from './App/Components/WSO';
 import Emergency from './App/Containers/Emergency';
 import About from './App/Components/About';
-import DiningList from './App/Components/DiningList';
+import DiningList from './App/Containers/Dining';
 
 retrieveFromStorage = async(value) => {
     try {

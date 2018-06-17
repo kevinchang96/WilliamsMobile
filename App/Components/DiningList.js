@@ -4,16 +4,13 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Avatar, Button, Header, Icon, List, ListItem } from 'react-native-elements';
-import WebViewComponent from './WebViewComponent';
-import DiningMenus from './DiningMenus';
-import { DrawerNavigator, StackNavigator } from 'react-navigation';
-import ItemCalculator from './ItemCalculator';
-import GrillMenu from '../Components/GrillMenu';
-import MyHeader from '../Components/MyHeader';
+import { AppRegistry, Image, ScrollView, View } from 'react-native';
+import { Avatar, Icon, List, ListItem } from 'react-native-elements';
 
-class DiningList extends Component{
+import MyHeader from '../Components/MyHeader';
+import styles from '../Utils/Style';
+
+export default class DiningList extends Component{
     constructor(props){
         super(props);
     }
@@ -85,7 +82,6 @@ class DiningList extends Component{
 
          return(
              <View style={styles.container}>
-                  <MyHeader navigation={this.props.navigation} text={"Dining List"}></MyHeader>
                  <ScrollView style={styles.scrollContainer}>
                      <List containerStyle={{ marginTop: 10, marginBottom: 0 }}>
                        {
@@ -151,56 +147,4 @@ class DiningList extends Component{
      }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-//        justifyContent: 'center',
-        backgroundColor: '#EEEEEE' //'#DCD0FE',
-    },
-    scrollContainer: {
-        flex: 1,
-    },
-    scrollText: {
-        color: 'black',
-        fontSize: 18,
-    },
-    btn: {
-//        position: 'absolute',
-//        right: 25,
-//        bottom: 25,
-        borderRadius: 30,
-        width: 60,
-        height: 60,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.7)',
-//        padding: 15
-    },
-    btnImage:
-    {
-        resizeMode: 'contain',
-        width: '100%',
-        tintColor: 'white'
-    }
-
-});
-
-const webViewPost = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
-
-const itemCalculator = ({navigation}) => ( <ItemCalculator navigation={navigation}/> );
-
-const diningMenus = ({navigation}) => ( <DiningMenus navigation={navigation}/> );
-
-const grillMenu = ({navigation}) => ( <GrillMenu navigation={navigation}/> );
-
-const DiningNavigator = StackNavigator({
-    Home: { screen: DiningList },
-    DiningMenus: { screen: diningMenus },
-    WebViewPost: { screen: webViewPost },
-    ItemCalculator: { screen: itemCalculator },
-    GrillMenu: { screen: grillMenu }
-  },
-    { headerMode: 'none' }
-);
-
-export default DiningNavigator;
+AppRegistry.registerComponent('DiningList', () => DiningList );

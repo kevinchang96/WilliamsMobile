@@ -13,22 +13,6 @@ import styles from '../Utils/Style';
 import LinkList from '../Components/LinkList';
 
 class Links extends Component{
-    static navigationOptions = {
-        drawerLabel: 'Links',
-        drawerIcon: ({ tintColor }) => (
-            <Icon
-                name='links'
-                color={tintColor} />
-        ),
-    };
-
-    state = {
-        index: 0
-    }
-
-    updateIndex = (index) => {
-        this.setState({index})
-    }
 
     render(){
     const { navigate } = this.props.navigation;
