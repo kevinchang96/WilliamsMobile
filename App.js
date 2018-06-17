@@ -16,7 +16,7 @@ import { Avatar, Card, Button, Header, Icon, List, ListItem, Tile } from 'react-
 import LinkList from './App/Containers/Links';
 import NewsList from './App/Components/NewsList';
 import HomeScreen from './App/Containers/Home';
-import WSO from './App/Components/WSO';
+import WSO from './App/Containers/WSO';
 import Emergency from './App/Containers/Emergency';
 import About from './App/Components/About';
 import DiningList from './App/Containers/Dining';

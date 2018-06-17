@@ -4,25 +4,13 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, Image, Platform, StyleSheet, Text, ScrollView, View } from 'react-native';
-import { Card, Button, Header, Icon, List, ListItem } from 'react-native-elements';
+import { AppRegistry, Text, ScrollView, View } from 'react-native';
+import { Card, Button, Icon, List, ListItem } from 'react-native-elements';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
-import WebViewComponent from './WebViewComponent';
 
-import WSOPost from '../Components/WSOPost';
-import Facebook from '../Components/Facebook';
-import Factrak from '../Components/Factrak';
-import MyHeader from '../Components/MyHeader';
+import styles from '../Utils/Style';
 
-class WSO extends Component{
-    static navigationOptions = {
-        drawerLabel: 'WSO',
-        drawerIcon: ({ tintColor }) => (
-            <Icon
-                name='language'
-                color={tintColor} />
-        ),
-    };
+export default class WSOList extends Component{
 
     constructor(props){
         super(props);
@@ -66,7 +54,6 @@ class WSO extends Component{
         const { navigate } = this.props.navigation;
         return(
          <View style={styles.container}>
-             <MyHeader navigation={this.props.navigation} text={"WSO"}></MyHeader>
 
              <ScrollView>
                  <Button title='FACEBOOK'
@@ -205,62 +192,4 @@ class WSO extends Component{
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: '#EEEEEE', //'#DCD0FE',
-    },
-    scrollContainer: {
-        flex: 1,
-    },
-    scrollText: {
-        color: 'black',
-        fontSize: 18,
-    },
-    buttonStyle: {
-        borderRadius: 0,
-        marginLeft: 0,
-        marginRight: 0,
-        marginTop: 10,
-        marginBottom: 0,
-        backgroundColor: '#512698'
-    },
-    buttonTStyle: {
-        borderRadius: 0,
-        marginLeft: 0,
-        marginRight: 0,
-        marginTop: 15,
-        marginBottom: 0,
-        backgroundColor: '#512698'
-    },
-    btnImage: {
-        resizeMode: 'contain',
-        width: '100%',
-        tintColor: 'white'
-    },
-    icon: {
-        width: 24,
-        height: 24,
-    }
-});
-
-const webViewPost = ({navigation}) => ( <WebViewComponent navigation={navigation}/> );
-
-const wsoPost = ({navigation}) => ( <WSOPost navigation={navigation}/> );
-
-const factrak = ({navigation}) => (<Factrak screenProps={navigation}/>);
-
-const facebook = ({navigation}) => (<Facebook navigation={navigation}/>);
-
-const PostNavigator = StackNavigator({
-    Home: { screen: WSO },
-    WebViewPost: { screen: webViewPost },
-    WSOPost: { screen: wsoPost },
-    Factrak: { screen: factrak },
-    Facebook: { screen: facebook },
-  },
-    { headerMode: 'none' }
-);
-
-export default PostNavigator;
+AppRegistry.registerComponent('WSOList', () => WSOList );
