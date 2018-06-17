@@ -11,6 +11,7 @@ import DiningMenus from './DiningMenus';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import ItemCalculator from './ItemCalculator';
 import GrillMenu from '../Components/GrillMenu';
+import MyHeader from '../Components/MyHeader';
 
 class DiningList extends Component{
     constructor(props){
@@ -84,18 +85,7 @@ class DiningList extends Component{
 
          return(
              <View style={styles.container}>
-                  <Header
-                      leftComponent={
-                          <Icon
-                              name='menu'
-                              color='white'
-                              onPress={() => this.props.navigation.navigate('DrawerToggle')}
-                              underlayColor='#512698'/>
-                      }
-                      centerComponent={{ text: 'Dining', style: { fontSize: 22, color: '#ffffff' } }}
-                      outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
-                      underlayColor='#512698'/>
-
+                  <MyHeader navigation={this.props.navigation} text={"Dining List"}></MyHeader>
                  <ScrollView style={styles.scrollContainer}>
                      <List containerStyle={{ marginTop: 10, marginBottom: 0 }}>
                        {

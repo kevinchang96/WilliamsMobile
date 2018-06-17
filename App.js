@@ -12,7 +12,7 @@ import LinkList from './App/Components/LinkList';
 import NewsList from './App/Components/NewsList';
 import HomeScreen from './App/Containers/Home';
 import WSO from './App/Components/WSO';
-import Emergency from './App/Components/Emergency';
+import Emergency from './App/Containers/Emergency';
 import About from './App/Components/About';
 import DiningList from './App/Components/DiningList';
 

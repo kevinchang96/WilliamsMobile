@@ -34,6 +34,22 @@ export default StyleSheet.create({
            icon: {
                width: 24,
                height: 24,
+           },
+           headerTextRed: {
+               color: 'red',
+               fontSize: 22,
+               textAlign: 'center',
+           },
+           headerTextBlack: {
+               color: 'black',
+               fontSize: 22,
+               textAlign: 'center',
+           },
+           text: {
+               color: 'black',
+               fontSize: 14,
+               textAlign: 'center',
+               fontStyle: 'italic',
+               marginTop: 10,
            }
        });
-

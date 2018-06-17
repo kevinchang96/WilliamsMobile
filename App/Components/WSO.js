@@ -12,6 +12,7 @@ import WebViewComponent from './WebViewComponent';
 import WSOPost from '../Components/WSOPost';
 import Facebook from '../Components/Facebook';
 import Factrak from '../Components/Factrak';
+import MyHeader from '../Components/MyHeader';
 
 class WSO extends Component{
     static navigationOptions = {
@@ -65,17 +66,7 @@ class WSO extends Component{
         const { navigate } = this.props.navigation;
         return(
          <View style={styles.container}>
-             <Header
-                 leftComponent={
-                     <Icon
-                         name='menu'
-                         color='white'
-                         onPress={() => this.props.navigation.navigate('DrawerToggle')}
-                         underlayColor='#512698'/>
-                 }
-                 centerComponent={{ text: 'WSO', style: { fontSize: 22, color: '#ffffff' } }}
-                 outerContainerStyles={{backgroundColor: '#512698', borderBottomWidth: 0, padding: 10, height: 55}}
-             />
+             <MyHeader navigation={this.props.navigation} text={"WSO"}></MyHeader>
 
              <ScrollView>
                  <Button title='FACEBOOK'
