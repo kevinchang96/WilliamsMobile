@@ -7,7 +7,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "fresh": "^0.5.2",
     "hoek": "^4.2.1",
+    "lodash": "^4.17.10",
     "native-base": "^2.5.2",
     "react": "16.2.0",
     "react-native": "0.51.0",
@@ -23,6 +25,7 @@
     "react-native-webbrowser-with-back": "^1.0.36",
     "react-navigation": "^1.5.12",
     "react-open-weather": "^0.3.0",
+    "sshpk": "^1.14.2",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
